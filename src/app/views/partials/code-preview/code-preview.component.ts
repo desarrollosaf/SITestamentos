@@ -4,14 +4,13 @@ import { Highlight } from 'ngx-highlightjs';
 import { ClipboardModule } from 'ngx-clipboard';
 
 @Component({
-  selector: 'app-code-preview',
-  standalone: true,
-  imports: [
-    NgbNavModule,
-    Highlight,
-    ClipboardModule
-  ],
-  templateUrl: './code-preview.component.html'
+    selector: 'app-code-preview',
+    imports: [
+        NgbNavModule,
+        Highlight,
+        ClipboardModule
+    ],
+    templateUrl: './code-preview.component.html'
 })
 export class CodePreviewComponent {
 

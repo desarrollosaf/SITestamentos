@@ -4,14 +4,13 @@ import { RouterLink } from '@angular/router';
 import { ContentChange, QuillModule, SelectionChange } from 'ngx-quill'
 
 @Component({
-  selector: 'app-editors',
-  standalone: true,
-  imports: [
-    RouterLink,
-    QuillModule,
-    FormsModule
-  ],
-  templateUrl: './editors.component.html'
+    selector: 'app-editors',
+    imports: [
+        RouterLink,
+        QuillModule,
+        FormsModule
+    ],
+    templateUrl: './editors.component.html'
 })
 export class EditorsComponent {
 

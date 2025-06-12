@@ -4,13 +4,12 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { ThemeCssVariableService, ThemeCssVariablesType } from '../../../../core/services/theme-css-variable.service';
 
 @Component({
-  selector: 'app-apexcharts',
-  standalone: true,
-  imports: [
-    RouterLink,
-    NgApexchartsModule
-  ],
-  templateUrl: './apexcharts.component.html'
+    selector: 'app-apexcharts',
+    imports: [
+        RouterLink,
+        NgApexchartsModule
+    ],
+    templateUrl: './apexcharts.component.html'
 })
 export class ApexchartsComponent implements OnInit {
 

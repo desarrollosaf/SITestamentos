@@ -40,14 +40,13 @@ export class ScrollbarComponent {}`,
 }
 
 @Component({
-  selector: 'app-scrollbar',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    NgScrollbar
-  ],
-  templateUrl: './scrollbar.component.html',
-  styleUrl: './scrollbar.component.scss'
+    selector: 'app-scrollbar',
+    imports: [
+        CodePreviewComponent,
+        NgScrollbar
+    ],
+    templateUrl: './scrollbar.component.html',
+    styleUrl: './scrollbar.component.scss'
 })
 export class ScrollbarComponent {
 

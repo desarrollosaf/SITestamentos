@@ -218,15 +218,14 @@ export class TypeaheadComponent {
 }
 
 @Component({
-  selector: 'app-typeahead',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    NgbTypeaheadModule,
-    FormsModule,
-    JsonPipe
-  ],
-  templateUrl: './typeahead.component.html'
+    selector: 'app-typeahead',
+    imports: [
+        CodePreviewComponent,
+        NgbTypeaheadModule,
+        FormsModule,
+        JsonPipe
+    ],
+    templateUrl: './typeahead.component.html'
 })
 export class TypeaheadComponent {
 

@@ -5,15 +5,14 @@ import { RouterLink } from '@angular/router';
 import { TagInputModule } from 'ngx-chips';
 
 @Component({
-  selector: 'app-ngx-chips',
-  standalone: true,
-  imports: [
-    RouterLink,
-    TagInputModule,
-    FormsModule,
-    JsonPipe
-  ],
-  templateUrl: './ngx-chips.component.html'
+    selector: 'app-ngx-chips',
+    imports: [
+        RouterLink,
+        TagInputModule,
+        FormsModule,
+        JsonPipe
+    ],
+    templateUrl: './ngx-chips.component.html'
 })
 export class NgxChipsComponent {
   

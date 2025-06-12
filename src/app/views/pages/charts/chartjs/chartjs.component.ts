@@ -5,16 +5,15 @@ import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2
 import { ThemeCssVariableService } from '../../../../core/services/theme-css-variable.service';
 
 @Component({
-  selector: 'app-chartjs',
-  standalone: true,
-  imports: [
-    RouterLink,
-    BaseChartDirective
-  ],
-  providers: [
-    provideCharts(withDefaultRegisterables())
-  ],
-  templateUrl: './chartjs.component.html'
+    selector: 'app-chartjs',
+    imports: [
+        RouterLink,
+        BaseChartDirective
+    ],
+    providers: [
+        provideCharts(withDefaultRegisterables())
+    ],
+    templateUrl: './chartjs.component.html'
 })
 export class ChartjsComponent {
 

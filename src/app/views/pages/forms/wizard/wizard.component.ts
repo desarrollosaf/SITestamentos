@@ -7,16 +7,15 @@ import { WizardComponent as BaseWizardComponent } from '@rg-software/angular-arc
 import { FeatherIconDirective } from '../../../../core/feather-icon/feather-icon.directive';
 
 @Component({
-  selector: 'app-wizard',
-  standalone: true,
-  imports: [
-    RouterLink,
-    ArchwizardModule,
-    NgClass,
-    ReactiveFormsModule,
-    FeatherIconDirective
-  ],
-  templateUrl: './wizard.component.html'
+    selector: 'app-wizard',
+    imports: [
+        RouterLink,
+        ArchwizardModule,
+        NgClass,
+        ReactiveFormsModule,
+        FeatherIconDirective
+    ],
+    templateUrl: './wizard.component.html'
 })
 export class WizardComponent implements OnInit {
 

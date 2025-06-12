@@ -77,13 +77,12 @@ export class CollapseComponent {
 }
 
 @Component({
-  selector: 'app-collapse',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    NgbCollapseModule
-  ],
-  templateUrl: './collapse.component.html'
+    selector: 'app-collapse',
+    imports: [
+        CodePreviewComponent,
+        NgbCollapseModule
+    ],
+    templateUrl: './collapse.component.html'
 })
 export class CollapseComponent implements OnInit {
 

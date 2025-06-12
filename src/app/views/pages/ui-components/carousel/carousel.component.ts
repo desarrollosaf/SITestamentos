@@ -163,13 +163,12 @@ export class CarouselComponent {
 }
 
 @Component({
-  selector: 'app-carousel',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    NgbCarouselModule,
-  ],
-  templateUrl: './carousel.component.html'
+    selector: 'app-carousel',
+    imports: [
+        CodePreviewComponent,
+        NgbCarouselModule,
+    ],
+    templateUrl: './carousel.component.html'
 })
 export class CarouselComponent implements OnInit {
 

@@ -244,15 +244,14 @@ export class DatepickerComponent {
 }
 
 @Component({
-  selector: 'app-datepicker',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    NgbDatepickerModule,
-    FormsModule,
-    JsonPipe
-  ],
-  templateUrl: './datepicker.component.html'
+    selector: 'app-datepicker',
+    imports: [
+        CodePreviewComponent,
+        NgbDatepickerModule,
+        FormsModule,
+        JsonPipe
+    ],
+    templateUrl: './datepicker.component.html'
 })
 export class DatepickerComponent implements OnInit {
 

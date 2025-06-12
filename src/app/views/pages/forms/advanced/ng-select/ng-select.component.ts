@@ -7,17 +7,16 @@ import { UpperCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-ng-select',
-  standalone: true,
-  imports: [
-    RouterLink,
-    NgLabelTemplateDirective,
-    NgOptionTemplateDirective,
-    MyNgSelectComponent,
-    FormsModule,
-    UpperCasePipe,
-  ],
-  templateUrl: './ng-select.component.html'
+    selector: 'app-ng-select',
+    imports: [
+        RouterLink,
+        NgLabelTemplateDirective,
+        NgOptionTemplateDirective,
+        MyNgSelectComponent,
+        FormsModule,
+        UpperCasePipe,
+    ],
+    templateUrl: './ng-select.component.html'
 })
 export class NgSelectComponent implements OnInit {
 

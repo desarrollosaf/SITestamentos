@@ -166,13 +166,12 @@ export class PaginationComponent {
 }
 
 @Component({
-  selector: 'app-pagination',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    NgbPaginationModule
-  ],
-  templateUrl: './pagination.component.html'
+    selector: 'app-pagination',
+    imports: [
+        CodePreviewComponent,
+        NgbPaginationModule
+    ],
+    templateUrl: './pagination.component.html'
 })
 export class PaginationComponent {
 

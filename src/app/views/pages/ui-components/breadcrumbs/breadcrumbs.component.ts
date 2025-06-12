@@ -77,12 +77,11 @@ const changingSeperatorNone = {
 }
 
 @Component({
-  selector: 'app-breadcrumbs',
-  standalone: true,
-  imports: [
-    CodePreviewComponent
-  ],
-  templateUrl: './breadcrumbs.component.html'
+    selector: 'app-breadcrumbs',
+    imports: [
+        CodePreviewComponent
+    ],
+    templateUrl: './breadcrumbs.component.html'
 })
 export class BreadcrumbsComponent implements OnInit {
 

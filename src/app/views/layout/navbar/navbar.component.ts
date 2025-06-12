@@ -9,19 +9,18 @@ import { MenuItem } from './menu.model';
 import { FeatherIconDirective } from '../../../core/feather-icon/feather-icon.directive';
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [
-    NgbDropdownModule,
-    FeatherIconDirective,
-    RouterLink,
-    RouterLinkActive,
-    NgFor,
-    NgIf,
-    NgClass
-  ],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+    selector: 'app-navbar',
+    imports: [
+        NgbDropdownModule,
+        FeatherIconDirective,
+        RouterLink,
+        RouterLinkActive,
+        NgFor,
+        NgIf,
+        NgClass
+    ],
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
 

@@ -6,14 +6,13 @@ import { RouterLink } from '@angular/router';
 
 
 @Component({
-  selector: 'app-cropper',
-  standalone: true,
-  imports: [
-    RouterLink,
-    FormsModule,
-    ImageCropperComponent
-  ],
-  templateUrl: './cropper.component.html'
+    selector: 'app-cropper',
+    imports: [
+        RouterLink,
+        FormsModule,
+        ImageCropperComponent
+    ],
+    templateUrl: './cropper.component.html'
 })
 export class CropperComponent implements OnInit {
 

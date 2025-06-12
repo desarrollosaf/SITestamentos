@@ -3,13 +3,12 @@ import { RouterLink } from '@angular/router';
 import { ColumnMode, DatatableComponent, NgxDatatableModule } from '@siemens/ngx-datatable';
 
 @Component({
-  selector: 'app-ngx-datatable',
-  standalone: true,
-  imports: [
-    RouterLink,
-    NgxDatatableModule
-  ],
-  templateUrl: './ngx-datatable.component.html'
+    selector: 'app-ngx-datatable',
+    imports: [
+        RouterLink,
+        NgxDatatableModule
+    ],
+    templateUrl: './ngx-datatable.component.html'
 })
 export class NgxDatatableComponent {
 

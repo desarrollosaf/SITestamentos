@@ -691,21 +691,20 @@ const COUNTRIES_PAGINATION: Country[] = [
 ];
 
 @Component({
-  selector: 'app-table',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    DecimalPipe,
-    NgbdSortableHeader,
-    AsyncPipe,
-    ReactiveFormsModule,
-    NgbHighlight,
-    FormsModule,
-    NgbTypeaheadModule,
-    NgbPaginationModule
-  ],
-  templateUrl: './table.component.html',
-  providers: [DecimalPipe]
+    selector: 'app-table',
+    imports: [
+        CodePreviewComponent,
+        DecimalPipe,
+        NgbdSortableHeader,
+        AsyncPipe,
+        ReactiveFormsModule,
+        NgbHighlight,
+        FormsModule,
+        NgbTypeaheadModule,
+        NgbPaginationModule
+    ],
+    templateUrl: './table.component.html',
+    providers: [DecimalPipe]
 })
 export class TableComponent implements OnInit {
 

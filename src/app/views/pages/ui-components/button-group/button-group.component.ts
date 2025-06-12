@@ -224,15 +224,14 @@ export class ButtonGroupComponent {}`
 }
 
 @Component({
-  selector: 'app-button-group',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    FormsModule,
-    NgbDropdownModule,
-    JsonPipe
-  ],
-  templateUrl: './button-group.component.html'
+    selector: 'app-button-group',
+    imports: [
+        CodePreviewComponent,
+        FormsModule,
+        NgbDropdownModule,
+        JsonPipe
+    ],
+    templateUrl: './button-group.component.html'
 })
 export class ButtonGroupComponent implements OnInit {
 

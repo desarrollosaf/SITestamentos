@@ -73,13 +73,12 @@ export class AccordionComponent {}`
 }
 
 @Component({
-  selector: 'app-accordion',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    NgbAccordionModule
-  ],
-  templateUrl: './accordion.component.html'
+    selector: 'app-accordion',
+    imports: [
+        CodePreviewComponent,
+        NgbAccordionModule
+    ],
+    templateUrl: './accordion.component.html'
 })
 export class AccordionComponent implements OnInit {
 

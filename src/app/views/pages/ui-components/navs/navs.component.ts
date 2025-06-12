@@ -323,14 +323,13 @@ export class NavsComponent {}`
 }
 
 @Component({
-  selector: 'app-navs',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    NgbNavModule,
-    NgbDropdownModule
-  ],
-  templateUrl: './navs.component.html'
+    selector: 'app-navs',
+    imports: [
+        CodePreviewComponent,
+        NgbNavModule,
+        NgbDropdownModule
+    ],
+    templateUrl: './navs.component.html'
 })
 export class NavsComponent implements OnInit {
 

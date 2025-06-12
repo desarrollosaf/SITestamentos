@@ -213,12 +213,11 @@ export class SpinnersComponent {}`
 }
 
 @Component({
-  selector: 'app-spinners',
-  standalone: true,
-  imports: [
-    CodePreviewComponent
-  ],
-  templateUrl: './spinners.component.html'
+    selector: 'app-spinners',
+    imports: [
+        CodePreviewComponent
+    ],
+    templateUrl: './spinners.component.html'
 })
 export class SpinnersComponent {
 

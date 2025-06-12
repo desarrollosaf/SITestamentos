@@ -71,15 +71,14 @@ export class TimepickerComponent {
 }
 
 @Component({
-  selector: 'app-timepicker',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    NgbTimepickerModule,
-    FormsModule,
-    JsonPipe
-  ],
-  templateUrl: './timepicker.component.html'
+    selector: 'app-timepicker',
+    imports: [
+        CodePreviewComponent,
+        NgbTimepickerModule,
+        FormsModule,
+        JsonPipe
+    ],
+    templateUrl: './timepicker.component.html'
 })
 export class TimepickerComponent {
 

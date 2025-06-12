@@ -114,13 +114,12 @@ export class ProgressComponent {}`
 }
 
 @Component({
-  selector: 'app-progress',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    NgbProgressbarModule
-  ],
-  templateUrl: './progress.component.html'
+    selector: 'app-progress',
+    imports: [
+        CodePreviewComponent,
+        NgbProgressbarModule
+    ],
+    templateUrl: './progress.component.html'
 })
 export class ProgressComponent {
 

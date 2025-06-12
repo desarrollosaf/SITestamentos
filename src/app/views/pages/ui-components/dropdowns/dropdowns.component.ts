@@ -353,13 +353,12 @@ export class DropdownsComponent {}`
 }
 
 @Component({
-  selector: 'app-dropdowns',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    NgbDropdownModule
-  ],
-  templateUrl: './dropdowns.component.html'
+    selector: 'app-dropdowns',
+    imports: [
+        CodePreviewComponent,
+        NgbDropdownModule
+    ],
+    templateUrl: './dropdowns.component.html'
 })
 export class DropdownsComponent implements OnInit {
 

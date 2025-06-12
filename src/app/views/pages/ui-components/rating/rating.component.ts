@@ -72,15 +72,14 @@ export class RatingComponent {
 }
 
 @Component({
-  selector: 'app-rating',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    NgbRatingModule,
-    FeatherIconDirective
-  ],
-  templateUrl: './rating.component.html',
-  styles: [`
+    selector: 'app-rating',
+    imports: [
+        CodePreviewComponent,
+        NgbRatingModule,
+        FeatherIconDirective
+    ],
+    templateUrl: './rating.component.html',
+    styles: [`
     svg, i {
       color: rgba(114, 124, 245, 0.3);
     }

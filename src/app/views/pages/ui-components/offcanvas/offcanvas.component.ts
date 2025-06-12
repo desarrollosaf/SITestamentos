@@ -149,12 +149,11 @@ export class OffcanvasComponent {
 }
 
 @Component({
-  selector: 'app-offcanvas',
-  standalone: true,
-  imports: [
-    CodePreviewComponent
-  ],
-  templateUrl: './offcanvas.component.html'
+    selector: 'app-offcanvas',
+    imports: [
+        CodePreviewComponent
+    ],
+    templateUrl: './offcanvas.component.html'
 })
 export class OffcanvasComponent implements OnInit {
 

@@ -30,13 +30,12 @@ export class TooltipsComponent {}`
 }
 
 @Component({
-  selector: 'app-tooltips',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    NgbTooltipModule
-  ],
-  templateUrl: './tooltips.component.html'
+    selector: 'app-tooltips',
+    imports: [
+        CodePreviewComponent,
+        NgbTooltipModule
+    ],
+    templateUrl: './tooltips.component.html'
 })
 export class TooltipsComponent {
 

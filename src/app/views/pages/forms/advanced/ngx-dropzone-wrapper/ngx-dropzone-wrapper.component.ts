@@ -12,19 +12,18 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
  };
 
 @Component({
-  selector: 'app-ngx-dropzone-wrapper',
-  standalone: true,
-  imports: [
-    RouterLink,
-    DropzoneModule
-  ],
-  providers: [
-    {
-      provide: DROPZONE_CONFIG,
-      useValue: DEFAULT_DROPZONE_CONFIG
-    }
-  ],
-  templateUrl: './ngx-dropzone-wrapper.component.html'
+    selector: 'app-ngx-dropzone-wrapper',
+    imports: [
+        RouterLink,
+        DropzoneModule
+    ],
+    providers: [
+        {
+            provide: DROPZONE_CONFIG,
+            useValue: DEFAULT_DROPZONE_CONFIG
+        }
+    ],
+    templateUrl: './ngx-dropzone-wrapper.component.html'
 })
 export class NgxDropzoneWrapperComponent {
 

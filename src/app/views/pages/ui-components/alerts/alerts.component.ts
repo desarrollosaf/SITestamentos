@@ -141,13 +141,12 @@ export class AlertsComponent {
 }
 
 @Component({
-  selector: 'app-alerts',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    NgbAlertModule,
-  ],
-  templateUrl: './alerts.component.html'
+    selector: 'app-alerts',
+    imports: [
+        CodePreviewComponent,
+        NgbAlertModule,
+    ],
+    templateUrl: './alerts.component.html'
 })
 export class AlertsComponent implements OnInit {
 

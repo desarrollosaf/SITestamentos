@@ -173,10 +173,9 @@ export class ListGroupComponent {}`
 }
 
 @Component({
-  selector: 'app-list-group',
-  standalone: true,
-  imports: [CodePreviewComponent],
-  templateUrl: './list-group.component.html'
+    selector: 'app-list-group',
+    imports: [CodePreviewComponent],
+    templateUrl: './list-group.component.html'
 })
 export class ListGroupComponent implements OnInit {
 

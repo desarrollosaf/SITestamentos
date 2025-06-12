@@ -10,13 +10,12 @@ interface Image {
 }
 
 @Component({
-  selector: 'app-owl-carousel',
-  standalone: true,
-  imports: [
-    RouterLink,
-    CarouselModule, 
-  ],
-  templateUrl: './owl-carousel.component.html'
+    selector: 'app-owl-carousel',
+    imports: [
+        RouterLink,
+        CarouselModule,
+    ],
+    templateUrl: './owl-carousel.component.html'
 })
 export class OwlCarouselComponent implements OnInit {
 

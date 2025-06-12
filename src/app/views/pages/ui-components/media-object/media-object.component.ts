@@ -168,10 +168,9 @@ export class MediaObjectComponent {}`
 }
 
 @Component({
-  selector: 'app-media-object',
-  standalone: true,
-  imports: [CodePreviewComponent],
-  templateUrl: './media-object.component.html'
+    selector: 'app-media-object',
+    imports: [CodePreviewComponent],
+    templateUrl: './media-object.component.html'
 })
 export class MediaObjectComponent implements OnInit {
 

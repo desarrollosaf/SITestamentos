@@ -4,13 +4,12 @@ import { ColorPickerModule } from 'ngx-color-picker';
 
 
 @Component({
-  selector: 'app-ngx-color-picker',
-  standalone: true,
-  imports: [
-    RouterLink,
-    ColorPickerModule
-  ],
-  templateUrl: './ngx-color-picker.component.html'
+    selector: 'app-ngx-color-picker',
+    imports: [
+        RouterLink,
+        ColorPickerModule
+    ],
+    templateUrl: './ngx-color-picker.component.html'
 })
 export class NgxColorPickerComponent {
 

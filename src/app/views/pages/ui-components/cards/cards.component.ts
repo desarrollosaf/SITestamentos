@@ -353,12 +353,11 @@ export class CardsComponent {}`
 }
 
 @Component({
-  selector: 'app-cards',
-  standalone: true,
-  imports: [
-    CodePreviewComponent
-  ],
-  templateUrl: './cards.component.html'
+    selector: 'app-cards',
+    imports: [
+        CodePreviewComponent
+    ],
+    templateUrl: './cards.component.html'
 })
 export class CardsComponent implements OnInit {
 

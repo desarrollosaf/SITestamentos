@@ -6,17 +6,16 @@ import { FeatherIconDirective } from '../../../core/feather-icon/feather-icon.di
 import { ThemeCssVariableService, ThemeCssVariablesType } from '../../../core/services/theme-css-variable.service';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [
-    NgbDropdownModule,
-    FormsModule, 
-    NgbDatepickerModule, 
-    NgApexchartsModule,
-    FeatherIconDirective
-  ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+    selector: 'app-dashboard',
+    imports: [
+        NgbDropdownModule,
+        FormsModule,
+        NgbDatepickerModule,
+        NgApexchartsModule,
+        FeatherIconDirective
+    ],
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
 

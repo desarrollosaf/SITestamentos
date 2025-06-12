@@ -232,12 +232,11 @@ export class ModalComponent {
 }
 
 @Component({
-  selector: 'app-modal',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-  ],
-  templateUrl: './modal.component.html'
+    selector: 'app-modal',
+    imports: [
+        CodePreviewComponent,
+    ],
+    templateUrl: './modal.component.html'
 })
 export class ModalComponent implements OnInit {
 

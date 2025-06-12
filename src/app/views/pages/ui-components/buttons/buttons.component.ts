@@ -251,12 +251,11 @@ export class ButtonsComponent {}`
 }
 
 @Component({
-  selector: 'app-buttons',
-  standalone: true,
-  imports: [
-    CodePreviewComponent
-  ],
-  templateUrl: './buttons.component.html'
+    selector: 'app-buttons',
+    imports: [
+        CodePreviewComponent
+    ],
+    templateUrl: './buttons.component.html'
 })
 export class ButtonsComponent implements OnInit {
 

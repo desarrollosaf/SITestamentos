@@ -125,12 +125,11 @@ export class BadgesComponent {}`
 }
 
 @Component({
-  selector: 'app-badges',
-  standalone: true,
-  imports: [
-    CodePreviewComponent
-  ],
-  templateUrl: './badges.component.html'
+    selector: 'app-badges',
+    imports: [
+        CodePreviewComponent
+    ],
+    templateUrl: './badges.component.html'
 })
 export class BadgesComponent implements OnInit {
 

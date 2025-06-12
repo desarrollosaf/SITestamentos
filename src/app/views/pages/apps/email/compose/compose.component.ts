@@ -5,17 +5,16 @@ import { ContentChange, QuillModule, SelectionChange } from 'ngx-quill';
 import { PeoplesData } from '../../../../../core/dummy-datas/peoples.data';
 
 @Component({
-  selector: 'app-compose',
-  standalone: true,
-  imports: [
-    NgLabelTemplateDirective,
-    NgOptionTemplateDirective,
-    NgSelectComponent,
-    FormsModule,
-    QuillModule
-  ],
-  templateUrl: './compose.component.html',
-  styleUrl: './compose.component.scss'
+    selector: 'app-compose',
+    imports: [
+        NgLabelTemplateDirective,
+        NgOptionTemplateDirective,
+        NgSelectComponent,
+        FormsModule,
+        QuillModule
+    ],
+    templateUrl: './compose.component.html',
+    styleUrl: './compose.component.scss'
 })
 export class ComposeComponent implements OnInit {
   

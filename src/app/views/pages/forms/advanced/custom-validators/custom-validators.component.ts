@@ -4,14 +4,13 @@ import { RouterLink } from '@angular/router';
 import { NarikCustomValidatorsModule } from '@narik/custom-validators';
 
 @Component({
-  selector: 'app-custom-validators',
-  standalone: true,
-  imports: [
-    RouterLink,
-    FormsModule,
-    NarikCustomValidatorsModule
-  ],
-  templateUrl: './custom-validators.component.html'
+    selector: 'app-custom-validators',
+    imports: [
+        RouterLink,
+        FormsModule,
+        NarikCustomValidatorsModule
+    ],
+    templateUrl: './custom-validators.component.html'
 })
 export class CustomValidatorsComponent {
 

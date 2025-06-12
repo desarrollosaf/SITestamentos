@@ -4,15 +4,14 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
 
 @Component({
-  selector: 'app-base',
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    NavbarComponent,
-    FooterComponent
-  ],
-  templateUrl: './base.component.html',
-  styleUrl: './base.component.scss'
+    selector: 'app-base',
+    imports: [
+        RouterOutlet,
+        NavbarComponent,
+        FooterComponent
+    ],
+    templateUrl: './base.component.html',
+    styleUrl: './base.component.scss'
 })
 export class BaseComponent implements OnInit {
 

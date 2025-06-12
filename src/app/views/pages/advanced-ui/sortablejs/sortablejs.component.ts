@@ -6,15 +6,14 @@ import { FeatherIconDirective } from '../../../../core/feather-icon/feather-icon
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-sortablejs',
-  standalone: true,
-  imports: [
-    RouterLink,
-    SortablejsModule, 
-    JsonPipe, 
-    FeatherIconDirective
-  ],
-  templateUrl: './sortablejs.component.html'
+    selector: 'app-sortablejs',
+    imports: [
+        RouterLink,
+        SortablejsModule,
+        JsonPipe,
+        FeatherIconDirective
+    ],
+    templateUrl: './sortablejs.component.html'
 })
 export class SortablejsComponent {
 

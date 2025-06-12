@@ -3,16 +3,15 @@ import { NgbDropdownModule, NgbNavModule, NgbTooltip } from '@ng-bootstrap/ng-bo
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
 @Component({
-  selector: 'app-chat',
-  standalone: true,
-  imports: [
-    NgbNavModule,
-    NgbDropdownModule,
-    NgScrollbarModule,
-    NgbTooltip
-  ],
-  templateUrl: './chat.component.html',
-  styleUrl: './chat.component.scss'
+    selector: 'app-chat',
+    imports: [
+        NgbNavModule,
+        NgbDropdownModule,
+        NgScrollbarModule,
+        NgbTooltip
+    ],
+    templateUrl: './chat.component.html',
+    styleUrl: './chat.component.scss'
 })
 export class ChatComponent implements AfterViewInit {
 

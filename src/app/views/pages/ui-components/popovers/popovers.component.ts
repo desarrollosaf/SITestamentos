@@ -47,13 +47,12 @@ export class PopoversComponent {}`
 }
 
 @Component({
-  selector: 'app-popovers',
-  standalone: true,
-  imports: [
-    CodePreviewComponent,
-    NgbPopoverModule
-  ],
-  templateUrl: './popovers.component.html'
+    selector: 'app-popovers',
+    imports: [
+        CodePreviewComponent,
+        NgbPopoverModule
+    ],
+    templateUrl: './popovers.component.html'
 })
 export class PopoversComponent {
 

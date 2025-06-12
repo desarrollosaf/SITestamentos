@@ -11,14 +11,13 @@ import { Draggable } from '@fullcalendar/interaction'; // for dateClick
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 
 @Component({
-  selector: 'app-calendar',
-  standalone: true,
-  imports: [
-    NgStyle,
-    FullCalendarModule
-  ],
-  templateUrl: './calendar.component.html',
-  styleUrl: './calendar.component.scss'
+    selector: 'app-calendar',
+    imports: [
+        NgStyle,
+        FullCalendarModule
+    ],
+    templateUrl: './calendar.component.html',
+    styleUrl: './calendar.component.scss'
 })
 export class CalendarComponent implements OnInit {
 
