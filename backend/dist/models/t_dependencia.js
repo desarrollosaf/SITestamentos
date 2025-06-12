@@ -12,30 +12,37 @@ Dependencia.init({
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
+        field: 'id_Dependencia'
     },
     C_presupDep: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
+        field: 'C_presupDep'
     },
     Nombre: {
         type: sequelize_1.DataTypes.STRING(100),
         allowNull: false,
+        field: 'Nombre'
     },
     Creado: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
+        field: 'Creado'
     },
     F_Creacion: {
         type: sequelize_1.DataTypes.DATEONLY,
         allowNull: false,
+        field: 'F_Creacion'
     },
     U_Modificacion: {
         type: sequelize_1.DataTypes.DATEONLY,
         allowNull: true,
+        field: 'U_Modificacion'
     },
     Estado: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
+        field: 'Estado'
     },
     orden: {
         type: sequelize_1.DataTypes.INTEGER,

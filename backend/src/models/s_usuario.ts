@@ -6,6 +6,9 @@ import {
   CreationOptional,
 } from 'sequelize';
 import sequelize from '../database/connection'; 
+import Dependencia from './t_dependencia';
+import Direccion from './t_direccion';
+import Departamento from './t_departamento';
 
 class SUsuario extends Model<
   InferAttributes<SUsuario>,
@@ -154,6 +157,25 @@ SUsuario.init(
     ],
   }
 );
+
+SUsuario.hasOne(Dependencia, {
+  sourceKey: 'id_Dependencia',         
+  foreignKey: 'id_Dependencia',   
+  as: 'dependencia',
+});
+
+SUsuario.hasOne(Direccion, {
+  sourceKey: 'id_Direccion',         
+  foreignKey: 'id_Direccion',   
+  as: 'direccion',
+});
+
+SUsuario.hasOne(Departamento, {
+  sourceKey: 'id_Departamento',         
+  foreignKey: 'id_Departamento',   
+  as: 'departamento',
+});
+
 
 
 
