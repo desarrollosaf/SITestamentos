@@ -1,41 +1,41 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.users = void 0;
+exports.dp_beneficiarios = void 0;
 const sequelize_1 = require("sequelize");
-class users extends sequelize_1.Model {
+class dp_beneficiarios extends sequelize_1.Model {
     static initModel(sequelize) {
-        return users.init({
+        return dp_beneficiarios.init({
             id: {
                 autoIncrement: true,
                 type: sequelize_1.DataTypes.BIGINT.UNSIGNED,
                 allowNull: false,
                 primaryKey: true
             },
-            name: {
+            nom_ben: {
                 type: sequelize_1.DataTypes.STRING(255),
                 allowNull: false
             },
-            email: {
-                type: sequelize_1.DataTypes.STRING(255),
-                allowNull: false,
-                unique: "users_email_unique"
-            },
-            email_verified_at: {
-                type: sequelize_1.DataTypes.DATE,
-                allowNull: true
-            },
-            password: {
+            pa_ben: {
                 type: sequelize_1.DataTypes.STRING(255),
                 allowNull: false
             },
-            remember_token: {
-                type: sequelize_1.DataTypes.STRING(100),
+            sa_ben: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: false
+            },
+            porcentaje: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: false
+            },
+            f_rfc: {
+                type: sequelize_1.DataTypes.STRING(255),
                 allowNull: true
             }
         }, {
             sequelize,
-            tableName: 'users',
+            tableName: 'dp_beneficiarios',
             timestamps: true,
+            paranoid: true,
             indexes: [
                 {
                     name: "PRIMARY",
@@ -45,16 +45,8 @@ class users extends sequelize_1.Model {
                         { name: "id" },
                     ]
                 },
-                {
-                    name: "users_email_unique",
-                    unique: true,
-                    using: "BTREE",
-                    fields: [
-                        { name: "email" },
-                    ]
-                },
             ]
         });
     }
 }
-exports.users = users;
+exports.dp_beneficiarios = dp_beneficiarios;

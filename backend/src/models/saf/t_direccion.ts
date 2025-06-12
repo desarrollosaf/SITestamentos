@@ -5,7 +5,7 @@ import {
   InferCreationAttributes,
   CreationOptional,
 } from 'sequelize';
-import sequelize from '../database/connection';
+import sequelize from '../../database/connection'; 
 
 class Direccion extends Model<
   InferAttributes<Direccion>,
