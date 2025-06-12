@@ -1,0 +1,51 @@
+
+  .colorsm{
+    color: #fa0000;
+  }
+
+  .negri{
+    font-weight: bold;
+  }
+    h5.titulo {
+        text-align: left;
+        width: 100%;
+        background-color: #96134b;
+        /* Fondo del título */
+        color: white;
+        /* Color del texto */
+        padding: 15px 0;
+        /* Espaciado dentro del título */
+        margin: 0;
+        /* Eliminar márgenes del título */
+        padding-left: 20px;
+    }
+    
+    h5.titulo2 {
+        text-align: left;
+        width: 100%;
+        background-color: #005f1a;
+        /* Fondo del título */
+        color: white;
+        /* Color del texto */
+        padding: 15px 0;
+        /* Espaciado dentro del título */
+        margin: 0;
+        /* Eliminar márgenes del título */
+        padding-left: 20px;
+    }
+
+  .auth-background {
+    background-image: url('/images/fondo_registro.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Ocupa toda la altura visible */
+    padding-top: 30px; /* Espacio superior si es necesario */
+    padding-bottom: 30px;
+  }
+  
+  .card {
+    max-width: 900px; /* o lo que necesites */
+    margin: 0 auto;    /* centra la card */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* opcional: sombra para destacarla */
+  }
