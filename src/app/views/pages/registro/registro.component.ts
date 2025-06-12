@@ -13,6 +13,18 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class RegistroComponent {
   mostrarExtraInfo: boolean = false;
   formTestamento: FormGroup;
+
+  documentos: { [key: string]: File | null } = {
+    acta_nacimiento: null,
+    acta_matrimonio: null,
+    identificacion: null,
+    curp: null,
+    comprobante_domicilio: null,
+    certificado_publico: null,
+    certificado_privado: null,
+  };
+
+
   constructor(private fb: FormBuilder){
       this.formTestamento = this.fb.group({
       f_rfc:['', Validators.required],
@@ -24,11 +36,7 @@ export class RegistroComponent {
       f_primer_apellido:['', [Validators.required, Validators.email]],
       f_segundo_apellido: ['', [Validators.required, Validators.email]],
       f_fecha_nacimiento:['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      f_lugar_nacimiento:['', Validators.required],
-
-
-
-
+      lugar_nacimiento:['', Validators.required],
       edad:['', Validators.required],
       ocupacion:['', Validators.required],
       f_cp:['', Validators.required],
@@ -37,19 +45,23 @@ export class RegistroComponent {
       colonia_id:['', Validators.required],
       f_domicilio:['', Validators.required],
       numext:['', Validators.required],
-      numero_tel:['', Validators.required],
-
-      numero_cel:['', Validators.required],
-      correo_per:['', Validators.required],
-      numero_tel:['', Validators.required],
-      numero_tel:['', Validators.required],
-      numero_tel:['', Validators.required],
-      numero_tel:['', Validators.required],
-      numero_tel:['', Validators.required],
+      numero_tel:['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      numero_cel:['',[Validators.required, Validators.pattern(/^\d{10}$/)]],
+      correo_per:['', [Validators.required, Validators.email]],
     });
 
   }
 
   ngOnInit(): void {
   }
+
+  onFileSelect(event: Event, campo: string): void {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    this.documentos[campo] = input.files[0];
+    console.log(`${campo}:`, this.documentos[campo]);
+  }
+}
+
+
 }
