@@ -19,7 +19,7 @@ import {
 } from 'sequelize';
 
 import sequelizefun from '../../database/fun'; // Conexión específica a 'administracion'
-import type { dp_datospersonales } from '../fun/dp_datospersonales';
+import type { dp_datospersonales } from './dp_datospersonales';
 
 export class dp_estado_civil extends Model<
   InferAttributes<dp_estado_civil>,

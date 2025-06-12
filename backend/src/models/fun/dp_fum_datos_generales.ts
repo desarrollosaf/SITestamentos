@@ -37,10 +37,9 @@ export class dp_fum_datos_generales extends Model<
   declare funciones_p: string | null;
   declare num_int: string | null;
   declare num_ext: string | null;
-
-  declare created_at: CreationOptional<Date>;
-  declare updated_at: CreationOptional<Date>;
-  declare deleted_at: CreationOptional<Date>;
+  declare createdAt: CreationOptional<Date>;
+  declare updatedAt: CreationOptional<Date>;
+  declare deletedAt: Date | null;
 
   static initModel(sequelize: Sequelize): typeof dp_fum_datos_generales {
     dp_fum_datos_generales.init(
@@ -72,9 +71,21 @@ export class dp_fum_datos_generales extends Model<
         funciones_p: { type: DataTypes.TEXT, allowNull: true },
         num_int: { type: DataTypes.STRING(255), allowNull: true },
         num_ext: { type: DataTypes.STRING(255), allowNull: true },
-        created_at: { type: DataTypes.DATE, allowNull: true },
-        updated_at: { type: DataTypes.DATE, allowNull: true },
-        deleted_at: { type: DataTypes.DATE, allowNull: true },
+        createdAt: {
+          field: 'created_at', 
+          type: DataTypes.DATE,
+          allowNull: true,
+        },
+        updatedAt: {
+          field: 'updated_at', 
+          type: DataTypes.DATE,
+          allowNull: true,
+        },
+        deletedAt: {
+          field: 'deleted_at', 
+          type: DataTypes.DATE,
+          allowNull: true,
+        },
       },
       {
         sequelize: sequelizefun,

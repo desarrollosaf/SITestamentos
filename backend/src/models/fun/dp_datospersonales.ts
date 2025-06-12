@@ -10,12 +10,12 @@ import {
   NonAttribute,
 } from 'sequelize';
 import sequelizefun from '../../database/fun'; // Conexión específica a 'administracion'
-import type { dp_colonias } from '../fun/dp_colonias';
-import type { dp_escolaridad } from '../fun/dp_escolaridad';
-import type { dp_estado_civil } from '../fun/dp_estado_civil';
-import type { dp_estados } from '../fun/dp_estados';
-import type { dp_municipios } from '../fun/dp_municipios';
-import type { dp_opciones } from '../fun/dp_opciones';
+import { dp_colonias } from '../fun/dp_colonias';
+import { dp_escolaridad } from '../fun/dp_escolaridad';
+import { dp_estado_civil } from '../fun/dp_estado_civil';
+import { dp_estados } from '../fun/dp_estados';
+import { dp_municipios } from '../fun/dp_municipios';
+import { dp_opciones } from '../fun/dp_opciones';
 
 export class dp_datospersonales extends Model<
   InferAttributes<dp_datospersonales>,
@@ -140,50 +140,41 @@ export class dp_datospersonales extends Model<
       }
     );
 
-    return dp_datospersonales;
-  }
-
-  static associate(models: {
-    dp_colonias: typeof dp_colonias;
-    dp_escolaridad: typeof dp_escolaridad;
-    dp_estado_civil: typeof dp_estado_civil;
-    dp_estados: typeof dp_estados;
-    dp_municipios: typeof dp_municipios;
-    dp_opciones: typeof dp_opciones;
-  }) {
-    dp_datospersonales.belongsTo(models.dp_colonias, {
+     dp_datospersonales.belongsTo(dp_colonias, {
       foreignKey: 'colonia_id',
       as: 'colonia',
     });
 
-    dp_datospersonales.belongsTo(models.dp_escolaridad, {
-      foreignKey: 'escolaridad_id',
-      as: 'escolaridad',
-    });
+    //  dp_datospersonales.belongsTo(dp_escolaridad, {
+    //   foreignKey: 'escolaridad_id',
+    //   as: 'escolaridad',
+    // });
 
-    dp_datospersonales.belongsTo(models.dp_estado_civil, {
-      foreignKey: 'estadocivil_id',
-      as: 'estadocivil',
-    });
+    //  dp_datospersonales.belongsTo(dp_estado_civil, {
+    //   foreignKey: 'estadocivil_id',
+    //   as: 'estadocivil',
+    // });
 
-    dp_datospersonales.belongsTo(models.dp_estados, {
-      foreignKey: 'estado_id',
-      as: 'estado',
-    });
+    //  dp_datospersonales.belongsTo(dp_estados, {
+    //   foreignKey: 'estado_id',
+    //   as: 'estado',
+    // });
 
-    dp_datospersonales.belongsTo(models.dp_municipios, {
-      foreignKey: 'municipio_id',
-      as: 'municipio',
-    });
+    //   dp_datospersonales.belongsTo(dp_municipios, {
+    //   foreignKey: 'municipio_id',
+    //   as: 'municipio',
+    // });
 
-    dp_datospersonales.belongsTo(models.dp_opciones, {
-      foreignKey: 'sindicalizado_id',
-      as: 'sindicalizado',
-    });
+    //  dp_datospersonales.belongsTo(dp_opciones, {
+    //   foreignKey: 'sindicalizado_id',
+    //   as: 'sindicalizado',
+    // });
 
-    dp_datospersonales.belongsTo(models.dp_opciones, {
-      foreignKey: 'sci_id',
-      as: 'sci',
-    });
+    // dp_datospersonales.belongsTo(dp_opciones, {
+    //   foreignKey: 'sci_id',
+    //   as: 'sci',
+    // });
+
+    return dp_datospersonales;
   }
 }

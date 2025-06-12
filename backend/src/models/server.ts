@@ -3,6 +3,7 @@ import cors from 'cors'
 import path from 'path';
 import routesUser from '../routes/user'
 import routesEstados from '../routes/estados'
+import routesDatosp from '../routes/datosp'
 
 class Server {
 
@@ -29,6 +30,7 @@ class Server {
     router(){
          this.app.use(routesUser);
          this.app.use(routesEstados);
+         this.app.use(routesDatosp);
     }
 
     

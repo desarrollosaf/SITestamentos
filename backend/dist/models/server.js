@@ -16,6 +16,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const user_1 = __importDefault(require("../routes/user"));
 const estados_1 = __importDefault(require("../routes/estados"));
+const datosp_1 = __importDefault(require("../routes/datosp"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -33,6 +34,7 @@ class Server {
     router() {
         this.app.use(user_1.default);
         this.app.use(estados_1.default);
+        this.app.use(datosp_1.default);
     }
     midlewares() {
         this.app.use(express_1.default.json());
