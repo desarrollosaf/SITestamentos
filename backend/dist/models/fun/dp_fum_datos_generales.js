@@ -36,9 +36,21 @@ class dp_fum_datos_generales extends sequelize_1.Model {
             funciones_p: { type: sequelize_1.DataTypes.TEXT, allowNull: true },
             num_int: { type: sequelize_1.DataTypes.STRING(255), allowNull: true },
             num_ext: { type: sequelize_1.DataTypes.STRING(255), allowNull: true },
-            created_at: { type: sequelize_1.DataTypes.DATE, allowNull: true },
-            updated_at: { type: sequelize_1.DataTypes.DATE, allowNull: true },
-            deleted_at: { type: sequelize_1.DataTypes.DATE, allowNull: true },
+            createdAt: {
+                field: 'created_at',
+                type: sequelize_1.DataTypes.DATE,
+                allowNull: true,
+            },
+            updatedAt: {
+                field: 'updated_at',
+                type: sequelize_1.DataTypes.DATE,
+                allowNull: true,
+            },
+            deletedAt: {
+                field: 'deleted_at',
+                type: sequelize_1.DataTypes.DATE,
+                allowNull: true,
+            },
         }, {
             sequelize: fun_1.default,
             tableName: 'dp_fum_datos_generales',
