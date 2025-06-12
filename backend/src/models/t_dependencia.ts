@@ -28,31 +28,38 @@ Dependencia.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false,
+       field: 'id_Dependencia'
     },
     C_presupDep: {
       type: DataTypes.INTEGER,
       allowNull: false,
+       field: 'C_presupDep'
     },
     Nombre: {
       type: DataTypes.STRING(100),
       allowNull: false,
+       field: 'Nombre'
     },
     Creado: {
       type: DataTypes.INTEGER,
       allowNull: false,
+       field: 'Creado'
     },
     F_Creacion: {
       type: DataTypes.DATEONLY,
       allowNull: false,
+       field: 'F_Creacion'
     },
     
     U_Modificacion: {
       type: DataTypes.DATEONLY,
       allowNull: true,
+       field: 'U_Modificacion'
     },
     Estado: {
       type: DataTypes.INTEGER,
       allowNull: false,
+       field: 'Estado'
     },
     orden: {
       type: DataTypes.INTEGER,

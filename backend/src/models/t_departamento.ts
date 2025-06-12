@@ -32,38 +32,47 @@ Departamento.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+       field: 'id_Departamento'
     },
     C_presupDepto: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      field: 'C_presupDepto'
     },
     Nombre: {
       type: DataTypes.STRING(100),
       allowNull: false,
+      field: 'Nombre'
     },
     Creado: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      field: 'Creado'
     },
     F_Creacion: {
       type: DataTypes.DATEONLY,
       allowNull: false,
+       field: 'F_Creacion'
     },
     U_Modificacion: {
       type: DataTypes.DATEONLY,
       allowNull: false,
+      field: 'U_Modificacion'
     },
     Estado: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      field: 'Estado'
     },
     id_Dependencia: {
       type: DataTypes.INTEGER,
       allowNull: true,
+      field: 'id_Dependencia'
     },
     id_Direccion: {
       type: DataTypes.INTEGER,
       allowNull: true,
+       field: 'id_Direccion'
     },
     c_presup: {
       type: DataTypes.INTEGER,
