@@ -1,12 +1,15 @@
 import { NgStyle } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Observable } from 'rxjs';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
     selector: 'app-login',
     imports: [
         NgStyle,
-        RouterLink
+        RouterLink,
+        FormsModule
     ],
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss'
@@ -14,6 +17,10 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   returnUrl: any;
+  loggedin: boolean = false;
+  Uemail: string = '';
+  Upassword: string = '';
+  userRole$: Observable<string | undefined>;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -22,8 +29,7 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  onLoggedin(e: Event) {
-    e.preventDefault();
+  onLoggedin(form: NgForm) {
     localStorage.setItem('isLoggedin', 'true');
     if (localStorage.getItem('isLoggedin') === 'true') {
       this.router.navigate([this.returnUrl]);
