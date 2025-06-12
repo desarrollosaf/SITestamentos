@@ -1,0 +1,34 @@
+import { Request, Response } from 'express';
+import { dp_datospersonales } from '../models/fun/dp_datospersonales';
+import sequelizefun from '../database/fun'; // La conexión
+import { dp_fum_datos_generales } from '../models/fun/dp_fum_datos_generales';
+
+dp_datospersonales.initModel(sequelizefun);
+dp_fum_datos_generales.initModel(sequelizefun);
+
+export const getregistro = async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+  try {
+   
+    let registro: dp_datospersonales | dp_fum_datos_generales | null = await dp_datospersonales.findOne({ 
+    where: { f_curp: id }
+    });
+
+    if (!registro) {
+    registro = await dp_fum_datos_generales.findOne({ 
+        where: { f_curp: id }
+    });
+
+    if (!registro) {
+        return res.status(500).json({ error: 'No se tiene ningun registro' });
+    }
+    }
+    return res.json({
+      msg: `Lista obtenida exitosamente`,
+      data: registro
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
+  }
+};
