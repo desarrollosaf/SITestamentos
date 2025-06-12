@@ -1,8 +1,10 @@
 import { NgStyle } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FormsModule, NgForm } from '@angular/forms';
+import { UserService } from '../../../../core/services/user.service';
+import { User } from '../../../../core/interfaces/user';
 
 @Component({
     selector: 'app-login',
@@ -21,6 +23,8 @@ export class LoginComponent implements OnInit {
   Uemail: string = '';
   Upassword: string = '';
   userRole$: Observable<string | undefined>;
+
+  public _userService = inject(UserService);
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
