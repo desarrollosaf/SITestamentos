@@ -5,10 +5,10 @@ import {
   InferCreationAttributes,
   CreationOptional,
 } from 'sequelize';
-import sequelize from '../database/connection'; 
-import Dependencia from './t_dependencia';
-import Direccion from './t_direccion';
-import Departamento from './t_departamento';
+import sequelize from '../../database/connection'; 
+import Dependencia from '../saf/t_dependencia';
+import Direccion from '../saf/t_direccion';
+import Departamento from '../saf/t_departamento';
 
 class SUsuario extends Model<
   InferAttributes<SUsuario>,

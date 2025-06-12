@@ -1,41 +1,33 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.users = void 0;
+exports.pre_proyecto_unidades = void 0;
 const sequelize_1 = require("sequelize");
-class users extends sequelize_1.Model {
+class pre_proyecto_unidades extends sequelize_1.Model {
     static initModel(sequelize) {
-        return users.init({
+        return pre_proyecto_unidades.init({
             id: {
                 autoIncrement: true,
                 type: sequelize_1.DataTypes.BIGINT.UNSIGNED,
                 allowNull: false,
                 primaryKey: true
             },
-            name: {
-                type: sequelize_1.DataTypes.STRING(255),
-                allowNull: false
-            },
-            email: {
-                type: sequelize_1.DataTypes.STRING(255),
+            id_proyecto: {
+                type: sequelize_1.DataTypes.BIGINT.UNSIGNED,
                 allowNull: false,
-                unique: "users_email_unique"
+                references: {
+                    model: 'pre_proyectos',
+                    key: 'id'
+                }
             },
-            email_verified_at: {
-                type: sequelize_1.DataTypes.DATE,
-                allowNull: true
-            },
-            password: {
-                type: sequelize_1.DataTypes.STRING(255),
+            direccion: {
+                type: sequelize_1.DataTypes.BIGINT.UNSIGNED,
                 allowNull: false
-            },
-            remember_token: {
-                type: sequelize_1.DataTypes.STRING(100),
-                allowNull: true
             }
         }, {
             sequelize,
-            tableName: 'users',
+            tableName: 'pre_proyecto_unidades',
             timestamps: true,
+            paranoid: true,
             indexes: [
                 {
                     name: "PRIMARY",
@@ -46,15 +38,14 @@ class users extends sequelize_1.Model {
                     ]
                 },
                 {
-                    name: "users_email_unique",
-                    unique: true,
+                    name: "pre_proyecto_unidades_id_proyecto_foreign",
                     using: "BTREE",
                     fields: [
-                        { name: "email" },
+                        { name: "id_proyecto" },
                     ]
                 },
             ]
         });
     }
 }
-exports.users = users;
+exports.pre_proyecto_unidades = pre_proyecto_unidades;

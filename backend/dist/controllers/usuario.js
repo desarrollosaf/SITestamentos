@@ -13,11 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getRegistros = void 0;
-const users_1 = __importDefault(require("../models/users"));
-const s_usuario_1 = __importDefault(require("../models/s_usuario"));
-const t_dependencia_1 = __importDefault(require("../models/t_dependencia"));
-const t_direccion_1 = __importDefault(require("../models/t_direccion"));
-const t_departamento_1 = __importDefault(require("../models/t_departamento"));
+const users_1 = __importDefault(require("../models/saf/users"));
+const s_usuario_1 = __importDefault(require("../models/saf/s_usuario"));
+const t_dependencia_1 = __importDefault(require("../models/saf/t_dependencia"));
+const t_direccion_1 = __importDefault(require("../models/saf/t_direccion"));
+const t_departamento_1 = __importDefault(require("../models/saf/t_departamento"));
 const getRegistros = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const usuarios = yield users_1.default.findAll({
         include: [

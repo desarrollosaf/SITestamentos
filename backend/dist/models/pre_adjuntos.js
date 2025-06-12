@@ -1,41 +1,33 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.users = void 0;
+exports.pre_adjuntos = void 0;
 const sequelize_1 = require("sequelize");
-class users extends sequelize_1.Model {
+class pre_adjuntos extends sequelize_1.Model {
     static initModel(sequelize) {
-        return users.init({
+        return pre_adjuntos.init({
             id: {
                 autoIncrement: true,
                 type: sequelize_1.DataTypes.BIGINT.UNSIGNED,
                 allowNull: false,
                 primaryKey: true
             },
-            name: {
-                type: sequelize_1.DataTypes.STRING(255),
-                allowNull: false
-            },
-            email: {
-                type: sequelize_1.DataTypes.STRING(255),
+            id_solicitud: {
+                type: sequelize_1.DataTypes.CHAR(36),
                 allowNull: false,
-                unique: "users_email_unique"
+                references: {
+                    model: 'pre_solicituds',
+                    key: 'id'
+                }
             },
-            email_verified_at: {
-                type: sequelize_1.DataTypes.DATE,
-                allowNull: true
-            },
-            password: {
+            file_adjunto: {
                 type: sequelize_1.DataTypes.STRING(255),
-                allowNull: false
-            },
-            remember_token: {
-                type: sequelize_1.DataTypes.STRING(100),
                 allowNull: true
             }
         }, {
             sequelize,
-            tableName: 'users',
+            tableName: 'pre_adjuntos',
             timestamps: true,
+            paranoid: true,
             indexes: [
                 {
                     name: "PRIMARY",
@@ -46,15 +38,14 @@ class users extends sequelize_1.Model {
                     ]
                 },
                 {
-                    name: "users_email_unique",
-                    unique: true,
+                    name: "pre_adjuntos_id_solicitud_foreign",
                     using: "BTREE",
                     fields: [
-                        { name: "email" },
+                        { name: "id_solicitud" },
                     ]
                 },
             ]
         });
     }
 }
-exports.users = users;
+exports.pre_adjuntos = pre_adjuntos;
