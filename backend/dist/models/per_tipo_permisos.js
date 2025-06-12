@@ -1,40 +1,36 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.users = void 0;
+exports.per_tipo_permisos = void 0;
 const sequelize_1 = require("sequelize");
-class users extends sequelize_1.Model {
+class per_tipo_permisos extends sequelize_1.Model {
     static initModel(sequelize) {
-        return users.init({
+        return per_tipo_permisos.init({
             id: {
                 autoIncrement: true,
                 type: sequelize_1.DataTypes.BIGINT.UNSIGNED,
                 allowNull: false,
                 primaryKey: true
             },
-            name: {
+            permiso: {
                 type: sequelize_1.DataTypes.STRING(255),
                 allowNull: false
             },
-            email: {
+            antiguedad: {
                 type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true
+            },
+            indicativo: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true
+            },
+            status: {
+                type: sequelize_1.DataTypes.BOOLEAN,
                 allowNull: false,
-                unique: "users_email_unique"
-            },
-            email_verified_at: {
-                type: sequelize_1.DataTypes.DATE,
-                allowNull: true
-            },
-            password: {
-                type: sequelize_1.DataTypes.STRING(255),
-                allowNull: false
-            },
-            remember_token: {
-                type: sequelize_1.DataTypes.STRING(100),
-                allowNull: true
+                defaultValue: 1
             }
         }, {
             sequelize,
-            tableName: 'users',
+            tableName: 'per_tipo_permisos',
             timestamps: true,
             indexes: [
                 {
@@ -45,16 +41,8 @@ class users extends sequelize_1.Model {
                         { name: "id" },
                     ]
                 },
-                {
-                    name: "users_email_unique",
-                    unique: true,
-                    using: "BTREE",
-                    fields: [
-                        { name: "email" },
-                    ]
-                },
             ]
         });
     }
 }
-exports.users = users;
+exports.per_tipo_permisos = per_tipo_permisos;
