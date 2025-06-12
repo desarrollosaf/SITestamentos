@@ -1,6 +1,7 @@
 import express, {Application} from 'express'
 import cors from 'cors'
 import path from 'path';
+import routesUser from '../routes/user'
 
 class Server {
 
@@ -21,10 +22,11 @@ class Server {
         this.app.listen(this.port, () => {
             console.log("La aplicación se esta corriendo exitosamente en el puerto => "+ this.port)           
         })
+        
     }
 
     router(){
-        //
+         this.app.use(routesUser);
     }
 
     
