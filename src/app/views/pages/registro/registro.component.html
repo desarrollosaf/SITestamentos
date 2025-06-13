@@ -28,9 +28,6 @@
                   <label class="form-label negri">RFC:*</label>
                   <input formControlName="f_rfc" type="text" class="form-control" placeholder="Ejemplo: MACJ750101"
                     maxlength="10" />
-                  <small class="colorsm">
-                    <strong> RFC inválido o incompleto.</strong>
-                  </small>
                   <div>
                     <small class="colorsm" *ngIf="formTestamento.get('f_rfc')?.hasError('required')">Este campo es
                       <strong>requerido</strong></small>

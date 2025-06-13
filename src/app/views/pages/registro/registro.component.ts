@@ -41,8 +41,8 @@ export class RegistroComponent {
       f_segundo_apellido: ['', [Validators.required, Validators.email]],
       f_fecha_nacimiento:['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       lugar_nacimiento:['', Validators.required],
-      edad:['', Validators.required],
-      ocupacion:['', Validators.required],
+      edad:[''],
+      ocupacion:['Servidor Público', Validators.required],
       f_cp:['', Validators.required],
       estado_id:['', Validators.required],
       municipio_id:['', Validators.required],
@@ -76,6 +76,20 @@ export class RegistroComponent {
       this._registroService.getDatosUser(curp).subscribe({
         next: (response: any) => {
           console.log(response);
+          this.formTestamento.patchValue({
+          f_rfc: response.data.f_rfc,
+           f_nombre: response.data.f_nombre,
+          f_primer_apellido: response.data.f_primer_apellido,
+          f_segundo_apellido: response.data.f_segundo_apellido,
+          f_fecha_nacimiento: response.data.f_fecha_nacimiento,
+
+         
+          });
+          if (response.data.f_fecha_nacimiento) {
+            console.log('ppppp');
+            const edad = this.calcularEdad(response.data.f_fecha_nacimiento);
+            this.formTestamento.patchValue({ f_edad: edad });
+          }
         },
         error: (e: HttpErrorResponse) => {
         if (e.error && e.error.msg) {
@@ -86,6 +100,19 @@ export class RegistroComponent {
         },
       })
   }
+
+  calcularEdad(fechaNacimiento: string | Date): number {
+  const nacimiento = new Date(fechaNacimiento);
+  console.log(nacimiento);
+  const hoy = new Date();
+  let edad = hoy.getFullYear() - nacimiento.getFullYear();
+  const mes = hoy.getMonth() - nacimiento.getMonth();
+
+  if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+    edad--;
+  }
+  return edad;
+}
 
 
 }
