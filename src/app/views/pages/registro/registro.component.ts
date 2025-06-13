@@ -204,8 +204,6 @@ export class RegistroComponent {
   }
 
 
-
-
   documentosRequeridosLlenos(): boolean {
     return this.documentos.acta_nacimiento !== null &&
           this.documentos.identificacion !== null &&
@@ -232,12 +230,47 @@ export class RegistroComponent {
         formData.append(key, this.documentos[key] as File);
       }
     }
-    formData.forEach((valor, clave) => {
-      console.log(clave, valor);
-    });
+    formData.append('f_rfc', String(this.formTestamento.value.f_rfc,));
+    formData.append('f_curp', String(this.formTestamento.value.f_curp,));
+    formData.append('f_nombre', String(this.formTestamento.value.f_nombre,));
+    formData.append('f_primer_apellido', String(this.formTestamento.value.f_primer_apellido,));
+    formData.append('f_segundo_apellido', String(this.formTestamento.value.f_segundo_apellido,));
+    formData.append('f_fecha_nacimiento', String(this.formTestamento.value.f_fecha_nacimiento,));
+    formData.append('lugar_nacimiento', String(this.formTestamento.value.lugar_nacimiento,));
+    formData.append('f_cp', String(this.formTestamento.value.f_cp,));
+    formData.append('estado_id', String(this.formTestamento.value.estado_id,));
+    formData.append('municipio_id', String(this.formTestamento.value.municipio_id,));
+    formData.append('colonia_id', String(this.formTestamento.value.colonia_id,));
+    formData.append('f_domicilio', String(this.formTestamento.value.f_domicilio,));
+    formData.append('numext', String(this.formTestamento.value.numext,));
+    formData.append('numero_tel', String(this.formTestamento.value.numero_tel,));
+    formData.append('numero_cel', String(this.formTestamento.value.numero_cel,));
+    formData.append('correo_per', String(this.formTestamento.value.correo_per,));
+
+    // formData.forEach((valor, clave) => {
+    //   console.log(clave, valor);
+    // });
+
+    this._registroService.saveRegistro(formData).subscribe({
+      next: (response: any) => {
+        console.log('oki');
+      },
+      error: (e: HttpErrorResponse) => {
+        if (e.error && e.error.msg) {
+          console.error('Error del servidor:', e.error.msg);
+        } else {
+              Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "¡Atención!",
+            text: `Error al guardar, consulte al administrador del sistema.`,
+            showConfirmButton: false,
+            timer: 2000
+          });
+        }
+      },
+    })
   }
-
-
 
   limpiaForm(){
     ['f_rfc', 'f_nombre', 'f_primer_apellido', 'f_segundo_apellido', 'f_fecha_nacimiento'
