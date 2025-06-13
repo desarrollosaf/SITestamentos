@@ -90,7 +90,7 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Edad:</label>
-                  <input formControlName="edad" type="text" class="form-control" placeholder="Ejemplo: 32"
+                  <input formControlName="edad" type="text" class="form-control"
                       />
                 </div>
               </div>
@@ -208,13 +208,7 @@
                   <label class="form-label negri">Correo electrónico:*</label>
                   <input formControlName="correo_per" type="email" class="form-control"
                     placeholder="Ejemplo: usuario@dominio.com" />
-
-
-
-                    
                       <small class="colorsm" *ngIf="formTestamento.get('correo_per')?.hasError('required')">Este campo es <strong>requerido</strong></small>
-                     
-                     
                       <small class="colorsm" *ngIf="formTestamento.get('correo_per')?.hasError('email')">Por favor
                       <strong>ingresa un correo válido.</strong></small>
                     
