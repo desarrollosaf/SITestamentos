@@ -22,8 +22,8 @@ export class RegistroService {
   }
 
 
-  saveRegistro(document: FormData): Observable<string> {
-    return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl3}/getcodigo`,document)
+  saveRegistro(data: FormData): Observable<string> {
+    return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl3}/create`,data)
   }
 
 

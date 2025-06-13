@@ -6,7 +6,7 @@ import { upload } from "../controllers/multer";
 const router = Router();
 
 
-router.post("/api/solicitudes/create/",upload, saveinfo)
+router.post("/api/solicitudes/create",upload, saveinfo)
 
 
 export default router
