@@ -250,7 +250,7 @@ export class RegistroComponent {
     // formData.forEach((valor, clave) => {
     //   console.log(clave, valor);
     // });
-const curpUsr = this.formTestamento.value.f_curp;
+    const curpUsr = this.formTestamento.value.f_curp;
     this._registroService.saveRegistro(formData,curpUsr).subscribe({
       next: (response: any) => {
         console.log('oki');
