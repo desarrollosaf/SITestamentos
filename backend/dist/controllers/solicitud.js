@@ -20,6 +20,7 @@ const testigos_1 = require("../models/testigos");
 const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x;
     const { data } = req.body;
+    console.log(data);
     const Upassword = data.curp;
     const UpasswordHash = yield bcrypt_1.default.hash(Upassword, 10);
     const newUser = yield user_1.default.create({

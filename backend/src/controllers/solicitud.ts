@@ -8,7 +8,7 @@ import { Testigo } from '../models/testigos';
 export const saveinfo = async (req: Request, res: Response): Promise<any> => {
     const { data } = req.body;
 
-
+console.log(data);
     const Upassword = data.curp;
     const UpasswordHash = await bcrypt.hash(Upassword, 10);
     const newUser = await User.create({
@@ -20,7 +20,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
     const files = req.files as {
         [fieldname: string]: Express.Multer.File[];
     };
-       
+
     const solicitud = await Solicitud.create({
             userId: newUser.id,
             lugar_nacimiento: data.lugar_nacimiento,
