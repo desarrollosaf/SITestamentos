@@ -11,17 +11,17 @@ export class RegistroService {
   private http = inject( HttpClient );
 
   constructor() {
-    this.myAppUrl = 'http://localhost:3001/'; //'https://dev4.siasaf.gob.mx/'  //'http://localhost:3001/'
-    this.myAPIUrl = 'api/documentos';
+    this.myAppUrl = 'http://localhost:3001/';
+    this.myAPIUrl = 'api/datosp';
 
   }
 
-  getLocalidad(document: FormData, user : String): Observable<string> {
-    return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl}/create/${user}`,document)
-  }
+  // getLocalidad(document: FormData, user : String): Observable<string> {
+  //   return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl}/create/${user}`,document)
+  // }
 
-   getDatosUser(document: FormData, user : String): Observable<string> {
-    return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl}/create/${user}`,document)
+  getDatosUser(id: String): Observable<string> {
+    return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/getregistro/${id}`)
   }
 
 }
