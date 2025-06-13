@@ -14,9 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const user_1 = __importDefault(require("../routes/user"));
-const estados_1 = __importDefault(require("../routes/estados"));
-const datosp_1 = __importDefault(require("../routes/datosp"));
+const user_1 = __importDefault(require("../routes/saf/user"));
+const estados_1 = __importDefault(require("../routes/fun/estados"));
+const datosp_1 = __importDefault(require("../routes/fun/datosp"));
+const user_2 = __importDefault(require("../routes/user"));
+const user_3 = __importDefault(require("../models/user"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -35,6 +37,7 @@ class Server {
         this.app.use(user_1.default);
         this.app.use(estados_1.default);
         this.app.use(datosp_1.default);
+        this.app.use(user_2.default);
     }
     midlewares() {
         this.app.use(express_1.default.json());
@@ -43,6 +46,7 @@ class Server {
     DBconnetc() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                yield user_3.default.sync();
                 console.log("Conexion de DB exitoso");
             }
             catch (error) {

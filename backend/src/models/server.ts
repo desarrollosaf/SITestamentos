@@ -1,9 +1,11 @@
 import express, {Application} from 'express'
 import cors from 'cors'
 import path from 'path';
+import routesUsers from '../routes/saf/user'
+import routesEstados from '../routes/fun/estados'
+import routesDatosp from '../routes/fun/datosp'
 import routesUser from '../routes/user'
-import routesEstados from '../routes/estados'
-import routesDatosp from '../routes/datosp'
+import user from '../models/user'
 
 class Server {
 
@@ -28,9 +30,11 @@ class Server {
     }
 
     router(){
-         this.app.use(routesUser);
-         this.app.use(routesEstados);
-         this.app.use(routesDatosp);
+
+        this.app.use(routesUsers);
+        this.app.use(routesEstados);
+        this.app.use(routesDatosp);
+        this.app.use(routesUser);
     }
 
     
@@ -44,6 +48,7 @@ class Server {
     async DBconnetc(){
         try {
 
+            await user.sync(); 
             console.log("Conexion de DB exitoso");
 
         } catch (error) {

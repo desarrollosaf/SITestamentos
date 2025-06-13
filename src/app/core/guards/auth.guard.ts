@@ -1,16 +1,30 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 
 export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  const router = inject(Router);
+const router = inject(Router);
 
-  if (localStorage.getItem('isLoggedin') === 'true') {
-    // If the user is logged in, then return true
-    return true;
+  const token = localStorage.getItem('myToken');
+
+  if (token) {
+    try {
+      const decoded: any = jwtDecode(token);
+      const now = Math.floor(Date.now() / 1000);
+
+      if (decoded.exp && decoded.exp > now) {
+        return true;
+
+      } else {
+        localStorage.removeItem('myToken');
+
+      }
+
+    } catch (error) {
+      localStorage.removeItem('myToken');
+    }
   }
 
-  // If the user is not logged in, redirect to the login page with the return URL
   router.navigate(['/auth/login'], { queryParams: { returnUrl: state.url.split('?')[0] } });
   return false;
-  
 };

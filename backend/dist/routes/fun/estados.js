@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const users_1 = require("../controllers/users");
+const colonias_1 = require("../../controllers/colonias");
 const router = (0, express_1.Router)();
-router.post("/api/user/login", users_1.LoginUser);
+router.get("/api/estados/getcodigo/:id", colonias_1.getRegistros);
 exports.default = router;

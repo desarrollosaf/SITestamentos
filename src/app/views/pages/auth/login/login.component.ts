@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UserService } from '../../../../core/services/user.service';
 import { User } from '../../../../core/interfaces/user';
+import { map } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-login',
@@ -26,18 +28,46 @@ export class LoginComponent implements OnInit {
 
   public _userService = inject(UserService);
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) {
+    this.userRole$ = this._userService.currentUser$.pipe(
+      map(user => user?.rol_users?.role?.name)
+    );
+  }
 
   ngOnInit(): void {
-    // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
   }
 
   onLoggedin(form: NgForm) {
-    localStorage.setItem('isLoggedin', 'true');
-    if (localStorage.getItem('isLoggedin') === 'true') {
-      this.router.navigate([this.returnUrl]);
-    }
+
+    const user: User = {
+      email: form.value.Uemail,
+      password: form.value.Upassword
+    };
+
+    this._userService.login(user).subscribe({
+      next: (response: any) => {
+        const token = response.token;
+        const userData = response.user;
+
+        localStorage.setItem('myToken', token);
+        localStorage.setItem('isLoggedin', 'true');
+
+        this._userService.setCurrentUser(userData);
+        this.userRole$.subscribe(role => {
+        });
+        
+        this.router.navigate([this.returnUrl]);
+      },
+      error: (e: HttpErrorResponse) => {
+        if (e.error && e.error.msg) {
+          console.error('Error del servidor:', e.error.msg);
+        } else {
+          console.error('Error desconocido:', e);
+        }
+      },
+    });
   }
 
 }
