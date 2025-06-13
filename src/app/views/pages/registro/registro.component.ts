@@ -259,14 +259,15 @@ export class RegistroComponent {
         if (e.error && e.error.msg) {
           console.error('Error del servidor:', e.error.msg);
         } else {
-              Swal.fire({
-            position: "center",
-            icon: "error",
-            title: "¡Atención!",
-            text: `Error al guardar, consulte al administrador del sistema.`,
-            showConfirmButton: false,
-            timer: 2000
-          });
+           console.error('Error desconocido:', e);
+          //     Swal.fire({
+          //   position: "center",
+          //   icon: "error",
+          //   title: "¡Atención!",
+          //   text: `Error al guardar, consulte al administrador del sistema.`,
+          //   showConfirmButton: false,
+          //   timer: 2000
+          // });
         }
       },
     })
@@ -294,6 +295,4 @@ export class RegistroComponent {
     });
     this.localidades = [];
   }
-
-
 }

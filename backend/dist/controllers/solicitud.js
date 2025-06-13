@@ -17,16 +17,41 @@ const solicitud_1 = require("../models/solicitud");
 const user_1 = __importDefault(require("../models/user"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const testigos_1 = require("../models/testigos");
+const fun_1 = __importDefault(require("../database/fun")); // La conexión
+const dp_datospersonales_1 = require("../models/fun/dp_datospersonales");
+dp_datospersonales_1.dp_datospersonales.initModel(fun_1.default);
 const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x;
     const { data } = req.body;
+    console.log(data);
     const Upassword = data.curp;
     const UpasswordHash = yield bcrypt_1.default.hash(Upassword, 10);
     const newUser = yield user_1.default.create({
         name: data.curp,
-        email: data.curp,
+        email: data.correo_per,
         password: UpasswordHash,
     });
+    let registro = yield dp_datospersonales_1.dp_datospersonales.findOne({
+        where: { f_curp: data.curp }
+    });
+    if (!registro) {
+        const test = yield dp_datospersonales_1.dp_datospersonales.create({
+            f_curp: data.curp,
+            f_rfc: data.rfc,
+            f_nombre: data.nombre,
+            f_primer_apellido: data.f_primer_apellido,
+            f_segundo_apellido: data.f_segundo_apellido,
+            f_fecha_nacimiento: data.f_fecha_nacimiento,
+            estado_id: data.estado_id,
+            municipio_id: data.municipio_id,
+            colonia_id: data.colonia_id,
+            f_domicilio: data.f_domicilio,
+            numext: data.numext,
+            correo_per: data.correo_per,
+            f_homclave: ''
+        });
+    }
+    ;
     const files = req.files;
     const solicitud = yield solicitud_1.Solicitud.create({
         userId: newUser.id,
