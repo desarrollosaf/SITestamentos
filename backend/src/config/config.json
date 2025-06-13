@@ -3,7 +3,7 @@
     "username": "root",
     "password": "",
     "database": "testamentos",
-    "host": "192.168.10.10",
+    "host": "localhost",
     "dialect": "mysql"
   }
 }
