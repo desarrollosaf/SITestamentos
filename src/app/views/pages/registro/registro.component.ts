@@ -203,19 +203,38 @@ export class RegistroComponent {
     return edad;
   }
 
+
+
+
+  documentosRequeridosLlenos(): boolean {
+    return this.documentos.acta_nacimiento !== null &&
+          this.documentos.identificacion !== null &&
+          this.documentos.comprobante_domicilio !== null &&
+          this.documentos.curp !== null;
+  }
+
+
   enviarDatos(): void {
-
-
-
+    if (!this.documentosRequeridosLlenos()) {
+      Swal.fire({
+            position: "center",
+            icon: "warning",
+            title: "¡Atención!",
+            text: "Los documentos con (*) son obligatorios.",
+            showConfirmButton: false,
+            timer: 3000
+          });
+    return;
+    }
     const formData = new FormData();
     for (const key in this.documentos) {
       if (this.documentos[key]) {
         formData.append(key, this.documentos[key] as File);
       }
     }
-  formData.forEach((valor, clave) => {
-  console.log(clave, valor);
-});
+    formData.forEach((valor, clave) => {
+      console.log(clave, valor);
+    });
   }
 
 
