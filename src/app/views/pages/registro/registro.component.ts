@@ -66,9 +66,10 @@ export class RegistroComponent {
   }
 
   ngOnInit(): void {
-    this.formTestamento.get('edad')?.disable();
-    this.formTestamento.get('ocupacion')?.disable();
     this.formTestamento.get('f_curp')?.valueChanges.subscribe(value => {
+      if(value  && value.length < 18){
+        this.limpiaForm();
+      }
       if (value && value.length === 18) {
         this.buscarDatosPorCurp(value);
       }
@@ -284,11 +285,12 @@ export class RegistroComponent {
       , 'correo_per'
     ].forEach(campo => {
       const control = this.formTestamento.get(campo);
+      control?.setValue(null);
       control?.markAsPristine();
       control?.markAsUntouched();
     });
     this.formTestamento.patchValue({
-      estado_id: '',
+      colonia_id:'',
       municipio_id: '',
       estado_nombre: '',
       municipio_nombre: ''
