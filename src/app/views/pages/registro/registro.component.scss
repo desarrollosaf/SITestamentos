@@ -45,3 +45,16 @@
     color: #6b6b6b;
     pointer-events: none;
   }
+  .input-archivo-wrapper {
+  min-height: 100px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.form-label1 {
+  min-height: 2.5rem; /* ajusta según lo que necesites */
+  display: flex;
+  align-items: flex-start;
+}
