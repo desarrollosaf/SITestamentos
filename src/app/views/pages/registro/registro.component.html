@@ -6,18 +6,20 @@
           <h6 class="fw-bold mb-4 text-center" style="color: #96134b; font-size: 1.2rem;">
             SOLICITUD DE TESTAMENTO
           </h6>
-          <form [formGroup]="formTestamento"  (ngSubmit)="enviarDatos()"  class="forms-sample">
+          <form [formGroup]="formTestamento" (ngSubmit)="enviarDatos()" class="forms-sample">
             <div class="row">
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">CURP:*</label>
                   <input formControlName="f_curp" type="text" class="form-control"
                     placeholder="Ejemplo: MACJ750101HDFRRL01" maxlength="18" />
-                   <small class="colorsm" *ngIf="formTestamento.get('f_curp')?.hasError('pattern')">
+                  <small class="colorsm" *ngIf="formTestamento.get('f_curp')?.hasError('pattern')">
                     <strong> CURP inválida o incompleta.</strong>
                   </small>
                   <div>
-                   <small class="colorsm" *ngIf="formTestamento.get('f_curp')?.hasError('required') && formTestamento.get('f_curp')?.touched">Este campo es
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('f_curp')?.hasError('required') && formTestamento.get('f_curp')?.touched">Este
+                      campo es
                       <strong>requerido</strong></small>
                     <br />
                   </div>
@@ -26,20 +28,23 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">RFC:*</label>
-                  <input formControlName="f_rfc" type="text" class="form-control input-simulado-disabled" placeholder="Ejemplo: MACJ750101"
-                    maxlength="10" [readonly]="true" />
+                  <input formControlName="f_rfc" type="text" class="form-control input-simulado-disabled"
+                    placeholder="Ejemplo: MACJ750101" maxlength="10" [readonly]="true" />
                   <div>
-                    <small class="colorsm" *ngIf="formTestamento.get('f_rfc')?.hasError('required') && formTestamento.get('f_rfc')?.touched">Este campo es
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('f_rfc')?.hasError('required') && formTestamento.get('f_rfc')?.touched">Este
+                      campo es
                       <strong>requerido</strong></small>
                     <br />
                   </div>
                 </div>
               </div>
 
-                  <div class="col-sm-4">
+              <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Ocupación:</label>
-                  <input formControlName="ocupacion" type="text" class="form-control input-simulado-disabled" value='Servidor Público'  [readonly]="true"/>
+                  <input formControlName="ocupacion" type="text" class="form-control input-simulado-disabled"
+                    value='Servidor Público' [readonly]="true" />
                 </div>
               </div>
             </div>
@@ -49,27 +54,33 @@
                 <div class="mb-3">
                   <label class="form-label negri">Nombre completo:*</label>
                   <input formControlName="f_nombre" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: Juan Carlos"  [readonly]="true"/>
-                  <small class="colorsm" *ngIf="formTestamento.get('f_nombre')?.hasError('required') && formTestamento.get('f_nombre')?.touched">Este campo es
-                      <strong>requerido</strong></small>
+                    placeholder="Ejemplo: Juan Carlos" [readonly]="true" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('f_nombre')?.hasError('required') && formTestamento.get('f_nombre')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Apellido paterno:*</label>
                   <input formControlName="f_primer_apellido" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: Martínez"  [readonly]="true" />
-                 <small class="colorsm" *ngIf="formTestamento.get('f_primer_apellido')?.hasError('required') && formTestamento.get('f_primer_apellido')?.touched">Este campo es
-                      <strong>requerido</strong></small>
+                    placeholder="Ejemplo: Martínez" [readonly]="true" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('f_primer_apellido')?.hasError('required') && formTestamento.get('f_primer_apellido')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Apellido materno:*</label>
                   <input formControlName="f_segundo_apellido" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: López"  [readonly]="true"/>
-                  <small class="colorsm" *ngIf="formTestamento.get('f_segundo_apellido')?.hasError('required') && formTestamento.get('f_segundo_apellido')?.touched">Este campo es
-                      <strong>requerido</strong></small>
+                    placeholder="Ejemplo: López" [readonly]="true" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('f_segundo_apellido')?.hasError('required') && formTestamento.get('f_segundo_apellido')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
                 </div>
               </div>
             </div>
@@ -79,9 +90,11 @@
                 <div class="mb-3">
                   <label class="form-label negri">Fecha de nacimiento:*</label>
                   <input formControlName="f_fecha_nacimiento" type="date" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: usuario@dominio.com" [readonly]="true"/>
+                    placeholder="Ejemplo: usuario@dominio.com" [readonly]="true" />
                   <div>
-                    <small class="colorsm" *ngIf="formTestamento.get('f_fecha_nacimiento')?.hasError('required') && formTestamento.get('f_fecha_nacimiento')?.touched">Este campo es
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('f_fecha_nacimiento')?.hasError('required') && formTestamento.get('f_fecha_nacimiento')?.touched">Este
+                      campo es
                       <strong>requerido</strong></small>
                     <br />
                   </div>
@@ -90,8 +103,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Edad:</label>
-                  <input formControlName="edad" type="text" class="form-control input-simulado-disabled"  [readonly]="true"
-                      />
+                  <input formControlName="edad" type="text" class="form-control input-simulado-disabled"
+                    [readonly]="true" />
                 </div>
               </div>
               <div class="col-sm-4">
@@ -99,41 +112,50 @@
                   <label class="form-label negri">Lugar de nacimiento:*</label>
                   <input formControlName="lugar_nacimiento" type="text" class="form-control"
                     placeholder="Ejemplo: Veracruz" />
-                 <small class="colorsm" *ngIf="formTestamento.get('lugar_nacimiento')?.hasError('required') && formTestamento.get('lugar_nacimiento')?.touched">Este campo es
-                      <strong>requerido</strong></small>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('lugar_nacimiento')?.hasError('required') && formTestamento.get('lugar_nacimiento')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
                 </div>
               </div>
             </div>
 
             <!-- <div class="row">
-          
-            </div> -->
+
+</div> -->
 
             <div class="row">
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Código postal:</label>
-                  <input formControlName="f_cp" type="text" class="form-control" placeholder="Ejemplo: 50122" (change)="getLocalidad()"/>
-                  <small class="colorsm" *ngIf="formTestamento.get('f_cp')?.hasError('required') && formTestamento.get('f_cp')?.touched">Este campo es
-                      <strong>requerido</strong></small>
+                  <input formControlName="f_cp" type="text" class="form-control" placeholder="Ejemplo: 50122"
+                    (change)="getLocalidad()" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('f_cp')?.hasError('required') && formTestamento.get('f_cp')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Entidad federativa:</label>
-                  <input  [value]="formTestamento.get('estado_nombre')?.value" type="text" class="form-control" placeholder="Ejemplo: México"
-                    [readonly]="true" />
-                  <small class="colorsm" *ngIf="formTestamento.get('estado_id')?.hasError('required') && formTestamento.get('estado_id')?.touched">Este campo es
-                      <strong>requerido</strong></small>
+                  <input [value]="formTestamento.get('estado_nombre')?.value" type="text" class="form-control"
+                    placeholder="Ejemplo: México" [readonly]="true" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('estado_id')?.hasError('required') && formTestamento.get('estado_id')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Municipio:</label>
-                  <input [value]="formTestamento.get('municipio_nombre')?.value" type="text" class="form-control" placeholder="Ejemplo: México"
-                    [readonly]="true" />
-                  <small class="colorsm" *ngIf="formTestamento.get('municipio_id')?.hasError('required') && formTestamento.get('municipio_id')?.touched">Este campo es
-                      <strong>requerido</strong></small>
+                  <input [value]="formTestamento.get('municipio_nombre')?.value" type="text" class="form-control"
+                    placeholder="Ejemplo: México" [readonly]="true" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('municipio_id')?.hasError('required') && formTestamento.get('municipio_id')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
                 </div>
               </div>
             </div>
@@ -142,24 +164,24 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Colonia:</label>
-                  <ng-select
-                    [items]="localidades"
-                    bindLabel="colon"
-                    bindValue="idcol"
-                    formControlName="colonia_id"
+                  <ng-select [items]="localidades" bindLabel="colon" bindValue="idcol" formControlName="colonia_id"
                     placeholder="Selecciona una colonia">
                   </ng-select>
-                  <small class="colorsm" *ngIf="formTestamento.get('colonia_id')?.hasError('required') && formTestamento.get('colonia_id')?.touched">Este campo es
-                      <strong>requerido</strong></small>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('colonia_id')?.hasError('required') && formTestamento.get('colonia_id')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
                 </div>
               </div>
 
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Calle:</label>
-                  <input formControlName="f_domicilio" type="text" class="form-control" placeholder="Ejemplo: México"/>
-                  <small class="colorsm" *ngIf="formTestamento.get('f_domicilio')?.hasError('required') && formTestamento.get('f_domicilio')?.touched">Este campo es
-                      <strong>requerido</strong></small>
+                  <input formControlName="f_domicilio" type="text" class="form-control" placeholder="Ejemplo: México" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('f_domicilio')?.hasError('required') && formTestamento.get('f_domicilio')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
                 </div>
               </div>
 
@@ -167,8 +189,10 @@
                 <div class="mb-3">
                   <label class="form-label negri">Número:</label>
                   <input formControlName="numext" type="text" class="form-control" placeholder="Ejemplo: México" />
-                  <small class="colorsm" *ngIf="formTestamento.get('numext')?.hasError('required') && formTestamento.get('numext')?.touched">Este campo es
-                      <strong>requerido</strong></small>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('numext')?.hasError('required') && formTestamento.get('numext')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
                 </div>
               </div>
             </div>
@@ -182,11 +206,13 @@
                   <small class="colorsm" *ngIf="formTestamento.get('numero_tel')?.hasError('pattern')">
                     Número de teléfono inválido.<strong>Debe tener 10 dígitos.</strong>
                   </small>
-                  
-                    <small class="colorsm" *ngIf="formTestamento.get('numero_tel')?.hasError('required') && formTestamento.get('numero_tel')?.touched">Este campo es
-                      <strong>requerido</strong></small>
-                    <br/>
-                  
+
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('numero_tel')?.hasError('required') && formTestamento.get('numero_tel')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                  <br />
+
                 </div>
               </div>
               <div class="col-sm-4">
@@ -194,11 +220,13 @@
                   <label class="form-label negri">Celular:*</label>
                   <input formControlName="numero_cel" type="number" class="form-control"
                     placeholder="Ejemplo: 5512345678" />
-                   <small class="colorsm" *ngIf="formTestamento.get('numero_cel')?.hasError('pattern')">
+                  <small class="colorsm" *ngIf="formTestamento.get('numero_cel')?.hasError('pattern')">
                     Número de teléfono inválido.<strong>Debe tener 10 dígitos.</strong>
                   </small>
-                    <small class="colorsm" *ngIf="formTestamento.get('numero_cel')?.hasError('required') && formTestamento.get('numero_cel')?.touched">Este campo es
-                      <strong>requerido</strong></small>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('numero_cel')?.hasError('required') && formTestamento.get('numero_cel')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
                 </div>
               </div>
 
@@ -207,9 +235,11 @@
                   <label class="form-label negri">Correo electrónico:*</label>
                   <input formControlName="correo_per" type="email" class="form-control"
                     placeholder="Ejemplo: usuario@dominio.com" />
-                      <small class="colorsm" *ngIf="formTestamento.get('correo_per')?.hasError('required') && formTestamento.get('correo_per')?.touched">Este campo es <strong>requerido</strong></small>
-                      <small class="colorsm" *ngIf="formTestamento.get('correo_per')?.hasError('email')">Por favor
-                      <strong>ingresa un correo válido.</strong></small>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('correo_per')?.hasError('required') && formTestamento.get('correo_per')?.touched">Este
+                    campo es <strong>requerido</strong></small>
+                  <small class="colorsm" *ngIf="formTestamento.get('correo_per')?.hasError('email')">Por favor
+                    <strong>ingresa un correo válido.</strong></small>
                 </div>
               </div>
             </div>
@@ -218,78 +248,97 @@
             </div>
             <br>
             <div class="row">
+
               <div class="col-sm-6">
-                <div class="mb-3 d-flex flex-column justify-content-between h-100">
-                  <label class="form-label negri">Acta de nacimiento:*</label>
-                  <div class="mt-auto">
-                    <input class="form-control" type="file" id="acta_nacimiento" accept="application/pdf" #inputacta_nacimiento (change)="onFileSelect($event, 'acta_nacimiento')">
-                      <!-- <div *ngIf="documentos['acta_nacimiento']" class="mt-2">
-                      <button type="button" class="btn btn-sm btn-outline-danger" (click)="eliminarArchivo('acta_nacimiento', inputacta_nacimiento)">
-                      Eliminar archivo
+                <div class="mb-3 d-flex flex-column h-100">
+                  <label class="form-label1 negri">Acta de nacimiento:*</label>
+                  <div class="position-relative d-flex flex-column flex-grow-1"
+                    style="min-height: 10px; padding-bottom: 1rem;">
+                    <input class="form-control" type="file" id="acta_nacimiento" accept="application/pdf"
+                      #inputacta_nacimiento (change)="onFileSelect($event, 'acta_nacimiento')" />
+                    <div *ngIf="documentos['acta_nacimiento']" style="position: absolute; bottom: 0; left: 0;">
+                      <button type="button" class="btn btn-outline-danger btn-xs"
+                        (click)="eliminarArchivo('acta_nacimiento', inputacta_nacimiento)">
+                        <i class="feather icon-trash btn-icon-prepend"></i>
+                        Eliminar archivo
                       </button>
-                      </div> -->
                     </div>
+                  </div>
                 </div>
               </div>
+
               <div class="col-sm-6">
-                <div class="mb-3 d-flex flex-column justify-content-between h-100">
-                  <label class="form-label negri">Acta de matrimonio:</label>
-                  <div class="mt-auto">
-                    <input class="form-control" type="file" id="acta_matrimonio" accept="application/pdf" #inputacta_matrimonio (change)="onFileSelect($event, 'acta_matrimonio')">
-                      <!-- <div *ngIf="documentos['acta_matrimonio']" class="mt-2">
-                      <button type="button" class="btn btn-sm btn-outline-danger" (click)="eliminarArchivo('acta_matrimonio', inputacta_matrimonio)">
-                      Eliminar archivo
+                <div class="mb-3 d-flex flex-column h-100">
+                  <label class="form-label1 negri">Acta de matrimonio:</label>
+                  <div class="position-relative d-flex flex-column flex-grow-1"
+                    style="min-height: 10px; padding-bottom: 1rem;">
+                    <input class="form-control" type="file" id="acta_matrimonio" accept="application/pdf"
+                      #inputacta_matrimonio (change)="onFileSelect($event, 'acta_matrimonio')" />
+                    <div *ngIf="documentos['acta_matrimonio']" style="position: absolute; bottom: 0; left: 0;">
+                      <button type="button" class="btn btn-outline-danger btn-xs"
+                        (click)="eliminarArchivo('acta_matrimonio', inputacta_matrimonio)">
+                        <i class="feather icon-trash btn-icon-prepend"></i>
+                        Eliminar archivo
                       </button>
-                      </div> -->
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-             <br>
+            <br>
             <div class="row">
               <div class="col-sm-6">
-                <div class="mb-3 d-flex flex-column justify-content-between h-100">
-                  <label class="form-label negri">Identificación oficial vigente (Credencial para votar, pasaporte o
+                <div class="mb-3 d-flex flex-column h-100">
+                  <label class="form-label1 negri">Identificación oficial vigente (Credencial para votar, pasaporte o
                     cédula profesional):*</label>
-                  <div class="mt-auto">
-                    <input class="form-control" type="file" id="identificacion" accept="application/pdf" #inputidentificacion (change)="onFileSelect($event, 'identificacion')">
-                     <div *ngIf="documentos['identificacion']" class="mt-2">
-                      <p class="small mb-1">Archivo: {{ documentos['identificacion'].name }}</p>
-                      <button type="button" class="btn btn-sm btn-outline-danger" (click)="eliminarArchivo('identificacion', inputidentificacion)">
-                      Eliminar archivo
+                  <div class="position-relative d-flex flex-column flex-grow-1"
+                    style="min-height: 10px; padding-bottom: 1rem;">
+                    <input class="form-control" type="file" id="identificacion" accept="application/pdf"
+                      #inputidentificacion (change)="onFileSelect($event, 'identificacion')" />
+                    <div *ngIf="documentos['identificacion']" style="position: absolute; bottom: 0; left: 0;">
+                      <button type="button" class="btn btn-outline-danger btn-xs"
+                        (click)="eliminarArchivo('identificacion', inputidentificacion)">
+                        <i class="feather icon-trash btn-icon-prepend"></i>
+                        Eliminar archivo
                       </button>
-                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="col-sm-6">
-                <div class="mb-3 d-flex flex-column justify-content-between h-100">
-                  <label class="form-label negri">Comprobante de domicilio:*</label>
-                  <div class="mt-auto">
-                    <input class="form-control" type="file" id="comprobante_domicilio" accept="application/pdf" #inputcomprobante_domicilio (change)="onFileSelect($event, 'comprobante_domicilio')">
-                     <div *ngIf="documentos['comprobante_domicilio']" class="mt-2">
-                      <p class="small mb-1">Archivo: {{ documentos['comprobante_domicilio'].name }}</p>
-                      <button type="button" class="btn btn-sm btn-outline-danger" (click)="eliminarArchivo('comprobante_domicilio', inputcomprobante_domicilio)">
-                      Eliminar archivo
+                <div class="mb-3 d-flex flex-column h-100">
+                  <label class="form-label1 negri">Comprobante de domicilio:*</label>
+                  <div class="position-relative d-flex flex-column flex-grow-1"
+                    style="min-height: 10px; padding-bottom: 1rem;">
+                    <input class="form-control" type="file" id="comprobante_domicilio" accept="application/pdf"
+                      #inputcomprobante_domicilio (change)="onFileSelect($event, 'comprobante_domicilio')" />
+                    <div *ngIf="documentos['comprobante_domicilio']" style="position: absolute; bottom: 0; left: 0;">
+                      <button type="button" class="btn btn-outline-danger btn-xs"
+                        (click)="eliminarArchivo('comprobante_domicilio', inputcomprobante_domicilio)">
+                        <i class="feather icon-trash btn-icon-prepend"></i>
+                        Eliminar archivo
                       </button>
-                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-             <br>
+            <br>
             <div class="row">
               <div class="col-sm-6">
-                <div class="mb-3 d-flex flex-column justify-content-between h-100">
-                  <label class="form-label negri">Clave única de registro de población:*</label>
-                  <div class="mt-auto">
-                    <input class="form-control" type="file" id="curp" accept="application/pdf" #inputcurp (change)="onFileSelect($event, 'curp')">
-                     <div *ngIf="documentos['curp']" class="mt-2">
-                      <p class="small mb-1">Archivo: {{ documentos['curp'].name }}</p>
-                      <button type="button" class="btn btn-sm btn-outline-danger" (click)="eliminarArchivo('curp', inputcurp)">
-                      Eliminar archivo
+                <div class="mb-3 d-flex flex-column h-100">
+                  <label class="form-label1 negri">Clave única de registro de población:*</label>
+                  <div class="position-relative d-flex flex-column flex-grow-1"
+                    style="min-height: 10px; padding-bottom: 1rem;">
+                    <input class="form-control" type="file" id="curp" accept="application/pdf" #inputcurp
+                      (change)="onFileSelect($event, 'curp')" />
+                    <div *ngIf="documentos['curp']" style="position: absolute; bottom: 0; left: 0;">
+                      <button type="button" class="btn btn-outline-danger btn-xs"
+                        (click)="eliminarArchivo('curp', inputcurp)">
+                        <i class="feather icon-trash btn-icon-prepend"></i>
+                        Eliminar archivo
                       </button>
-                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -297,7 +346,8 @@
             <br>
             <div>
               <h5 class="titulo">
-                En caso de ser adulto mayor o que su estado de salud así lo requiera, o si es sordo o invidente, o si no sabe o no puede firmar o leer o si tiene alguna dificultad con lo antes mencionado:
+                En caso de ser adulto mayor o que su estado de salud así lo requiera, o si es sordo o invidente, o si no
+                sabe o no puede firmar o leer o si tiene alguna dificultad con lo antes mencionado:
               </h5>
               <a class="btn btn-secondary mt-2" (click)="toggleExtraInfo()">
                 {{ mostrarExtraInfo ? 'Ocultar' : 'Mostrar más' }}
@@ -311,18 +361,36 @@
               <br>
               <div class="row">
                 <div class="col-sm-6">
-                  <div class="mb-3 d-flex flex-column justify-content-between h-100">
+                  <div class="mb-3 d-flex flex-column h-100">
                     <label class="form-label negri">Expedido por una institución de salud pública :</label>
-                    <div class="mt-auto">
-                      <input class="form-control" type="file" id="certificado_publico" accept="application/pdf" (change)="onFileSelect($event, 'certificado_publico')">
+                    <div class="position-relative d-flex flex-column flex-grow-1"
+                      style="min-height: 10px; padding-bottom: 1rem;">
+                      <input class="form-control" type="file" id="certificado_publico" accept="application/pdf"
+                        #inputcertificado_publico (change)="onFileSelect($event, 'certificado_publico')" />
+                      <div *ngIf="documentos['certificado_publico']" style="position: absolute; bottom: 0; left: 0;">
+                        <button type="button" class="btn btn-outline-danger btn-xs"
+                          (click)="eliminarArchivo('certificado_publico', inputcertificado_publico)">
+                          <i class="feather icon-trash btn-icon-prepend"></i>
+                          Eliminar archivo
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-6">
-                  <div class="mb-3 d-flex flex-column justify-content-between h-100">
-                    <label class="form-label negri">Expedido por una Institución de salud privada:</label>
-                    <div class="mt-auto">
-                      <input class="form-control" type="file" id="certificado_privado" accept="application/pdf"  (change)="onFileSelect($event, 'certificado_privado')">
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label negri">Expedido por una institución de salud pública :</label>
+                    <div class="position-relative d-flex flex-column flex-grow-1"
+                      style="min-height: 10px; padding-bottom: 1rem;">
+                      <input class="form-control" type="file" id="certificado_privado" accept="application/pdf"
+                        #inputcertificado_privado (change)="onFileSelect($event, 'certificado_privado')" />
+                      <div *ngIf="documentos['certificado_privado']" style="position: absolute; bottom: 0; left: 0;">
+                        <button type="button" class="btn btn-outline-danger btn-xs"
+                          (click)="eliminarArchivo('certificado_privado', inputcertificado_privado)">
+                          <i class="feather icon-trash btn-icon-prepend"></i>
+                          Eliminar archivo
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -335,29 +403,58 @@
               <br>
               <div class="row">
                 <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column justify-content-between h-100">
-                    <label class="form-label negri">Identificación oficial vigente (Credencial para votar, pasaporte o
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Identificación oficial vigente
+                      (Credencial para votar, pasaporte o
                       cédula profesional):</label>
-                    <div class="mt-auto">
-                      <input class="form-control" type="file" id="t1_identificacion" accept="application/pdf" (change)="onFileSelect($event, 't1_identificacion')">
+                    <div class="position-relative d-flex flex-column flex-grow-1"
+                      style="min-height: 10px; padding-bottom: 1rem;">
+                      <input class="form-control" type="file" id="t1_identificacion" accept="application/pdf"
+                        #inputt1_identificacion (change)="onFileSelect($event, 't1_identificacion')" />
+                      <div *ngIf="documentos['t1_identificacion']" style="position: absolute; bottom: 0; left: 0;">
+                        <button type="button" class="btn btn-outline-danger btn-xs"
+                          (click)="eliminarArchivo('t1_identificacion', inputt1_identificacion)">
+                          <i class="feather icon-trash btn-icon-prepend"></i>
+                          Eliminar archivo
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-
                 <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column justify-content-between h-100">
-                    <label class="form-label negri">Clave unica de registro de población:</label>
-                    <div class="mt-auto">
-                      <input class="form-control" type="file" id="t1_curp" accept="application/pdf" (change)="onFileSelect($event, 't1_curp')">
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave unica de registro de
+                      población:</label>
+                    <div class="position-relative d-flex flex-column flex-grow-1"
+                      style="min-height: 10px; padding-bottom: 1rem;">
+                      <input class="form-control" type="file" id="t1_curp" accept="application/pdf" #inputt1_curp
+                        (change)="onFileSelect($event, 't1_curp')" />
+                      <div *ngIf="documentos['t1_curp']" style="position: absolute; bottom: 0; left: 0;">
+                        <button type="button" class="btn btn-outline-danger btn-xs"
+                          (click)="eliminarArchivo('t1_curp', inputt1_curp)">
+                          <i class="feather icon-trash btn-icon-prepend"></i>
+                          Eliminar archivo
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-
                 <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column justify-content-between h-100">
-                    <label class="form-label negri">Comprobante de domicilio:</label>
-                    <div class="mt-auto">
-                      <input class="form-control" type="file" id="t1_comprobante_domicilio" accept="application/pdf" (change)="onFileSelect($event, 't1_comprobante_domicilio')">
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de
+                      domicilio:</label>
+                    <div class="position-relative d-flex flex-column flex-grow-1"
+                      style="min-height: 10px; padding-bottom: 1rem;">
+                      <input class="form-control" type="file" id="t1_comprobante_domicilio" accept="application/pdf"
+                        #inputt1_comprobante_domicilio (change)="onFileSelect($event, 't1_comprobante_domicilio')" />
+                      <div *ngIf="documentos['t1_comprobante_domicilio']"
+                        style="position: absolute; bottom: 0; left: 0;">
+                        <button type="button" class="btn btn-outline-danger btn-xs"
+                          (click)="eliminarArchivo('t1_comprobante_domicilio', inputt1_comprobante_domicilio)">
+                          <i class="feather icon-trash btn-icon-prepend"></i>
+                          Eliminar archivo
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -365,28 +462,58 @@
               <br>
               <div class="row">
                 <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column justify-content-between h-100">
-                    <label class="form-label negri">Identificación oficial vigente (Credencial para votar, pasaporte o
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Identificación oficial vigente
+                      (Credencial para votar, pasaporte o
                       cédula profesional):</label>
-                    <div class="mt-auto">
-                      <input class="form-control" type="file" id="t2_identificacion" accept="application/pdf" (change)="onFileSelect($event, 't2_identificacion')">
+                    <div class="position-relative d-flex flex-column flex-grow-1"
+                      style="min-height: 10px; padding-bottom: 1rem;">
+                      <input class="form-control" type="file" id="t2_identificacion" accept="application/pdf"
+                        #inputt2_identificacion (change)="onFileSelect($event, 't2_identificacion')" />
+                      <div *ngIf="documentos['t2_identificacion']" style="position: absolute; bottom: 0; left: 0;">
+                        <button type="button" class="btn btn-outline-danger btn-xs"
+                          (click)="eliminarArchivo('t2_identificacion', inputt2_identificacion)">
+                          <i class="feather icon-trash btn-icon-prepend"></i>
+                          Eliminar archivo
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-
                 <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column justify-content-between h-100">
-                    <label class="form-label negri">Clave unica de registro de población:</label>
-                    <div class="mt-auto">
-                      <input class="form-control" type="file" id="t2_curp" accept="application/pdf" (change)="onFileSelect($event, 't2_curp')">
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave unica de registro de
+                      población:</label>
+                    <div class="position-relative d-flex flex-column flex-grow-1"
+                      style="min-height: 10px; padding-bottom: 1rem;">
+                      <input class="form-control" type="file" id="t2_curp" accept="application/pdf" #inputt2_curp
+                        (change)="onFileSelect($event, 't2_curp')" />
+                      <div *ngIf="documentos['t2_curp']" style="position: absolute; bottom: 0; left: 0;">
+                        <button type="button" class="btn btn-outline-danger btn-xs"
+                          (click)="eliminarArchivo('t2_curp', inputt2_curp)">
+                          <i class="feather icon-trash btn-icon-prepend"></i>
+                          Eliminar archivo
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column justify-content-between h-100">
-                    <label class="form-label negri">Comprobante de domicilio:</label>
-                    <div class="mt-auto">
-                      <input class="form-control" type="file" id="t2_comprobante_domicilio" accept="application/pdf" (change)="onFileSelect($event, 't2_comprobante_domicilio')">
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de
+                      domicilio:</label>
+                    <div class="position-relative d-flex flex-column flex-grow-1"
+                      style="min-height: 10px; padding-bottom: 1rem;">
+                      <input class="form-control" type="file" id="t2_comprobante_domicilio" accept="application/pdf"
+                        #inputt2_comprobante_domicilio (change)="onFileSelect($event, 't2_comprobante_domicilio')" />
+                      <div *ngIf="documentos['t2_comprobante_domicilio']"
+                        style="position: absolute; bottom: 0; left: 0;">
+                        <button type="button" class="btn btn-outline-danger btn-xs"
+                          (click)="eliminarArchivo('t2_comprobante_domicilio', inputt2_comprobante_domicilio)">
+                          <i class="feather icon-trash btn-icon-prepend"></i>
+                          Eliminar archivo
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -394,29 +521,58 @@
               <br>
               <div class="row">
                 <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column justify-content-between h-100">
-                    <label class="form-label negri">Identificación oficial vigente (Credencial para votar, pasaporte o
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Identificación oficial vigente
+                      (Credencial para votar, pasaporte o
                       cédula profesional):</label>
-                    <div class="mt-auto">
-                      <input class="form-control" type="file" id="t3_identificacion" accept="application/pdf" (change)="onFileSelect($event, 't3_identificacion')">
+                    <div class="position-relative d-flex flex-column flex-grow-1"
+                      style="min-height: 10px; padding-bottom: 1rem;">
+                      <input class="form-control" type="file" id="t3_identificacion" accept="application/pdf"
+                        #inputt3_identificacion (change)="onFileSelect($event, 't3_identificacion')" />
+                      <div *ngIf="documentos['t3_identificacion']" style="position: absolute; bottom: 0; left: 0;">
+                        <button type="button" class="btn btn-outline-danger btn-xs"
+                          (click)="eliminarArchivo('t3_identificacion', inputt3_identificacion)">
+                          <i class="feather icon-trash btn-icon-prepend"></i>
+                          Eliminar archivo
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-
                 <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column justify-content-between h-100">
-                    <label class="form-label negri">Clave unica de registro de población:</label>
-                    <div class="mt-auto">
-                      <input class="form-control" type="file" id="t3_curp" accept="application/pdf" (change)="onFileSelect($event, 't3_curp')">
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave unica de registro de
+                      población:</label>
+                    <div class="position-relative d-flex flex-column flex-grow-1"
+                      style="min-height: 10px; padding-bottom: 1rem;">
+                      <input class="form-control" type="file" id="t3_curp" accept="application/pdf" #inputt3_curp
+                        (change)="onFileSelect($event, 't3_curp')" />
+                      <div *ngIf="documentos['t3_curp']" style="position: absolute; bottom: 0; left: 0;">
+                        <button type="button" class="btn btn-outline-danger btn-xs"
+                          (click)="eliminarArchivo('t3_curp', inputt3_curp)">
+                          <i class="feather icon-trash btn-icon-prepend"></i>
+                          Eliminar archivo
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-
                 <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column justify-content-between h-100">
-                    <label class="form-label negri">Comprobante de domicilio:</label>
-                    <div class="mt-auto">
-                      <input class="form-control" type="file" id="t3_comprobante_domicilio" accept="application/pdf"  (change)="onFileSelect($event, 't3_comprobante_domicilio')">
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de
+                      domicilio:</label>
+                    <div class="position-relative d-flex flex-column flex-grow-1"
+                      style="min-height: 10px; padding-bottom: 1rem;">
+                      <input class="form-control" type="file" id="t3_comprobante_domicilio" accept="application/pdf"
+                        #inputt3_comprobante_domicilio (change)="onFileSelect($event, 't3_comprobante_domicilio')" />
+                      <div *ngIf="documentos['t3_comprobante_domicilio']"
+                        style="position: absolute; bottom: 0; left: 0;">
+                        <button type="button" class="btn btn-outline-danger btn-xs"
+                          (click)="eliminarArchivo('t3_comprobante_domicilio', inputt3_comprobante_domicilio)">
+                          <i class="feather icon-trash btn-icon-prepend"></i>
+                          Eliminar archivo
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -433,7 +589,7 @@
             <br />
 
             <div class="text-center mt-4">
-              <button   [disabled]="formTestamento.invalid"  type="submit" class="btn btn-primary px-4">
+              <button [disabled]="formTestamento.invalid" type="submit" class="btn btn-primary px-4">
                 Registrarse
               </button>
             </div>
