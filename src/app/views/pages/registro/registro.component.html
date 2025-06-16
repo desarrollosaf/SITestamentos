@@ -223,7 +223,13 @@
                 <div class="mb-3 d-flex flex-column justify-content-between h-100">
                   <label class="form-label negri">Acta de nacimiento:*</label>
                   <div class="mt-auto">
-                    <input class="form-control" type="file" id="curp" accept="application/pdf" (change)="onFileSelect($event, 'acta_nacimiento')">
+                    <input class="form-control" type="file" id="acta_nacimiento" accept="application/pdf" #acta_nacimiento (change)="onFileSelect($event, 'acta_nacimiento')">
+                    <!-- <div *ngIf="documentos['acta_nacimiento']" class="mt-2">
+                      <p class="small mb-1">Archivo: {{ documentos['acta_nacimiento'].name }}</p>
+                      <button type="button" class="btn btn-sm btn-outline-danger" (click)="eliminarArchivo('acta_nacimiento', acta_nacimiento)">
+                      Eliminar archivo
+                      </button>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -272,7 +278,7 @@
               <h5 class="titulo">
                 En caso de ser adulto mayor o que su estado de salud así lo requiera, o si es sordo o invidente, o si no sabe o no puede firmar o leer o si tiene alguna dificultad con lo antes mencionado:
               </h5>
-              <a class="btn btn-secondary mt-2" (click)="mostrarExtraInfo = !mostrarExtraInfo">
+              <a class="btn btn-secondary mt-2" (click)="toggleExtraInfo()">
                 {{ mostrarExtraInfo ? 'Ocultar' : 'Mostrar más' }}
               </a>
             </div>
