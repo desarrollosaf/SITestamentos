@@ -17,7 +17,7 @@
                     <strong> CURP inválida o incompleta.</strong>
                   </small>
                   <div>
-                   <small class="colorsm" *ngIf="formTestamento.get('f_curp')?.hasError('required')">Este campo es
+                   <small class="colorsm" *ngIf="formTestamento.get('f_curp')?.hasError('required') && formTestamento.get('f_curp')?.touched">Este campo es
                       <strong>requerido</strong></small>
                     <br />
                   </div>
@@ -26,10 +26,10 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">RFC:*</label>
-                  <input formControlName="f_rfc" type="text" class="form-control" placeholder="Ejemplo: MACJ750101"
-                    maxlength="10" />
+                  <input formControlName="f_rfc" type="text" class="form-control input-simulado-disabled" placeholder="Ejemplo: MACJ750101"
+                    maxlength="10" [readonly]="true" />
                   <div>
-                    <small class="colorsm" *ngIf="formTestamento.get('f_rfc')?.hasError('required')">Este campo es
+                    <small class="colorsm" *ngIf="formTestamento.get('f_rfc')?.hasError('required') && formTestamento.get('f_rfc')?.touched">Este campo es
                       <strong>requerido</strong></small>
                     <br />
                   </div>
@@ -39,7 +39,7 @@
                   <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Ocupación:</label>
-                  <input formControlName="ocupacion" type="text" class="form-control" value='Servidor Público'/>
+                  <input formControlName="ocupacion" type="text" class="form-control input-simulado-disabled" value='Servidor Público'  [readonly]="true"/>
                 </div>
               </div>
             </div>
@@ -48,27 +48,27 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Nombre completo:*</label>
-                  <input formControlName="f_nombre" type="text" class="form-control"
-                    placeholder="Ejemplo: Juan Carlos" />
-                  <small class="colorsm" *ngIf="formTestamento.get('f_nombre')?.hasError('required')">Este campo es
+                  <input formControlName="f_nombre" type="text" class="form-control input-simulado-disabled"
+                    placeholder="Ejemplo: Juan Carlos"  [readonly]="true"/>
+                  <small class="colorsm" *ngIf="formTestamento.get('f_nombre')?.hasError('required') && formTestamento.get('f_nombre')?.touched">Este campo es
                       <strong>requerido</strong></small>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Apellido paterno:*</label>
-                  <input formControlName="f_primer_apellido" type="text" class="form-control"
-                    placeholder="Ejemplo: Martínez" />
-                 <small class="colorsm" *ngIf="formTestamento.get('f_primer_apellido')?.hasError('required')">Este campo es
+                  <input formControlName="f_primer_apellido" type="text" class="form-control input-simulado-disabled"
+                    placeholder="Ejemplo: Martínez"  [readonly]="true" />
+                 <small class="colorsm" *ngIf="formTestamento.get('f_primer_apellido')?.hasError('required') && formTestamento.get('f_primer_apellido')?.touched">Este campo es
                       <strong>requerido</strong></small>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Apellido materno:*</label>
-                  <input formControlName="f_segundo_apellido" type="text" class="form-control"
-                    placeholder="Ejemplo: López" />
-                  <small class="colorsm" *ngIf="formTestamento.get('f_segundo_apellido')?.hasError('required')">Este campo es
+                  <input formControlName="f_segundo_apellido" type="text" class="form-control input-simulado-disabled"
+                    placeholder="Ejemplo: López"  [readonly]="true"/>
+                  <small class="colorsm" *ngIf="formTestamento.get('f_segundo_apellido')?.hasError('required') && formTestamento.get('f_segundo_apellido')?.touched">Este campo es
                       <strong>requerido</strong></small>
                 </div>
               </div>
@@ -78,10 +78,10 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Fecha de nacimiento:*</label>
-                  <input formControlName="f_fecha_nacimiento" type="date" class="form-control"
-                    placeholder="Ejemplo: usuario@dominio.com" />
+                  <input formControlName="f_fecha_nacimiento" type="date" class="form-control input-simulado-disabled"
+                    placeholder="Ejemplo: usuario@dominio.com" [readonly]="true"/>
                   <div>
-                    <small class="colorsm" *ngIf="formTestamento.get('f_fecha_nacimiento')?.hasError('required')">Este campo es
+                    <small class="colorsm" *ngIf="formTestamento.get('f_fecha_nacimiento')?.hasError('required') && formTestamento.get('f_fecha_nacimiento')?.touched">Este campo es
                       <strong>requerido</strong></small>
                     <br />
                   </div>
@@ -90,7 +90,7 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Edad:</label>
-                  <input formControlName="edad" type="text" class="form-control"
+                  <input formControlName="edad" type="text" class="form-control input-simulado-disabled"  [readonly]="true"
                       />
                 </div>
               </div>
@@ -99,7 +99,7 @@
                   <label class="form-label negri">Lugar de nacimiento:*</label>
                   <input formControlName="lugar_nacimiento" type="text" class="form-control"
                     placeholder="Ejemplo: Veracruz" />
-                 <small class="colorsm" *ngIf="formTestamento.get('lugar_nacimiento')?.hasError('required')">Este campo es
+                 <small class="colorsm" *ngIf="formTestamento.get('lugar_nacimiento')?.hasError('required') && formTestamento.get('lugar_nacimiento')?.touched">Este campo es
                       <strong>requerido</strong></small>
                 </div>
               </div>
@@ -114,7 +114,7 @@
                 <div class="mb-3">
                   <label class="form-label negri">Código postal:</label>
                   <input formControlName="f_cp" type="text" class="form-control" placeholder="Ejemplo: 50122" (change)="getLocalidad()"/>
-                  <small class="colorsm" *ngIf="formTestamento.get('f_cp')?.hasError('required')">Este campo es
+                  <small class="colorsm" *ngIf="formTestamento.get('f_cp')?.hasError('required') && formTestamento.get('f_cp')?.touched">Este campo es
                       <strong>requerido</strong></small>
                 </div>
               </div>
@@ -123,7 +123,7 @@
                   <label class="form-label negri">Entidad federativa:</label>
                   <input  [value]="formTestamento.get('estado_nombre')?.value" type="text" class="form-control" placeholder="Ejemplo: México"
                     [readonly]="true" />
-                  <small class="colorsm" *ngIf="formTestamento.get('estado_id')?.hasError('required')">Este campo es
+                  <small class="colorsm" *ngIf="formTestamento.get('estado_id')?.hasError('required') && formTestamento.get('estado_id')?.touched">Este campo es
                       <strong>requerido</strong></small>
                 </div>
               </div>
@@ -132,7 +132,7 @@
                   <label class="form-label negri">Municipio:</label>
                   <input [value]="formTestamento.get('municipio_nombre')?.value" type="text" class="form-control" placeholder="Ejemplo: México"
                     [readonly]="true" />
-                  <small class="colorsm" *ngIf="formTestamento.get('municipio_id')?.hasError('required')">Este campo es
+                  <small class="colorsm" *ngIf="formTestamento.get('municipio_id')?.hasError('required') && formTestamento.get('municipio_id')?.touched">Este campo es
                       <strong>requerido</strong></small>
                 </div>
               </div>
@@ -149,7 +149,7 @@
                     formControlName="colonia_id"
                     placeholder="Selecciona una colonia">
                   </ng-select>
-                  <small class="colorsm" *ngIf="formTestamento.get('colonia_id')?.hasError('required')">Este campo es
+                  <small class="colorsm" *ngIf="formTestamento.get('colonia_id')?.hasError('required') && formTestamento.get('colonia_id')?.touched">Este campo es
                       <strong>requerido</strong></small>
                 </div>
               </div>
@@ -159,7 +159,7 @@
                   <label class="form-label negri">Calle:</label>
                   <input formControlName="f_domicilio" type="text" class="form-control" placeholder="Ejemplo: México"
                     [readonly]="true" />
-                  <small class="colorsm" *ngIf="formTestamento.get('f_domicilio')?.hasError('required')">Este campo es
+                  <small class="colorsm" *ngIf="formTestamento.get('f_domicilio')?.hasError('required') && formTestamento.get('f_domicilio')?.touched">Este campo es
                       <strong>requerido</strong></small>
                 </div>
               </div>
@@ -168,7 +168,7 @@
                 <div class="mb-3">
                   <label class="form-label negri">Número:</label>
                   <input formControlName="numext" type="text" class="form-control" placeholder="Ejemplo: México" />
-                  <small class="colorsm" *ngIf="formTestamento.get('numext')?.hasError('required')">Este campo es
+                  <small class="colorsm" *ngIf="formTestamento.get('numext')?.hasError('required') && formTestamento.get('numext')?.touched">Este campo es
                       <strong>requerido</strong></small>
                 </div>
               </div>
@@ -184,7 +184,7 @@
                     Número de teléfono inválido.<strong>Debe tener 10 dígitos.</strong>
                   </small>
                   
-                    <small class="colorsm" *ngIf="formTestamento.get('numero_tel')?.hasError('required')">Este campo es
+                    <small class="colorsm" *ngIf="formTestamento.get('numero_tel')?.hasError('required') && formTestamento.get('numero_tel')?.touched">Este campo es
                       <strong>requerido</strong></small>
                     <br/>
                   
@@ -198,7 +198,7 @@
                    <small class="colorsm" *ngIf="formTestamento.get('numero_cel')?.hasError('pattern')">
                     Número de teléfono inválido.<strong>Debe tener 10 dígitos.</strong>
                   </small>
-                    <small class="colorsm" *ngIf="formTestamento.get('numero_cel')?.hasError('required')">Este campo es
+                    <small class="colorsm" *ngIf="formTestamento.get('numero_cel')?.hasError('required') && formTestamento.get('numero_cel')?.touched">Este campo es
                       <strong>requerido</strong></small>
                 </div>
               </div>
@@ -208,10 +208,9 @@
                   <label class="form-label negri">Correo electrónico:*</label>
                   <input formControlName="correo_per" type="email" class="form-control"
                     placeholder="Ejemplo: usuario@dominio.com" />
-                      <small class="colorsm" *ngIf="formTestamento.get('correo_per')?.hasError('required')">Este campo es <strong>requerido</strong></small>
+                      <small class="colorsm" *ngIf="formTestamento.get('correo_per')?.hasError('required') && formTestamento.get('correo_per')?.touched">Este campo es <strong>requerido</strong></small>
                       <small class="colorsm" *ngIf="formTestamento.get('correo_per')?.hasError('email')">Por favor
                       <strong>ingresa un correo válido.</strong></small>
-                    
                 </div>
               </div>
             </div>
