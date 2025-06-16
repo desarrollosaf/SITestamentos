@@ -305,27 +305,27 @@ export class RegistroComponent {
     formData.forEach((valor, clave) => {
       console.log(clave, valor);
     });
-    // const curpUsr = this.formTestamento.value.f_curp;
-    // this._registroService.saveRegistro(formData,curpUsr).subscribe({
-    //   next: (response: any) => {
-    //     console.log('oki');
-    //   },
-    //   error: (e: HttpErrorResponse) => {
-    //     if (e.error && e.error.msg) {
-    //       console.error('Error del servidor:', e.error.msg);
-    //     } else {
-    //        console.error('Error desconocido:', e);
-    //       //     Swal.fire({
-    //       //   position: "center",
-    //       //   icon: "error",
-    //       //   title: "¡Atención!",
-    //       //   text: `Error al guardar, consulte al administrador del sistema.`,
-    //       //   showConfirmButton: false,
-    //       //   timer: 2000
-    //       // });
-    //     }
-    //   },
-    // })
+    const curpUsr = this.formTestamento.value.f_curp;
+    this._registroService.saveRegistro(formData,curpUsr).subscribe({
+      next: (response: any) => {
+        console.log('oki');
+      },
+      error: (e: HttpErrorResponse) => {
+        if (e.error && e.error.msg) {
+          console.error('Error del servidor:', e.error.msg);
+        } else {
+           console.error('Error desconocido:', e);
+          //     Swal.fire({
+          //   position: "center",
+          //   icon: "error",
+          //   title: "¡Atención!",
+          //   text: `Error al guardar, consulte al administrador del sistema.`,
+          //   showConfirmButton: false,
+          //   timer: 2000
+          // });
+        }
+      },
+    })
   }
 
   limpiaForm(){
