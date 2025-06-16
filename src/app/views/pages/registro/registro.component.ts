@@ -287,7 +287,7 @@ export class RegistroComponent {
     formData.append('f_rfc', String(this.formTestamento.value.f_rfc));
     formData.append('f_curp', String(this.formTestamento.value.f_curp));
     formData.append('f_nombre', String(this.formTestamento.value.f_nombre));
-    formData.append('f_primer_apellido', String(this.formTestamento.value.f_primer_apellid,));
+    formData.append('f_primer_apellido', String(this.formTestamento.value.f_primer_apellido));
     formData.append('f_segundo_apellido', String(this.formTestamento.value.f_segundo_apellido));
     formData.append('f_fecha_nacimiento', String(this.formTestamento.value.f_fecha_nacimiento));
     formData.append('lugar_nacimiento', String(this.formTestamento.value.lugar_nacimiento));
@@ -305,27 +305,27 @@ export class RegistroComponent {
     formData.forEach((valor, clave) => {
       console.log(clave, valor);
     });
-    const curpUsr = this.formTestamento.value.f_curp;
-    this._registroService.saveRegistro(formData,curpUsr).subscribe({
-      next: (response: any) => {
-        console.log('oki');
-      },
-      error: (e: HttpErrorResponse) => {
-        if (e.error && e.error.msg) {
-          console.error('Error del servidor:', e.error.msg);
-        } else {
-           console.error('Error desconocido:', e);
-          //     Swal.fire({
-          //   position: "center",
-          //   icon: "error",
-          //   title: "¡Atención!",
-          //   text: `Error al guardar, consulte al administrador del sistema.`,
-          //   showConfirmButton: false,
-          //   timer: 2000
-          // });
-        }
-      },
-    })
+    // const curpUsr = this.formTestamento.value.f_curp;
+    // this._registroService.saveRegistro(formData,curpUsr).subscribe({
+    //   next: (response: any) => {
+    //     console.log('oki');
+    //   },
+    //   error: (e: HttpErrorResponse) => {
+    //     if (e.error && e.error.msg) {
+    //       console.error('Error del servidor:', e.error.msg);
+    //     } else {
+    //        console.error('Error desconocido:', e);
+    //       //     Swal.fire({
+    //       //   position: "center",
+    //       //   icon: "error",
+    //       //   title: "¡Atención!",
+    //       //   text: `Error al guardar, consulte al administrador del sistema.`,
+    //       //   showConfirmButton: false,
+    //       //   timer: 2000
+    //       // });
+    //     }
+    //   },
+    // })
   }
 
   limpiaForm(){
