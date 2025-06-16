@@ -257,7 +257,7 @@
                     <input class="form-control" type="file" id="acta_nacimiento" accept="application/pdf"
                       #inputacta_nacimiento (change)="onFileSelect($event, 'acta_nacimiento')" />
                     <div *ngIf="documentos['acta_nacimiento']" style="position: absolute; bottom: 0; left: 0;">
-                      <button type="button" class="btn btn-outline-danger btn-xs"
+                      <button type="button" class="boton-danger-sm"
                         (click)="eliminarArchivo('acta_nacimiento', inputacta_nacimiento)">
                         <i class="feather icon-trash btn-icon-prepend"></i>
                         Eliminar archivo
@@ -275,7 +275,7 @@
                     <input class="form-control" type="file" id="acta_matrimonio" accept="application/pdf"
                       #inputacta_matrimonio (change)="onFileSelect($event, 'acta_matrimonio')" />
                     <div *ngIf="documentos['acta_matrimonio']" style="position: absolute; bottom: 0; left: 0;">
-                      <button type="button" class="btn btn-outline-danger btn-xs"
+                      <button type="button" class="boton-danger-sm"
                         (click)="eliminarArchivo('acta_matrimonio', inputacta_matrimonio)">
                         <i class="feather icon-trash btn-icon-prepend"></i>
                         Eliminar archivo
@@ -296,7 +296,7 @@
                     <input class="form-control" type="file" id="identificacion" accept="application/pdf"
                       #inputidentificacion (change)="onFileSelect($event, 'identificacion')" />
                     <div *ngIf="documentos['identificacion']" style="position: absolute; bottom: 0; left: 0;">
-                      <button type="button" class="btn btn-outline-danger btn-xs"
+                      <button type="button" class="boton-danger-sm"
                         (click)="eliminarArchivo('identificacion', inputidentificacion)">
                         <i class="feather icon-trash btn-icon-prepend"></i>
                         Eliminar archivo
@@ -313,7 +313,7 @@
                     <input class="form-control" type="file" id="comprobante_domicilio" accept="application/pdf"
                       #inputcomprobante_domicilio (change)="onFileSelect($event, 'comprobante_domicilio')" />
                     <div *ngIf="documentos['comprobante_domicilio']" style="position: absolute; bottom: 0; left: 0;">
-                      <button type="button" class="btn btn-outline-danger btn-xs"
+                      <button type="button" class="boton-danger-sm"
                         (click)="eliminarArchivo('comprobante_domicilio', inputcomprobante_domicilio)">
                         <i class="feather icon-trash btn-icon-prepend"></i>
                         Eliminar archivo
@@ -333,7 +333,7 @@
                     <input class="form-control" type="file" id="curp" accept="application/pdf" #inputcurp
                       (change)="onFileSelect($event, 'curp')" />
                     <div *ngIf="documentos['curp']" style="position: absolute; bottom: 0; left: 0;">
-                      <button type="button" class="btn btn-outline-danger btn-xs"
+                      <button type="button" class="boton-danger-sm"
                         (click)="eliminarArchivo('curp', inputcurp)">
                         <i class="feather icon-trash btn-icon-prepend"></i>
                         Eliminar archivo
@@ -368,7 +368,7 @@
                       <input class="form-control" type="file" id="certificado_publico" accept="application/pdf"
                         #inputcertificado_publico (change)="onFileSelect($event, 'certificado_publico')" />
                       <div *ngIf="documentos['certificado_publico']" style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="btn btn-outline-danger btn-xs"
+                        <button type="button" class="boton-danger-sm"
                           (click)="eliminarArchivo('certificado_publico', inputcertificado_publico)">
                           <i class="feather icon-trash btn-icon-prepend"></i>
                           Eliminar archivo
@@ -385,7 +385,7 @@
                       <input class="form-control" type="file" id="certificado_privado" accept="application/pdf"
                         #inputcertificado_privado (change)="onFileSelect($event, 'certificado_privado')" />
                       <div *ngIf="documentos['certificado_privado']" style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="btn btn-outline-danger btn-xs"
+                        <button type="button" class="boton-danger-sm"
                           (click)="eliminarArchivo('certificado_privado', inputcertificado_privado)">
                           <i class="feather icon-trash btn-icon-prepend"></i>
                           Eliminar archivo
@@ -412,7 +412,7 @@
                       <input class="form-control" type="file" id="t1_identificacion" accept="application/pdf"
                         #inputt1_identificacion (change)="onFileSelect($event, 't1_identificacion')" />
                       <div *ngIf="documentos['t1_identificacion']" style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="btn btn-outline-danger btn-xs"
+                        <button type="button" class="boton-danger-sm"
                           (click)="eliminarArchivo('t1_identificacion', inputt1_identificacion)">
                           <i class="feather icon-trash btn-icon-prepend"></i>
                           Eliminar archivo
@@ -430,7 +430,7 @@
                       <input class="form-control" type="file" id="t1_curp" accept="application/pdf" #inputt1_curp
                         (change)="onFileSelect($event, 't1_curp')" />
                       <div *ngIf="documentos['t1_curp']" style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="btn btn-outline-danger btn-xs"
+                        <button type="button" class="boton-danger-sm"
                           (click)="eliminarArchivo('t1_curp', inputt1_curp)">
                           <i class="feather icon-trash btn-icon-prepend"></i>
                           Eliminar archivo
@@ -449,7 +449,7 @@
                         #inputt1_comprobante_domicilio (change)="onFileSelect($event, 't1_comprobante_domicilio')" />
                       <div *ngIf="documentos['t1_comprobante_domicilio']"
                         style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="btn btn-outline-danger btn-xs"
+                        <button type="button" class="boton-danger-sm"
                           (click)="eliminarArchivo('t1_comprobante_domicilio', inputt1_comprobante_domicilio)">
                           <i class="feather icon-trash btn-icon-prepend"></i>
                           Eliminar archivo
@@ -471,7 +471,7 @@
                       <input class="form-control" type="file" id="t2_identificacion" accept="application/pdf"
                         #inputt2_identificacion (change)="onFileSelect($event, 't2_identificacion')" />
                       <div *ngIf="documentos['t2_identificacion']" style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="btn btn-outline-danger btn-xs"
+                        <button type="button" class="boton-danger-sm"
                           (click)="eliminarArchivo('t2_identificacion', inputt2_identificacion)">
                           <i class="feather icon-trash btn-icon-prepend"></i>
                           Eliminar archivo
@@ -489,7 +489,7 @@
                       <input class="form-control" type="file" id="t2_curp" accept="application/pdf" #inputt2_curp
                         (change)="onFileSelect($event, 't2_curp')" />
                       <div *ngIf="documentos['t2_curp']" style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="btn btn-outline-danger btn-xs"
+                        <button type="button" class="boton-danger-sm"
                           (click)="eliminarArchivo('t2_curp', inputt2_curp)">
                           <i class="feather icon-trash btn-icon-prepend"></i>
                           Eliminar archivo
@@ -508,7 +508,7 @@
                         #inputt2_comprobante_domicilio (change)="onFileSelect($event, 't2_comprobante_domicilio')" />
                       <div *ngIf="documentos['t2_comprobante_domicilio']"
                         style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="btn btn-outline-danger btn-xs"
+                        <button type="button" class="boton-danger-sm"
                           (click)="eliminarArchivo('t2_comprobante_domicilio', inputt2_comprobante_domicilio)">
                           <i class="feather icon-trash btn-icon-prepend"></i>
                           Eliminar archivo
@@ -530,7 +530,7 @@
                       <input class="form-control" type="file" id="t3_identificacion" accept="application/pdf"
                         #inputt3_identificacion (change)="onFileSelect($event, 't3_identificacion')" />
                       <div *ngIf="documentos['t3_identificacion']" style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="btn btn-outline-danger btn-xs"
+                        <button type="button" class="boton-danger-sm"
                           (click)="eliminarArchivo('t3_identificacion', inputt3_identificacion)">
                           <i class="feather icon-trash btn-icon-prepend"></i>
                           Eliminar archivo
@@ -548,7 +548,7 @@
                       <input class="form-control" type="file" id="t3_curp" accept="application/pdf" #inputt3_curp
                         (change)="onFileSelect($event, 't3_curp')" />
                       <div *ngIf="documentos['t3_curp']" style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="btn btn-outline-danger btn-xs"
+                        <button type="button" class="boton-danger-sm"
                           (click)="eliminarArchivo('t3_curp', inputt3_curp)">
                           <i class="feather icon-trash btn-icon-prepend"></i>
                           Eliminar archivo
@@ -567,7 +567,7 @@
                         #inputt3_comprobante_domicilio (change)="onFileSelect($event, 't3_comprobante_domicilio')" />
                       <div *ngIf="documentos['t3_comprobante_domicilio']"
                         style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="btn btn-outline-danger btn-xs"
+                        <button type="button" class="boton-danger-sm"
                           (click)="eliminarArchivo('t3_comprobante_domicilio', inputt3_comprobante_domicilio)">
                           <i class="feather icon-trash btn-icon-prepend"></i>
                           Eliminar archivo
