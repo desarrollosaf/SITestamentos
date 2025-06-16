@@ -23,6 +23,7 @@ export class RegistroComponent {
   public localidades: any[] = [];
   localidadSeleccionada: number | null = null;
   mostrarExtraInfo: boolean = false;
+  testigos: boolean = false;
   formTestamento: FormGroup;
   msgcurp : string;
   documentos: { [key: string]: File | null } = {
@@ -33,6 +34,15 @@ export class RegistroComponent {
     comprobante_domicilio: null,
     certificado_publico: null,
     certificado_privado: null,
+    t1_identificacion: null,
+    t1_curp: null,
+    t1_comprobante_domicilio: null,
+    t2_identificacion: null,
+    t2_curp: null,
+    t2_comprobante_domicilio: null,
+    t3_identificacion: null,
+    t3_curp: null,
+    t3_comprobante_domicilio: null,
   };
 
 
@@ -75,6 +85,19 @@ export class RegistroComponent {
       }
     });
   }
+
+
+  
+  toggleExtraInfo(): void {
+      this.mostrarExtraInfo = !this.mostrarExtraInfo;
+      if (this.mostrarExtraInfo) {
+        this.testigos =true;
+      console.log('Mostrando');
+      } else {
+        this.testigos =false;
+      console.log('Ocultando');
+      }
+    }
 
   getLocalidad(){
     const cp= this.formTestamento.get('f_cp')?.value
@@ -119,6 +142,10 @@ export class RegistroComponent {
     if (input.files && input.files.length > 0) {
       this.documentos[campo] = input.files[0];
     }  
+  }
+  eliminarArchivo(campo: string, inputRef: HTMLInputElement): void {
+    delete this.documentos[campo];  
+    inputRef.value = '';
   }
 
   buscarDatosPorCurp(curp: string) {
@@ -212,6 +239,20 @@ export class RegistroComponent {
           this.documentos.curp !== null;
   }
 
+  documentosExtraRequeridosLlenos(): boolean {
+    return this.documentos.certificado_publico !== null &&
+          this.documentos.certificado_privado !== null &&
+          this.documentos.t1_identificacion !== null &&
+          this.documentos.t1_curp !== null &&
+          this.documentos.t1_comprobante_domicilio !== null &&
+          this.documentos.t2_identificacion !== null &&
+          this.documentos.t2_curp !== null &&
+          this.documentos.t2_comprobante_domicilio !== null &&
+          this.documentos.t3_identificacion !== null &&
+          this.documentos.t3_curp !== null &&
+          this.documentos.t3_comprobante_domicilio !== null;
+  }
+
 
   enviarDatos(): void {
     if (!this.documentosRequeridosLlenos()) {
@@ -225,28 +266,41 @@ export class RegistroComponent {
           });
     return;
     }
+    if (this.testigos && !this.documentosExtraRequeridosLlenos()) {
+          Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: "¡Atención!",
+                text: "Los documentos extra son obligatorios.",
+                showConfirmButton: false,
+                timer: 3000
+              });
+        return;
+        }
+
     const formData = new FormData();
     for (const key in this.documentos) {
       if (this.documentos[key]) {
         formData.append(key, this.documentos[key] as File);
       }
     }
-    formData.append('f_rfc', String(this.formTestamento.value.f_rfc,));
-    formData.append('f_curp', String(this.formTestamento.value.f_curp,));
-    formData.append('f_nombre', String(this.formTestamento.value.f_nombre,));
-    formData.append('f_primer_apellido', String(this.formTestamento.value.f_primer_apellido,));
-    formData.append('f_segundo_apellido', String(this.formTestamento.value.f_segundo_apellido,));
-    formData.append('f_fecha_nacimiento', String(this.formTestamento.value.f_fecha_nacimiento,));
-    formData.append('lugar_nacimiento', String(this.formTestamento.value.lugar_nacimiento,));
-    formData.append('f_cp', String(this.formTestamento.value.f_cp,));
-    formData.append('estado_id', String(this.formTestamento.value.estado_id,));
-    formData.append('municipio_id', String(this.formTestamento.value.municipio_id,));
-    formData.append('colonia_id', String(this.formTestamento.value.colonia_id,));
-    formData.append('f_domicilio', String(this.formTestamento.value.f_domicilio,));
-    formData.append('numext', String(this.formTestamento.value.numext,));
-    formData.append('numero_tel', String(this.formTestamento.value.numero_tel,));
-    formData.append('numero_cel', String(this.formTestamento.value.numero_cel,));
-    formData.append('correo_per', String(this.formTestamento.value.correo_per,));
+    formData.append('f_rfc', String(this.formTestamento.value.f_rfc));
+    formData.append('f_curp', String(this.formTestamento.value.f_curp));
+    formData.append('f_nombre', String(this.formTestamento.value.f_nombre));
+    formData.append('f_primer_apellido', String(this.formTestamento.value.f_primer_apellid,));
+    formData.append('f_segundo_apellido', String(this.formTestamento.value.f_segundo_apellido));
+    formData.append('f_fecha_nacimiento', String(this.formTestamento.value.f_fecha_nacimiento));
+    formData.append('lugar_nacimiento', String(this.formTestamento.value.lugar_nacimiento));
+    formData.append('f_cp', String(this.formTestamento.value.f_cp));
+    formData.append('estado_id', String(this.formTestamento.value.estado_id));
+    formData.append('municipio_id', String(this.formTestamento.value.municipio_id));
+    formData.append('colonia_id', String(this.formTestamento.value.colonia_id));
+    formData.append('f_domicilio', String(this.formTestamento.value.f_domicilio));
+    formData.append('numext', String(this.formTestamento.value.numext));
+    formData.append('numero_tel', String(this.formTestamento.value.numero_tel));
+    formData.append('numero_cel', String(this.formTestamento.value.numero_cel));
+    formData.append('correo_per', String(this.formTestamento.value.correo_per));
+     formData.append('testigos', String(this.testigos));
 
     // formData.forEach((valor, clave) => {
     //   console.log(clave, valor);
