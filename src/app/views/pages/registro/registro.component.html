@@ -157,8 +157,7 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Calle:</label>
-                  <input formControlName="f_domicilio" type="text" class="form-control" placeholder="Ejemplo: México"
-                    [readonly]="true" />
+                  <input formControlName="f_domicilio" type="text" class="form-control" placeholder="Ejemplo: México"/>
                   <small class="colorsm" *ngIf="formTestamento.get('f_domicilio')?.hasError('required') && formTestamento.get('f_domicilio')?.touched">Este campo es
                       <strong>requerido</strong></small>
                 </div>
@@ -223,21 +222,25 @@
                 <div class="mb-3 d-flex flex-column justify-content-between h-100">
                   <label class="form-label negri">Acta de nacimiento:*</label>
                   <div class="mt-auto">
-                    <input class="form-control" type="file" id="acta_nacimiento" accept="application/pdf" #acta_nacimiento (change)="onFileSelect($event, 'acta_nacimiento')">
-                    <!-- <div *ngIf="documentos['acta_nacimiento']" class="mt-2">
-                      <p class="small mb-1">Archivo: {{ documentos['acta_nacimiento'].name }}</p>
-                      <button type="button" class="btn btn-sm btn-outline-danger" (click)="eliminarArchivo('acta_nacimiento', acta_nacimiento)">
+                    <input class="form-control" type="file" id="acta_nacimiento" accept="application/pdf" #inputacta_nacimiento (change)="onFileSelect($event, 'acta_nacimiento')">
+                      <!-- <div *ngIf="documentos['acta_nacimiento']" class="mt-2">
+                      <button type="button" class="btn btn-sm btn-outline-danger" (click)="eliminarArchivo('acta_nacimiento', inputacta_nacimiento)">
                       Eliminar archivo
                       </button>
-                    </div> -->
-                  </div>
+                      </div> -->
+                    </div>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="mb-3 d-flex flex-column justify-content-between h-100">
                   <label class="form-label negri">Acta de matrimonio:</label>
                   <div class="mt-auto">
-                    <input class="form-control" type="file" id="curp" accept="application/pdf" (change)="onFileSelect($event, 'acta_matrimonio')">
+                    <input class="form-control" type="file" id="acta_matrimonio" accept="application/pdf" #inputacta_matrimonio (change)="onFileSelect($event, 'acta_matrimonio')">
+                      <!-- <div *ngIf="documentos['acta_matrimonio']" class="mt-2">
+                      <button type="button" class="btn btn-sm btn-outline-danger" (click)="eliminarArchivo('acta_matrimonio', inputacta_matrimonio)">
+                      Eliminar archivo
+                      </button>
+                      </div> -->
                   </div>
                 </div>
               </div>
@@ -249,7 +252,13 @@
                   <label class="form-label negri">Identificación oficial vigente (Credencial para votar, pasaporte o
                     cédula profesional):*</label>
                   <div class="mt-auto">
-                    <input class="form-control" type="file" id="curp" accept="application/pdf" (change)="onFileSelect($event, 'identificacion')">
+                    <input class="form-control" type="file" id="identificacion" accept="application/pdf" #inputidentificacion (change)="onFileSelect($event, 'identificacion')">
+                     <div *ngIf="documentos['identificacion']" class="mt-2">
+                      <p class="small mb-1">Archivo: {{ documentos['identificacion'].name }}</p>
+                      <button type="button" class="btn btn-sm btn-outline-danger" (click)="eliminarArchivo('identificacion', inputidentificacion)">
+                      Eliminar archivo
+                      </button>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -257,7 +266,13 @@
                 <div class="mb-3 d-flex flex-column justify-content-between h-100">
                   <label class="form-label negri">Comprobante de domicilio:*</label>
                   <div class="mt-auto">
-                    <input class="form-control" type="file" id="curp" accept="application/pdf" (change)="onFileSelect($event, 'comprobante_domicilio')">
+                    <input class="form-control" type="file" id="comprobante_domicilio" accept="application/pdf" #inputcomprobante_domicilio (change)="onFileSelect($event, 'comprobante_domicilio')">
+                     <div *ngIf="documentos['comprobante_domicilio']" class="mt-2">
+                      <p class="small mb-1">Archivo: {{ documentos['comprobante_domicilio'].name }}</p>
+                      <button type="button" class="btn btn-sm btn-outline-danger" (click)="eliminarArchivo('comprobante_domicilio', inputcomprobante_domicilio)">
+                      Eliminar archivo
+                      </button>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -268,7 +283,13 @@
                 <div class="mb-3 d-flex flex-column justify-content-between h-100">
                   <label class="form-label negri">Clave única de registro de población:*</label>
                   <div class="mt-auto">
-                    <input class="form-control" type="file" id="curp" accept="application/pdf" (change)="onFileSelect($event, 'curp')">
+                    <input class="form-control" type="file" id="curp" accept="application/pdf" #inputcurp (change)="onFileSelect($event, 'curp')">
+                     <div *ngIf="documentos['curp']" class="mt-2">
+                      <p class="small mb-1">Archivo: {{ documentos['curp'].name }}</p>
+                      <button type="button" class="btn btn-sm btn-outline-danger" (click)="eliminarArchivo('curp', inputcurp)">
+                      Eliminar archivo
+                      </button>
+                      </div>
                   </div>
                 </div>
               </div>
