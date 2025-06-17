@@ -92,10 +92,8 @@ export class RegistroComponent {
       this.mostrarExtraInfo = !this.mostrarExtraInfo;
       if (this.mostrarExtraInfo) {
         this.testigos =true;
-      console.log('Mostrando');
       } else {
         this.testigos =false;
-      console.log('Ocultando');
       }
     }
 
@@ -302,9 +300,9 @@ export class RegistroComponent {
     formData.append('correo_per', String(this.formTestamento.value.correo_per));
     formData.append('testigos', String(this.testigos));
 
-    formData.forEach((valor, clave) => {
-      console.log(clave, valor);
-    });
+    // formData.forEach((valor, clave) => {
+    //   console.log(clave, valor);
+    // });
     const curpUsr = this.formTestamento.value.f_curp;
     this._registroService.saveRegistro(formData,curpUsr).subscribe({
       next: (response: any) => {

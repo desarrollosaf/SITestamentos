@@ -80,8 +80,6 @@ export class DetalleSolicitudComponent {
   ngOnInit(): void {
     this._solicitudService.getsolicitud(this.id).subscribe({
       next: (response: any) => {
-
-        console.log(response[0]);
         this.formTestamento.patchValue({
           f_rfc: response[0].user.datos_user.f_rfc,
           f_curp: response[0].user.datos_user.f_curp,
@@ -165,10 +163,8 @@ export class DetalleSolicitudComponent {
     this.mostrarExtraInfo = !this.mostrarExtraInfo;
     if (this.mostrarExtraInfo) {
       this.testigos = true;
-      console.log('Mostrando');
     } else {
       this.testigos = false;
-      console.log('Ocultando');
     }
   }
 
