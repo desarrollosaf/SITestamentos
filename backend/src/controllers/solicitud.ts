@@ -1,34 +1,40 @@
 import { Request, Response, NextFunction } from 'express'
-import { Solicitud } from '../models/solicitud';
+import Solicitud from '../models/solicitud';
 import User from '../models/user';
 import bcrypt from 'bcrypt'
-import { Testigo } from '../models/testigos';
+import Testigo  from '../models/testigos';
 import sequelizefun from '../database/fun'; // La conexión
 import { dp_datospersonales } from '../models/fun/dp_datospersonales';
+import path from 'path';
+import { dp_fum_datos_generales } from '../models/fun/dp_fum_datos_generales';
 
 dp_datospersonales.initModel(sequelizefun);
 
 export const saveinfo = async (req: Request, res: Response): Promise<any> => {
-    const { data } = req.body;
-
-console.log(data);
-    const Upassword = data.curp;
+    const data  = req.body;
+    // console.log(data);
+    // return 200 
+    const Upassword = data.f_rfc;
     const UpasswordHash = await bcrypt.hash(Upassword, 10);
+
+    
+
     const newUser = await User.create({
-      name: data.curp,
-      email: data.correo_per,
+      name:  data.f_rfc,
+      email:  data.correo_per,
       password: UpasswordHash,
     });
 
+   
     let registro = await dp_datospersonales.findOne({ 
-        where: { f_curp: data.curp }
+        where: { f_curp: data.f_curp }
     });
-
+    
     if (!registro) {
          const test = await dp_datospersonales.create({
-             f_curp: data.curp,
-             f_rfc: data.rfc,
-             f_nombre: data.nombre,
+             f_curp: data.f_curp,
+             f_rfc: data.f_rfc,
+             f_nombre: data.f_nombre,
              f_primer_apellido: data.f_primer_apellido,
              f_segundo_apellido: data.f_segundo_apellido,
              f_fecha_nacimiento: data.f_fecha_nacimiento,
@@ -37,42 +43,146 @@ console.log(data);
              colonia_id: data.colonia_id,
              f_domicilio: data.f_domicilio,
              numext: data.numext,
+             numero_tel: data.numero_tel,
+             numero_cel: data.numero_cel,
              correo_per: data.correo_per,
-             f_homclave: ''
+             f_homclave: '',
+             f_cp: data.f_cp,
          });    
     };
 
+    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+    const f_curp = data.f_curp;
 
-
-    const files = req.files as {
-        [fieldname: string]: Express.Multer.File[];
+    const buildPath = (field: string): string | null => {
+    const file = files[field]?.[0];
+    return file ? path.join('storage', f_curp, file.filename) : null;
     };
 
-    const solicitud = await Solicitud.create({
-            userId: newUser.id,
-            lugar_nacimiento: data.lugar_nacimiento,
-            acta_nacimiento: files['acta_nacimiento']?.[0]?.path,
-            acta_matrimonio: files['acta_matrimonio']?.[0]?.path,
-            identificacion:  files['identificacion']?.[0]?.path,
-            curp: files['curp']?.[0]?.path,
-            comprobante_domicilio: files['comprobante_domicilio']?.[0]?.path,
-            certificado_privado: files['certificado_privado']?.[0]?.path,
-            certificado_publico: files['certificado_publico']?.[0]?.path, 
-            fecha_envio: new Date(),
-    })
+    // Crear solicitud
+    const solicitudFields = [
+    'acta_nacimiento', 'acta_matrimonio', 'identificacion', 'curp',
+    'comprobante_domicilio', 'certificado_privado', 'certificado_publico',
+    ];
 
-    for (const testigo of data.testigos) {
-    const test = await Testigo.create({
-        solicitudId: solicitud.id,
-        nombre: testigo.nombre,
-        rfc: files['rfc']?.[0]?.path,
-        identificacion: files['identificacion']?.[0]?.path,
-        curp: files['curp']?.[0]?.path,
-        comprobante_domicilio: files['comprobante_domicilio']?.[0]?.path,
+    const solicitudPayload: any = {
+    userId: newUser.id,
+    lugar_nacimiento: data.lugar_nacimiento,
+    fecha_envio: new Date(),
+    };
+
+    for (const field of solicitudFields) {
+    solicitudPayload[field] = buildPath(field);
+    }
+
+    const solicitud = await Solicitud.create(solicitudPayload);
+
+    // Crear testigos
+    if (data.testigos === 'true') {
+        const crearTestigo = (i: number) => {
+        const prefix = `t${i}_`;
+        return Testigo.create({
+            solicitudId: solicitud.id,
+            identificacion: buildPath(`${prefix}identificacion`),
+            curp: buildPath(`${prefix}curp`),
+            comprobante_domicilio: buildPath(`${prefix}comprobante_domicilio`),
         });
+        };
+        const [test1, test2, test3] = await Promise.all([
+            crearTestigo(1),
+            crearTestigo(2),
+            crearTestigo(3),
+        ]);
     }
 
     return res.status(201).json({
         message: 'Documento guardado exitosamente'
     });
+};
+
+
+
+export const getsolicitudes = async (req: Request, res: Response): Promise<any> => {
+    try {
+        let solicitudes = await Solicitud.findAll({
+            include: [
+                {
+                    model: Testigo,
+                    as: 'testigos',
+                },
+                {
+                    model: User,
+                    as: 'user',
+                }
+            ]
+        });
+
+        // Cargar datos personales manualmente desde otra base de datos
+        for (const solicitud of solicitudes) {
+            const user = solicitud.user;
+            if (user && user.name) {
+                console.log('hola si usuario:', user.name )
+                const datos = await dp_datospersonales.findOne({
+                    where: { f_rfc: user.name }, 
+                });
+                console.log(datos)
+                // Simular el include dentro de usuarios
+                if (datos) {
+                    user.setDataValue('datos_user', datos);
+                }
+            }
+        }
+
+        if (solicitudes.length > 0) {
+            return res.json(solicitudes);
+        } else {
+            return res.status(404).json({ msg: `No existe el id ${id}` });
+        }
+    } catch (error) {
+        console.error('Error al obtener solicitudes:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor' });
+    }
+};
+
+export const getsolicitud = async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+
+    try {
+        let solicitudes = await Solicitud.findAll({
+            where: {id: id},
+            include: [
+                {
+                    model: Testigo,
+                    as: 'testigos',
+                },
+                {
+                    model: User,
+                    as: 'user',
+                }
+            ]
+        });
+
+        // Cargar datos personales manualmente desde otra base de datos
+        for (const solicitud of solicitudes) {
+            const user = solicitud.user;
+            if (user && user.name) {
+                const datos = await dp_datospersonales.findOne({
+                    where: { f_rfc: user.name }, 
+                });
+                // Simular el include dentro de usuarios
+                if (datos) {
+                    user.setDataValue('datos_user', datos);
+                }
+            }
+        }
+
+        if (solicitudes) {
+            return res.json(solicitudes);
+        } else {
+            return res.status(404).json({ msg: `No existe el id ${id}` });
+        }
+    } catch (error) {
+        console.error('Error al obtener solicitudes:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor' });
+    }
 };

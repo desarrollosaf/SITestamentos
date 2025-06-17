@@ -18,6 +18,7 @@ const user_1 = __importDefault(require("../routes/saf/user"));
 const estados_1 = __importDefault(require("../routes/fun/estados"));
 const datosp_1 = __importDefault(require("../routes/fun/datosp"));
 const user_2 = __importDefault(require("../routes/user"));
+const solicitudes_1 = __importDefault(require("../routes/solicitudes"));
 const user_3 = __importDefault(require("../models/user"));
 class Server {
     constructor() {
@@ -38,6 +39,7 @@ class Server {
         this.app.use(estados_1.default);
         this.app.use(datosp_1.default);
         this.app.use(user_2.default);
+        this.app.use(solicitudes_1.default);
     }
     midlewares() {
         this.app.use(express_1.default.json());

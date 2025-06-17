@@ -12,33 +12,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saveinfo = void 0;
-const solicitud_1 = require("../models/solicitud");
+exports.getsolicitud = exports.getsolicitudes = exports.saveinfo = void 0;
+const solicitud_1 = __importDefault(require("../models/solicitud"));
 const user_1 = __importDefault(require("../models/user"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const testigos_1 = require("../models/testigos");
+const testigos_1 = __importDefault(require("../models/testigos"));
 const fun_1 = __importDefault(require("../database/fun")); // La conexión
 const dp_datospersonales_1 = require("../models/fun/dp_datospersonales");
+const path_1 = __importDefault(require("path"));
 dp_datospersonales_1.dp_datospersonales.initModel(fun_1.default);
 const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x;
-    const { data } = req.body;
-    console.log(data);
-    const Upassword = data.curp;
+    const data = req.body;
+    // console.log(data);
+    // return 200 
+    const Upassword = data.f_rfc;
     const UpasswordHash = yield bcrypt_1.default.hash(Upassword, 10);
     const newUser = yield user_1.default.create({
-        name: data.curp,
+        name: data.f_rfc,
         email: data.correo_per,
         password: UpasswordHash,
     });
     let registro = yield dp_datospersonales_1.dp_datospersonales.findOne({
-        where: { f_curp: data.curp }
+        where: { f_curp: data.f_curp }
     });
     if (!registro) {
         const test = yield dp_datospersonales_1.dp_datospersonales.create({
-            f_curp: data.curp,
-            f_rfc: data.rfc,
-            f_nombre: data.nombre,
+            f_curp: data.f_curp,
+            f_rfc: data.f_rfc,
+            f_nombre: data.f_nombre,
             f_primer_apellido: data.f_primer_apellido,
             f_segundo_apellido: data.f_segundo_apellido,
             f_fecha_nacimiento: data.f_fecha_nacimiento,
@@ -47,36 +48,138 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             colonia_id: data.colonia_id,
             f_domicilio: data.f_domicilio,
             numext: data.numext,
+            numero_tel: data.numero_tel,
+            numero_cel: data.numero_cel,
             correo_per: data.correo_per,
-            f_homclave: ''
+            f_homclave: '',
+            f_cp: data.f_cp,
         });
     }
     ;
     const files = req.files;
-    const solicitud = yield solicitud_1.Solicitud.create({
+    const f_curp = data.f_curp;
+    const buildPath = (field) => {
+        var _a;
+        const file = (_a = files[field]) === null || _a === void 0 ? void 0 : _a[0];
+        return file ? path_1.default.join('storage', f_curp, file.filename) : null;
+    };
+    // Crear solicitud
+    const solicitudFields = [
+        'acta_nacimiento', 'acta_matrimonio', 'identificacion', 'curp',
+        'comprobante_domicilio', 'certificado_privado', 'certificado_publico',
+    ];
+    const solicitudPayload = {
         userId: newUser.id,
         lugar_nacimiento: data.lugar_nacimiento,
-        acta_nacimiento: (_b = (_a = files['acta_nacimiento']) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.path,
-        acta_matrimonio: (_d = (_c = files['acta_matrimonio']) === null || _c === void 0 ? void 0 : _c[0]) === null || _d === void 0 ? void 0 : _d.path,
-        identificacion: (_f = (_e = files['identificacion']) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.path,
-        curp: (_h = (_g = files['curp']) === null || _g === void 0 ? void 0 : _g[0]) === null || _h === void 0 ? void 0 : _h.path,
-        comprobante_domicilio: (_k = (_j = files['comprobante_domicilio']) === null || _j === void 0 ? void 0 : _j[0]) === null || _k === void 0 ? void 0 : _k.path,
-        certificado_privado: (_m = (_l = files['certificado_privado']) === null || _l === void 0 ? void 0 : _l[0]) === null || _m === void 0 ? void 0 : _m.path,
-        certificado_publico: (_p = (_o = files['certificado_publico']) === null || _o === void 0 ? void 0 : _o[0]) === null || _p === void 0 ? void 0 : _p.path,
         fecha_envio: new Date(),
-    });
-    for (const testigo of data.testigos) {
-        const test = yield testigos_1.Testigo.create({
-            solicitudId: solicitud.id,
-            nombre: testigo.nombre,
-            rfc: (_r = (_q = files['rfc']) === null || _q === void 0 ? void 0 : _q[0]) === null || _r === void 0 ? void 0 : _r.path,
-            identificacion: (_t = (_s = files['identificacion']) === null || _s === void 0 ? void 0 : _s[0]) === null || _t === void 0 ? void 0 : _t.path,
-            curp: (_v = (_u = files['curp']) === null || _u === void 0 ? void 0 : _u[0]) === null || _v === void 0 ? void 0 : _v.path,
-            comprobante_domicilio: (_x = (_w = files['comprobante_domicilio']) === null || _w === void 0 ? void 0 : _w[0]) === null || _x === void 0 ? void 0 : _x.path,
-        });
+    };
+    for (const field of solicitudFields) {
+        solicitudPayload[field] = buildPath(field);
+    }
+    const solicitud = yield solicitud_1.default.create(solicitudPayload);
+    // Crear testigos
+    if (data.testigos === 'true') {
+        const crearTestigo = (i) => {
+            const prefix = `t${i}_`;
+            return testigos_1.default.create({
+                solicitudId: solicitud.id,
+                identificacion: buildPath(`${prefix}identificacion`),
+                curp: buildPath(`${prefix}curp`),
+                comprobante_domicilio: buildPath(`${prefix}comprobante_domicilio`),
+            });
+        };
+        const [test1, test2, test3] = yield Promise.all([
+            crearTestigo(1),
+            crearTestigo(2),
+            crearTestigo(3),
+        ]);
     }
     return res.status(201).json({
         message: 'Documento guardado exitosamente'
     });
 });
 exports.saveinfo = saveinfo;
+const getsolicitudes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        let solicitudes = yield solicitud_1.default.findAll({
+            include: [
+                {
+                    model: testigos_1.default,
+                    as: 'testigos',
+                },
+                {
+                    model: user_1.default,
+                    as: 'user',
+                }
+            ]
+        });
+        // Cargar datos personales manualmente desde otra base de datos
+        for (const solicitud of solicitudes) {
+            const user = solicitud.user;
+            if (user && user.name) {
+                console.log('hola si usuario:', user.name);
+                const datos = yield dp_datospersonales_1.dp_datospersonales.findOne({
+                    where: { f_rfc: user.name },
+                });
+                console.log(datos);
+                // Simular el include dentro de usuarios
+                if (datos) {
+                    user.setDataValue('datos_user', datos);
+                }
+            }
+        }
+        if (solicitudes.length > 0) {
+            return res.json(solicitudes);
+        }
+        else {
+            return res.status(404).json({ msg: `No existe el id ${id}` });
+        }
+    }
+    catch (error) {
+        console.error('Error al obtener solicitudes:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor' });
+    }
+});
+exports.getsolicitudes = getsolicitudes;
+const getsolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    try {
+        let solicitudes = yield solicitud_1.default.findAll({
+            where: { id: id },
+            include: [
+                {
+                    model: testigos_1.default,
+                    as: 'testigos',
+                },
+                {
+                    model: user_1.default,
+                    as: 'user',
+                }
+            ]
+        });
+        // Cargar datos personales manualmente desde otra base de datos
+        for (const solicitud of solicitudes) {
+            const user = solicitud.user;
+            if (user && user.name) {
+                const datos = yield dp_datospersonales_1.dp_datospersonales.findOne({
+                    where: { f_rfc: user.name },
+                });
+                // Simular el include dentro de usuarios
+                if (datos) {
+                    user.setDataValue('datos_user', datos);
+                }
+            }
+        }
+        if (solicitudes) {
+            return res.json(solicitudes);
+        }
+        else {
+            return res.status(404).json({ msg: `No existe el id ${id}` });
+        }
+    }
+    catch (error) {
+        console.error('Error al obtener solicitudes:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor' });
+    }
+});
+exports.getsolicitud = getsolicitud;
