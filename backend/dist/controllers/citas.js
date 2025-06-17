@@ -12,14 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getregistro = void 0;
-const dp_datospersonales_1 = require("../models/fun/dp_datospersonales");
+exports.getservidor = void 0;
 const fun_1 = __importDefault(require("../database/fun")); // La conexión
 const dp_fum_datos_generales_1 = require("../models/fun/dp_fum_datos_generales");
-const user_1 = __importDefault(require("../models/user"));
+const dp_datospersonales_1 = require("../models/fun/dp_datospersonales");
 dp_datospersonales_1.dp_datospersonales.initModel(fun_1.default);
 dp_fum_datos_generales_1.dp_fum_datos_generales.initModel(fun_1.default);
-const getregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getservidor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     console.log(id);
     try {
@@ -31,18 +30,12 @@ const getregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                 where: { f_curp: id }
             });
             if (!registro) {
-                return res.status(500).json({ error: 'No se tiene ningun registro' });
+                return res.status(500).json({ error: 'existe un servidor publico en el curp', id });
             }
         }
-        const solicitud = yield user_1.default.findOne({
-            where: { name: registro.f_rfc }
-        });
-        if (solicitud) {
-            return res.status(400).json({ error: 'Este servidor ya cuenta con un registro' });
-        }
         return res.json({
-            msg: `Lista obtenida exitosamente`,
-            data: registro
+            msg: `si existe el servidor`,
+            estatus: '200'
         });
     }
     catch (error) {
@@ -50,4 +43,4 @@ const getregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
     }
 });
-exports.getregistro = getregistro;
+exports.getservidor = getservidor;
