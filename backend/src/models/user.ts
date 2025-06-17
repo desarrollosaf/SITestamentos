@@ -8,6 +8,8 @@ import {
 import sequelize from '../database/testamentosConnection';
 import RolUsers from './role_users'; 
 import { v4 as uuidv4 } from 'uuid';
+// import { dp_fum_datos_generales } from './fun/dp_fum_datos_generales';
+import { dp_datospersonales } from './fun/dp_datospersonales';
 
 class User extends Model<
   InferAttributes<User>,
@@ -21,6 +23,7 @@ class User extends Model<
   declare password: string | null;
   declare remember_token: string | null;
   declare rol_users?: { role_id: number };
+  declare datos_user?: dp_datospersonales;
 }
 
 User.init(
@@ -70,5 +73,11 @@ User.init(
 // Relaciones
 User.hasOne(RolUsers, { foreignKey: 'user_id', as: 'rol_users' });
 RolUsers.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+// User.hasOne(dp_fum_datos_generales, { foreignKey: 'user_id', as: 'rol_users' });
+// User.hasOne(dp_datospersonales, {
+//   sourceKey: 'name',         
+//   foreignKey: 'f_curp',   
+//   as: 'datos_user',
+// });
 
 export default User;

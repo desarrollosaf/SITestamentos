@@ -134,7 +134,7 @@ export class dp_datospersonales extends Model<
       {
         sequelize: sequelizefun, // conexión específica
         tableName: 'dp_datospersonales',
-        timestamps: true,
+        timestamps: false,
         paranoid: true,
         underscored: true,
       }

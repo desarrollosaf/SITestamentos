@@ -70,7 +70,7 @@ class dp_datospersonales extends sequelize_1.Model {
         }, {
             sequelize: fun_1.default, // conexión específica
             tableName: 'dp_datospersonales',
-            timestamps: true,
+            timestamps: false,
             paranoid: true,
             underscored: true,
         });

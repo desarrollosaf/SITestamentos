@@ -51,4 +51,10 @@ User.init({
 // Relaciones
 User.hasOne(role_users_1.default, { foreignKey: 'user_id', as: 'rol_users' });
 role_users_1.default.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+// User.hasOne(dp_fum_datos_generales, { foreignKey: 'user_id', as: 'rol_users' });
+// User.hasOne(dp_datospersonales, {
+//   sourceKey: 'name',         
+//   foreignKey: 'f_curp',   
+//   as: 'datos_user',
+// });
 exports.default = User;

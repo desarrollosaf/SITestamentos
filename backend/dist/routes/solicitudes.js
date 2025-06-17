@@ -4,5 +4,7 @@ const express_1 = require("express");
 const solicitud_1 = require("../controllers/solicitud");
 const multer_1 = require("../controllers/multer");
 const router = (0, express_1.Router)();
-router.post("/api/solicitudes/create", multer_1.upload, solicitud_1.saveinfo);
+router.post("/api/solicitudes/create/:curp", multer_1.upload, solicitud_1.saveinfo);
+router.get("/api/solicitudes/getsolicitudes/", solicitud_1.getsolicitudes);
+router.get("/api/solicitudes/getsolicitud/:id", solicitud_1.getsolicitud);
 exports.default = router;
