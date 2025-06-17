@@ -21,6 +21,7 @@ module.exports = {
       },
       nombre: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
       rfc: {
         type: Sequelize.STRING,
