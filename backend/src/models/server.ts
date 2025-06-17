@@ -6,6 +6,7 @@ import routesEstados from '../routes/fun/estados'
 import routesDatosp from '../routes/fun/datosp'
 import routesUser from '../routes/user'
 import routesSolicitud from '../routes/solicitudes'
+import routesCitas from '../routes/citas'
 import user from '../models/user'
 
 class Server {
@@ -37,6 +38,7 @@ class Server {
         this.app.use(routesDatosp);
         this.app.use(routesUser);
         this.app.use(routesSolicitud);
+        this.app.use(routesCitas);
     }
 
     

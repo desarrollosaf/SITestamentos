@@ -17,7 +17,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
     const Upassword = data.f_rfc;
     const UpasswordHash = await bcrypt.hash(Upassword, 10);
 
-    
+   
 
     const newUser = await User.create({
       name:  data.f_rfc,
