@@ -3,6 +3,10 @@ import { BaseComponent } from './views/layout/base/base.component';
 import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
+  {
+    path: '',
+    loadComponent: () => import('./views/pages/home/home.component').then(c => c.HomeComponent) 
+  },
   { path: 'auth', loadChildren: () => import('./views/pages/auth/auth.routes')},
   {
     path: '',
