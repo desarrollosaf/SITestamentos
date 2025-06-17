@@ -13,7 +13,7 @@ export class SolicitudesService {
     private http = inject( HttpClient );
 
     constructor() {
-    this.myAppUrl = 'http://localhost:3001/';
+    this.myAppUrl = 'https://dev7.siasaf.gob.mx/';
     this.myAPIUrl = 'api/datosp';
     this.myAPIUrl2 = 'api/estados';
     this.myAPIUrl3 = 'api/solicitudes';
@@ -28,9 +28,9 @@ export class SolicitudesService {
     getsolicitud(id:string): Observable<string> {
         return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl3}/getsolicitud/${id}`)
     }
-  getLocalidad(id: string): Observable<string> {
-    return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl2}/getcodigo/${id}`)
-  }
+    getLocalidad(id: string): Observable<string> {
+      return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl2}/getcodigo/${id}`)
+    }
 
 
 }
