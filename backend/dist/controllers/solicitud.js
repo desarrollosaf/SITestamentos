@@ -55,7 +55,26 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             f_cp: data.f_cp,
         });
     }
-    ;
+    else {
+        yield registro.update({
+            f_curp: data.f_curp,
+            f_rfc: data.f_rfc,
+            f_nombre: data.f_nombre,
+            f_primer_apellido: data.f_primer_apellido,
+            f_segundo_apellido: data.f_segundo_apellido,
+            f_fecha_nacimiento: data.f_fecha_nacimiento,
+            estado_id: data.estado_id,
+            municipio_id: data.municipio_id,
+            colonia_id: data.colonia_id,
+            f_domicilio: data.f_domicilio,
+            numext: data.numext,
+            numero_tel: data.numero_tel,
+            numero_cel: data.numero_cel,
+            correo_per: data.correo_per,
+            f_homclave: '',
+            f_cp: data.f_cp,
+        });
+    }
     const files = req.files;
     const f_curp = data.f_curp;
     const buildPath = (field) => {
@@ -94,7 +113,7 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             crearTestigo(3),
         ]);
     }
-    return res.status(201).json({
+    return res.status(200).json({
         message: 'Documento guardado exitosamente'
     });
 });
@@ -132,7 +151,7 @@ const getsolicitudes = (req, res) => __awaiter(void 0, void 0, void 0, function*
             return res.json(solicitudes);
         }
         else {
-            return res.status(404).json({ msg: `No existe el id ${id}` });
+            return res.status(404).json({ msg: `Sin datos` });
         }
     }
     catch (error) {

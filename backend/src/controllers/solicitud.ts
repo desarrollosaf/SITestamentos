@@ -49,7 +49,27 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
              f_homclave: '',
              f_cp: data.f_cp,
          });    
-    };
+    }else{
+            await registro.update({
+             f_curp: data.f_curp,
+             f_rfc: data.f_rfc,
+             f_nombre: data.f_nombre,
+             f_primer_apellido: data.f_primer_apellido,
+             f_segundo_apellido: data.f_segundo_apellido,
+             f_fecha_nacimiento: data.f_fecha_nacimiento,
+             estado_id: data.estado_id,
+             municipio_id: data.municipio_id,
+             colonia_id: data.colonia_id,
+             f_domicilio: data.f_domicilio,
+             numext: data.numext,
+             numero_tel: data.numero_tel,
+             numero_cel: data.numero_cel,
+             correo_per: data.correo_per,
+             f_homclave: '',
+             f_cp: data.f_cp,
+             
+            });
+    }
 
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
     const f_curp = data.f_curp;
