@@ -95,7 +95,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
         ]);
     }
 
-    return res.status(201).json({
+    return res.status(200).json({
         message: 'Documento guardado exitosamente'
     });
 };
@@ -136,7 +136,7 @@ export const getsolicitudes = async (req: Request, res: Response): Promise<any> 
         if (solicitudes.length > 0) {
             return res.json(solicitudes);
         } else {
-            return res.status(404).json({ msg: `No existe el id ${id}` });
+            return res.status(404).json({ msg: `Sin datos` });
         }
     } catch (error) {
         console.error('Error al obtener solicitudes:', error);
