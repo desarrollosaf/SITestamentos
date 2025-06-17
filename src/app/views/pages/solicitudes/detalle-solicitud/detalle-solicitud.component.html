@@ -1,1 +1,364 @@
-<p>detalle-solicitud works!</p>
+<div class="container-fluid auth-background">
+    <div class="row justify-content-center">
+        <div class="col-md-10 stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-4 text-center" style="color: #96134b; font-size: 1.2rem;">
+                        Detalle de solicitud
+                    </h6>
+                    <form [formGroup]="formTestamento" class="forms-sample">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">CURP:*</label>
+                                    <input formControlName="f_curp" type="text" class="form-control"
+                                        placeholder="Ejemplo: MACJ750101HDFRRL01" maxlength="18" />
+                                    <small class="colorsm" *ngIf="formTestamento.get('f_curp')?.hasError('pattern')">
+                                        <strong> CURP inválida o incompleta.</strong>
+                                    </small>
+                                    <div>
+                                        <small class="colorsm"
+                                            *ngIf="formTestamento.get('f_curp')?.hasError('required') && formTestamento.get('f_curp')?.touched">Este
+                                            campo es
+                                            <strong>requerido</strong></small>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">RFC:*</label>
+                                    <input formControlName="f_rfc" type="text" class="form-control "
+                                        placeholder="Ejemplo: MACJ750101" maxlength="10" />
+                                    <div>
+                                        <small class="colorsm"
+                                            *ngIf="formTestamento.get('f_rfc')?.hasError('required') && formTestamento.get('f_rfc')?.touched">Este
+                                            campo es
+                                            <strong>requerido</strong></small>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Ocupación:</label>
+                                    <input formControlName="ocupacion" type="text" class="form-control "
+                                        value='Servidor Público' />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Nombre completo:*</label>
+                                    <input formControlName="f_nombre" type="text" class="form-control "
+                                        placeholder="Ejemplo: Juan Carlos" />
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('f_nombre')?.hasError('required') && formTestamento.get('f_nombre')?.touched">Este
+                                        campo es
+                                        <strong>requerido</strong></small>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Apellido paterno:*</label>
+                                    <input formControlName="f_primer_apellido" type="text" class="form-control "
+                                        placeholder="Ejemplo: Martínez" />
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('f_primer_apellido')?.hasError('required') && formTestamento.get('f_primer_apellido')?.touched">Este
+                                        campo es
+                                        <strong>requerido</strong></small>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Apellido materno:*</label>
+                                    <input formControlName="f_segundo_apellido" type="text" class="form-control "
+                                        placeholder="Ejemplo: López" />
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('f_segundo_apellido')?.hasError('required') && formTestamento.get('f_segundo_apellido')?.touched">Este
+                                        campo es
+                                        <strong>requerido</strong></small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Fecha de nacimiento:*</label>
+                                    <input formControlName="f_fecha_nacimiento" type="date" class="form-control "
+                                        placeholder="Ejemplo: usuario@dominio.com" />
+                                    <div>
+                                        <small class="colorsm"
+                                            *ngIf="formTestamento.get('f_fecha_nacimiento')?.hasError('required') && formTestamento.get('f_fecha_nacimiento')?.touched">Este
+                                            campo es
+                                            <strong>requerido</strong></small>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Edad:</label>
+                                    <input formControlName="edad" type="text" class="form-control " />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Lugar de nacimiento:*</label>
+                                    <input formControlName="lugar_nacimiento" type="text" class="form-control"
+                                        placeholder="Ejemplo: Veracruz" />
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('lugar_nacimiento')?.hasError('required') && formTestamento.get('lugar_nacimiento')?.touched">Este
+                                        campo es
+                                        <strong>requerido</strong></small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Código postal:</label>
+                                    <input formControlName="f_cp" type="text" class="form-control"
+                                        placeholder="Ejemplo: 50122" />
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('f_cp')?.hasError('required') && formTestamento.get('f_cp')?.touched">Este
+                                        campo es
+                                        <strong>requerido</strong></small>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Entidad federativa:</label>
+                                    <input [value]="formTestamento.get('estado_nombre')?.value" type="text"
+                                        class="form-control" placeholder="Ejemplo: México" [disabled]="true" />
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('estado_id')?.hasError('required') && formTestamento.get('estado_id')?.touched">Este
+                                        campo es
+                                        <strong>requerido</strong></small>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Municipio:</label>
+                                    <input [value]="formTestamento.get('municipio_nombre')?.value" type="text"
+                                        class="form-control" placeholder="Ejemplo: México" [disabled]="true" />
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('municipio_id')?.hasError('required') && formTestamento.get('municipio_id')?.touched">Este
+                                        campo es
+                                        <strong>requerido</strong></small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Colonia:</label>
+                                    <ng-select [items]="localidades" bindLabel="colon" bindValue="idcol"
+                                        formControlName="colonia_id" placeholder="Selecciona una colonia">
+                                    </ng-select>
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('colonia_id')?.hasError('required') && formTestamento.get('colonia_id')?.touched">Este
+                                        campo es
+                                        <strong>requerido</strong></small>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Calle:</label>
+                                    <input formControlName="f_domicilio" type="text" class="form-control"
+                                        placeholder="Ejemplo: México" />
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('f_domicilio')?.hasError('required') && formTestamento.get('f_domicilio')?.touched">Este
+                                        campo es
+                                        <strong>requerido</strong></small>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Número:</label>
+                                    <input formControlName="numext" type="text" class="form-control"
+                                        placeholder="Ejemplo: México" />
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('numext')?.hasError('required') && formTestamento.get('numext')?.touched">Este
+                                        campo es
+                                        <strong>requerido</strong></small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Teléfono:*</label>
+                                    <input formControlName="numero_tel" type="number" class="form-control"
+                                        placeholder="Ejemplo: 5512345678" />
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('numero_tel')?.hasError('pattern')">
+                                        Número de teléfono inválido.<strong>Debe tener 10 dígitos.</strong>
+                                    </small>
+
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('numero_tel')?.hasError('required') && formTestamento.get('numero_tel')?.touched">Este
+                                        campo es
+                                        <strong>requerido</strong></small>
+                                    <br />
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Celular:*</label>
+                                    <input formControlName="numero_cel" type="number" class="form-control"
+                                        placeholder="Ejemplo: 5512345678" />
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('numero_cel')?.hasError('pattern')">
+                                        Número de teléfono inválido.<strong>Debe tener 10 dígitos.</strong>
+                                    </small>
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('numero_cel')?.hasError('required') && formTestamento.get('numero_cel')?.touched">Este
+                                        campo es
+                                        <strong>requerido</strong></small>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Correo electrónico:*</label>
+                                    <input formControlName="correo_per" type="email" class="form-control"
+                                        placeholder="Ejemplo: usuario@dominio.com" />
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('correo_per')?.hasError('required') && formTestamento.get('correo_per')?.touched">Este
+                                        campo es <strong>requerido</strong></small>
+                                    <small class="colorsm"
+                                        *ngIf="formTestamento.get('correo_per')?.hasError('email')">Por favor
+                                        <strong>ingresa un correo válido.</strong></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="titulo">Documentación requerida:</h5>
+                        </div>
+                        <br>
+                        <ng-container *ngFor="let row of documentoChunks">
+                            <div class="row g-4 mb-4"> <!-- <- Aquí -->
+                                <ng-container *ngFor="let doc of row">
+                                    <div class="col-md-6">
+                                        <div class="card h-100 p-3">
+                                            <label class="form-label fw-bold">{{ doc.label }}:</label>
+
+                                            <ng-container *ngIf="documentos[doc.key]; else noDocumento">
+                                                <a [href]="'http://localhost:3001/'+documentos[doc.key]" target="_blank"
+                                                    class="d-flex justify-content-center align-items-center mt-3 text-decoration-none">
+                                                    <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
+                                                </a>
+                                            </ng-container>
+
+                                            <ng-template #noDocumento>
+                                                <p class="d-flex justify-content-center align-items-center mt-3">No
+                                                    disponible</p>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                        <br>
+
+                        <div>
+                            <h5 class="titulo">
+                                En caso de ser adulto mayor o que su estado de salud así lo requiera, o si es sordo o
+                                invidente, o si no
+                                sabe o no puede firmar o leer o si tiene alguna dificultad con lo antes mencionado:
+                            </h5>
+                            <a class="btn btn-secondary mt-2" (click)="toggleExtraInfo()">
+                                {{ mostrarExtraInfo ? 'Ocultar' : 'Mostrar más' }}
+                            </a>
+                        </div>
+                        <div *ngIf="mostrarExtraInfo">
+                            <br>
+                            <div>
+                                <h5 class="titulo2">A. Presentar dos Certificados médicos:</h5>
+                            </div>
+                            <br>
+                            <ng-container *ngFor="let row of documentoChunks2">
+                                <div class="row g-4 mb-4"> <!-- <- Aquí -->
+                                    <ng-container *ngFor="let doc of row">
+                                        <div class="col-md-6">
+                                            <div class="card h-100 p-3">
+                                                <label class="form-label fw-bold">{{ doc.label }}:</label>
+
+                                                <ng-container *ngIf="documentos[doc.key]; else noDocumento">
+                                                    <a [href]="'http://localhost:3001/'+documentos[doc.key]"
+                                                        target="_blank"
+                                                        class="d-flex justify-content-center align-items-center mt-3 text-decoration-none">
+                                                        <img src="assets/images/pdf.png" alt="PDF" width="50"
+                                                            height="60" />
+                                                    </a>
+                                                </ng-container>
+
+                                                <ng-template #noDocumento>
+                                                    <p class="d-flex justify-content-center align-items-center mt-3">No
+                                                        disponible</p>
+                                                </ng-template>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                            <br>
+                            <div>
+                                <h5 class="titulo2">B. Presentar tres testigos que no sean familiares del testador o
+                                    testadora, y
+                                    proporcionar de cada testigo lo siguiente:</h5>
+                            </div>
+                            <br>
+                            <div class="row g-4 mt-4">
+                                <ng-container *ngFor="let testigo of docs; let i = index">
+                                    <div>
+                                        <h5 class="titulo3">Testigo {{ i + 1 }}</h5>
+                                    </div>
+                                    <br>
+                                    <ng-container *ngFor="let doc of documentoTesFields">
+                                        <div class="col-md-4">
+                                            <div class="card h-100 p-3">
+                                                <label class="form-label fw-bold">{{ doc.label }}:</label>
+
+                                                <ng-container *ngIf="testigo[doc.key]; else noDoc">
+                                                    <a [href]="'http://localhost:3001/' + testigo[doc.key]"
+                                                        target="_blank"
+                                                        class="d-flex justify-content-center align-items-center mt-2 text-decoration-none">
+                                                        <img src="assets/images/pdf.png" alt="PDF" width="50"
+                                                            height="60" />
+                                                    </a>
+                                                </ng-container>
+
+                                                <ng-template #noDoc>
+                                                    <p class="text-muted text-center mt-2">No disponible</p>
+                                                </ng-template>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="text-center mt-4">
+                            <a routerLink="/solicitudes" class="btn btn-secondary">
+                                Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

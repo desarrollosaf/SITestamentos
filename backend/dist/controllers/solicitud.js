@@ -94,7 +94,7 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             crearTestigo(3),
         ]);
     }
-    return res.status(201).json({
+    return res.status(200).json({
         message: 'Documento guardado exitosamente'
     });
 });
@@ -132,7 +132,7 @@ const getsolicitudes = (req, res) => __awaiter(void 0, void 0, void 0, function*
             return res.json(solicitudes);
         }
         else {
-            return res.status(404).json({ msg: `No existe el id ${id}` });
+            return res.status(404).json({ msg: `Sin datos` });
         }
     }
     catch (error) {
