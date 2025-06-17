@@ -44,6 +44,7 @@ class Server {
     midlewares(){
         this.app.use(express.json())
         this.app.use(cors())
+         this.app.use('/storage', express.static(path.join(process.cwd(), 'storage')));
 
     }
 
