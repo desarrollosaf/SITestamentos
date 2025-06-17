@@ -46,7 +46,7 @@ export class RegistroComponent {
   };
 
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder, private router: Router){
       this.formTestamento = this.fb.group({
       f_rfc:['', Validators.required],
       f_curp:['',[
@@ -111,7 +111,6 @@ export class RegistroComponent {
     this._registroService.getLocalidad(cp).subscribe({
       next: (response: any) => {
         this.localidades = response.data;
- 
         this.formTestamento.patchValue({
         colonia_id: null,
         estado_id: this.localidades[0].municipio_dp_municipio.estado_dp_estado.estadoid,
@@ -144,7 +143,8 @@ export class RegistroComponent {
     }  
   }
   eliminarArchivo(campo: string, inputRef: HTMLInputElement): void {
-    delete this.documentos[campo];  
+    delete this.documentos[campo]; 
+    this.documentos[campo] = null;  
     inputRef.value = '';
   }
 
@@ -300,29 +300,36 @@ export class RegistroComponent {
     formData.append('numero_tel', String(this.formTestamento.value.numero_tel));
     formData.append('numero_cel', String(this.formTestamento.value.numero_cel));
     formData.append('correo_per', String(this.formTestamento.value.correo_per));
-     formData.append('testigos', String(this.testigos));
+    formData.append('testigos', String(this.testigos));
 
-    // formData.forEach((valor, clave) => {
-    //   console.log(clave, valor);
-    // });
+    formData.forEach((valor, clave) => {
+      console.log(clave, valor);
+    });
     const curpUsr = this.formTestamento.value.f_curp;
     this._registroService.saveRegistro(formData,curpUsr).subscribe({
       next: (response: any) => {
-        console.log('oki');
+        Swal.fire({
+          position: "center", 
+          icon: "success",
+          title: "Tu registro ha sido enviado.",
+          showConfirmButton: false,
+          timer: 3000
+        });
+        window.location.reload();
       },
       error: (e: HttpErrorResponse) => {
         if (e.error && e.error.msg) {
           console.error('Error del servidor:', e.error.msg);
         } else {
            console.error('Error desconocido:', e);
-          //     Swal.fire({
-          //   position: "center",
-          //   icon: "error",
-          //   title: "¡Atención!",
-          //   text: `Error al guardar, consulte al administrador del sistema.`,
-          //   showConfirmButton: false,
-          //   timer: 2000
-          // });
+              Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "¡Atención!",
+            text: `Error al guardar, consulte al administrador del sistema.`,
+            showConfirmButton: false,
+            timer: 2000
+          });
         }
       },
     })

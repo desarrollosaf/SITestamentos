@@ -1,68 +1,80 @@
-import { Component, ViewChild } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Component, inject, ViewChild } from '@angular/core';
+import { RouterLink, RouterModule } from '@angular/router';
 import { ColumnMode, DatatableComponent, NgxDatatableModule } from '@siemens/ngx-datatable';
-
+import { SolicitudesService } from '../../../service/solicitudes.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { NgIconsModule } from '@ng-icons/core';
+import { AfterViewInit } from '@angular/core';
+declare var bootstrap: any;
 @Component({
   selector: 'app-solicitudes',
   imports: [
-        RouterLink,
-        NgxDatatableModule
+     NgxDatatableModule, CommonModule,RouterModule,NgIconsModule
   ],
   templateUrl: './solicitudes.component.html',
   styleUrl: './solicitudes.component.scss'
 })
 
-
-export class SolicitudesComponent {
-
-  rows = [];
-  temp = [];
-  loadingIndicator = true;
-  reorderable = true;
-  ColumnMode = ColumnMode;
-
-  @ViewChild('table') table: DatatableComponent
-
-  constructor() {
-    this.fetch((data: never[]) => {
-      //cache our list
-      this.temp = [...data];
-
-      // push our initial complete list
-      this.rows = data;
-
-      setTimeout(() => {
-        this.loadingIndicator = false;
-      }, 1500);
+export class SolicitudesComponent implements AfterViewInit {
+  ngAfterViewInit() {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipTriggerList.forEach((tooltipTriggerEl) => {
+      new bootstrap.Tooltip(tooltipTriggerEl);
     });
   }
 
+  originalData: any[] = []; 
+  temp: any[] = [];   
+  rows: any[] = [];
+  page: number = 0;
+  pageSize: number = 10;
+  filteredCount: number = 0;
+  loading: boolean = true;
+  rutaActual: string = '';
+  titulo: string = '';
+  tipoEstatus: number = 0;
+  public _solicitudService = inject(SolicitudesService);
+  @ViewChild('table') table: DatatableComponent;
 
-  fetch(cb: any) {
-    const req = new XMLHttpRequest();
-    req.open('GET', `data/100k.json`);
+  constructor() {}
 
-    req.onload = () => {
-      cb(JSON.parse(req.response));
-    };
+ngOnInit(): void {
+  this._solicitudService.getsolicitudes().subscribe({
+      next: (response: any) => {
+        console.log(response);
+        //  console.log(response.user.datos_user);
+        this.originalData = [...response];
+        this.temp = [...this.originalData];
+        this.filteredCount = this.temp.length;
+        this.setPage({ offset: 0 });
+        this.loading = false;
+        
+      },
+      error: (e: HttpErrorResponse) => {
+        const msg = e.error?.msg || 'Error desconocido';
+        console.error('Error del servidor:', msg);
+      }
+    });
 
-    req.send();
+}
+  setPage(pageInfo: any) {
+    this.page = pageInfo.offset;
+    const start = this.page * this.pageSize;
+    const end = start + this.pageSize;
+    this.rows = this.temp.slice(start, end); 
   }
 
+  updateFilter(event: any) {
+    const val = (event.target?.value || '').toLowerCase();
+    this.temp = this.originalData.filter((row: any) => {
+      return Object.values(row).some((field) => {
+        return field && field.toString().toLowerCase().includes(val);
+      });
+    });
 
-  updateFilter(event: KeyboardEvent) {
-    const val = (event.target as HTMLInputElement).value.toLocaleLowerCase();
-    
-    // filter our data
-    const temp = this.temp.filter(function(d: any) {
-      return d.name.toLocaleLowerCase().indexOf(val) !== -1 || !val;
-    })
-
-    // update the rows
-    this.rows = temp;
-
-    // whenever the filter changes, always go back to the first page
-    this.table.offset = 0;
+    this.filteredCount = this.temp.length;
+    this.setPage({ offset: 0 }); 
   }
 
 }
