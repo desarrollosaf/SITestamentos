@@ -15,13 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
-const user_1 = __importDefault(require("../routes/saf/user"));
 const estados_1 = __importDefault(require("../routes/fun/estados"));
 const datosp_1 = __importDefault(require("../routes/fun/datosp"));
-const user_2 = __importDefault(require("../routes/user"));
+const user_1 = __importDefault(require("../routes/user"));
 const solicitudes_1 = __importDefault(require("../routes/solicitudes"));
 const citas_1 = __importDefault(require("../routes/citas"));
-const user_3 = __importDefault(require("../models/user"));
+const users_1 = __importDefault(require("../models/saf/users"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -37,10 +36,9 @@ class Server {
         });
     }
     router() {
-        this.app.use(user_1.default);
         this.app.use(estados_1.default);
         this.app.use(datosp_1.default);
-        this.app.use(user_2.default);
+        this.app.use(user_1.default);
         this.app.use(solicitudes_1.default);
         this.app.use(citas_1.default);
     }
@@ -52,7 +50,7 @@ class Server {
     DBconnetc() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield user_3.default.sync();
+                yield users_1.default.sync();
                 console.log("Conexion de DB exitoso");
             }
             catch (error) {
