@@ -10,40 +10,37 @@ module.exports = {
         allowNull: false,
       },
       userId: {
-        type: Sequelize.UUID,
-        references: {
-          model: 'users',
-          key: 'id'
-        },
-        allowNull: false,
-        onDelete: 'CASCADE', 
-        onUpdate: 'CASCADE'  
+       type: Sequelize.STRING 
       },
       lugar_nacimiento: {
         type: Sequelize.STRING 
       },
-      acta_nacimiento: {
-        type: Sequelize.STRING 
-      },
-      acta_matrimonio: {
-        type: Sequelize.STRING,
+      es_primer_testamento: {
+        type: Sequelize.BOOLEAN,
         allowNull: true, 
       },
-      identificacion: {
-        type: Sequelize.STRING 
-      },
-      curp: {
-        type: Sequelize.STRING 
-      },
-      comprobante_domicilio: {
-        type: Sequelize.STRING 
-      },
-      certificado_privado: {
-        type: Sequelize.STRING,
+      sabe_leer: {
+        type: Sequelize.BOOLEAN,
         allowNull: true, 
       },
-      certificado_publico: {
-        type: Sequelize.STRING,
+      sabe_escribir: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true, 
+      },
+      puede_hablar: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true, 
+      },
+      puede_ver: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true, 
+      },
+      puede_oir: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true, 
+      },
+      dificultad_comunicacion: {
+        type: Sequelize.BOOLEAN,
         allowNull: true, 
       },
       fecha_envio: {
@@ -67,3 +64,4 @@ module.exports = {
     await queryInterface.dropTable('solicituds');
   }
 };
+
