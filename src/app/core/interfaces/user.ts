@@ -11,7 +11,7 @@ export interface Role {
   
   export interface User {
     id?: number;
-    email: string;
+    rfc: string;
     password: string;
     rol_users?: UserRole;
   }
