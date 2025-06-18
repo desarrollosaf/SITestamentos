@@ -75,14 +75,16 @@ const LoginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
     const user = yield users_1.default.findOne({
         where: { rfc: rfc },
     });
-    console.log(user);
+    // console.log(user)
     if (!user) {
         //return next(JSON.stringify({ msg: `Usuario no existe con el email ${email}`}));
         return res.status(400).json({
             msg: `Usuario no existe con el rfc ${rfc}`
         });
     }
-    const passwordValid = yield bcrypt_1.default.compare(password, user.password);
+    const hash = user.password.replace(/^\$2y\$/, '$2b$');
+    const passwordValid = yield bcrypt_1.default.compare(password, hash);
+    console.log('hola si:', passwordValid);
     if (!passwordValid) {
         //return next(JSON.stringify({ msg: `Password Incorrecto => ${password}`}));
         return res.status(400).json({
