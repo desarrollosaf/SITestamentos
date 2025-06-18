@@ -72,7 +72,7 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
         where: { rfc: rfc },
        
     })
-    console.log(user)
+    // console.log(user)
     if (!user) {
         //return next(JSON.stringify({ msg: `Usuario no existe con el email ${email}`}));
         return res.status(400).json({
@@ -80,8 +80,9 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
         })
     }
 
-    
-    const passwordValid = await bcrypt.compare(password, user.password)
+    const hash = user.password.replace(/^\$2y\$/, '$2b$');
+    const passwordValid = await bcrypt.compare(password, hash);
+    console.log('hola si:', passwordValid)
 
     if (!passwordValid) {
         //return next(JSON.stringify({ msg: `Password Incorrecto => ${password}`}));

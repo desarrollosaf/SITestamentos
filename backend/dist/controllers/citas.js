@@ -12,15 +12,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getservidor = void 0;
+exports.saveregistro = exports.validafecha = exports.getservidor = void 0;
 const fun_1 = __importDefault(require("../database/fun")); // La conexión
 const dp_fum_datos_generales_1 = require("../models/fun/dp_fum_datos_generales");
 const dp_datospersonales_1 = require("../models/fun/dp_datospersonales");
+const citas_1 = __importDefault(require("../models/citas"));
 dp_datospersonales_1.dp_datospersonales.initModel(fun_1.default);
 dp_fum_datos_generales_1.dp_fum_datos_generales.initModel(fun_1.default);
 const getservidor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    console.log(id);
     try {
         let registro = yield dp_datospersonales_1.dp_datospersonales.findOne({
             where: { f_curp: id }
@@ -44,3 +44,39 @@ const getservidor = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.getservidor = getservidor;
+const validafecha = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    try {
+        const totalCitas = yield citas_1.default.count({
+            where: { fecha: id }
+        });
+        if (totalCitas >= 20) {
+            return res.status(400).json({
+                error: 'Ya no se pueden agendar más citas para esta fecha. Límite alcanzado (20).'
+            });
+        }
+        return res.json({
+            msg: `si tenemos disponibilidad`,
+            estatus: '200'
+        });
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
+    }
+});
+exports.validafecha = validafecha;
+const saveregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { data } = req.body;
+    try {
+        //  await Cita.create({
+        //       curp: data.curp,
+        //       fecha: data.fecha,
+        //   }); 
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
+    }
+});
+exports.saveregistro = saveregistro;
