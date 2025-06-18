@@ -68,11 +68,12 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
     const { rfc, password } = req.body;
     let passwordValid = false;
     let user: any = null;
-    let bandera = false;
+    let bandera = true;
+
     if (rfc.startsWith('NOT25')) {
-        console.log('Hola, sí entré');
-        bandera = true;
-         user = await Usertest.findOne({ 
+
+        bandera = false;
+        user = await Usertest.findOne({ 
             where: { name: rfc },
         })
         if (!user) {
@@ -84,11 +85,11 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
        
 
     }else{
-         user = await User.findOne({ 
-        where: { rfc: rfc },
+
+        user = await User.findOne({ 
+            where: { rfc: rfc },
         })
         if (!user) {
-            //return next(JSON.stringify({ msg: `Usuario no existe con el email ${email}`}));
             return res.status(400).json({
                 msg: `Usuario no existe con el rfc ${rfc}`
             })
@@ -96,13 +97,12 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
 
         const hash = user.password.replace(/^\$2y\$/, '$2b$');
         passwordValid = await bcrypt.compare(password, hash);
-        console.log('hola si:', passwordValid)
+
     }
 
 
 
     if (!passwordValid) {
-        //return next(JSON.stringify({ msg: `Password Incorrecto => ${password}`}));
         return res.status(400).json({
             msg: `Password Incorrecto => ${password}`
         })

@@ -48,8 +48,10 @@ export class LoginComponent implements OnInit {
 
     this._userService.login(user).subscribe({
       next: (response: any) => {
+        
         const token = response.token;
         const userData = response.user;
+        const bandera =  response.bandera
 
         localStorage.setItem('myToken', token);
         localStorage.setItem('isLoggedin', 'true');
@@ -58,7 +60,12 @@ export class LoginComponent implements OnInit {
         this.userRole$.subscribe(role => {
         });
         
-        this.router.navigate([this.returnUrl]);
+        if(bandera){
+          this.router.navigate(['/registro']);
+        }else{
+          this.router.navigate([this.returnUrl]);
+        }
+        
       },
       error: (e: HttpErrorResponse) => {
         if (e.error && e.error.msg) {

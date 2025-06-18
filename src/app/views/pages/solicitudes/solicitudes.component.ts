@@ -42,6 +42,7 @@ export class SolicitudesComponent implements AfterViewInit {
 ngOnInit(): void {
   this._solicitudService.getsolicitudes().subscribe({
       next: (response: any) => {
+        console.log(response)
         this.originalData = [...response];
         this.temp = [...this.originalData];
         this.filteredCount = this.temp.length;
