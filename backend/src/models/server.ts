@@ -1,13 +1,12 @@
 import express, {Application} from 'express'
 import cors from 'cors'
 import path from 'path';
-import routesUsers from '../routes/saf/user'
 import routesEstados from '../routes/fun/estados'
 import routesDatosp from '../routes/fun/datosp'
 import routesUser from '../routes/user'
 import routesSolicitud from '../routes/solicitudes'
 import routesCitas from '../routes/citas'
-import user from '../models/user'
+import UsersSafs from '../models/saf/users'
 
 class Server {
 
@@ -32,8 +31,6 @@ class Server {
     }
 
     router(){
-
-        this.app.use(routesUsers);
         this.app.use(routesEstados);
         this.app.use(routesDatosp);
         this.app.use(routesUser);
@@ -46,14 +43,14 @@ class Server {
     midlewares(){
         this.app.use(express.json())
         this.app.use(cors())
-         this.app.use('/storage', express.static(path.join(process.cwd(), 'storage')));
+        this.app.use('/storage', express.static(path.join(process.cwd(), 'storage')));
 
     }
 
     async DBconnetc(){
         try {
 
-            await user.sync(); 
+            await UsersSafs.sync(); 
             console.log("Conexion de DB exitoso");
 
         } catch (error) {
