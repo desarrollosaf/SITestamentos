@@ -1,11 +1,12 @@
 import { Request, Response, NextFunction } from 'express'
 import bcrypt from 'bcrypt'
-import  User  from '../models/user'
+import  User  from '../models/saf/users'
 import  RolUsers  from '../models/role_users'
 import  Roles  from '../models/role'
 import { Op } from 'sequelize'  
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import  sequelizeSAF  from '../database/connection'
 
 
 export const ReadUser = async (req: Request, res: Response): Promise<any> => {
@@ -63,30 +64,19 @@ export const CreateUser = async (req: Request, res: Response,  next: NextFunctio
 }
 
 export const LoginUser = async (req: Request, res: Response, next: NextFunction):  Promise<any> => {
-    const { email, password } = req.body;
+    const { rfc, password } = req.body;
 
     console.log(req.body);
 
     const user: any = await User.findOne({ 
-        where: { email: email },
-        include: [
-        {
-            model: RolUsers,
-            as: 'rol_users',
-            include: [
-            {
-                model: Roles,
-                as: 'role'
-            }
-            ]
-        }
-        ]
+        where: { rfc: rfc },
+       
     })
     console.log(user)
     if (!user) {
         //return next(JSON.stringify({ msg: `Usuario no existe con el email ${email}`}));
         return res.status(400).json({
-            msg: `Usuario no existe con el email ${email}`
+            msg: `Usuario no existe con el rfc ${rfc}`
         })
     }
 
@@ -101,7 +91,7 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
     }
 
     const token = jwt.sign({
-        email: email
+        rfc: rfc
     }, process.env.SECRET_KEY || 'TSE-Poder-legislativo',
     { expiresIn: 10000 }
     );

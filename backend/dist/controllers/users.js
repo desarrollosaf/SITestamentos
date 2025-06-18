@@ -14,12 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoginUser = exports.CreateUser = exports.ReadUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const user_1 = __importDefault(require("../models/user"));
-const role_users_1 = __importDefault(require("../models/role_users"));
-const role_1 = __importDefault(require("../models/role"));
+const users_1 = __importDefault(require("../models/saf/users"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const ReadUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const listUser = yield user_1.default.findAll();
+    const listUser = yield users_1.default.findAll();
     return res.json({
         msg: `List de categoría encontrada exitosamenteeeee`,
         data: listUser
@@ -72,28 +70,16 @@ const CreateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 });
 exports.CreateUser = CreateUser;
 const LoginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email, password } = req.body;
+    const { rfc, password } = req.body;
     console.log(req.body);
-    const user = yield user_1.default.findOne({
-        where: { email: email },
-        include: [
-            {
-                model: role_users_1.default,
-                as: 'rol_users',
-                include: [
-                    {
-                        model: role_1.default,
-                        as: 'role'
-                    }
-                ]
-            }
-        ]
+    const user = yield users_1.default.findOne({
+        where: { rfc: rfc },
     });
     console.log(user);
     if (!user) {
         //return next(JSON.stringify({ msg: `Usuario no existe con el email ${email}`}));
         return res.status(400).json({
-            msg: `Usuario no existe con el email ${email}`
+            msg: `Usuario no existe con el rfc ${rfc}`
         });
     }
     const passwordValid = yield bcrypt_1.default.compare(password, user.password);
@@ -104,7 +90,7 @@ const LoginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
         });
     }
     const token = jsonwebtoken_1.default.sign({
-        email: email
+        rfc: rfc
     }, process.env.SECRET_KEY || 'TSE-Poder-legislativo', { expiresIn: 10000 });
     return res.json({ token, user });
 });
