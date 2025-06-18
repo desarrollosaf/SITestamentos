@@ -243,6 +243,222 @@
                 </div>
               </div>
             </div>
+
+            <div>
+              <h5 class="titulo3">Datos del padre:</h5>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nombre(s):*</label>
+                  <input formControlName="f_nombre_padre" type="text" class="form-control"
+                    placeholder="Ejemplo: Juan Carlos" />
+
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nombre completo:*</label>
+                  <input formControlName="f_primer_apellido_padre" type="text" class="form-control"
+                    placeholder="Ejemplo: Jimenez Gonzalez" />
+
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nombre completo:*</label>
+                  <input formControlName="f_segundo_apellido_padre" type="text" class="form-control"
+                    placeholder="Ejemplo: Gonzalez" />
+
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Indicar si vive:*</label>
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>--Selecciona una opción--</option>
+                    <option value="1">Vive</option>
+                    <option value="0">Finado</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nacionalidad:*</label>
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>--Selecciona una opción--</option>
+                    <option value="1">Mexicana</option>
+                    <option value="0">Otra</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Especifique:*</label>
+                  <input formControlName="especifique_nac_padre" type="text" class="form-control"
+                    placeholder="Ejemplo: Peruana" />
+                </div>
+              </div>
+            </div>
+
+
+            <div>
+              <h5 class="titulo3">Datos de la madre:</h5>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nombre(s):*</label>
+                  <input formControlName="f_nombre_madre" type="text" class="form-control"
+                    placeholder="Ejemplo: Sofia" />
+
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Primer apellido:*</label>
+                  <input formControlName="f_primer_apellido_madre" type="text" class="form-control"
+                    placeholder="Ejemplo: Jimenez Gonzalez" />
+
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Segundo apellido:*</label>
+                  <input formControlName="f_segundo_apellido_pmadre" type="text" class="form-control"
+                    placeholder="Ejemplo: Gonzalez" />
+
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Indicar si vive:*</label>
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>--Selecciona una opción--</option>
+                    <option value="1">Vive</option>
+                    <option value="0">Finado</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nacionalidad:*</label>
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>--Selecciona una opción--</option>
+                    <option value="1">Mexicana</option>
+                    <option value="0">Otra</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Especifique:*</label>
+                  <input formControlName="especifique_nac_madre" type="text" class="form-control"
+                    placeholder="Ejemplo: Peruana" />
+
+                </div>
+              </div>
+            </div>
+            <div>
+              <h5 class="titulo">DISPOSICIONES TESTAMENTARIAS</h5>
+            </div>
+            <br>
+            <div class="row">
+
+              <div class="col-sm-12">
+                <div class="mb-3 d-flex flex-column h-100">
+                  <label class="form-label1 negri">PRIMERO.- Heredero (s):*</label>
+                  <p class="form-text" style="margin-top: 0.5rem; margin-bottom: 1rem; text-align: justify;">
+                    Es quien sin saberlo es beneficiaria o beneficiario a título universal de sus bienes, recibe de
+                    usted tanto su
+                    activo como su pasivo y, por tanto, debe responder también de todas sus deudas, salvo que renuncie a
+                    serlo.
+                    Puede usted designar a uno o varios herederos, por partes iguales o en los porcentajes que
+                    libremente usted
+                    determine:<br><strong>Designo como Herederos a:</strong>
+                  </p>
+                  <div class="position-relative d-flex flex-column flex-grow-1"
+                    style="min-height: 10px; padding-bottom: 1rem;">
+                    <input class="form-control" type="file" id="acta_nacimiento" accept="application/pdf"
+                      #inputacta_nacimiento (change)="onFileSelect($event, 'acta_nacimiento')" />
+                    <div *ngIf="documentos['acta_nacimiento']" style="position: absolute; bottom: 0; left: 0;">
+                      <button type="button" class="boton-danger-sm"
+                        (click)="eliminarArchivo('acta_nacimiento', inputacta_nacimiento)">
+                        <i class="feather icon-trash btn-icon-prepend"></i>
+                        Eliminar archivo
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="mb-3 d-flex flex-column h-100">
+                  <label class="form-label1 negri">Segundo.- ALBACEA:</label>
+                  <p class="form-text" style="margin-top: 0.5rem; margin-bottom: 1rem; text-align: justify;">
+                    Es la persona (de confianza) designada por el testador encargada de ejecutar y vigilar la correcta
+                    ejecución de un testamento.
+                    Pueden ser nombrados uno o más albaceas, mancomunados o solidarios. Entre sus funciones ordinarias
+                    se
+                    encuentran las siguientes: satisfacer legados, velar por los bienes de la herencia y ejecutar la
+                    misma,
+                    es un cargo voluntario, renunciable, personalísimo, normalmente gratuito y temporal.
+                  </p>
+
+                  <div class="col-sm-8">
+                    <div class="row">
+                      <!-- Teléfono -->
+                      <div class="col-6">
+                        <div class="mb-3">
+                          <label class="form-label negri">Nombre completo:*</label>
+                          <input type="string" class="form-control" placeholder="Ejemplo: Jose Perez" />
+
+
+                        </div>
+                      </div>
+
+                      <!-- Celular -->
+                      <div class="col-6">
+                        <div class="mb-3">
+                          <label class="form-label negri">A su falta :*</label>
+                          <input type="string" class="form-control" placeholder="Ejemplo: Nombre" />
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div>
               <h5 class="titulo">Documentación requerida:</h5>
             </div>
@@ -333,8 +549,7 @@
                     <input class="form-control" type="file" id="curp" accept="application/pdf" #inputcurp
                       (change)="onFileSelect($event, 'curp')" />
                     <div *ngIf="documentos['curp']" style="position: absolute; bottom: 0; left: 0;">
-                      <button type="button" class="boton-danger-sm"
-                        (click)="eliminarArchivo('curp', inputcurp)">
+                      <button type="button" class="boton-danger-sm" (click)="eliminarArchivo('curp', inputcurp)">
                         <i class="feather icon-trash btn-icon-prepend"></i>
                         Eliminar archivo
                       </button>
