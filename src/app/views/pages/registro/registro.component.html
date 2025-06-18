@@ -393,18 +393,16 @@
                     libremente usted
                     determine:<br><strong>Designo como Herederos a:</strong>
                   </p>
-                  <div class="position-relative d-flex flex-column flex-grow-1"
-                    style="min-height: 10px; padding-bottom: 1rem;">
-                    <input class="form-control" type="file" id="acta_nacimiento" accept="application/pdf"
-                      #inputacta_nacimiento (change)="onFileSelect($event, 'acta_nacimiento')" />
-                    <div *ngIf="documentos['acta_nacimiento']" style="position: absolute; bottom: 0; left: 0;">
-                      <button type="button" class="boton-danger-sm"
-                        (click)="eliminarArchivo('acta_nacimiento', inputacta_nacimiento)">
-                        <i class="feather icon-trash btn-icon-prepend"></i>
-                        Eliminar archivo
-                      </button>
-                    </div>
-                  </div>
+                      <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Dentro de sus herederos considera designar a un "menor de edad":*</label>
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>--Selecciona una opción--</option>
+                    <option value="1">Si</option>
+                    <option value="0">No</option>
+                  </select>
+                </div>
+              </div>
                 </div>
               </div>
 
