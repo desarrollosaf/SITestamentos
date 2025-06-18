@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoginUser = exports.CreateUser = exports.ReadUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const users_1 = __importDefault(require("../models/saf/users"));
+const user_1 = __importDefault(require("../models/user"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const ReadUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const listUser = yield users_1.default.findAll();
@@ -71,20 +72,36 @@ const CreateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 exports.CreateUser = CreateUser;
 const LoginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { rfc, password } = req.body;
-    console.log(req.body);
-    const user = yield users_1.default.findOne({
-        where: { rfc: rfc },
-    });
-    // console.log(user)
-    if (!user) {
-        //return next(JSON.stringify({ msg: `Usuario no existe con el email ${email}`}));
-        return res.status(400).json({
-            msg: `Usuario no existe con el rfc ${rfc}`
+    let passwordValid = false;
+    let user = null;
+    let bandera = false;
+    if (rfc.startsWith('NOT25')) {
+        console.log('Hola, sí entré');
+        bandera = true;
+        user = yield user_1.default.findOne({
+            where: { name: rfc },
         });
+        if (!user) {
+            return res.status(400).json({
+                msg: `Usuario no existe con el rfc ${rfc}`
+            });
+        }
+        passwordValid = yield bcrypt_1.default.compare(password, user.password);
     }
-    const hash = user.password.replace(/^\$2y\$/, '$2b$');
-    const passwordValid = yield bcrypt_1.default.compare(password, hash);
-    console.log('hola si:', passwordValid);
+    else {
+        user = yield users_1.default.findOne({
+            where: { rfc: rfc },
+        });
+        if (!user) {
+            //return next(JSON.stringify({ msg: `Usuario no existe con el email ${email}`}));
+            return res.status(400).json({
+                msg: `Usuario no existe con el rfc ${rfc}`
+            });
+        }
+        const hash = user.password.replace(/^\$2y\$/, '$2b$');
+        passwordValid = yield bcrypt_1.default.compare(password, hash);
+        console.log('hola si:', passwordValid);
+    }
     if (!passwordValid) {
         //return next(JSON.stringify({ msg: `Password Incorrecto => ${password}`}));
         return res.status(400).json({
@@ -94,6 +111,6 @@ const LoginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
     const token = jsonwebtoken_1.default.sign({
         rfc: rfc
     }, process.env.SECRET_KEY || 'TSE-Poder-legislativo', { expiresIn: 10000 });
-    return res.json({ token, user });
+    return res.json({ token, user, bandera });
 });
 exports.LoginUser = LoginUser;

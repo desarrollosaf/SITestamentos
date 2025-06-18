@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import bcrypt from 'bcrypt'
 import  User  from '../models/saf/users'
+import  Usertest  from '../models/user'
 import  RolUsers  from '../models/role_users'
 import  Roles  from '../models/role'
 import { Op } from 'sequelize'  
@@ -65,24 +66,40 @@ export const CreateUser = async (req: Request, res: Response,  next: NextFunctio
 
 export const LoginUser = async (req: Request, res: Response, next: NextFunction):  Promise<any> => {
     const { rfc, password } = req.body;
-
-    console.log(req.body);
-
-    const user: any = await User.findOne({ 
-        where: { rfc: rfc },
-       
-    })
-    // console.log(user)
-    if (!user) {
-        //return next(JSON.stringify({ msg: `Usuario no existe con el email ${email}`}));
-        return res.status(400).json({
-            msg: `Usuario no existe con el rfc ${rfc}`
+    let passwordValid = false;
+    let user: any = null;
+    let bandera = false;
+    if (rfc.startsWith('NOT25')) {
+        console.log('Hola, sí entré');
+        bandera = true;
+         user = await Usertest.findOne({ 
+            where: { name: rfc },
         })
+        if (!user) {
+            return res.status(400).json({
+                msg: `Usuario no existe con el rfc ${rfc}`
+            })
+        }
+        passwordValid = await bcrypt.compare(password, user.password);
+       
+
+    }else{
+         user = await User.findOne({ 
+        where: { rfc: rfc },
+        })
+        if (!user) {
+            //return next(JSON.stringify({ msg: `Usuario no existe con el email ${email}`}));
+            return res.status(400).json({
+                msg: `Usuario no existe con el rfc ${rfc}`
+            })
+        }
+
+        const hash = user.password.replace(/^\$2y\$/, '$2b$');
+        passwordValid = await bcrypt.compare(password, hash);
+        console.log('hola si:', passwordValid)
     }
 
-    const hash = user.password.replace(/^\$2y\$/, '$2b$');
-    const passwordValid = await bcrypt.compare(password, hash);
-    console.log('hola si:', passwordValid)
+
 
     if (!passwordValid) {
         //return next(JSON.stringify({ msg: `Password Incorrecto => ${password}`}));
@@ -97,7 +114,7 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
     { expiresIn: 10000 }
     );
     
-    return res.json({ token,user })
+    return res.json({ token,user,bandera })
 }
 
 
