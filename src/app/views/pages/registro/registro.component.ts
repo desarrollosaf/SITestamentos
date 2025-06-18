@@ -44,7 +44,7 @@ export class RegistroComponent {
     t3_curp: null,
     t3_comprobante_domicilio: null,
   };
-
+ 
 
   constructor(private fb: FormBuilder, private router: Router){
       this.formTestamento = this.fb.group({
@@ -70,7 +70,17 @@ export class RegistroComponent {
       numero_cel:['',[Validators.required, Validators.pattern(/^\d{10}$/)]],
       correo_per:['', [Validators.required, Validators.email]],
       estado_nombre: [''], 
-      municipio_nombre: ['']  
+      municipio_nombre: [''],
+
+
+      f_nombre_padre:[''],
+      f_primer_apellido_padre:[''],
+      f_segundo_apellido_padre:[''],
+      especifique_nac_padre:[''],
+      f_nombre_madre:[''],
+      f_primer_apellido_madre:[''],
+        f_segundo_apellido_pmadre:[''],
+          especifique_nac_madre:[''],
     });
 
   }
