@@ -2,27 +2,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('albaceas', {
+    await queryInterface.createTable('estado_civils', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
         allowNull: false,
       },
-      solicitudId: {
-        type: Sequelize.UUID,
-        references: {
-          model: 'solicituds',
-          key: 'id'
-        },
-        allowNull: false,
-        onDelete: 'CASCADE', 
-        onUpdate: 'CASCADE'
-      },
-      nombre_completo: {
-        type: Sequelize.STRING
-      },
-      tipo: {
+      nombre: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -36,6 +23,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('albaceas');
+    await queryInterface.dropTable('estado_civils');
   }
 };

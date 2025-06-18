@@ -3,11 +3,11 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('herederos', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
+     id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        allowNull: false,
       },
       solicitudId: {
         type: Sequelize.UUID,

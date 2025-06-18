@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('albaceas', {
+    await queryInterface.createTable('testamentos_pasados', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -19,10 +19,16 @@ module.exports = {
         onDelete: 'CASCADE', 
         onUpdate: 'CASCADE'
       },
-      nombre_completo: {
+      fecha_tramite: {
+        type: Sequelize.DATE
+      },
+      notaria: {
         type: Sequelize.STRING
       },
-      tipo: {
+      instrumento_volumen: {
+        type: Sequelize.STRING
+      },
+      path_testamento: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -36,6 +42,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('albaceas');
+    await queryInterface.dropTable('testamentos_pasados');
   }
 };

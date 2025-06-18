@@ -12,7 +12,7 @@ module.exports = {
       userId: {
        type: Sequelize.STRING 
       },
-      lugar_nacimiento: {
+      nacionalidad: {
         type: Sequelize.STRING 
       },
       es_primer_testamento: {
@@ -43,8 +43,25 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         allowNull: true, 
       },
-      fecha_envio: {
-        type: Sequelize.DATE
+      no_pasaporte: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true, 
+      },
+      cedula_profesional: {
+        type: Sequelize.DATE,
+        allowNull: true, 
+      },
+      documento_residencia: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true, 
+      },
+      cedula_profesional: {
+        type: Sequelize.DATE,
+        allowNull: true, 
+      },
+      heredero_menor_edad: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true, 
       },
       createdAt: {
         allowNull: false,

@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('albaceas', {
+    await queryInterface.createTable('tutor_descendientes', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -19,10 +19,16 @@ module.exports = {
         onDelete: 'CASCADE', 
         onUpdate: 'CASCADE'
       },
-      nombre_completo: {
+      nombre: {
         type: Sequelize.STRING
       },
-      tipo: {
+      nombre_tutor_sustituto: {
+        type: Sequelize.STRING
+      },
+      nombre_curador: {
+        type: Sequelize.STRING
+      },
+      nombre_curador_falta: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -36,6 +42,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('albaceas');
+    await queryInterface.dropTable('tutor_descendientes');
   }
 };

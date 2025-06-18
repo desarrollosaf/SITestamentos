@@ -4,10 +4,10 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('hijos', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        allowNull: false,
       },
       solicitudId: {
         type: Sequelize.UUID,
@@ -25,7 +25,7 @@ module.exports = {
           model: 'matrimonios',
           key: 'id'
         },
-        allowNull: false,
+        allowNull: true,
         onDelete: 'CASCADE', 
         onUpdate: 'CASCADE'
       },
