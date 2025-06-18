@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   returnUrl: any;
   loggedin: boolean = false;
-  Uemail: string = '';
+  Urfc: string = '';
   Upassword: string = '';
   userRole$: Observable<string | undefined>;
 
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   onLoggedin(form: NgForm) {
 
     const user: User = {
-      email: form.value.Uemail,
+      rfc: form.value.Urfc,
       password: form.value.Upassword
     };
 
