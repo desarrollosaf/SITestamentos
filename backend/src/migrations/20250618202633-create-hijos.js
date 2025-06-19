@@ -30,13 +30,26 @@ module.exports = {
         onUpdate: 'CASCADE'
       },
       nombre_completo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      edad: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      vive: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       reconocido: {
         type: Sequelize.BOOLEAN
       },
       fuera_de_matrimonio: {
         type: Sequelize.BOOLEAN
+      },
+      nombre_fuera: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

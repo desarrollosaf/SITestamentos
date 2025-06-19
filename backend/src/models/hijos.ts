@@ -7,30 +7,35 @@ import {
   ForeignKey,
 } from 'sequelize';
 import sequelize from '../database/testamentosConnection';
+
 import Solicitud from './solicitud';
 import Matrimonio from './matrimonios';
 
-class Hijos extends Model<
-  InferAttributes<Hijos>,
-  InferCreationAttributes<Hijos>
+class Hijo extends Model<
+  InferAttributes<Hijo>,
+  InferCreationAttributes<Hijo>
 > {
-  declare id: CreationOptional<number>;
-  declare solicitudId: ForeignKey<string>;
-  declare matrimonioId: ForeignKey<string>;
+  declare id: CreationOptional<string>;
+  declare solicitudId: ForeignKey<Solicitud['id']>;
+  declare matrimonioId: ForeignKey<Matrimonio['id']> | null;
+
   declare nombre_completo: string;
+  declare edad: number | null;
+  declare vive: string | null;
   declare reconocido: boolean;
   declare fuera_de_matrimonio: boolean;
+  declare nombre_fuera: string;
+
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
 
-Hijos.init(
+Hijo.init(
   {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      allowNull: false,
     },
     solicitudId: {
       type: DataTypes.UUID,
@@ -38,11 +43,19 @@ Hijos.init(
     },
     matrimonioId: {
       type: DataTypes.UUID,
-      allowNull: false,
+      allowNull: true,
     },
     nombre_completo: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    edad: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    vive: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     reconocido: {
       type: DataTypes.BOOLEAN,
@@ -52,45 +65,31 @@ Hijos.init(
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    createdAt: {
-      type: DataTypes.DATE,
+    nombre_fuera: {
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: DataTypes.NOW,
     },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
   },
   {
     sequelize,
     tableName: 'hijos',
     timestamps: true,
-    indexes: [
-      {
-        name: 'PRIMARY',
-        unique: true,
-        using: 'BTREE',
-        fields: ['id'],
-      },
-    ],
   }
 );
 
 // Relaciones
-Hijos.belongsTo(Solicitud, {
+Hijo.belongsTo(Solicitud, {
   foreignKey: 'solicitudId',
-  as: 'solicitud',
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',
 });
 
-Hijos.belongsTo(Matrimonio, {
+Hijo.belongsTo(Matrimonio, {
   foreignKey: 'matrimonioId',
-  as: 'matrimonio',
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',
 });
 
-export default Hijos;
+export default Hijo;

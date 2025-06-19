@@ -12,6 +12,9 @@ module.exports = {
       userId: {
        type: Sequelize.STRING 
       },
+       nacionalidad: {
+        type: Sequelize.STRING 
+      },
       nacionalidad: {
         type: Sequelize.STRING 
       },
@@ -44,19 +47,15 @@ module.exports = {
         allowNull: true, 
       },
       no_pasaporte: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING,
         allowNull: true, 
       },
       cedula_profesional: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
         allowNull: true, 
       },
       documento_residencia: {
         type: Sequelize.BOOLEAN,
-        allowNull: true, 
-      },
-      cedula_profesional: {
-        type: Sequelize.DATE,
         allowNull: true, 
       },
       heredero_menor_edad: {

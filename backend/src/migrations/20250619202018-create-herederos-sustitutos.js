@@ -2,14 +2,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('albaceas', {
+    await queryInterface.createTable('herederos_sustitutos', {
       id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        primaryKey: true,
         allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
       },
-      solicitudId: {
+       solicitudId: {
         type: Sequelize.UUID,
         references: {
           model: 'solicituds',
@@ -22,8 +22,11 @@ module.exports = {
       nombre_completo: {
         type: Sequelize.STRING
       },
-      a_su_fata: {
+      nombre_completo_asustituir: {
         type: Sequelize.STRING
+      },
+      derecho_acrecer: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -36,6 +39,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('albaceas');
+    await queryInterface.dropTable('herederos_sustitutos');
   }
 };

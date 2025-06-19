@@ -16,7 +16,7 @@ class Albacea extends Model<
   declare id: CreationOptional<string>;
   declare solicitudId: ForeignKey<string>;
   declare nombre_completo: string | null;
-  declare tipo: string | null;
+  declare a_su_fata: string | null;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
@@ -37,7 +37,7 @@ Albacea.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    tipo: {
+    a_su_fata: {
       type: DataTypes.STRING,
       allowNull: true,
     },

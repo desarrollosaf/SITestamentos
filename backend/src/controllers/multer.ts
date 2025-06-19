@@ -2,29 +2,32 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 
-// Define campos base y campos de testigos
+// Campos base individuales (1 archivo por campo)
 const baseFields = [
-  'acta_nacimiento',
+  'constancia_fiscal',
+  'certificado_publico',
   'acta_matrimonio',
+  'certificado_privado',
+  'acta_nacimiento',
+  'ine',
+  // 'comprobante_domicilio',
+  'documento_residencia',
+  // 'curp',
+  // 'identificacion',
+  'copia_testamento',
+].map(name => ({ name, maxCount: 1 }));
+
+// Campos repetidos por testigo (hasta 3 testigos)
+const testigoDocumentFields = [
   'identificacion',
   'curp',
-  'comprobante_domicilio',
-  'certificado_privado',
-  'certificado_publico',
-];
+  'comprobante_domicilio'
+].map(name => ({ name, maxCount: 10 })); // Ajusta maxCount según cuántos testigos permitas
 
-const testigos = ['t1', 't2', 't3'];
-const testigoFields = testigos.flatMap(t =>
-  ['identificacion', 'curp', 'comprobante_domicilio'].map(f => `${t}_${f}`)
-);
+// Combina todos los campos
+const allFields = [...baseFields, ...testigoDocumentFields];
 
-// Junta todos los campos
-const allFields = [...baseFields, ...testigoFields].map(name => ({
-  name,
-  maxCount: 1,
-}));
-
-// Configura Multer
+// Configura almacenamiento de archivos
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const usuarioId = req.params.curp;
@@ -43,5 +46,5 @@ const storage = multer.diskStorage({
   }
 });
 
-// Exporta el middleware
+// Exporta el middleware para usar en tu ruta
 export const upload = multer({ storage }).fields(allFields);

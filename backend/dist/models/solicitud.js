@@ -55,11 +55,11 @@ Solicitud.init({
         allowNull: true,
     },
     no_pasaporte: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
     cedula_profesional: {
-        type: sequelize_1.DataTypes.DATE,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
     documento_residencia: {
