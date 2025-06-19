@@ -74,10 +74,9 @@ const LoginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
     const { rfc, password } = req.body;
     let passwordValid = false;
     let user = null;
-    let bandera = false;
+    let bandera = true;
     if (rfc.startsWith('NOT25')) {
-        console.log('Hola, sí entré');
-        bandera = true;
+        bandera = false;
         user = yield user_1.default.findOne({
             where: { name: rfc },
         });
@@ -93,17 +92,14 @@ const LoginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
             where: { rfc: rfc },
         });
         if (!user) {
-            //return next(JSON.stringify({ msg: `Usuario no existe con el email ${email}`}));
             return res.status(400).json({
                 msg: `Usuario no existe con el rfc ${rfc}`
             });
         }
         const hash = user.password.replace(/^\$2y\$/, '$2b$');
         passwordValid = yield bcrypt_1.default.compare(password, hash);
-        console.log('hola si:', passwordValid);
     }
     if (!passwordValid) {
-        //return next(JSON.stringify({ msg: `Password Incorrecto => ${password}`}));
         return res.status(400).json({
             msg: `Password Incorrecto => ${password}`
         });

@@ -12,7 +12,7 @@ import {
 import sequelizefun from '../../database/fun'; // Conexión específica a 'administracion'
 import { dp_colonias } from '../fun/dp_colonias';
 import { dp_escolaridad } from '../fun/dp_escolaridad';
-import { dp_estado_civil } from '../fun/dp_estado_civil';
+import  dp_estado_civil  from '../fun/dp_estado_civil';
 import { dp_estados } from '../fun/dp_estados';
 import { dp_municipios } from '../fun/dp_municipios';
 import { dp_opciones } from '../fun/dp_opciones';
