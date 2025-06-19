@@ -41,15 +41,15 @@ export class RegistroComponent {
     comprobante_domicilio: null,
     certificado_publico: null,
     certificado_privado: null,
-    t1_identificacion: null,
-    t1_curp: null,
-    t1_comprobante_domicilio: null,
-    t2_identificacion: null,
-    t2_curp: null,
-    t2_comprobante_domicilio: null,
-    t3_identificacion: null,
-    t3_curp: null,
-    t3_comprobante_domicilio: null,
+    // t1_identificacion: null,
+    // t1_curp: null,
+    // t1_comprobante_domicilio: null,
+    // t2_identificacion: null,
+    // t2_curp: null,
+    // t2_comprobante_domicilio: null,
+    // t3_identificacion: null,
+    // t3_curp: null,
+    // t3_comprobante_domicilio: null,
     primer_testamento_doc :null,
     comprobante_residencia: null
   };
@@ -685,16 +685,16 @@ export class RegistroComponent {
   //PARA QUE SE HAGAN REQUERIDOS LOS INPUT DE LOS TESTIGOS EN CASO DE QUE SE CUMPLA LA CONDICION
   documentosExtraRequeridosLlenos(): boolean {
     return this.documentos.certificado_publico !== null &&
-          this.documentos.certificado_privado !== null &&
-          this.documentos.t1_identificacion !== null &&
-          this.documentos.t1_curp !== null &&
-          this.documentos.t1_comprobante_domicilio !== null &&
-          this.documentos.t2_identificacion !== null &&
-          this.documentos.t2_curp !== null &&
-          this.documentos.t2_comprobante_domicilio !== null &&
-          this.documentos.t3_identificacion !== null &&
-          this.documentos.t3_curp !== null &&
-          this.documentos.t3_comprobante_domicilio !== null;
+          this.documentos.certificado_privado !== null;
+          // this.documentos.t1_identificacion !== null &&
+          // this.documentos.t1_curp !== null &&
+          // this.documentos.t1_comprobante_domicilio !== null &&
+          // this.documentos.t2_identificacion !== null &&
+          // this.documentos.t2_curp !== null &&
+          // this.documentos.t2_comprobante_domicilio !== null &&
+          // this.documentos.t3_identificacion !== null &&
+          // this.documentos.t3_curp !== null &&
+          // this.documentos.t3_comprobante_domicilio !== null;
   }
 
   //GUARDA DATOS
