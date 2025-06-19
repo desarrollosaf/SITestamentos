@@ -1,0 +1,39 @@
+<div class="container-fluid auth-background">
+    <div class="row justify-content-center">
+        <div class="col-md-10 stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-4 text-center" style="color: #96134b; font-size: 1.2rem;">
+                        Citas
+                    </h6>
+                    <form [formGroup]="formCitas" (ngSubmit)="enviarDatos()" class="forms-sample">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label class="form-label negri">Ingrese CURP:*</label>
+                                    <input formControlName="f_curp" type="text" class="form-control"
+                                        placeholder="Ejemplo: MACJ750101HDFRRL01" maxlength="18" />
+                                    <small class="colorsm" *ngIf="formCitas.get('f_curp')?.hasError('pattern')">
+                                        <strong> CURP inválida o incompleta.</strong>
+                                    </small>
+                                    <div>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" >
+<full-calendar
+  [plugins]="calendarPlugins"
+  [initialView]="'dayGridMonth'"
+  [weekends]="true"
+  [dateClick]="handleDateClick.bind(this)"
+  [dayCellClassNames]="getDayClassNames.bind(this)">
+</full-calendar>
+                  </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

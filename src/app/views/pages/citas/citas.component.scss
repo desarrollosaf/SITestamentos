@@ -1,0 +1,21 @@
+/* Alta disponibilidad */
+.fc-daygrid-day.alta-disponibilidad {
+  background-color: #d4edda;
+}
+
+/* Poca disponibilidad */
+.fc-daygrid-day.poca-disponibilidad {
+  background-color: #fff3cd;
+}
+
+/* Sin disponibilidad */
+.fc-daygrid-day.no-disponibilidad {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Sin servicio (fines de semana) */
+.fc-daygrid-day.no-service {
+  background-color: #e2e3e5;
+  color: #6c757d;
+}
