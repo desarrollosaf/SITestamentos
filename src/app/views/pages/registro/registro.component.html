@@ -273,6 +273,71 @@
               </div>
             </div>
 
+            <div class="row">
+               <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nacionalidad:*</label>
+                  <select class="form-select" id="nacionalidad_serv" formControlName="nacionalidad_serv">
+                    <option *ngFor="let vives of nacionalidad" [value]="vives.id">
+                      {{ vives.name }}
+                    </option>
+                  </select>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('nacionalidad_serv')?.hasError('required') && formTestamento.get('nacionalidad_serv')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Indique nacionalidad:</label>
+                    <input formControlName="indique_nacionalidad_serv" type="text" class="form-control"
+                      placeholder="Ejemplo: 123456789" />
+                      <small class="colorsm"
+                      *ngIf="formTestamento.get('indique_nacionalidad_serv')?.hasError('required') && formTestamento.get('indique_nacionalidad_serv')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Cuenta con documento de residencia:</label>
+                    <select class="form-select" id="documento_residencia_serv" formControlName="documento_residencia_serv">
+                      <option *ngFor="let vives of primerTestamento" [value]="vives.id">
+                        {{ vives.name }}
+                      </option>
+                    </select>
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('documento_residencia_serv')?.hasError('required') && formTestamento.get('documento_residencia_serv')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label negri" style="min-height: 1rem;">Adjunta la copia de tu documento de
+                      residencia:</label>
+                    <div class="position-relative d-flex flex-column flex-grow-1" style="min-height: 10px; padding-bottom: 1rem;">
+                      <input class="form-control" type="file" id="comprobante_residencia" accept="application/pdf"
+                        #inputcomprobante_residencia (change)="onFileSelect($event, 'comprobante_residencia')" />
+                      <div *ngIf="documentos['comprobante_residencia']" style="position: absolute; bottom: 0; left: 0;">
+                        <button type="button" class="boton-danger-sm"
+                          (click)="eliminarArchivo('comprobante_residencia', inputcomprobante_residencia)">
+                          <i class="feather icon-trash btn-icon-prepend"></i>
+                          Eliminar archivo
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <br>
             <div>
               <h5 class="titulo3">Datos del padre:</h5>
             </div>
