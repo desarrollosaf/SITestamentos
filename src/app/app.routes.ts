@@ -32,5 +32,9 @@ export const routes: Routes = [
     path: 'registro',
     loadComponent: () => import('./views/pages/registro/registro.component').then(c => c.RegistroComponent)
   },
+  {
+    path: 'citas',
+    loadComponent: () => import('./views/pages/citas/citas.component').then(c => c.CitasComponent)
+  },
   { path: '**', redirectTo: 'error/404', pathMatch: 'full' }
 ];
