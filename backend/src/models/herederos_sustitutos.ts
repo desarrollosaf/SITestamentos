@@ -10,27 +10,25 @@ import {
 import sequelize from '../database/testamentosConnection';
 import Solicitud from './solicitud';
 
-class Heredero extends Model<
-  InferAttributes<Heredero>,
-  InferCreationAttributes<Heredero>
+class HerederoSustituto extends Model<
+  InferAttributes<HerederoSustituto>,
+  InferCreationAttributes<HerederoSustituto>
 > {
-  declare id: CreationOptional<string>;
+  declare id: CreationOptional<number>;
   declare solicitudId: ForeignKey<Solicitud['id']>;
   declare nombre_completo: string;
-  declare edad: number;
-  declare parentesco: number;
-  declare porcentaje: string;
+  declare nombre_completo_asustituir: string;
   declare derecho_acrecer: boolean;
 
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
 
-Heredero.init(
+HerederoSustituto.init(
   {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
       primaryKey: true,
     },
     solicitudId: {
@@ -41,15 +39,7 @@ Heredero.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    edad: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    parentesco: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    porcentaje: {
+    nombre_completo_asustituir: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -57,21 +47,27 @@ Heredero.init(
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE,
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
   },
   {
     sequelize,
-    tableName: 'herederos',
+    tableName: 'herederos_sustitutos',
     timestamps: true,
   }
 );
 
 // Relación con Solicitud
-Heredero.belongsTo(Solicitud, {
+HerederoSustituto.belongsTo(Solicitud, {
   foreignKey: 'solicitudId',
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',
 });
 
-export default Heredero;
+export default HerederoSustituto;

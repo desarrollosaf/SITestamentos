@@ -23,7 +23,7 @@ Albacea.init({
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
-    tipo: {
+    a_su_fata: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },

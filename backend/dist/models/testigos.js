@@ -17,7 +17,43 @@ Testigo.init({
         type: sequelize_1.DataTypes.UUID,
         allowNull: false,
     },
-    nombre: {
+    nombre_completo: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    nacionalidad: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    fecha_naciento: {
+        type: sequelize_1.DataTypes.DATEONLY,
+        allowNull: true,
+    },
+    lugar_nacimiento: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    curp_dato: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    estado_civil: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    ocupacion: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    domicilio: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    cp: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    telefono: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
@@ -49,13 +85,10 @@ Testigo.init({
     sequelize: testamentosConnection_1.default,
     tableName: 'testigos',
     timestamps: true,
-    paranoid: false,
-    underscored: false,
 });
-// Asociación con solicitud
+// Relación con Solicitud
 // Testigo.belongsTo(Solicitud, {
 //   foreignKey: 'solicitudId',
-//   as: 'solicitud',
 //   onDelete: 'CASCADE',
 //   onUpdate: 'CASCADE',
 // });

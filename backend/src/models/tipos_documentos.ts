@@ -49,11 +49,11 @@ TipoDocumento.init(
 );
 
 // Relación inversa
-TipoDocumento.hasMany(Documento, {
-  foreignKey: 'tipo_documento',
-  as: 'documentos',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-});
+// TipoDocumento.hasMany(Documento, {
+//   foreignKey: 'tipo_documento',
+//   as: 'documentos',
+//   onDelete: 'CASCADE',
+//   onUpdate: 'CASCADE',
+// });
 
 export default TipoDocumento;

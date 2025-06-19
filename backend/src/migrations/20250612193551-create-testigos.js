@@ -19,21 +19,61 @@ module.exports = {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
-      nombre: {
+      nombre_completo: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      nacionalidad: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      fecha_naciento: {
+        type: Sequelize.DATEONLY,
+        allowNull: true,
+      },
+      lugar_nacimiento: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      curp_dato: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      estado_civil: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      ocupacion: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      domicilio: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      cp: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      telefono: {
         type: Sequelize.STRING,
         allowNull: true,
       },
       rfc: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
       identificacion: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
       curp: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
       comprobante_domicilio: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,

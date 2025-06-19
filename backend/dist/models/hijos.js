@@ -7,14 +7,13 @@ const sequelize_1 = require("sequelize");
 const testamentosConnection_1 = __importDefault(require("../database/testamentosConnection"));
 const solicitud_1 = __importDefault(require("./solicitud"));
 const matrimonios_1 = __importDefault(require("./matrimonios"));
-class Hijos extends sequelize_1.Model {
+class Hijo extends sequelize_1.Model {
 }
-Hijos.init({
+Hijo.init({
     id: {
-        type: sequelize_1.DataTypes.INTEGER,
-        autoIncrement: true,
+        type: sequelize_1.DataTypes.UUID,
+        defaultValue: sequelize_1.DataTypes.UUIDV4,
         primaryKey: true,
-        allowNull: false,
     },
     solicitudId: {
         type: sequelize_1.DataTypes.UUID,
@@ -22,11 +21,19 @@ Hijos.init({
     },
     matrimonioId: {
         type: sequelize_1.DataTypes.UUID,
-        allowNull: false,
+        allowNull: true,
     },
     nombre_completo: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
+    },
+    edad: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: true,
+    },
+    vive: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
     },
     reconocido: {
         type: sequelize_1.DataTypes.BOOLEAN,
@@ -36,40 +43,26 @@ Hijos.init({
         type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: false,
     },
-    createdAt: {
-        type: sequelize_1.DataTypes.DATE,
+    nombre_fuera: {
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        defaultValue: sequelize_1.DataTypes.NOW,
     },
-    updatedAt: {
-        type: sequelize_1.DataTypes.DATE,
-        allowNull: false,
-        defaultValue: sequelize_1.DataTypes.NOW,
-    },
+    createdAt: sequelize_1.DataTypes.DATE,
+    updatedAt: sequelize_1.DataTypes.DATE,
 }, {
     sequelize: testamentosConnection_1.default,
     tableName: 'hijos',
     timestamps: true,
-    indexes: [
-        {
-            name: 'PRIMARY',
-            unique: true,
-            using: 'BTREE',
-            fields: ['id'],
-        },
-    ],
 });
 // Relaciones
-Hijos.belongsTo(solicitud_1.default, {
+Hijo.belongsTo(solicitud_1.default, {
     foreignKey: 'solicitudId',
-    as: 'solicitud',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
 });
-Hijos.belongsTo(matrimonios_1.default, {
+Hijo.belongsTo(matrimonios_1.default, {
     foreignKey: 'matrimonioId',
-    as: 'matrimonio',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
 });
-exports.default = Hijos;
+exports.default = Hijo;

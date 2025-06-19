@@ -24,8 +24,8 @@ export class Solicitud extends Model<
   declare puede_ver: boolean | null;
   declare puede_oir: boolean | null;
   declare dificultad_comunicacion: boolean | null;
-  declare no_pasaporte: boolean | null;
-  declare cedula_profesional: Date | null;
+  declare no_pasaporte: string | null;
+  declare cedula_profesional: string | null;
   declare documento_residencia: boolean | null;
   declare heredero_menor_edad: boolean | null;
   declare user?: User;
@@ -81,11 +81,11 @@ Solicitud.init(
       allowNull: true,
     },
     no_pasaporte: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     cedula_profesional: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     documento_residencia: {

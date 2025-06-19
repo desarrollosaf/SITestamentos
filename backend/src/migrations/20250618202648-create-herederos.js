@@ -22,17 +22,18 @@ module.exports = {
       nombre_completo: {
         type: Sequelize.STRING
       },
+      edad: {
+        type: Sequelize.INTEGER
+      },
+      parentesco: {
+        type: Sequelize.INTEGER
+      },
       porcentaje: {
         type: Sequelize.STRING
       },
-      menor_edad: {
-        type: Sequelize.BOOLEAN
-      },
+    
       derecho_acrecer: {
         type: Sequelize.BOOLEAN
-      },
-      tipo: {
-        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

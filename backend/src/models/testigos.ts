@@ -5,10 +5,9 @@ import {
   InferCreationAttributes,
   CreationOptional,
   ForeignKey,
-  NonAttribute,
-  Sequelize,
 } from 'sequelize';
-import sequelizefun from '../database/testamentosConnection';
+
+import sequelize from '../database/testamentosConnection';
 import Solicitud from './solicitud';
 
 class Testigo extends Model<
@@ -17,16 +16,23 @@ class Testigo extends Model<
 > {
   declare id: CreationOptional<string>;
   declare solicitudId: ForeignKey<Solicitud['id']>;
-  declare nombre: string |null;
-  declare rfc: string | null;
+  declare nombre_completo: string | null;
+  declare nacionalidad: string;
+  declare fecha_naciento: Date;
+  declare lugar_nacimiento: string;
+  declare curp_dato: string;
+  declare estado_civil: string;
+  declare ocupacion: string;
+  declare domicilio: string;
+  declare cp: string;
+  declare telefono: string;
+  declare rfc: string;
   declare identificacion: string | null;
   declare curp: string | null;
   declare comprobante_domicilio: string | null;
 
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
-
-  declare solicitud?: NonAttribute<Solicitud>;
 }
 
 Testigo.init(
@@ -40,7 +46,43 @@ Testigo.init(
       type: DataTypes.UUID,
       allowNull: false,
     },
-    nombre: {
+    nombre_completo: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    nacionalidad: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    fecha_naciento: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
+    },
+    lugar_nacimiento: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    curp_dato: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    estado_civil: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    ocupacion: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    domicilio: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    cp: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    telefono: {
       type: DataTypes.STRING,
       allowNull: true,
     },
@@ -70,18 +112,15 @@ Testigo.init(
     },
   },
   {
-    sequelize: sequelizefun,
+    sequelize,
     tableName: 'testigos',
     timestamps: true,
-    paranoid: false,
-    underscored: false,
   }
 );
 
-// Asociación con solicitud
+// Relación con Solicitud
 // Testigo.belongsTo(Solicitud, {
 //   foreignKey: 'solicitudId',
-//   as: 'solicitud',
 //   onDelete: 'CASCADE',
 //   onUpdate: 'CASCADE',
 // });

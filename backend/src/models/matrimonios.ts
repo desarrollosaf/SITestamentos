@@ -4,18 +4,27 @@ import {
   InferAttributes,
   InferCreationAttributes,
   CreationOptional,
+  ForeignKey,
 } from 'sequelize';
+
 import sequelize from '../database/testamentosConnection';
-import Hijo from './hijos';
+import Solicitud from './solicitud';
 
 class Matrimonio extends Model<
   InferAttributes<Matrimonio>,
   InferCreationAttributes<Matrimonio>
 > {
   declare id: CreationOptional<string>;
-  declare pareja: string | null;
+  declare solicitudId: ForeignKey<Solicitud['id']>;
+  declare orden: number;
+  declare conyuge_nombre: string;
+  declare regimen_patrimonial: string;
+  declare vive: boolean;
+
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
+
+  declare solicitud?: Solicitud;
 }
 
 Matrimonio.init(
@@ -24,21 +33,30 @@ Matrimonio.init(
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+    },
+    solicitudId: {
+      type: DataTypes.UUID,
       allowNull: false,
     },
-    pareja: {
+    orden: {
+      type: DataTypes.INTEGER,
+    },
+    conyuge_nombre: {
       type: DataTypes.STRING,
-      allowNull: true,
+    },
+    regimen_patrimonial: {
+      type: DataTypes.STRING,
+    },
+    vive: {
+      type: DataTypes.BOOLEAN,
     },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW,
     },
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW,
     },
   },
   {
@@ -48,7 +66,12 @@ Matrimonio.init(
   }
 );
 
-// Relación inversa
-
+// Asociación con Solicitud
+Matrimonio.belongsTo(Solicitud, {
+  foreignKey: 'solicitudId',
+  as: 'solicitud',
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
 
 export default Matrimonio;

@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const testamentosConnection_1 = __importDefault(require("../database/testamentosConnection"));
-const documentos_1 = __importDefault(require("./documentos"));
 class TipoDocumento extends sequelize_1.Model {
 }
 TipoDocumento.init({
@@ -35,10 +34,10 @@ TipoDocumento.init({
     timestamps: true,
 });
 // Relación inversa
-TipoDocumento.hasMany(documentos_1.default, {
-    foreignKey: 'tipo_documento',
-    as: 'documentos',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-});
+// TipoDocumento.hasMany(Documento, {
+//   foreignKey: 'tipo_documento',
+//   as: 'documentos',
+//   onDelete: 'CASCADE',
+//   onUpdate: 'CASCADE',
+// });
 exports.default = TipoDocumento;
