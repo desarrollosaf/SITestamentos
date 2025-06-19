@@ -50,7 +50,8 @@ export class RegistroComponent {
     t3_identificacion: null,
     t3_curp: null,
     t3_comprobante_domicilio: null,
-    primer_testamento_doc :null
+    primer_testamento_doc :null,
+    comprobante_residencia: null
   };
  
 
@@ -200,9 +201,9 @@ export class RegistroComponent {
         numero_documento_identifica: [{ value: '', disabled: true }],
 
         testigoArr: this.fb.array([]),
-        // nombre_testigo:[''],
-        // primer_apellido_testigo:[''],
-        // segundo_apellido_testigo:[''],
+        nacionalidad_serv:['',Validators.required],
+        indique_nacionalidad_serv:[''],
+        documento_residencia_serv:[''],
         // nacionalidad_testigo:[''],
         // fecha_nacimiento_testigo:[''],
         // lugar_nacimiento_testigo:[''],
@@ -243,6 +244,24 @@ export class RegistroComponent {
       controlExtra?.updateValueAndValidity();
     });
   
+
+ //PARA MOSTRAR EL DIV nacionalidad_serv
+    this.formTestamento.get('nacionalidad_serv')?.valueChanges.subscribe(valor => {
+      this.mostrarCamposTestamento = valor === '0';
+      const campos = [
+        'indique_nacionalidad_serv',
+        'documento_residencia_serv'
+      ];
+
+      campos.forEach(control => {
+        const c = this.formTestamento.get(control);
+        if (valor === '0') {
+          c?.enable();
+        } else {
+          c?.disable();
+        }
+      });
+    });
 
 
 
