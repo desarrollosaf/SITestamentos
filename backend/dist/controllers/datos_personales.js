@@ -17,6 +17,8 @@ const dp_datospersonales_1 = require("../models/fun/dp_datospersonales");
 const fun_1 = __importDefault(require("../database/fun")); // La conexión
 const dp_fum_datos_generales_1 = require("../models/fun/dp_fum_datos_generales");
 const user_1 = __importDefault(require("../models/user"));
+const regimen_patrimonial_1 = __importDefault(require("../models/regimen_patrimonial"));
+const dp_estado_civil_1 = __importDefault(require("../models/fun/dp_estado_civil"));
 dp_datospersonales_1.dp_datospersonales.initModel(fun_1.default);
 dp_fum_datos_generales_1.dp_fum_datos_generales.initModel(fun_1.default);
 const getregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -24,11 +26,11 @@ const getregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     console.log(id);
     try {
         let registro = yield dp_datospersonales_1.dp_datospersonales.findOne({
-            where: { f_curp: id }
+            where: { f_rfc: id }
         });
         if (!registro) {
             registro = yield dp_fum_datos_generales_1.dp_fum_datos_generales.findOne({
-                where: { f_curp: id }
+                where: { f_rfc: id }
             });
             if (!registro) {
                 return res.status(500).json({ error: 'No se tiene ningun registro' });
@@ -40,9 +42,13 @@ const getregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         if (solicitud) {
             return res.status(400).json({ error: 'Este servidor ya cuenta con un registro' });
         }
+        const regimen = yield regimen_patrimonial_1.default.findAll();
+        const civil = yield dp_estado_civil_1.default.findAll();
         return res.json({
             msg: `Lista obtenida exitosamente`,
-            data: registro
+            data: registro,
+            regimen: regimen,
+            estadocivil: civil
         });
     }
     catch (error) {

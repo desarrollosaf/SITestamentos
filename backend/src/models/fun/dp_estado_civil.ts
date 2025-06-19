@@ -1,7 +1,6 @@
 import {
   Model,
   DataTypes,
-  Sequelize,
   InferAttributes,
   InferCreationAttributes,
   CreationOptional,
@@ -17,13 +16,12 @@ import {
   HasManyHasAssociationsMixin,
   HasManyCountAssociationsMixin,
 } from 'sequelize';
-
-import sequelizefun from '../../database/fun'; // Conexión específica a 'administracion'
+import sequelize from '../../database/fun'; // conexión específica a la BD "administracion"
 import type { dp_datospersonales } from './dp_datospersonales';
 
-export class dp_estado_civil extends Model<
-  InferAttributes<dp_estado_civil>,
-  InferCreationAttributes<dp_estado_civil>
+class DpEstadoCivil extends Model<
+  InferAttributes<DpEstadoCivil>,
+  InferCreationAttributes<DpEstadoCivil>
 > {
   declare id: CreationOptional<number>;
   declare estado_civil: string;
@@ -32,7 +30,7 @@ export class dp_estado_civil extends Model<
   declare updated_at: CreationOptional<Date>;
   declare deleted_at: CreationOptional<Date>;
 
-  // Relaciones
+  // Relaciones (no obligatorias para funcionalidad básica)
   declare dp_datospersonales?: NonAttribute<dp_datospersonales[]>;
   declare getDp_datospersonales: HasManyGetAssociationsMixin<dp_datospersonales>;
   declare setDp_datospersonales: HasManySetAssociationsMixin<dp_datospersonales, number>;
@@ -44,50 +42,50 @@ export class dp_estado_civil extends Model<
   declare hasDp_datospersonale: HasManyHasAssociationMixin<dp_datospersonales, number>;
   declare hasDp_datospersonales: HasManyHasAssociationsMixin<dp_datospersonales, number>;
   declare countDp_datospersonales: HasManyCountAssociationsMixin;
-
-  static initModel(sequelize: Sequelize): typeof dp_estado_civil {
-    return dp_estado_civil.init(
-      {
-        id: {
-          autoIncrement: true,
-          type: DataTypes.BIGINT.UNSIGNED,
-          allowNull: false,
-          primaryKey: true,
-        },
-        estado_civil: {
-          type: DataTypes.STRING(255),
-          allowNull: false,
-        },
-        created_at: {
-          type: DataTypes.DATE,
-          allowNull: true,
-        },
-        updated_at: {
-          type: DataTypes.DATE,
-          allowNull: true,
-        },
-        deleted_at: {
-          type: DataTypes.DATE,
-          allowNull: true,
-        },
-      },
-      {
-        sequelize: sequelizefun, // conexión específica
-        tableName: 'dp_estado_civil',
-        timestamps: true,
-        paranoid: true,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at',
-        deletedAt: 'deleted_at',
-        indexes: [
-          {
-            name: 'PRIMARY',
-            unique: true,
-            using: 'BTREE',
-            fields: [{ name: 'id' }],
-          },
-        ],
-      }
-    );
-  }
 }
+
+DpEstadoCivil.init(
+  {
+    id: {
+      type: DataTypes.BIGINT.UNSIGNED,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
+    },
+    estado_civil: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    deleted_at: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+  },
+  {
+    sequelize,
+    tableName: 'dp_estado_civil',
+    timestamps: true,
+    paranoid: true,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+    deletedAt: 'deleted_at',
+    indexes: [
+      {
+        name: 'PRIMARY',
+        unique: true,
+        using: 'BTREE',
+        fields: ['id'],
+      },
+    ],
+  }
+);
+
+export default DpEstadoCivil;

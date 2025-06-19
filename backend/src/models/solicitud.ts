@@ -1,38 +1,39 @@
 import {
   Model,
   DataTypes,
+  Sequelize,
   InferAttributes,
   InferCreationAttributes,
   CreationOptional,
-  ForeignKey,
 } from 'sequelize';
-
-import sequelize from '../database/testamentosConnection';
+import sequelize from '../database/testamentosConnection'; // Ajusta la ruta según tu proyecto
 import User from './user';
 import Testigo from './testigos';
 
-class Solicitud extends Model<
+export class Solicitud extends Model<
   InferAttributes<Solicitud>,
   InferCreationAttributes<Solicitud>
 > {
   declare id: CreationOptional<string>;
-  declare userId: ForeignKey<User['id']>;
-  declare lugar_nacimiento: string | null;
-  declare acta_nacimiento: string | null ;
-  declare acta_matrimonio: string | null;
-  declare identificacion: string | null;
-  declare curp: string | null;
-  declare comprobante_domicilio: string| null;
-  declare certificado_privado: string | null;
-  declare certificado_publico: string | null;
-  declare fecha_envio: Date;
-
+  declare userId: string | null;
+  declare nacionalidad: string | null;
+  declare es_primer_testamento: boolean | null;
+  declare sabe_leer: boolean | null;
+  declare sabe_escribir: boolean | null;
+  declare puede_hablar: boolean | null;
+  declare puede_ver: boolean | null;
+  declare puede_oir: boolean | null;
+  declare dificultad_comunicacion: boolean | null;
+  declare no_pasaporte: boolean | null;
+  declare cedula_profesional: Date | null;
+  declare documento_residencia: boolean | null;
+  declare heredero_menor_edad: boolean | null;
   declare user?: User;
   declare testigos?: Testigo[];
 
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
-  declare deletedAt: CreationOptional<Date>;
+  declare deletedAt: CreationOptional<Date | null>;
 }
 
 Solicitud.init(
@@ -41,50 +42,72 @@ Solicitud.init(
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      allowNull: false,
     },
     userId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-    },
-    lugar_nacimiento: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    acta_nacimiento: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    acta_matrimonio: {
+    nacionalidad: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    identificacion: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    curp: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    comprobante_domicilio: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    certificado_privado: {
-      type: DataTypes.STRING,
+    es_primer_testamento: {
+      type: DataTypes.BOOLEAN,
       allowNull: true,
     },
-    certificado_publico: {
-      type: DataTypes.STRING,
+    sabe_leer: {
+      type: DataTypes.BOOLEAN,
       allowNull: true,
     },
-    fecha_envio: {
+    sabe_escribir: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    puede_hablar: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    puede_ver: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    puede_oir: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    dificultad_comunicacion: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    no_pasaporte: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    cedula_profesional: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    documento_residencia: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    heredero_menor_edad: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE,
-    deletedAt: DataTypes.DATE,
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    deletedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
   {
     sequelize,
@@ -94,7 +117,6 @@ Solicitud.init(
   }
 );
 
-// Relaciones
 Solicitud.belongsTo(User, {
   foreignKey: 'userId',
   as: 'user',
@@ -107,6 +129,5 @@ Solicitud.hasMany(Testigo, {
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',
 });
-
 
 export default Solicitud;

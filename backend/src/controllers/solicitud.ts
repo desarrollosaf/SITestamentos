@@ -6,7 +6,7 @@ import Testigo  from '../models/testigos';
 import sequelizefun from '../database/fun'; // La conexión
 import { dp_datospersonales } from '../models/fun/dp_datospersonales';
 import path from 'path';
-import { dp_fum_datos_generales } from '../models/fun/dp_fum_datos_generales';
+
 
 dp_datospersonales.initModel(sequelizefun);
 
