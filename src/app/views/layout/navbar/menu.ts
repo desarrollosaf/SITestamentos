@@ -6,6 +6,16 @@ export const MENU: MenuItem[] = [
     icon: 'book',
     link: '/solicitudes'
   },
+  {
+    label: 'Generar CSV',
+    icon: 'file-text',
+    link: '/csv'
+  },
+  {
+    label: 'Reportes',
+    icon: 'check-square',
+    link: '/reportes'
+  },
   
   
 ];
