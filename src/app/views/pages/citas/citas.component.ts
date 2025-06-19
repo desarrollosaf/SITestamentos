@@ -26,12 +26,6 @@ import interactionPlugin from '@fullcalendar/interaction';
 })
 export class CitasComponent {
   formCitas: FormGroup;
-  http = inject(HttpClient);
-
-  calendarPlugins = [dayGridPlugin, interactionPlugin];
-
-  availability = signal<Record<string, number>>({});
-  
   constructor(private fb: FormBuilder, private router: Router){
       this.formCitas = this.fb.group({
       f_curp:['',[
@@ -41,64 +35,14 @@ export class CitasComponent {
     });
   }
 
-
-
-  
   ngOnInit(): void {
-this.fetchAvailability();
-
     this.formCitas.get('f_curp')?.valueChanges.subscribe(value => {
       if (value && value.length === 18) {
         this.buscarDatosPorCurp(value);
       }
     });
   }
-  fetchAvailability() {
-    this.http.get<Record<string, number>>('/api/availability')
-      .subscribe(data => this.availability.set(data));
-  }
 
-  handleDateClick(arg: any) {
-    const clickedDate = new Date(arg.dateStr);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const isWeekend = clickedDate.getDay() === 0 || clickedDate.getDay() === 6;
-    if (clickedDate < today || isWeekend) {
-      alert('Día no disponible.');
-      return;
-    }
-
-    const dateStr = arg.dateStr;
-    const count = this.availability()[dateStr] || 0;
-
-    if (count >= 20) {
-      alert('Sin disponibilidad.');
-      return;
-    }
-
-    const confirmCita = confirm(`¿Confirmar cita para el día ${dateStr}?`);
-    if (confirmCita) {
-      this.http.post('/api/appointments', { date: dateStr }).subscribe(() => {
-        alert('Cita confirmada');
-        this.fetchAvailability();
-      });
-    }
-  }
-
-  getDayClassNames(arg: any): string[] {
-    const dateStr = arg.date.toISOString().split('T')[0];
-    const date = new Date(dateStr);
-    const isWeekend = date.getDay() === 0 || date.getDay() === 6;
-
-    if (isWeekend) return ['no-service'];
-    if (date < new Date()) return [];
-
-    const count = this.availability()[dateStr] || 0;
-    if (count >= 20) return ['no-disponibilidad'];
-    if (count >= 15) return ['poca-disponibilidad'];
-    return ['alta-disponibilidad'];
-  }
 
   buscarDatosPorCurp(curp: string) {
     console.log('hd');
