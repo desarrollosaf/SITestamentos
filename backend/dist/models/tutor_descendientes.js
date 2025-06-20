@@ -19,7 +19,15 @@ TutorDescendiente.init({
         type: sequelize_1.DataTypes.UUID,
         allowNull: false,
     },
-    nombre: {
+    nombre_tutor: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    primer_apellido_tutor: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    segundo_apellido_tutor: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
@@ -27,11 +35,35 @@ TutorDescendiente.init({
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
+    primer_apellido_tutor_sustituto: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    segundo_apellido_tutor_sustituto: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
     nombre_curador: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
-    nombre_curador_falta: {
+    primer_apellido_curador: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    segundo_apellido_curador: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    nombre_a_su_falta_curador: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    primer_apellido_a_su_falta_curador: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    segundo_apellido_a_su_falta_curador: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },

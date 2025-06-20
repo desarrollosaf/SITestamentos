@@ -21,7 +21,13 @@ Matrimonio.init({
     orden: {
         type: sequelize_1.DataTypes.INTEGER,
     },
-    conyuge_nombre: {
+    nombre: {
+        type: sequelize_1.DataTypes.STRING,
+    },
+    primer_apellido: {
+        type: sequelize_1.DataTypes.STRING,
+    },
+    segundo_apellido: {
         type: sequelize_1.DataTypes.STRING,
     },
     regimen_patrimonial: {

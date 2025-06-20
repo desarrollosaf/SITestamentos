@@ -18,11 +18,27 @@ HerederoSustituto.init({
         type: sequelize_1.DataTypes.UUID,
         allowNull: false,
     },
-    nombre_completo: {
+    nombre_sustituto: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
-    nombre_completo_asustituir: {
+    primer_apellido_sustituto: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    segundo_apellido_sustituto: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    nombre_a_sustituir: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    primer_apellido_a_sustituir: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    segundo_apellido_a_sustituir: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },

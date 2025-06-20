@@ -19,7 +19,15 @@ module.exports = {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
-      nombre_completo: {
+      nombre_testigo: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      primer_apellido_testigo: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      segundo_apellido_testigo: {
         type: Sequelize.STRING,
         allowNull: true,
       },

@@ -19,7 +19,13 @@ module.exports = {
         onDelete: 'CASCADE', 
         onUpdate: 'CASCADE'
       },
-      nombre_completo: {
+      nombre_heredero: {
+        type: Sequelize.STRING
+      },
+      primer_apellido_heredero: {
+        type: Sequelize.STRING
+      },
+      segundo_apellido_heredero: {
         type: Sequelize.STRING
       },
       edad: {

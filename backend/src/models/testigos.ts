@@ -16,7 +16,9 @@ class Testigo extends Model<
 > {
   declare id: CreationOptional<string>;
   declare solicitudId: ForeignKey<Solicitud['id']>;
-  declare nombre_completo: string | null;
+  declare nombre_testigo: string | null;
+  declare primer_apellido_testigo: string | null;
+   declare segundo_apellido_testigo: string | null;
   declare nacionalidad: string;
   declare fecha_naciento: Date;
   declare lugar_nacimiento: string;
@@ -46,7 +48,15 @@ Testigo.init(
       type: DataTypes.UUID,
       allowNull: false,
     },
-    nombre_completo: {
+    nombre_testigo: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+     primer_apellido_testigo: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+     segundo_apellido_testigo: {
       type: DataTypes.STRING,
       allowNull: true,
     },

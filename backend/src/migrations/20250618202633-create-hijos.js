@@ -29,7 +29,15 @@ module.exports = {
         onDelete: 'CASCADE', 
         onUpdate: 'CASCADE'
       },
-      nombre_completo: {
+      nombre: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      primer_apellido: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      segundo_apellido: {
         type: Sequelize.STRING,
         allowNull: false,
       },

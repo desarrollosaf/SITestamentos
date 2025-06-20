@@ -19,10 +19,22 @@ module.exports = {
         onDelete: 'CASCADE', 
         onUpdate: 'CASCADE'
       },
-      nombre_completo: {
+      nombre_sustituto: {
         type: Sequelize.STRING
       },
-      nombre_completo_asustituir: {
+      primer_apellido_sustituto: {
+        type: Sequelize.STRING
+      },
+      segundo_apellido_sustituto: {
+        type: Sequelize.STRING
+      },
+      nombre_a_sustituir: {
+        type: Sequelize.STRING
+      },
+      primer_apellido_a_sustituir: {
+        type: Sequelize.STRING
+      },
+      segundo_apellido_a_sustituir: {
         type: Sequelize.STRING
       },
       derecho_acrecer: {

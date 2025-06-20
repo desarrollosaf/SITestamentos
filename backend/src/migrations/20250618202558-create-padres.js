@@ -22,7 +22,13 @@ module.exports = {
       tipo: {
         type: Sequelize.STRING
       },
-      nombre_completo: {
+      nombre: {
+        type: Sequelize.STRING
+      },
+      primer_apellido: {
+        type: Sequelize.STRING
+      },
+      segundo_apellido: {
         type: Sequelize.STRING
       },
       vive: {
@@ -30,6 +36,9 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       nacionalidad: {
+        type: Sequelize.BOOLEAN
+      },
+       especifique_nacionalidad: {
         type: Sequelize.STRING
       },
       updatedAt: {

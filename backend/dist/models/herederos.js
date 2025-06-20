@@ -18,7 +18,15 @@ Heredero.init({
         type: sequelize_1.DataTypes.UUID,
         allowNull: false,
     },
-    nombre_completo: {
+    nombre_heredero: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    primer_apellido_heredero: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    segundo_apellido_heredero: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },

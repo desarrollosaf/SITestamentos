@@ -50,6 +50,10 @@ Solicitud.init({
         type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: true,
     },
+    primer_testamento: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        allowNull: true,
+    },
     dificultad_comunicacion: {
         type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: true,
@@ -68,6 +72,18 @@ Solicitud.init({
     },
     heredero_menor_edad: {
         type: sequelize_1.DataTypes.BOOLEAN,
+        allowNull: true,
+    },
+    documento_identifica: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    numero_documento_identifica: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    indique_nacionalidad_serv: {
+        type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
     createdAt: {

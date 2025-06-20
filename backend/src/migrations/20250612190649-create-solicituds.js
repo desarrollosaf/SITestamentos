@@ -15,9 +15,6 @@ module.exports = {
        nacionalidad: {
         type: Sequelize.STRING 
       },
-      nacionalidad: {
-        type: Sequelize.STRING 
-      },
       es_primer_testamento: {
         type: Sequelize.BOOLEAN,
         allowNull: true, 
@@ -60,6 +57,18 @@ module.exports = {
       },
       heredero_menor_edad: {
         type: Sequelize.BOOLEAN,
+        allowNull: true, 
+      },
+      documento_identifica: {
+        type: Sequelize.STRING,
+        allowNull: true, 
+      },
+      numero_documento_identifica: {
+        type: Sequelize.STRING,
+        allowNull: true, 
+      },
+       indique_nacionalidad_serv: {
+        type: Sequelize.STRING,
         allowNull: true, 
       },
       createdAt: {
