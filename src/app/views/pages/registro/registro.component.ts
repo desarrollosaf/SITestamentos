@@ -639,7 +639,7 @@ export class RegistroComponent {
           }
           if (response.data.f_fecha_nacimiento) {
             const edad = this.calcularEdad(response.data.f_fecha_nacimiento);
-            if(edad > 29){
+            if(edad > 60){
               this.mostrarExtraInfo = !this.mostrarExtraInfo;
             }
             this.formTestamento.patchValue({ edad: edad + ' años' });
