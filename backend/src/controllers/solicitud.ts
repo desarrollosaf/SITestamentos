@@ -112,7 +112,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
     const documentosFields = [
         'acta_nacimiento', 'acta_matrimonio', 'identificacion', 'curp',
         'comprobante_domicilio', 'certificado_privado', 'certificado_publico',
-        'ine', 'comprobante_residencia'
+        'ine', 'comprobante_residencia', 'constancia_situacion_fiscal'
     ];
 
     const documentosPaths: { [key: string]: string | null } = {};
