@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getsolicitud = exports.getsolicitudes = exports.saveinfo = void 0;
 const solicitud_1 = __importDefault(require("../models/solicitud"));
-const user_1 = __importDefault(require("../models/user"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const testigos_1 = __importDefault(require("../models/testigos"));
 const fun_1 = __importDefault(require("../database/fun")); // La conexión
@@ -30,6 +29,7 @@ const herederos_1 = __importDefault(require("../models/herederos"));
 const herederos_sustitutos_1 = __importDefault(require("../models/herederos_sustitutos"));
 const albaceas_1 = __importDefault(require("../models/albaceas"));
 const tutor_descendientes_1 = __importDefault(require("../models/tutor_descendientes"));
+const hijos_2 = __importDefault(require("../models/hijos"));
 dp_datospersonales_1.dp_datospersonales.initModel(fun_1.default);
 const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
@@ -353,24 +353,16 @@ const getsolicitudes = (req, res) => __awaiter(void 0, void 0, void 0, function*
                     model: testigos_1.default,
                     as: 'testigos',
                 },
-                {
-                    model: user_1.default,
-                    as: 'user',
-                }
-            ]
+            ],
         });
-        // Cargar datos personales manualmente desde otra base de datos
         for (const solicitud of solicitudes) {
-            const user = solicitud.user;
-            if (user && user.name) {
-                console.log('hola si usuario:', user.name);
+            if (solicitud.userId) {
+                console.log('📌 Buscando datos personales para:', solicitud.userId);
                 const datos = yield dp_datospersonales_1.dp_datospersonales.findOne({
-                    where: { f_rfc: user.name },
+                    where: { f_rfc: solicitud.userId },
                 });
-                console.log(datos);
-                // Simular el include dentro de usuarios
                 if (datos) {
-                    user.setDataValue('datos_user', datos);
+                    solicitud.setDataValue('datos_user', datos);
                 }
             }
         }
@@ -398,21 +390,64 @@ const getsolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                     as: 'testigos',
                 },
                 {
-                    model: user_1.default,
-                    as: 'user',
-                }
+                    model: albaceas_1.default,
+                    as: 'albacea',
+                },
+                {
+                    model: documentos_1.default,
+                    as: 'documentos',
+                    include: [
+                        {
+                            model: tipos_documentos_1.default,
+                            as: 'tipo_doc',
+                        },
+                    ]
+                },
+                {
+                    model: herederos_1.default,
+                    as: 'herederos',
+                },
+                {
+                    model: herederos_sustitutos_1.default,
+                    as: 'herederos_susti',
+                },
+                {
+                    model: hijos_2.default,
+                    as: 'hijos',
+                    include: [
+                        {
+                            model: matrimonios_1.default,
+                            as: 'matrimonio',
+                        },
+                    ]
+                },
+                {
+                    model: matrimonios_1.default,
+                    as: 'matrimonios',
+                },
+                {
+                    model: padres_1.default,
+                    as: 'padres',
+                },
+                {
+                    model: testamentos_pasados_1.default,
+                    as: 'testamentos_pasados',
+                },
+                {
+                    model: tutor_descendientes_1.default,
+                    as: 'tutor_descendientes',
+                },
             ]
         });
         // Cargar datos personales manualmente desde otra base de datos
         for (const solicitud of solicitudes) {
-            const user = solicitud.user;
-            if (user && user.name) {
+            if (solicitud.userId) {
+                console.log('📌 Buscando datos personales para:', solicitud.userId);
                 const datos = yield dp_datospersonales_1.dp_datospersonales.findOne({
-                    where: { f_rfc: user.name },
+                    where: { f_rfc: solicitud.userId },
                 });
-                // Simular el include dentro de usuarios
                 if (datos) {
-                    user.setDataValue('datos_user', datos);
+                    solicitud.setDataValue('datos_user', datos);
                 }
             }
         }

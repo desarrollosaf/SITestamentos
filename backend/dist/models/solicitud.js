@@ -6,8 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Solicitud = void 0;
 const sequelize_1 = require("sequelize");
 const testamentosConnection_1 = __importDefault(require("../database/testamentosConnection")); // Ajusta la ruta según tu proyecto
-const user_1 = __importDefault(require("./user"));
 const testigos_1 = __importDefault(require("./testigos"));
+const albaceas_1 = __importDefault(require("./albaceas"));
+const documentos_1 = __importDefault(require("./documentos"));
+const herederos_1 = __importDefault(require("./herederos"));
+const herederos_sustitutos_1 = __importDefault(require("./herederos_sustitutos"));
+const hijos_1 = __importDefault(require("./hijos"));
+const matrimonios_1 = __importDefault(require("./matrimonios"));
+const padres_1 = __importDefault(require("./padres"));
+const testamentos_pasados_1 = __importDefault(require("./testamentos_pasados"));
+const tutor_descendientes_1 = __importDefault(require("./tutor_descendientes"));
 class Solicitud extends sequelize_1.Model {
 }
 exports.Solicitud = Solicitud;
@@ -47,10 +55,6 @@ Solicitud.init({
         allowNull: true,
     },
     puede_oir: {
-        type: sequelize_1.DataTypes.BOOLEAN,
-        allowNull: true,
-    },
-    primer_testamento: {
         type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: true,
     },
@@ -104,15 +108,69 @@ Solicitud.init({
     timestamps: true,
     paranoid: true,
 });
-Solicitud.belongsTo(user_1.default, {
-    foreignKey: 'userId',
-    as: 'user',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-});
+// Solicitud.belongsTo(User, {
+//   foreignKey: 'userId',
+//   as: 'user',
+//   onDelete: 'CASCADE',
+//   onUpdate: 'CASCADE',
+// });
 Solicitud.hasMany(testigos_1.default, {
     foreignKey: 'solicitudId',
     as: 'testigos',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+Solicitud.hasOne(albaceas_1.default, {
+    foreignKey: 'solicitudId',
+    as: 'albacea',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+Solicitud.hasMany(documentos_1.default, {
+    foreignKey: 'solicitudId',
+    as: 'documentos',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+Solicitud.hasMany(herederos_1.default, {
+    foreignKey: 'solicitudId',
+    as: 'herederos',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+Solicitud.hasMany(herederos_sustitutos_1.default, {
+    foreignKey: 'solicitudId',
+    as: 'herederos_susti',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+Solicitud.hasMany(hijos_1.default, {
+    foreignKey: 'solicitudId',
+    as: 'hijos',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+Solicitud.hasMany(matrimonios_1.default, {
+    foreignKey: 'solicitudId',
+    as: 'matrimonios',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+Solicitud.hasMany(padres_1.default, {
+    foreignKey: 'solicitudId',
+    as: 'padres',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+Solicitud.hasOne(testamentos_pasados_1.default, {
+    foreignKey: 'solicitudId',
+    as: 'testamentos_pasados',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+Solicitud.hasOne(tutor_descendientes_1.default, {
+    foreignKey: 'solicitudId',
+    as: 'tutor_descendientes',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
 });

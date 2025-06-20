@@ -61,16 +61,16 @@ Documento.init(
 );
 
 // Relaciones
-Documento.belongsTo(Solicitud, {
-  foreignKey: 'solicitudId',
-  as: 'solicitud',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-});
+// Documento.belongsTo(Solicitud, {
+//   foreignKey: 'solicitudId',
+//   as: 'solicitud',
+//   onDelete: 'CASCADE',
+//   onUpdate: 'CASCADE',
+// });
 
 Documento.belongsTo(TipoDocumento, {
   foreignKey: 'tipo_documento',
-  as: 'tipo',
+  as: 'tipo_doc',
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',
 });

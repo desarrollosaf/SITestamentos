@@ -110,11 +110,11 @@ TutorDescendiente.init(
 );
 
 // Relaciones
-TutorDescendiente.belongsTo(Solicitud, {
-  foreignKey: 'solicitudId',
-  as: 'solicitud',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-});
+// TutorDescendiente.belongsTo(Solicitud, {
+//   foreignKey: 'solicitudId',
+//   as: 'solicitud',
+//   onDelete: 'CASCADE',
+//   onUpdate: 'CASCADE',
+// });
 
 export default TutorDescendiente;

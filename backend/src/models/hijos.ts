@@ -90,14 +90,15 @@ Hijo.init(
 );
 
 // Relaciones
-Hijo.belongsTo(Solicitud, {
-  foreignKey: 'solicitudId',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-});
+// Hijo.belongsTo(Solicitud, {
+//   foreignKey: 'solicitudId',
+//   onDelete: 'CASCADE',
+//   onUpdate: 'CASCADE',
+// });
 
 Hijo.belongsTo(Matrimonio, {
   foreignKey: 'matrimonioId',
+  as: 'matrimonio',
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',
 });

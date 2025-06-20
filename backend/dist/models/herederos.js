@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const testamentosConnection_1 = __importDefault(require("../database/testamentosConnection"));
-const solicitud_1 = __importDefault(require("./solicitud"));
 class Heredero extends sequelize_1.Model {
 }
 Heredero.init({
@@ -54,9 +53,9 @@ Heredero.init({
     timestamps: true,
 });
 // Relación con Solicitud
-Heredero.belongsTo(solicitud_1.default, {
-    foreignKey: 'solicitudId',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-});
+// Heredero.belongsTo(Solicitud, {
+//   foreignKey: 'solicitudId',
+//   onDelete: 'CASCADE',
+//   onUpdate: 'CASCADE',
+// });
 exports.default = Heredero;

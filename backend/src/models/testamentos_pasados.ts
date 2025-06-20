@@ -70,11 +70,11 @@ TestamentoPasados.init(
 );
 
 // Relaciones
-TestamentoPasados.belongsTo(Solicitud, {
-  foreignKey: 'solicitudId',
-  as: 'solicitud',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-});
+// TestamentoPasados.belongsTo(Solicitud, {
+//   foreignKey: 'solicitudId',
+//   as: 'solicitud',
+//   onDelete: 'CASCADE',
+//   onUpdate: 'CASCADE',
+// });
 
 export default TestamentoPasados;

@@ -80,11 +80,11 @@ Albacea.init(
 );
 
 // Relaciones
-Albacea.belongsTo(Solicitud, {
-  foreignKey: 'solicitudId',
-  as: 'solicitud',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-});
+// Albacea.belongsTo(Solicitud, {
+//   foreignKey: 'solicitudId',
+//   as: 'solicitud',
+//   onDelete: 'CASCADE',
+//   onUpdate: 'CASCADE',
+// });
 
 export default Albacea;
