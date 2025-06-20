@@ -16,9 +16,10 @@ const baseFields = [
     'acta_nacimiento',
     'ine',
     'comprobante_residencia',
-    // 'documento_residencia',
-    // 'curp',
-    // 'identificacion',
+    'documento_residencia',
+    'comprobante_domicilio',
+    'curp',
+    'identificacion',
     'primer_testamento_doc',
     'documento_residencia_serv'
 ].map(name => ({ name, maxCount: 1 }));
