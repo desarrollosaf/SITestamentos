@@ -10,14 +10,14 @@ class Padre extends sequelize_1.Model {
 }
 Padre.init({
     id: {
-        type: sequelize_1.DataTypes.INTEGER,
-        autoIncrement: true,
+        type: sequelize_1.DataTypes.UUID,
+        defaultValue: sequelize_1.DataTypes.UUIDV4,
         primaryKey: true,
         allowNull: false,
     },
     solicitudId: {
         type: sequelize_1.DataTypes.UUID,
-        allowNull: false,
+        allowNull: true,
     },
     tipo: {
         type: sequelize_1.DataTypes.STRING,
@@ -37,7 +37,7 @@ Padre.init({
     },
     vive: {
         type: sequelize_1.DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
     },
     nacionalidad: {
         type: sequelize_1.DataTypes.BOOLEAN,

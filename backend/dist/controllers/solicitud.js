@@ -33,8 +33,8 @@ const tutor_descendientes_1 = __importDefault(require("../models/tutor_descendie
 dp_datospersonales_1.dp_datospersonales.initModel(fun_1.default);
 const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
-    // console.log(data);
-    // return 200 
+    console.log('save');
+    console.log(data);
     const Upassword = data.f_rfc;
     const UpasswordHash = yield bcrypt_1.default.hash(Upassword, 10);
     const newUser = yield user_1.default.create({
@@ -94,24 +94,28 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const file = (_a = files[field]) === null || _a === void 0 ? void 0 : _a[0];
         return file ? path_1.default.join('storage', f_curp, file.filename) : null;
     };
-    const solicituddata = {
-        userId: newUser.id,
-        fecha_envio: new Date(),
-        primer_testamento: data.primer_testamento,
-        sabe_leer: data.sabe_leer,
-        sabe_escribir: data.sabe_escribir,
-        puede_hablar: data.puede_hablar,
-        puede_ver: data.puede_ver,
-        puede_oir: data.puede_oir,
-        dificultad_comunicacion: data.presenta_dificultad,
-        heredero_menor_edad: data.menor_de_edad,
-        documento_identifica: data.documento_identifica,
-        numero_documento_identifica: data.numero_documento_identifica,
-        nacionalidad: data.nacionalidad_serv,
-        indique_nacionalidad_serv: data.indique_nacionalidad_serv,
-        documento_residencia: data.documento_residencia_serv,
-    };
-    const solicitud = yield solicitud_1.default.create(solicituddata);
+    let solicitud = null;
+    try {
+        solicitud = yield solicitud_1.default.create({
+            userId: newUser.id,
+            es_primer_testamento: data.primer_testamento,
+            sabe_leer: data.sabe_leer,
+            sabe_escribir: data.sabe_escribir,
+            puede_hablar: data.puede_hablar,
+            puede_ver: data.puede_ver,
+            puede_oir: data.puede_oir,
+            heredero_menor_edad: data.menor_de_edad,
+            documento_identifica: data.documento_identifica,
+            numero_documento_identifica: data.numero_documento_identifica,
+            nacionalidad: data.nacionalidad_serv,
+            //indique_nacionalidad_serv: data.indique_nacionalidad_serv,
+            //documento_residencia: data.documento_residencia_serv,
+        });
+    }
+    catch (error) {
+        console.error('❌ Error al crear la solicitud:', error);
+    }
+    //const solicitud = await Solicitud.create(solicituddata);
     const documentosFields = [
         'acta_nacimiento', 'acta_matrimonio', 'identificacion', 'curp',
         'comprobante_domicilio', 'certificado_privado', 'certificado_publico',
@@ -135,19 +139,24 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             });
         }
     }
-    const padre = yield padres_1.default.create({
-        solicitudId: solicitud.id,
-        tipo: '1',
-        nombre: data.f_nombre_padre,
-        primer_apellido: data.f_primer_apellido_padre,
-        segundo_apellido: data.f_segundo_apellido_padre,
-        vive: data.vive_padre,
-        nacionalidad: data.nacionalidad_padre,
-        especifique_nacionalidad: data.especifique_nac_padre,
-    });
+    try {
+        const padre = yield padres_1.default.create({
+            solicitudId: solicitud.id,
+            tipo: '1',
+            nombre: data.f_nombre_padre,
+            primer_apellido: data.f_primer_apellido_padre,
+            segundo_apellido: data.f_segundo_apellido_padre,
+            vive: data.vive_padre,
+            nacionalidad: data.nacionalidad_padre,
+            especifique_nacionalidad: data.especifique_nac_padre,
+        });
+    }
+    catch (error) {
+        console.error('❌ Error al crear el padre :', error);
+    }
     const madre = yield padres_1.default.create({
         solicitudId: solicitud.id,
-        tipo: '1',
+        tipo: '2',
         nombre: data.f_nombre_madre,
         primer_apellido: data.f_primer_apellido_madre,
         segundo_apellido: data.f_segundo_apellido_pmadre,
@@ -164,8 +173,8 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         regimen_patrimonial: data.regimen_patrimonial_primer_nup,
         vive: data.vive_primer_nup,
     });
-    if (data.hijosPrimer) {
-        for (const hijosprimer of data.hijosPrimer) {
+    if (data.hijosPrimerMatrimonio) {
+        for (const hijosprimer of data.hijosPrimerMatrimonio) {
             const hijosprimerasnupcias = yield hijos_1.default.create({
                 solicitudId: solicitud.id,
                 matrimonioId: primerasnupcias.id,
@@ -180,29 +189,31 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             });
         }
     }
-    const segundasnupcias = yield matrimonios_1.default.create({
-        solicitudId: solicitud.id,
-        orden: 1,
-        nombre: data.nombre_dos_nup,
-        primer_apellido: data.primer_apellido_dos_nup,
-        segundo_apellido: data.segundo_apellido_dos_nup,
-        regimen_patrimonial: data.regimen_patrimonial_dos_nup,
-        vive: data.vive_dos_nup,
-    });
-    if (data.hijosSegundo) {
-        for (const hijossegundos of data.hijosSegundo) {
-            const hijossegundasnupcias = yield hijos_1.default.create({
-                solicitudId: solicitud.id,
-                matrimonioId: segundasnupcias.id,
-                nombre: hijossegundos.hijo_nombre_primer_nup,
-                primer_apellido: hijossegundos.hijo_primer_apellido_primer_nup,
-                segundo_apellido: hijossegundos.hijo_segundo_apellido_primer_nup,
-                edad: hijossegundos.hijo_edad_dos_nup,
-                vive: hijossegundos.hijo_vf_dos_nup,
-                reconocido: true,
-                fuera_de_matrimonio: false,
-                nombre_fuera: ''
-            });
+    if (data.nombre_dos_nup) {
+        let segundasnupcias = yield matrimonios_1.default.create({
+            solicitudId: solicitud.id,
+            orden: 1,
+            nombre: data.nombre_dos_nup,
+            primer_apellido: data.primer_apellido_dos_nup,
+            segundo_apellido: data.segundo_apellido_dos_nup,
+            regimen_patrimonial: data.regimen_patrimonial_dos_nup,
+            vive: data.vive_dos_nup,
+        });
+        if (data.hijosSegundo) {
+            for (const hijossegundos of data.hijosSegundo) {
+                const hijossegundasnupcias = yield hijos_1.default.create({
+                    solicitudId: solicitud.id,
+                    matrimonioId: segundasnupcias.id,
+                    nombre: hijossegundos.hijo_nombre_primer_nup,
+                    primer_apellido: hijossegundos.hijo_primer_apellido_primer_nup,
+                    segundo_apellido: hijossegundos.hijo_segundo_apellido_primer_nup,
+                    edad: hijossegundos.hijo_edad_dos_nup,
+                    vive: hijossegundos.hijo_vf_dos_nup,
+                    reconocido: true,
+                    fuera_de_matrimonio: false,
+                    nombre_fuera: ''
+                });
+            }
         }
     }
     if (data.hijosFueraMatrim) {
@@ -221,28 +232,38 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             });
         }
     }
-    if (data.primer_testamento == false) {
-        const tienetestamento = yield testamentos_pasados_1.default.create({
-            solicitudId: solicitud.id,
-            fecha_tramite: data.fecha_primer_testamento,
-            notaria: data.notaria_primer_testamento,
-            instrumento_volumen: data.instrumento_primer_testamento,
-            path_testamento: buildPath(`primer_testamento_doc`),
-        });
-    }
-    if (data.herederoAdd) {
-        for (const heredero of data.herederoAdd) {
-            const herederos = yield herederos_1.default.create({
+    try {
+        if (data.primer_testamento == false) {
+            const tienetestamento = yield testamentos_pasados_1.default.create({
                 solicitudId: solicitud.id,
-                nombre_heredero: heredero.nombre_heredero,
-                primer_apellido_heredero: heredero.primer_apellido_heredero,
-                segundo_apellido_heredero: heredero.segundo_apellido_heredero,
-                porcentaje: heredero.porcentaje_heredero,
-                edad: heredero.edad_heredero,
-                parentesco: heredero.parentesco_heredero,
-                derecho_acrecer: data.derecho_acrecer,
+                fecha_tramite: data.fecha_primer_testamento,
+                notaria: data.notaria_primer_testamento,
+                instrumento_volumen: data.instrumento_primer_testamento,
+                path_testamento: buildPath(`primer_testamento_doc`),
             });
         }
+    }
+    catch (error) {
+        console.error('❌ Error al crear el TESTAMENTO :', error);
+    }
+    try {
+        if (data.herederos) {
+            for (const heredero of data.herederos) {
+                const herederos = yield herederos_1.default.create({
+                    solicitudId: solicitud.id,
+                    nombre_heredero: heredero.nombre_heredero,
+                    primer_apellido_heredero: heredero.primer_apellido_heredero,
+                    segundo_apellido_heredero: heredero.segundo_apellido_heredero,
+                    porcentaje: heredero.porcentaje_heredero,
+                    edad: heredero.edad_heredero,
+                    parentesco: heredero.parentesco_heredero,
+                    derecho_acrecer: data.derecho_acrecer,
+                });
+            }
+        }
+    }
+    catch (error) {
+        console.error('❌ Error al crear el HEREDEROS :', error);
     }
     if (data.herederoSustituto) {
         for (const herederosustituto of data.herederoSustituto) {
@@ -289,30 +310,36 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const file = (_a = files[field]) === null || _a === void 0 ? void 0 : _a[index];
         return file ? path_1.default.join('storage', data.f_curp, file.filename) : null;
     };
-    if (data.testigos) {
-        for (let i = 0; i < data.testigos.length; i++) {
-            const itemtest = data.testigos[i];
-            const testig = yield testigos_1.default.create({
-                solicitudId: solicitud.id,
-                nombre_testigo: itemtest.nombre_testigo,
-                primer_apellido_testigo: itemtest.primer_apellido_testigo,
-                segundo_apellido_testigo: itemtest.segundo_apellido_testigo,
-                nacionalidad: itemtest.nacionalidad_testigo,
-                fecha_naciento: itemtest.fecha_nacimiento_testigo,
-                lugar_nacimiento: itemtest.lugar_nacimiento_testigo,
-                curp_dato: itemtest.curp_testigo,
-                estado_civil: itemtest.estado_civil_testigo,
-                ocupacion: itemtest.ocupacion_testigo,
-                domicilio: itemtest.domicilio_testigo,
-                cp: itemtest.cp_testigo,
-                telefono: itemtest.telefono_testigo,
-                rfc: itemtest.rfc_testigo,
-                identificacion: buildIndexedPath('identificacion', i),
-                curp: buildIndexedPath('curp', i),
-                comprobante_domicilio: buildIndexedPath('comprobante_domicilio', i)
-            });
+    try {
+        if (data.testigos) {
+            for (let i = 0; i < data.testigos.length; i++) {
+                const itemtest = data.testigos[i];
+                const testig = yield testigos_1.default.create({
+                    solicitudId: solicitud.id,
+                    nombre_testigo: itemtest.nombre_testigo,
+                    primer_apellido_testigo: itemtest.primer_apellido_testigo,
+                    segundo_apellido_testigo: itemtest.segundo_apellido_testigo,
+                    nacionalidad: itemtest.nacionalidad_testigo,
+                    fecha_naciento: itemtest.fecha_nacimiento_testigo,
+                    lugar_nacimiento: itemtest.lugar_nacimiento_testigo,
+                    curp_dato: itemtest.curp_testigo,
+                    estado_civil: itemtest.estado_civil_testigo,
+                    ocupacion: itemtest.ocupacion_testigo,
+                    domicilio: itemtest.domicilio_testigo,
+                    cp: itemtest.cp_testigo,
+                    telefono: itemtest.telefono_testigo,
+                    rfc: itemtest.rfc_testigo,
+                    identificacion: buildIndexedPath('identificacion_t', i),
+                    curp: buildIndexedPath('curp_t', i),
+                    comprobante_domicilio: buildIndexedPath('comprobante_domicilio_t', i)
+                });
+            }
         }
     }
+    catch (error) {
+        console.error('❌ Error al crear el HEREDEROS :', error);
+    }
+    return 500;
     return res.status(200).json({
         message: 'Documento guardado exitosamente'
     });

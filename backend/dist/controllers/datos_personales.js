@@ -23,7 +23,7 @@ dp_datospersonales_1.dp_datospersonales.initModel(fun_1.default);
 dp_fum_datos_generales_1.dp_fum_datos_generales.initModel(fun_1.default);
 const getregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    console.log(id);
+    console.log('si entro:', id);
     try {
         let registro = yield dp_datospersonales_1.dp_datospersonales.findOne({
             where: { f_rfc: id }

@@ -13,7 +13,7 @@ dp_fum_datos_generales.initModel(sequelizefun);
 
 export const getregistro = async (req: Request, res: Response): Promise<any> => {
     const { id } = req.params;
-    console.log(id);
+    console.log('si entro:',id);
   try {
    
     let registro: dp_datospersonales | dp_fum_datos_generales | null = await dp_datospersonales.findOne({ 

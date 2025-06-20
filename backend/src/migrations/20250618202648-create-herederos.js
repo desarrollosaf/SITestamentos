@@ -32,7 +32,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       parentesco: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       porcentaje: {
         type: Sequelize.STRING
