@@ -48,7 +48,8 @@ Testigo.init(
       type: DataTypes.UUID,
       allowNull: false,
     },
-    nombre_testigo: {
+    nombre_testigo
+    : {
       type: DataTypes.STRING,
       allowNull: true,
     },

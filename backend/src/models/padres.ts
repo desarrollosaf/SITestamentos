@@ -13,29 +13,29 @@ class Padre extends Model<
   InferAttributes<Padre>,
   InferCreationAttributes<Padre>
 > {
-  declare id: CreationOptional<number>;
+  declare id: CreationOptional<string>;
   declare solicitudId: ForeignKey<string>;
-  declare tipo: string;
-  declare nombre: string;
-  declare primer_apellido: string;
-  declare segundo_apellido: string; 
-  declare vive: boolean;
-  declare nacionalidad: string; 
-  declare especifique_nacionalidad: string;
+  declare tipo: string | null;
+  declare nombre: string | null;
+  declare primer_apellido: string | null;
+  declare segundo_apellido: string | null;
+  declare vive: boolean | null;
+  declare nacionalidad: boolean | null;
+  declare especifique_nacionalidad: string | null;
   declare updatedAt: CreationOptional<Date>;
 }
 
 Padre.init(
   {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
+     type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
       allowNull: false,
     },
     solicitudId: {
       type: DataTypes.UUID,
-      allowNull: false,
+      allowNull: true,
     },
     tipo: {
       type: DataTypes.STRING,
@@ -55,7 +55,7 @@ Padre.init(
     },
     vive: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
     nacionalidad: {
       type: DataTypes.BOOLEAN,

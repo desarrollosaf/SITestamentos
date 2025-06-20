@@ -20,7 +20,7 @@ class Heredero extends Model<
   declare primer_apellido_heredero: string;
   declare segundo_apellido_heredero: string;
   declare edad: number;
-  declare parentesco: number;
+  declare parentesco: string;
   declare porcentaje: string;
   declare derecho_acrecer: boolean;
 
