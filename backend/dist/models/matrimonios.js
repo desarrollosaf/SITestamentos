@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const testamentosConnection_1 = __importDefault(require("../database/testamentosConnection"));
+const hijos_1 = __importDefault(require("./hijos"));
 class Matrimonio extends sequelize_1.Model {
 }
 Matrimonio.init({
@@ -55,4 +56,14 @@ Matrimonio.init({
 //   onDelete: 'CASCADE',
 //   onUpdate: 'CASCADE',
 // });
+// Solicitud.hasMany(Hijo, {     
+//   foreignKey: 'matrimonioId',
+//   as: 'hijos',
+// });
+Matrimonio.hasMany(hijos_1.default, {
+    foreignKey: 'matrimonioId',
+    as: 'hijos',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
 exports.default = Matrimonio;

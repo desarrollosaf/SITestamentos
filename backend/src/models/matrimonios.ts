@@ -9,6 +9,7 @@ import {
 
 import sequelize from '../database/testamentosConnection';
 import Solicitud from './solicitud';
+import Hijo from './hijos';
 
 class Matrimonio extends Model<
   InferAttributes<Matrimonio>,
@@ -81,5 +82,17 @@ Matrimonio.init(
 //   onDelete: 'CASCADE',
 //   onUpdate: 'CASCADE',
 // });
+
+// Solicitud.hasMany(Hijo, {     
+//   foreignKey: 'matrimonioId',
+//   as: 'hijos',
+// });
+
+Matrimonio.hasMany(Hijo, {
+  foreignKey: 'matrimonioId',
+  as: 'hijos',
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
 
 export default Matrimonio;

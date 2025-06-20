@@ -194,7 +194,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
     if(data.nombre_dos_nup){
           let segundasnupcias = await Matrimonio.create({
             solicitudId: solicitud.id,
-            orden: 1,
+            orden: 2,
             nombre: data.nombre_dos_nup,
             primer_apellido:  data.primer_apellido_dos_nup,
             segundo_apellido:  data.segundo_apellido_dos_nup,
@@ -397,62 +397,79 @@ export const getsolicitud = async (req: Request, res: Response): Promise<any> =>
 
     try {
         let solicitudes = await Solicitud.findAll({
-            where: {id: id},
-            include: [
-                {
+            where: { id: id },
+                include: [
+                    {
                     model: Testigo,
                     as: 'testigos',
-                },
-                {
+                    },
+                    {
                     model: Albacea,
                     as: 'albacea',
-                },
-                {
+                    },
+                    {
                     model: Documento,
                     as: 'documentos',
-                     include: [
+                    include: [
                         {
                         model: TipoDocumento,
                         as: 'tipo_doc',
                         },
-                     ]
-                },
-                {
+                    ],
+                    },
+                    {
                     model: Heredero,
                     as: 'herederos',
-                },
-                {
+                    },
+                    {
                     model: HerederoSustituto,
                     as: 'herederos_susti',
-                },
-                {
+                    },
+                    {
                     model: Hijo,
                     as: 'hijos',
-                     include: [
-                        {
-                        model: Matrimonio,
-                        as: 'matrimonio',
-                        },
-                     ]
-                },
-                {
+                    },
+                    // Primeras nupcias (orden 1)
+                    {
                     model: Matrimonio,
-                    as: 'matrimonios',
-                },
-                {
+                    as: 'primeras_nupcias',
+                    where: { orden: 1 },
+                    required: false,
+                    include: [
+                        {
+                        model: Hijo,
+                        as: 'hijos',
+                        },
+                    ],
+                    },
+                    // Segundas nupcias (orden 2)
+                    {
+                    model: Matrimonio,
+                    as: 'segundas_nupcias',
+                    where: { orden: 2 },
+                    required: false,
+                    include: [
+                        {
+                        model: Hijo,
+                        as: 'hijos',
+                        },
+                    ],
+                    },
+                    {
                     model: Padre,
                     as: 'padres',
-                },
-                {
+                    },
+                    {
                     model: TestamentoPasados,
                     as: 'testamentos_pasados',
-                },
-                {
+                    },
+                    {
                     model: TutorDescendiente,
                     as: 'tutor_descendientes',
-                },
-            ]
-        });
+                    },
+                ],
+            });
+
 
         // Cargar datos personales manualmente desde otra base de datos
         for (const solicitud of solicitudes) {
