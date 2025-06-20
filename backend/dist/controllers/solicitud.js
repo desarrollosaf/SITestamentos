@@ -37,11 +37,11 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(data);
     const Upassword = data.f_rfc;
     const UpasswordHash = yield bcrypt_1.default.hash(Upassword, 10);
-    const newUser = yield user_1.default.create({
-        name: data.f_rfc,
-        email: data.correo_per,
-        password: UpasswordHash,
-    });
+    /*const newUser = await User.create({
+      name:  data.f_rfc,
+      email:  data.correo_per,
+      password: UpasswordHash,
+    });*/
     let registro = yield dp_datospersonales_1.dp_datospersonales.findOne({
         where: { f_curp: data.f_curp }
     });
@@ -97,7 +97,7 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let solicitud = null;
     try {
         solicitud = yield solicitud_1.default.create({
-            userId: newUser.id,
+            userId: data.f_rfc,
             es_primer_testamento: data.primer_testamento,
             sabe_leer: data.sabe_leer,
             sabe_escribir: data.sabe_escribir,
@@ -119,7 +119,7 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const documentosFields = [
         'acta_nacimiento', 'acta_matrimonio', 'identificacion', 'curp',
         'comprobante_domicilio', 'certificado_privado', 'certificado_publico',
-        'ine', 'comprobante_residencia'
+        'ine', 'comprobante_residencia', 'constancia_situacion_fiscal'
     ];
     const documentosPaths = {};
     for (const field of documentosFields) {
