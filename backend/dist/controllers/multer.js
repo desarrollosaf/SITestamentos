@@ -9,7 +9,7 @@ const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 // Campos base individuales (1 archivo por campo)
 const baseFields = [
-    'constancia_fiscal',
+    'constancia_situacion_fiscal',
     'certificado_publico',
     'acta_matrimonio',
     'certificado_privado',
