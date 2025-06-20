@@ -1887,15 +1887,14 @@ campo es
             <div class="row">
               <div class="col-sm-6">
                 <div class="mb-3 d-flex flex-column h-100">
-                  <label class="form-label1 negri">Identificación oficial vigente (Credencial para votar, pasaporte o
-                    cédula profesional):*</label>
+                  <label class="form-label1 negri">INE:*</label>
                   <div class="position-relative d-flex flex-column flex-grow-1"
                     style="min-height: 10px; padding-bottom: 1rem;">
-                    <input class="form-control" type="file" id="identificacion" accept="application/pdf"
-                      #inputidentificacion (change)="onFileSelect($event, 'identificacion')" />
-                    <div *ngIf="documentos['identificacion']" style="position: absolute; bottom: 0; left: 0;">
+                    <input class="form-control" type="file" id="ine" accept="application/pdf"
+                      #inputine (change)="onFileSelect($event, 'ine')" />
+                    <div *ngIf="documentos['ine']" style="position: absolute; bottom: 0; left: 0;">
                       <button type="button" class="boton-danger-sm"
-                        (click)="eliminarArchivo('identificacion', inputidentificacion)">
+                        (click)="eliminarArchivo('ine', inputine)">
                         <i class="feather icon-trash btn-icon-prepend"></i>
                         Eliminar archivo
                       </button>
@@ -1932,6 +1931,22 @@ campo es
                       (change)="onFileSelect($event, 'curp')" />
                     <div *ngIf="documentos['curp']" style="position: absolute; bottom: 0; left: 0;">
                       <button type="button" class="boton-danger-sm" (click)="eliminarArchivo('curp', inputcurp)">
+                        <i class="feather icon-trash btn-icon-prepend"></i>
+                        Eliminar archivo
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+               <div class="col-sm-6">
+                <div class="mb-3 d-flex flex-column h-100">
+                  <label class="form-label1 negri">Constancia de situación fiscal:*</label>
+                  <div class="position-relative d-flex flex-column flex-grow-1"
+                    style="min-height: 10px; padding-bottom: 1rem;">
+                    <input class="form-control" type="file" id="constancia_situacion_fiscal" accept="application/pdf" #inputconstancia_situacion_fiscal
+                      (change)="onFileSelect($event, 'constancia_situacion_fiscal')" />
+                    <div *ngIf="documentos['constancia_situacion_fiscal']" style="position: absolute; bottom: 0; left: 0;">
+                      <button type="button" class="boton-danger-sm" (click)="eliminarArchivo('constancia_situacion_fiscal', inputconstancia_situacion_fiscal)">
                         <i class="feather icon-trash btn-icon-prepend"></i>
                         Eliminar archivo
                       </button>

@@ -38,11 +38,12 @@ export class RegistroComponent {
   documentos: { [key: string]: File | null } = {
     acta_nacimiento: null,
     acta_matrimonio: null,
-    identificacion: null,
+    ine: null,
     curp: null,
     comprobante_domicilio: null,
     certificado_publico: null,
     certificado_privado: null,
+    constancia_situacion_fiscal: null,
     // t1_identificacion: null,
     // t1_curp: null,
     // t1_comprobante_domicilio: null,
