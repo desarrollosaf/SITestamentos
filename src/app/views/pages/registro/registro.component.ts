@@ -890,6 +890,7 @@ export class RegistroComponent {
 
     for (const key in this.documentos) {
       if (this.documentos[key]) {
+        console.log(key)
         formData.append(key, this.documentos[key] as File);
       }
     }

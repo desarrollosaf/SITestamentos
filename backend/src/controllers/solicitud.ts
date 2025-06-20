@@ -23,8 +23,8 @@ dp_datospersonales.initModel(sequelizefun);
 
 export const saveinfo = async (req: Request, res: Response): Promise<any> => {
     const data  = req.body;
-    // console.log(data);
-    // return 200 
+    console.log('save');
+    console.log(data);
     const Upassword = data.f_rfc;
     const UpasswordHash = await bcrypt.hash(Upassword, 10);
     const newUser = await User.create({
@@ -78,7 +78,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
              estadocivil_id: data.estadocivil_id
             });
     }
-     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
     const f_curp = data.f_curp;
 
     const buildPath = (field: string): string | null => {
@@ -86,24 +86,28 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
         return file ? path.join('storage', f_curp, file.filename) : null;
     };
 
-    const solicituddata: any = {
-        userId: newUser.id,
-        fecha_envio: new Date(),
-        primer_testamento: data.primer_testamento,
-        sabe_leer: data.sabe_leer,
-        sabe_escribir: data.sabe_escribir,
-        puede_hablar: data.puede_hablar,
-        puede_ver: data.puede_ver,
-        puede_oir: data.puede_oir,
-        dificultad_comunicacion: data.presenta_dificultad,
-        heredero_menor_edad: data.menor_de_edad,  
-        documento_identifica: data.documento_identifica,
-        numero_documento_identifica: data.numero_documento_identifica,
-        nacionalidad: data.nacionalidad_serv,
-        indique_nacionalidad_serv: data.indique_nacionalidad_serv,
-        documento_residencia: data.documento_residencia_serv,
-    };
-    const solicitud = await Solicitud.create(solicituddata);
+    let solicitud: any | null = null;
+    try {
+        solicitud = await Solicitud.create({
+            userId: newUser.id,
+            es_primer_testamento: data.primer_testamento,
+            sabe_leer: data.sabe_leer,
+            sabe_escribir: data.sabe_escribir,
+            puede_hablar: data.puede_hablar,
+            puede_ver: data.puede_ver,
+            puede_oir: data.puede_oir,
+            heredero_menor_edad: data.menor_de_edad,  
+            documento_identifica: data.documento_identifica,
+            numero_documento_identifica: data.numero_documento_identifica,
+            nacionalidad: data.nacionalidad_serv,
+            //indique_nacionalidad_serv: data.indique_nacionalidad_serv,
+            //documento_residencia: data.documento_residencia_serv,
+        });    
+    } catch (error) {
+        console.error('❌ Error al crear la solicitud:', error);
+
+    }
+    //const solicitud = await Solicitud.create(solicituddata);
 
     const documentosFields = [
         'acta_nacimiento', 'acta_matrimonio', 'identificacion', 'curp',
