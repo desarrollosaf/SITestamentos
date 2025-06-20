@@ -103,7 +103,7 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Edad:</label>
-                  <input formControlName="edad" type="text" class="form-control input-simulado-disabled"
+                  <input formControlName="edad" type="number" class="form-control input-simulado-disabled"
                     [readonly]="true" />
                 </div>
               </div>
@@ -119,11 +119,6 @@
                 </div>
               </div>
             </div>
-
-            <!-- <div class="row">
-
-</div> -->
-
             <div class="row">
               <div class="col-sm-4">
                 <div class="mb-3">
@@ -274,7 +269,7 @@
             </div>
 
             <div class="row">
-               <div class="col-sm-4">
+              <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Nacionalidad:*</label>
                   <select class="form-select" id="nacionalidad_serv" formControlName="nacionalidad_serv">
@@ -296,7 +291,7 @@
                     <label class="form-label negri">Indique nacionalidad:</label>
                     <input formControlName="indique_nacionalidad_serv" type="text" class="form-control"
                       placeholder="Ejemplo: 123456789" />
-                      <small class="colorsm"
+                    <small class="colorsm"
                       *ngIf="formTestamento.get('indique_nacionalidad_serv')?.hasError('required') && formTestamento.get('indique_nacionalidad_serv')?.touched">Este
                       campo es
                       <strong>requerido</strong></small>
@@ -305,7 +300,8 @@
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri">Cuenta con documento de residencia:</label>
-                    <select class="form-select" id="documento_residencia_serv" formControlName="documento_residencia_serv">
+                    <select class="form-select" id="documento_residencia_serv"
+                      formControlName="documento_residencia_serv">
                       <option *ngFor="let vives of primerTestamento" [value]="vives.id">
                         {{ vives.name }}
                       </option>
@@ -321,7 +317,8 @@
                   <div class="mb-3 d-flex flex-column h-100">
                     <label class="form-label negri" style="min-height: 1rem;">Adjunta la copia de tu documento de
                       residencia:</label>
-                    <div class="position-relative d-flex flex-column flex-grow-1" style="min-height: 10px; padding-bottom: 1rem;">
+                    <div class="position-relative d-flex flex-column flex-grow-1"
+                      style="min-height: 10px; padding-bottom: 1rem;">
                       <input class="form-control" type="file" id="comprobante_residencia" accept="application/pdf"
                         #inputcomprobante_residencia (change)="onFileSelect($event, 'comprobante_residencia')" />
                       <div *ngIf="documentos['comprobante_residencia']" style="position: absolute; bottom: 0; left: 0;">
@@ -595,47 +592,47 @@ campo es
                   class="row border p-3 mb-3 rounded bg-light">
                   <div class="row">
                     <div class="col-sm-4">
-                    <div class="mb-3">
-                      <label class="form-label negri">Nombre(s):*</label>
-                      <input formControlName="hijo_nombre_primer_nup" type="text" class="form-control"
-                        placeholder="Ejemplo: Sofía" />
+                      <div class="mb-3">
+                        <label class="form-label negri">Nombre(s):*</label>
+                        <input formControlName="hijo_nombre_primer_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: Sofía" />
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="col-sm-4">
-                    <div class="mb-3">
-                      <label class="form-label negri">Primer apellido:*</label>
-                      <input formControlName="hijo_primer_apellido_primer_nup" type="text" class="form-control"
-                        placeholder="Ejemplo: Jiménez" />
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Primer apellido:*</label>
+                        <input formControlName="hijo_primer_apellido_primer_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: Jiménez" />
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="col-sm-4">
-                    <div class="mb-3">
-                      <label class="form-label negri">Segundo apellido:*</label>
-                      <input formControlName="hijo_segundo_apellido_primer_nup" type="text" class="form-control"
-                        placeholder="Ejemplo: González" />
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Segundo apellido:*</label>
+                        <input formControlName="hijo_segundo_apellido_primer_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: González" />
+                      </div>
                     </div>
                   </div>
-                  </div>
-               <div class="row">
-                   <div class="col-sm-4">
-                    <div class="mb-3">
-                      <label class="form-label negri">Edad*</label>
-                      <input formControlName="hijo_edad_primer_nup" type="text" class="form-control"
-                        placeholder="Ejemplo: 18" />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Edad*</label>
+                        <input formControlName="hijo_edad_primer_nup" type="number" class="form-control"
+                          placeholder="Ejemplo: 18" />
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="col-sm-4">
-                    <div class="mb-3">
-                      <label class="form-label negri">Vive o Finado:*</label>
-                      <input formControlName="hijo_vf_primer_nup" type="text" class="form-control"
-                        placeholder="Ejemplo: Vivo" />
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Vive o Finado:*</label>
+                        <input formControlName="hijo_vf_primer_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: Vivo" />
+                      </div>
                     </div>
-                  </div>
 
-               </div>
+                  </div>
 
 
                   <div class="col-12 text-center">
@@ -742,7 +739,8 @@ campo es
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Nombre(s):*</label>
-                        <input formControlName="hijo_nombre_dos_nup" type="text" class="form-control" placeholder="Ejemplo: Sofía" />
+                        <input formControlName="hijo_nombre_dos_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: Sofía" />
                       </div>
                     </div>
 
@@ -768,13 +766,15 @@ campo es
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Edad*</label>
-                        <input formControlName="hijo_edad_dos_nup" type="text" class="form-control" placeholder="Ejemplo: 18" />
+                        <input formControlName="hijo_edad_dos_nup" type="number" class="form-control"
+                          placeholder="Ejemplo: 18" />
                       </div>
                     </div>
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Vive o Finado:*</label>
-                        <input formControlName="hijo_vf_dos_nup" type="text" class="form-control" placeholder="Ejemplo: Vivo" />
+                        <input formControlName="hijo_vf_dos_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: Vivo" />
                       </div>
                     </div>
                   </div>
@@ -836,7 +836,8 @@ campo es
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Nombre(s):*</label>
-                        <input formControlName="fuera_hijo_nombre" type="text" class="form-control" placeholder="Ejemplo: Sofía" />
+                        <input formControlName="fuera_hijo_nombre" type="text" class="form-control"
+                          placeholder="Ejemplo: Sofía" />
                       </div>
                     </div>
 
@@ -860,13 +861,15 @@ campo es
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Edad*</label>
-                        <input formControlName="fuera_hijo_edad" type="text" class="form-control" placeholder="Ejemplo: 18" />
+                        <input formControlName="fuera_hijo_edad" type="number" class="form-control"
+                          placeholder="Ejemplo: 18" />
                       </div>
                     </div>
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Vive o Finado:*</label>
-                        <input formControlName="fuera_hijo_vf" type="text" class="form-control" placeholder="Ejemplo: Vivo" />
+                        <input formControlName="fuera_hijo_vf" type="text" class="form-control"
+                          placeholder="Ejemplo: Vivo" />
                       </div>
                     </div>
                   </div>
@@ -1065,6 +1068,10 @@ campo es
                         <label class="form-label negri">Nombre(s):*</label>
                         <input formControlName="nombre_testigo" type="text" class="form-control"
                           placeholder="Ejemplo: Sofía" />
+                        <small class="colorsm"
+                          *ngIf="testigosF.at(i).get('nombre_testigo')?.hasError('required') && testigosF.at(i).get('nombre_testigo')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
 
@@ -1073,6 +1080,10 @@ campo es
                         <label class="form-label negri">Primer apellido:*</label>
                         <input formControlName="primer_apellido_testigo" type="text" class="form-control"
                           placeholder="Ejemplo: Jiménez" />
+                        <small class="colorsm"
+                          *ngIf="testigosF.at(i).get('primer_apellido_testigo')?.hasError('required') && testigosF.at(i).get('primer_apellido_testigo')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
 
@@ -1081,6 +1092,10 @@ campo es
                         <label class="form-label negri">Segundo apellido:*</label>
                         <input formControlName="segundo_apellido_testigo" type="text" class="form-control"
                           placeholder="Ejemplo: González" />
+                        <small class="colorsm"
+                          *ngIf="testigosF.at(i).get('segundo_apellido_testigo')?.hasError('required') && testigosF.at(i).get('segundo_apellido_testigo')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
                   </div>
@@ -1090,6 +1105,10 @@ campo es
                         <label class="form-label negri">Nacionalidad:*</label>
                         <input formControlName="nacionalidad_testigo" type="text" class="form-control"
                           placeholder="Ejemplo: 18 años" />
+                        <small class="colorsm"
+                          *ngIf="testigosF.at(i).get('nacionalidad_testigo')?.hasError('required') && testigosF.at(i).get('nacionalidad_testigo')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
 
@@ -1098,6 +1117,10 @@ campo es
                         <label class="form-label negri">fecha de nacimiento:*</label>
                         <input formControlName="fecha_nacimiento_testigo" type="date" class="form-control"
                           placeholder="Ejemplo: Hijo" />
+                        <small class="colorsm"
+                          *ngIf="testigosF.at(i).get('fecha_nacimiento_testigo')?.hasError('required') && testigosF.at(i).get('fecha_nacimiento_testigo')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
                     <div class="col-sm-4">
@@ -1105,6 +1128,10 @@ campo es
                         <label class="form-label negri">Lugar de nacimiento:*</label>
                         <input formControlName="lugar_nacimiento_testigo" type="text" class="form-control"
                           placeholder="Ejemplo: 100" />
+                        <small class="colorsm"
+                          *ngIf="testigosF.at(i).get('lugar_nacimiento_testigo')?.hasError('required') && testigosF.at(i).get('lugar_nacimiento_testigo')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
                   </div>
@@ -1115,6 +1142,10 @@ campo es
                         <label class="form-label negri">Curp:*</label>
                         <input formControlName="curp_testigo" type="text" class="form-control"
                           placeholder="Ejemplo: 18 años" />
+                        <small class="colorsm"
+                          *ngIf="testigosF.at(i).get('curp_testigo')?.hasError('required') && testigosF.at(i).get('curp_testigo')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
 
@@ -1123,6 +1154,10 @@ campo es
                         <label class="form-label negri">Estado civil:*</label>
                         <input formControlName="estado_civil_testigo" type="text" class="form-control"
                           placeholder="Ejemplo: Hijo" />
+                        <small class="colorsm"
+                          *ngIf="testigosF.at(i).get('estado_civil_testigo')?.hasError('required') && testigosF.at(i).get('estado_civil_testigo')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
                     <div class="col-sm-4">
@@ -1130,6 +1165,10 @@ campo es
                         <label class="form-label negri">Ocupación:*</label>
                         <input formControlName="ocupacion_testigo" type="text" class="form-control"
                           placeholder="Ejemplo: 100" />
+                        <small class="colorsm"
+                          *ngIf="testigosF.at(i).get('ocupacion_testigo')?.hasError('required') && testigosF.at(i).get('ocupacion_testigo')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
                   </div>
@@ -1141,38 +1180,45 @@ campo es
                         <label class="form-label negri">Domicilio:*</label>
                         <input formControlName="domicilio_testigo" type="text" class="form-control"
                           placeholder="Ejemplo: 18 años" />
-                      </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                      <div class="mb-3">
-                        <label class="form-label negri">Estado civil:*</label>
-                        <input formControlName="estado_civil_testigo" type="text" class="form-control"
-                          placeholder="Ejemplo: Hijo" />
+                        <small class="colorsm"
+                          *ngIf="testigosF.at(i).get('domicilio_testigo')?.hasError('required') && testigosF.at(i).get('domicilio_testigo')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Codigo postal:*</label>
-                        <input formControlName="cp_testigo" type="text" class="form-control"
+                        <input formControlName="cp_testigo" type="number" class="form-control"
                           placeholder="Ejemplo: 100" />
+                        <small class="colorsm"
+                          *ngIf="testigosF.at(i).get('cp_testigo')?.hasError('required') && testigosF.at(i).get('cp_testigo')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Télefono:*</label>
+                        <input formControlName="telefono_testigo" type="text" class="form-control"
+                          placeholder="Ejemplo: 18 años" />
+                        <small class="colorsm"
+                          *ngIf="testigosF.at(i).get('telefono_testigo')?.hasError('required') && testigosF.at(i).get('telefono_testigo')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label class="form-label negri">Télefono:*</label>
-                        <input formControlName="telefono_testigo" type="text" class="form-control"
-                          placeholder="Ejemplo: 18 años" />
-                      </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                      <div class="mb-3">
                         <label class="form-label negri">RFC:*</label>
                         <input formControlName="rfc_testigo" type="text" class="form-control"
                           placeholder="Ejemplo: Hijo" />
+                        <small class="colorsm"
+                          *ngIf="testigosF.at(i).get('rfc_testigo')?.hasError('required') && testigosF.at(i).get('rfc_testigo')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
                   </div>
@@ -1588,6 +1634,10 @@ campo es
                         <label class="form-label negri">Nombre(s):*</label>
                         <input formControlName="nombre_heredero" type="text" class="form-control"
                           placeholder="Ejemplo: Sofía" />
+                        <small class="colorsm"
+                          *ngIf="herederos.at(i).get('nombre_heredero')?.hasError('required') && herederos.at(i).get('nombre_heredero')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
 
@@ -1596,6 +1646,10 @@ campo es
                         <label class="form-label negri">Primer apellido:*</label>
                         <input formControlName="primer_apellido_heredero" type="text" class="form-control"
                           placeholder="Ejemplo: Jiménez" />
+                        <small class="colorsm"
+                          *ngIf="herederos.at(i).get('primer_apellido_heredero')?.hasError('required') && herederos.at(i).get('primer_apellido_heredero')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
 
@@ -1604,6 +1658,10 @@ campo es
                         <label class="form-label negri">Segundo apellido:*</label>
                         <input formControlName="segundo_apellido_heredero" type="text" class="form-control"
                           placeholder="Ejemplo: González" />
+                        <small class="colorsm"
+                          *ngIf="herederos.at(i).get('segundo_apellido_heredero')?.hasError('required') && herederos.at(i).get('segundo_apellido_heredero')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
                   </div>
@@ -1611,8 +1669,12 @@ campo es
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Edad:*</label>
-                        <input formControlName="edad_heredero" type="text" class="form-control"
+                        <input formControlName="edad_heredero" type="number" class="form-control"
                           placeholder="Ejemplo: 18 años" />
+                        <small class="colorsm"
+                          *ngIf="herederos.at(i).get('edad_heredero')?.hasError('required') && herederos.at(i).get('edad_heredero')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
 
@@ -1621,6 +1683,10 @@ campo es
                         <label class="form-label negri">Parentesco:*</label>
                         <input formControlName="parentesco_heredero" type="text" class="form-control"
                           placeholder="Ejemplo: Hijo" />
+                        <small class="colorsm"
+                          *ngIf="herederos.at(i).get('parentesco_heredero')?.hasError('required') && herederos.at(i).get('parentesco_heredero')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
                     <div class="col-sm-4">
@@ -1628,6 +1694,10 @@ campo es
                         <label class="form-label negri">Porcentaje:*</label>
                         <input formControlName="porcentaje_heredero" type="number" class="form-control"
                           placeholder="Ejemplo: 100" />
+                        <small class="colorsm"
+                          *ngIf="herederos.at(i).get('porcentaje_heredero')?.hasError('required') && herederos.at(i).get('porcentaje_heredero')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
                   </div>
@@ -1675,17 +1745,21 @@ campo es
 
 
 
-    <div class="row">
+            <div class="row">
               <div formArrayName="herederoSustituto">
                 <div *ngFor="let hijo of herederoSustit.controls; let i = index" [formGroupName]="i"
                   class="row border p-3 mb-3 rounded bg-light">
                   <div class="row">
-                     <p>Heredero sustituto</p>
+                    <p>Heredero sustituto</p>
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Nombre(s):*</label>
                         <input formControlName="nombre_sustituto" type="text" class="form-control"
                           placeholder="Ejemplo: Sofía" />
+                        <small class="colorsm"
+                          *ngIf="herederoSustit.at(i).get('nombre_sustituto')?.hasError('required') && herederoSustit.at(i).get('nombre_sustituto')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
 
@@ -1694,6 +1768,10 @@ campo es
                         <label class="form-label negri">Primer apellido:*</label>
                         <input formControlName="primer_apellido_sustituto" type="text" class="form-control"
                           placeholder="Ejemplo: Jiménez" />
+                        <small class="colorsm"
+                          *ngIf="herederoSustit.at(i).get('primer_apellido_sustituto')?.hasError('required') && herederoSustit.at(i).get('primer_apellido_sustituto')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
 
@@ -1702,16 +1780,24 @@ campo es
                         <label class="form-label negri">Segundo apellido:*</label>
                         <input formControlName="segundo_apellido_sustituto" type="text" class="form-control"
                           placeholder="Ejemplo: González" />
+                        <small class="colorsm"
+                          *ngIf="herederoSustit.at(i).get('segundo_apellido_sustituto')?.hasError('required') && herederoSustit.at(i).get('segundo_apellido_sustituto')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
                   </div>
                   <div class="row">
-                      <p>Heredero a sustituir</p>
+                    <p>Heredero a sustituir</p>
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Nombre(s):*</label>
                         <input formControlName="nombre_a_sustituir" type="text" class="form-control"
                           placeholder="Ejemplo: Sofía" />
+                        <small class="colorsm"
+                          *ngIf="herederoSustit.at(i).get('nombre_a_sustituir')?.hasError('required') && herederoSustit.at(i).get('nombre_a_sustituir')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
 
@@ -1720,6 +1806,10 @@ campo es
                         <label class="form-label negri">Primer apellido:*</label>
                         <input formControlName="primer_apellido_a_sustituir" type="text" class="form-control"
                           placeholder="Ejemplo: Jiménez" />
+                        <small class="colorsm"
+                          *ngIf="herederoSustit.at(i).get('primer_apellido_a_sustituir')?.hasError('required') && herederoSustit.at(i).get('primer_apellido_a_sustituir')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
 
@@ -1728,12 +1818,16 @@ campo es
                         <label class="form-label negri">Segundo apellido:*</label>
                         <input formControlName="segundo_apellido_a_sustituir" type="text" class="form-control"
                           placeholder="Ejemplo: González" />
+                        <small class="colorsm"
+                          *ngIf="herederoSustit.at(i).get('segundo_apellido_a_sustituir')?.hasError('required') && herederoSustit.at(i).get('segundo_apellido_a_sustituir')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
                       </div>
                     </div>
                   </div>
                   <div class="col-12 text-center">
-                    <button style="background-color: #c82333; color: white;" type="button" (click)="eliminarSustituto(i)"
-                      class="btn btn-sm mt-2">
+                    <button style="background-color: #c82333; color: white;" type="button"
+                      (click)="eliminarSustituto(i)" class="btn btn-sm mt-2">
                       🗑️ Eliminar sustituto
                     </button>
                   </div>
@@ -1890,11 +1984,10 @@ campo es
                   <label class="form-label1 negri">INE:*</label>
                   <div class="position-relative d-flex flex-column flex-grow-1"
                     style="min-height: 10px; padding-bottom: 1rem;">
-                    <input class="form-control" type="file" id="ine" accept="application/pdf"
-                      #inputine (change)="onFileSelect($event, 'ine')" />
+                    <input class="form-control" type="file" id="ine" accept="application/pdf" #inputine
+                      (change)="onFileSelect($event, 'ine')" />
                     <div *ngIf="documentos['ine']" style="position: absolute; bottom: 0; left: 0;">
-                      <button type="button" class="boton-danger-sm"
-                        (click)="eliminarArchivo('ine', inputine)">
+                      <button type="button" class="boton-danger-sm" (click)="eliminarArchivo('ine', inputine)">
                         <i class="feather icon-trash btn-icon-prepend"></i>
                         Eliminar archivo
                       </button>
@@ -1938,15 +2031,18 @@ campo es
                   </div>
                 </div>
               </div>
-               <div class="col-sm-6">
+              <div class="col-sm-6">
                 <div class="mb-3 d-flex flex-column h-100">
                   <label class="form-label1 negri">Constancia de situación fiscal:*</label>
                   <div class="position-relative d-flex flex-column flex-grow-1"
                     style="min-height: 10px; padding-bottom: 1rem;">
-                    <input class="form-control" type="file" id="constancia_situacion_fiscal" accept="application/pdf" #inputconstancia_situacion_fiscal
+                    <input class="form-control" type="file" id="constancia_situacion_fiscal" accept="application/pdf"
+                      #inputconstancia_situacion_fiscal
                       (change)="onFileSelect($event, 'constancia_situacion_fiscal')" />
-                    <div *ngIf="documentos['constancia_situacion_fiscal']" style="position: absolute; bottom: 0; left: 0;">
-                      <button type="button" class="boton-danger-sm" (click)="eliminarArchivo('constancia_situacion_fiscal', inputconstancia_situacion_fiscal)">
+                    <div *ngIf="documentos['constancia_situacion_fiscal']"
+                      style="position: absolute; bottom: 0; left: 0;">
+                      <button type="button" class="boton-danger-sm"
+                        (click)="eliminarArchivo('constancia_situacion_fiscal', inputconstancia_situacion_fiscal)">
                         <i class="feather icon-trash btn-icon-prepend"></i>
                         Eliminar archivo
                       </button>
@@ -1958,16 +2054,17 @@ campo es
 
             <br>
             <!-- **********************************ngIf="mostrarExtraInfo"*****************************AQUI VA EL DIV DE 60+************************************************************** -->
-              <!-- **************************************************************AQUI VA EL DIV DE 60+************************************************************** -->
-                <!-- **************************************************************AQUI VA EL DIV DE 60+************************************************************** -->
+            <!-- **************************************************************AQUI VA EL DIV DE 60+************************************************************** -->
+            <!-- **************************************************************AQUI VA EL DIV DE 60+************************************************************** -->
             <div *ngIf="mostrarExtraInfo">
               <div>
                 <h5 class="titulo">
-                  En caso de ser adulto mayor o que su estado de salud así lo requiera, o si es sordo o invidente, o si no
+                  En caso de ser adulto mayor o que su estado de salud así lo requiera, o si es sordo o invidente, o si
+                  no
                   sabe o no puede firmar o leer o si tiene alguna dificultad con lo antes mencionado:
                 </h5>
               </div>
-               <br>
+              <br>
               <div>
                 <h5 class="titulo2">A. Presentar dos Certificados médicos:</h5>
               </div>
@@ -2009,194 +2106,194 @@ campo es
                 </div>
               </div>
             </div>
-             <!-- **************************************************************AQUI TERMINA EL DIV DE 60+************************************************************** -->
-               <!-- **************************************************************AQUI TERMINA EL DIV DE 60+************************************************************** -->
-                 <!-- **************************************************************AQUI TERMINA EL DIV DE 60+************************************************************** -->
-  
-              <!-- <div>
-                <h5 class="titulo2">B. Presentar tres testigos que no sean familiares del testador o testadora, y
-                  proporcionar de cada testigo lo siguiente:</h5>
-              </div>
-              <br>
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column h-100">
-                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Identificación oficial vigente
-                      (Credencial para votar, pasaporte o
-                      cédula profesional):</label>
-                    <div class="position-relative d-flex flex-column flex-grow-1"
-                      style="min-height: 10px; padding-bottom: 1rem;">
-                      <input class="form-control" type="file" id="t1_identificacion" accept="application/pdf"
-                        #inputt1_identificacion (change)="onFileSelect($event, 't1_identificacion')" />
-                      <div *ngIf="documentos['t1_identificacion']" style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="boton-danger-sm"
-                          (click)="eliminarArchivo('t1_identificacion', inputt1_identificacion)">
-                          <i class="feather icon-trash btn-icon-prepend"></i>
-                          Eliminar archivo
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column h-100">
-                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave unica de registro de
-                      población:</label>
-                    <div class="position-relative d-flex flex-column flex-grow-1"
-                      style="min-height: 10px; padding-bottom: 1rem;">
-                      <input class="form-control" type="file" id="t1_curp" accept="application/pdf" #inputt1_curp
-                        (change)="onFileSelect($event, 't1_curp')" />
-                      <div *ngIf="documentos['t1_curp']" style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="boton-danger-sm"
-                          (click)="eliminarArchivo('t1_curp', inputt1_curp)">
-                          <i class="feather icon-trash btn-icon-prepend"></i>
-                          Eliminar archivo
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column h-100">
-                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de
-                      domicilio:</label>
-                    <div class="position-relative d-flex flex-column flex-grow-1"
-                      style="min-height: 10px; padding-bottom: 1rem;">
-                      <input class="form-control" type="file" id="t1_comprobante_domicilio" accept="application/pdf"
-                        #inputt1_comprobante_domicilio (change)="onFileSelect($event, 't1_comprobante_domicilio')" />
-                      <div *ngIf="documentos['t1_comprobante_domicilio']"
-                        style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="boton-danger-sm"
-                          (click)="eliminarArchivo('t1_comprobante_domicilio', inputt1_comprobante_domicilio)">
-                          <i class="feather icon-trash btn-icon-prepend"></i>
-                          Eliminar archivo
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <br>
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column h-100">
-                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Identificación oficial vigente
-                      (Credencial para votar, pasaporte o
-                      cédula profesional):</label>
-                    <div class="position-relative d-flex flex-column flex-grow-1"
-                      style="min-height: 10px; padding-bottom: 1rem;">
-                      <input class="form-control" type="file" id="t2_identificacion" accept="application/pdf"
-                        #inputt2_identificacion (change)="onFileSelect($event, 't2_identificacion')" />
-                      <div *ngIf="documentos['t2_identificacion']" style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="boton-danger-sm"
-                          (click)="eliminarArchivo('t2_identificacion', inputt2_identificacion)">
-                          <i class="feather icon-trash btn-icon-prepend"></i>
-                          Eliminar archivo
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column h-100">
-                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave unica de registro de
-                      población:</label>
-                    <div class="position-relative d-flex flex-column flex-grow-1"
-                      style="min-height: 10px; padding-bottom: 1rem;">
-                      <input class="form-control" type="file" id="t2_curp" accept="application/pdf" #inputt2_curp
-                        (change)="onFileSelect($event, 't2_curp')" />
-                      <div *ngIf="documentos['t2_curp']" style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="boton-danger-sm"
-                          (click)="eliminarArchivo('t2_curp', inputt2_curp)">
-                          <i class="feather icon-trash btn-icon-prepend"></i>
-                          Eliminar archivo
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column h-100">
-                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de
-                      domicilio:</label>
-                    <div class="position-relative d-flex flex-column flex-grow-1"
-                      style="min-height: 10px; padding-bottom: 1rem;">
-                      <input class="form-control" type="file" id="t2_comprobante_domicilio" accept="application/pdf"
-                        #inputt2_comprobante_domicilio (change)="onFileSelect($event, 't2_comprobante_domicilio')" />
-                      <div *ngIf="documentos['t2_comprobante_domicilio']"
-                        style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="boton-danger-sm"
-                          (click)="eliminarArchivo('t2_comprobante_domicilio', inputt2_comprobante_domicilio)">
-                          <i class="feather icon-trash btn-icon-prepend"></i>
-                          Eliminar archivo
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <br>
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column h-100">
-                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Identificación oficial vigente
-                      (Credencial para votar, pasaporte o
-                      cédula profesional):</label>
-                    <div class="position-relative d-flex flex-column flex-grow-1"
-                      style="min-height: 10px; padding-bottom: 1rem;">
-                      <input class="form-control" type="file" id="t3_identificacion" accept="application/pdf"
-                        #inputt3_identificacion (change)="onFileSelect($event, 't3_identificacion')" />
-                      <div *ngIf="documentos['t3_identificacion']" style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="boton-danger-sm"
-                          (click)="eliminarArchivo('t3_identificacion', inputt3_identificacion)">
-                          <i class="feather icon-trash btn-icon-prepend"></i>
-                          Eliminar archivo
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column h-100">
-                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave unica de registro de
-                      población:</label>
-                    <div class="position-relative d-flex flex-column flex-grow-1"
-                      style="min-height: 10px; padding-bottom: 1rem;">
-                      <input class="form-control" type="file" id="t3_curp" accept="application/pdf" #inputt3_curp
-                        (change)="onFileSelect($event, 't3_curp')" />
-                      <div *ngIf="documentos['t3_curp']" style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="boton-danger-sm"
-                          (click)="eliminarArchivo('t3_curp', inputt3_curp)">
-                          <i class="feather icon-trash btn-icon-prepend"></i>
-                          Eliminar archivo
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="mb-3 d-flex flex-column h-100">
-                    <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de
-                      domicilio:</label>
-                    <div class="position-relative d-flex flex-column flex-grow-1"
-                      style="min-height: 10px; padding-bottom: 1rem;">
-                      <input class="form-control" type="file" id="t3_comprobante_domicilio" accept="application/pdf"
-                        #inputt3_comprobante_domicilio (change)="onFileSelect($event, 't3_comprobante_domicilio')" />
-                      <div *ngIf="documentos['t3_comprobante_domicilio']"
-                        style="position: absolute; bottom: 0; left: 0;">
-                        <button type="button" class="boton-danger-sm"
-                          (click)="eliminarArchivo('t3_comprobante_domicilio', inputt3_comprobante_domicilio)">
-                          <i class="feather icon-trash btn-icon-prepend"></i>
-                          Eliminar archivo
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
+            <!-- **************************************************************AQUI TERMINA EL DIV DE 60+************************************************************** -->
+            <!-- **************************************************************AQUI TERMINA EL DIV DE 60+************************************************************** -->
+            <!-- **************************************************************AQUI TERMINA EL DIV DE 60+************************************************************** -->
+
+            <!-- <div>
+<h5 class="titulo2">B. Presentar tres testigos que no sean familiares del testador o testadora, y
+proporcionar de cada testigo lo siguiente:</h5>
+</div>
+<br>
+<div class="row">
+<div class="col-sm-4">
+<div class="mb-3 d-flex flex-column h-100">
+<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Identificación oficial vigente
+(Credencial para votar, pasaporte o
+cédula profesional):</label>
+<div class="position-relative d-flex flex-column flex-grow-1"
+style="min-height: 10px; padding-bottom: 1rem;">
+<input class="form-control" type="file" id="t1_identificacion" accept="application/pdf"
+#inputt1_identificacion (change)="onFileSelect($event, 't1_identificacion')" />
+<div *ngIf="documentos['t1_identificacion']" style="position: absolute; bottom: 0; left: 0;">
+<button type="button" class="boton-danger-sm"
+(click)="eliminarArchivo('t1_identificacion', inputt1_identificacion)">
+<i class="feather icon-trash btn-icon-prepend"></i>
+Eliminar archivo
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="col-sm-4">
+<div class="mb-3 d-flex flex-column h-100">
+<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave unica de registro de
+población:</label>
+<div class="position-relative d-flex flex-column flex-grow-1"
+style="min-height: 10px; padding-bottom: 1rem;">
+<input class="form-control" type="file" id="t1_curp" accept="application/pdf" #inputt1_curp
+(change)="onFileSelect($event, 't1_curp')" />
+<div *ngIf="documentos['t1_curp']" style="position: absolute; bottom: 0; left: 0;">
+<button type="button" class="boton-danger-sm"
+(click)="eliminarArchivo('t1_curp', inputt1_curp)">
+<i class="feather icon-trash btn-icon-prepend"></i>
+Eliminar archivo
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="col-sm-4">
+<div class="mb-3 d-flex flex-column h-100">
+<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de
+domicilio:</label>
+<div class="position-relative d-flex flex-column flex-grow-1"
+style="min-height: 10px; padding-bottom: 1rem;">
+<input class="form-control" type="file" id="t1_comprobante_domicilio" accept="application/pdf"
+#inputt1_comprobante_domicilio (change)="onFileSelect($event, 't1_comprobante_domicilio')" />
+<div *ngIf="documentos['t1_comprobante_domicilio']"
+style="position: absolute; bottom: 0; left: 0;">
+<button type="button" class="boton-danger-sm"
+(click)="eliminarArchivo('t1_comprobante_domicilio', inputt1_comprobante_domicilio)">
+<i class="feather icon-trash btn-icon-prepend"></i>
+Eliminar archivo
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<br>
+<div class="row">
+<div class="col-sm-4">
+<div class="mb-3 d-flex flex-column h-100">
+<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Identificación oficial vigente
+(Credencial para votar, pasaporte o
+cédula profesional):</label>
+<div class="position-relative d-flex flex-column flex-grow-1"
+style="min-height: 10px; padding-bottom: 1rem;">
+<input class="form-control" type="file" id="t2_identificacion" accept="application/pdf"
+#inputt2_identificacion (change)="onFileSelect($event, 't2_identificacion')" />
+<div *ngIf="documentos['t2_identificacion']" style="position: absolute; bottom: 0; left: 0;">
+<button type="button" class="boton-danger-sm"
+(click)="eliminarArchivo('t2_identificacion', inputt2_identificacion)">
+<i class="feather icon-trash btn-icon-prepend"></i>
+Eliminar archivo
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="col-sm-4">
+<div class="mb-3 d-flex flex-column h-100">
+<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave unica de registro de
+población:</label>
+<div class="position-relative d-flex flex-column flex-grow-1"
+style="min-height: 10px; padding-bottom: 1rem;">
+<input class="form-control" type="file" id="t2_curp" accept="application/pdf" #inputt2_curp
+(change)="onFileSelect($event, 't2_curp')" />
+<div *ngIf="documentos['t2_curp']" style="position: absolute; bottom: 0; left: 0;">
+<button type="button" class="boton-danger-sm"
+(click)="eliminarArchivo('t2_curp', inputt2_curp)">
+<i class="feather icon-trash btn-icon-prepend"></i>
+Eliminar archivo
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="col-sm-4">
+<div class="mb-3 d-flex flex-column h-100">
+<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de
+domicilio:</label>
+<div class="position-relative d-flex flex-column flex-grow-1"
+style="min-height: 10px; padding-bottom: 1rem;">
+<input class="form-control" type="file" id="t2_comprobante_domicilio" accept="application/pdf"
+#inputt2_comprobante_domicilio (change)="onFileSelect($event, 't2_comprobante_domicilio')" />
+<div *ngIf="documentos['t2_comprobante_domicilio']"
+style="position: absolute; bottom: 0; left: 0;">
+<button type="button" class="boton-danger-sm"
+(click)="eliminarArchivo('t2_comprobante_domicilio', inputt2_comprobante_domicilio)">
+<i class="feather icon-trash btn-icon-prepend"></i>
+Eliminar archivo
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<br>
+<div class="row">
+<div class="col-sm-4">
+<div class="mb-3 d-flex flex-column h-100">
+<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Identificación oficial vigente
+(Credencial para votar, pasaporte o
+cédula profesional):</label>
+<div class="position-relative d-flex flex-column flex-grow-1"
+style="min-height: 10px; padding-bottom: 1rem;">
+<input class="form-control" type="file" id="t3_identificacion" accept="application/pdf"
+#inputt3_identificacion (change)="onFileSelect($event, 't3_identificacion')" />
+<div *ngIf="documentos['t3_identificacion']" style="position: absolute; bottom: 0; left: 0;">
+<button type="button" class="boton-danger-sm"
+(click)="eliminarArchivo('t3_identificacion', inputt3_identificacion)">
+<i class="feather icon-trash btn-icon-prepend"></i>
+Eliminar archivo
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="col-sm-4">
+<div class="mb-3 d-flex flex-column h-100">
+<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave unica de registro de
+población:</label>
+<div class="position-relative d-flex flex-column flex-grow-1"
+style="min-height: 10px; padding-bottom: 1rem;">
+<input class="form-control" type="file" id="t3_curp" accept="application/pdf" #inputt3_curp
+(change)="onFileSelect($event, 't3_curp')" />
+<div *ngIf="documentos['t3_curp']" style="position: absolute; bottom: 0; left: 0;">
+<button type="button" class="boton-danger-sm"
+(click)="eliminarArchivo('t3_curp', inputt3_curp)">
+<i class="feather icon-trash btn-icon-prepend"></i>
+Eliminar archivo
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="col-sm-4">
+<div class="mb-3 d-flex flex-column h-100">
+<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de
+domicilio:</label>
+<div class="position-relative d-flex flex-column flex-grow-1"
+style="min-height: 10px; padding-bottom: 1rem;">
+<input class="form-control" type="file" id="t3_comprobante_domicilio" accept="application/pdf"
+#inputt3_comprobante_domicilio (change)="onFileSelect($event, 't3_comprobante_domicilio')" />
+<div *ngIf="documentos['t3_comprobante_domicilio']"
+style="position: absolute; bottom: 0; left: 0;">
+<button type="button" class="boton-danger-sm"
+(click)="eliminarArchivo('t3_comprobante_domicilio', inputt3_comprobante_domicilio)">
+<i class="feather icon-trash btn-icon-prepend"></i>
+Eliminar archivo
+</button>
+</div>
+</div>
+</div>
+</div>
+</div> -->
 
 
-           
+
 
             <div class="row">
               <div class="col-sm-12">
@@ -2212,8 +2309,8 @@ campo es
                 Registrarse
               </button>
               <!-- <button [disabled]="formTestamento.invalid" type="submit" class="btn btn-primary px-4">
-                Registrarse
-              </button> -->
+Registrarse
+</button> -->
             </div>
           </form>
         </div>
