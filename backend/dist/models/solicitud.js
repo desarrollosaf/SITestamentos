@@ -35,31 +35,31 @@ Solicitud.init({
         allowNull: true,
     },
     es_primer_testamento: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: true,
     },
     sabe_leer: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: true,
     },
     sabe_escribir: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: true,
     },
     puede_hablar: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: true,
     },
     puede_ver: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: true,
     },
     puede_oir: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: true,
     },
     dificultad_comunicacion: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: true,
     },
     no_pasaporte: {
@@ -71,11 +71,11 @@ Solicitud.init({
         allowNull: true,
     },
     documento_residencia: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: true,
     },
     heredero_menor_edad: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: true,
     },
     documento_identifica: {
@@ -181,5 +181,11 @@ Solicitud.hasMany(matrimonios_1.default, {
 Solicitud.hasMany(matrimonios_1.default, {
     foreignKey: 'solicitudId',
     as: 'segundas_nupcias',
+});
+Solicitud.hasMany(hijos_1.default, {
+    foreignKey: 'solicitudId',
+    as: 'hijo_fuera',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
 });
 exports.default = Solicitud;

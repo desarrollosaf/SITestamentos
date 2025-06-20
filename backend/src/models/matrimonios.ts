@@ -22,7 +22,7 @@ class Matrimonio extends Model<
   declare primer_apellido: string;
   declare segundo_apellido: string;
   declare regimen_patrimonial: string;
-  declare vive: boolean;
+  declare vive: number;
 
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
@@ -57,7 +57,7 @@ Matrimonio.init(
       type: DataTypes.STRING,
     },
     vive: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
     },
     createdAt: {
       type: DataTypes.DATE,

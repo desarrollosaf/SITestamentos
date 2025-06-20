@@ -35,11 +35,11 @@ Padre.init({
         allowNull: true,
     },
     vive: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: true,
     },
     nacionalidad: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: true,
     },
     especifique_nacionalidad: {

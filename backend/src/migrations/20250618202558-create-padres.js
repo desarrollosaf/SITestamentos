@@ -33,10 +33,10 @@ module.exports = {
       },
       vive: {
         allowNull: false,
-        type: Sequelize.BOOLEAN
+        type: Sequelize.INTEGER
       },
       nacionalidad: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.INTEGER
       },
        especifique_nacionalidad: {
         type: Sequelize.STRING

@@ -19,8 +19,8 @@ class Padre extends Model<
   declare nombre: string | null;
   declare primer_apellido: string | null;
   declare segundo_apellido: string | null;
-  declare vive: boolean | null;
-  declare nacionalidad: boolean | null;
+  declare vive: number | null;
+  declare nacionalidad: number | null;
   declare especifique_nacionalidad: string | null;
   declare updatedAt: CreationOptional<Date>;
 }
@@ -54,11 +54,11 @@ Padre.init(
       allowNull: true,
     },
     vive: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     nacionalidad: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     especifique_nacionalidad: {
