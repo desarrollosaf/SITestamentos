@@ -289,7 +289,7 @@
                 </div>
               </div>
             </div>
-            <div>
+            <div *ngIf="mostrarNacServ">
               <div class="row">
                 <div class="col-sm-4">
                   <div class="mb-3">
@@ -593,7 +593,8 @@ campo es
               <div formArrayName="hijosPrimer">
                 <div *ngFor="let hijo of hijos.controls; let i = index" [formGroupName]="i"
                   class="row border p-3 mb-3 rounded bg-light">
-                  <div class="col-sm-4">
+                  <div class="row">
+                    <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Nombre(s):*</label>
                       <input formControlName="hijo_nombre_primer_nup" type="text" class="form-control"
@@ -616,6 +617,25 @@ campo es
                         placeholder="Ejemplo: González" />
                     </div>
                   </div>
+                  </div>
+               <div class="row">
+                   <div class="col-sm-4">
+                    <div class="mb-3">
+                      <label class="form-label negri">Edad*</label>
+                      <input formControlName="hijo_edad_primer_nup" type="text" class="form-control"
+                        placeholder="Ejemplo: 18" />
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="mb-3">
+                      <label class="form-label negri">Vive o Finado:*</label>
+                      <input formControlName="hijo_vf_primer_nup" type="text" class="form-control"
+                        placeholder="Ejemplo: Vivo" />
+                    </div>
+                  </div>
+
+               </div>
 
 
                   <div class="col-12 text-center">
@@ -717,27 +737,45 @@ campo es
               <div formArrayName="hijosSegundo">
                 <div *ngFor="let hijo of hijosDos.controls; let i = index" [formGroupName]="i"
                   class="row border p-3 mb-3 rounded bg-light">
-                  <div class="col-sm-4">
-                    <div class="mb-3">
-                      <label class="form-label negri">Nombre(s):*</label>
-                      <input formControlName="hijo_nombre_dos_nup" type="text" class="form-control"
-                        placeholder="Ejemplo: Sofía" />
+
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Nombre(s):*</label>
+                        <input formControlName="hijo_nombre_dos_nup" type="text" class="form-control" placeholder="Ejemplo: Sofía" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Primer apellido:*</label>
+                        <input formControlName="hijo_primer_apellido_dos_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: Jiménez" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Segundo apellido:*</label>
+                        <input formControlName="hijo_segundo_apellido_dos_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: González" />
+                      </div>
                     </div>
                   </div>
 
-                  <div class="col-sm-4">
-                    <div class="mb-3">
-                      <label class="form-label negri">Primer apellido:*</label>
-                      <input formControlName="hijo_primer_apellido_dos_nup" type="text" class="form-control"
-                        placeholder="Ejemplo: Jiménez" />
-                    </div>
-                  </div>
 
-                  <div class="col-sm-4">
-                    <div class="mb-3">
-                      <label class="form-label negri">Segundo apellido:*</label>
-                      <input formControlName="hijo_segundo_apellido_dos_nup" type="text" class="form-control"
-                        placeholder="Ejemplo: González" />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Edad*</label>
+                        <input formControlName="hijo_edad_dos_nup" type="text" class="form-control" placeholder="Ejemplo: 18" />
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Vive o Finado:*</label>
+                        <input formControlName="hijo_vf_dos_nup" type="text" class="form-control" placeholder="Ejemplo: Vivo" />
+                      </div>
                     </div>
                   </div>
 
@@ -783,7 +821,6 @@ campo es
                 </div>
               </div>
             </div>
-
             <div class="row">
               <div class="hijos-container">
                 <label class="form-label">Hijos fuera del matrimonio:*</label>
@@ -795,27 +832,42 @@ campo es
               <div formArrayName="hijosFueraMatrim">
                 <div *ngFor="let hijo of hijosFuera.controls; let i = index" [formGroupName]="i"
                   class="row border p-3 mb-3 rounded bg-light">
-                  <div class="col-sm-4">
-                    <div class="mb-3">
-                      <label class="form-label negri">Nombre(s):*</label>
-                      <input formControlName="fuera_hijo_nombre" type="text" class="form-control"
-                        placeholder="Ejemplo: Sofía" />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Nombre(s):*</label>
+                        <input formControlName="fuera_hijo_nombre" type="text" class="form-control" placeholder="Ejemplo: Sofía" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Primer apellido:*</label>
+                        <input formControlName="fuera_hijo_primer_apellido" type="text" class="form-control"
+                          placeholder="Ejemplo: Jiménez" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Segundo apellido:*</label>
+                        <input formControlName="fuera_hijo_segundo_apellido" type="text" class="form-control"
+                          placeholder="Ejemplo: González" />
+                      </div>
                     </div>
                   </div>
-
-                  <div class="col-sm-4">
-                    <div class="mb-3">
-                      <label class="form-label negri">Primer apellido:*</label>
-                      <input formControlName="fuera_hijo_primer_apellido" type="text" class="form-control"
-                        placeholder="Ejemplo: Jiménez" />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Edad*</label>
+                        <input formControlName="fuera_hijo_edad" type="text" class="form-control" placeholder="Ejemplo: 18" />
+                      </div>
                     </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="mb-3">
-                      <label class="form-label negri">Segundo apellido:*</label>
-                      <input formControlName="fuera_hijo_segundo_apellido" type="text" class="form-control"
-                        placeholder="Ejemplo: González" />
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Vive o Finado:*</label>
+                        <input formControlName="fuera_hijo_vf" type="text" class="form-control" placeholder="Ejemplo: Vivo" />
+                      </div>
                     </div>
                   </div>
                   <div class="col-12 text-center">
@@ -991,7 +1043,7 @@ campo es
                 </div>
               </div>
 
-              <div class="col-sm-4">
+              <div class="col-sm-4" *ngIf="mostrarBtnTestigo">
                 <div class="mb-3">
                   <div class="hijos-container">
                     <label class="form-label">Agregar testigos (3 o más):*</label>
@@ -1647,6 +1699,77 @@ campo es
 
 
 
+    <div class="row">
+              <div formArrayName="herederoSustituto">
+                <div *ngFor="let hijo of herederoSustit.controls; let i = index" [formGroupName]="i"
+                  class="row border p-3 mb-3 rounded bg-light">
+                  <div class="row">
+                     <p>Heredero sustituto</p>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Nombre(s):*</label>
+                        <input formControlName="nombre_sustituto" type="text" class="form-control"
+                          placeholder="Ejemplo: Sofía" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Primer apellido:*</label>
+                        <input formControlName="primer_apellido_sustituto" type="text" class="form-control"
+                          placeholder="Ejemplo: Jiménez" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Segundo apellido:*</label>
+                        <input formControlName="segundo_apellido_sustituto" type="text" class="form-control"
+                          placeholder="Ejemplo: González" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                      <p>Heredero a sustituir</p>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Nombre(s):*</label>
+                        <input formControlName="nombre_a_sustituir" type="text" class="form-control"
+                          placeholder="Ejemplo: Sofía" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Primer apellido:*</label>
+                        <input formControlName="primer_apellido_a_sustituir" type="text" class="form-control"
+                          placeholder="Ejemplo: Jiménez" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Segundo apellido:*</label>
+                        <input formControlName="segundo_apellido_a_sustituir" type="text" class="form-control"
+                          placeholder="Ejemplo: González" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 text-center">
+                    <button style="background-color: #c82333; color: white;" type="button" (click)="eliminarSustituto(i)"
+                      class="btn btn-sm mt-2">
+                      🗑️ Eliminar sustituto
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
             <div class="row">
               <div class="col-sm-12">
                 <div class="mb-3 d-flex flex-column h-100">
@@ -2089,9 +2212,12 @@ campo es
             <br />
 
             <div class="text-center mt-4">
-              <button [disabled]="formTestamento.invalid" type="submit" class="btn btn-primary px-4">
+              <button type="submit" class="btn btn-primary px-4">
                 Registrarse
               </button>
+              <!-- <button [disabled]="formTestamento.invalid" type="submit" class="btn btn-primary px-4">
+                Registrarse
+              </button> -->
             </div>
           </form>
         </div>
