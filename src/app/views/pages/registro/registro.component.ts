@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { dp_estado_civil } from '../../../../../backend/src/models/fun/dp_estado_civil';
+import { UserService } from '../../../core/services/user.service';
 
 @Component({
   selector: 'app-registro',
@@ -103,7 +103,9 @@ export class RegistroComponent {
     { id: 'Cédula profesional', name: 'Cédula profesional' }
   ];
 
-  constructor(private fb: FormBuilder, private router: Router){
+  currentUser: any;
+
+  constructor(private fb: FormBuilder, private router: Router, private _userService: UserService){
       this.formTestamento = this.fb.group({
         f_rfc:['', Validators.required],
         f_curp:['',[
@@ -516,14 +518,10 @@ export class RegistroComponent {
   //****************************************************************************************** */
 
   ngOnInit(): void {
-    this.formTestamento.get('f_curp')?.valueChanges.subscribe(value => {
-      if(value  && value.length < 18){
-        this.limpiaForm();
-      }
-      if (value && value.length === 18) {
-        this.buscarDatosPorCurp(value);
-      }
-    });
+    this.currentUser = this._userService.currentUserValue;
+    console.log('Usuario Logueado:', this.currentUser);
+    this.buscarDatosPorCurp(this.currentUser.rfc);
+  
   }
 
   //PARA MOSTRAR EL DIV EN CASO DE QUE HAYA TESTIGOS
