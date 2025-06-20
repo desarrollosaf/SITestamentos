@@ -337,19 +337,19 @@ export class RegistroComponent {
 
   agregarTestigo() {
     const group = this.fb.group({
-      nombre_testigo: [''],
-      primer_apellido_testigo: [''],
-      segundo_apellido_testigo: [''],
-      nacionalidad_testigo: [''],
-      fecha_nacimiento_testigo: [''],
-      lugar_nacimiento_testigo: [''],
-      curp_testigo: [''],
-      estado_civil_testigo: [''],
-      ocupacion_testigo: [''],
-      domicilio_testigo: [''],
-      cp_testigo: [''],
-      telefono_testigo: [''],
-      rfc_testigo: ['']
+      nombre_testigo: ['', Validators.required],
+      primer_apellido_testigo: ['', Validators.required],
+      segundo_apellido_testigo: ['', Validators.required],
+      nacionalidad_testigo: ['', Validators.required],
+      fecha_nacimiento_testigo: ['', Validators.required],
+      lugar_nacimiento_testigo: ['', Validators.required],
+      curp_testigo: ['', Validators.required],
+      estado_civil_testigo: ['', Validators.required],
+      ocupacion_testigo: ['', Validators.required],
+      domicilio_testigo: ['', Validators.required],
+      cp_testigo: ['', Validators.required],
+      telefono_testigo: ['', Validators.required],
+      rfc_testigo: ['', Validators.required]
     });
 
     this.testigosF.push(group);
@@ -393,12 +393,12 @@ export class RegistroComponent {
 
   agregarSustituto(): void {
     const HerederoSustitutoGroup = this.fb.group({
-        nombre_sustituto: [''],
-        primer_apellido_sustituto: [''],
-        segundo_apellido_sustituto: [''],
-        nombre_a_sustituir: [''],
-        primer_apellido_a_sustituir: [''],
-        segundo_apellido_a_sustituir: [''],
+        nombre_sustituto: ['', Validators.required],
+        primer_apellido_sustituto: ['', Validators.required],
+        segundo_apellido_sustituto: ['', Validators.required],
+        nombre_a_sustituir: ['', Validators.required],
+        primer_apellido_a_sustituir: ['', Validators.required],
+        segundo_apellido_a_sustituir: ['', Validators.required]
     });
     this.herederoSustit.push(HerederoSustitutoGroup);
   }
@@ -417,12 +417,12 @@ export class RegistroComponent {
 
   agregarHeredero(): void {
     const HerederoGroup = this.fb.group({
-        nombre_heredero: [''],
-        primer_apellido_heredero: [''],
-        segundo_apellido_heredero: [''],
-        edad_heredero: [''],
-        parentesco_heredero: [''],
-        porcentaje_heredero: [''],
+        nombre_heredero: ['', Validators.required],
+        primer_apellido_heredero: ['', Validators.required],
+        segundo_apellido_heredero: ['', Validators.required],
+        edad_heredero: ['', Validators.required],
+        parentesco_heredero: ['', Validators.required],
+        porcentaje_heredero: ['', Validators.required],
     });
     this.herederos.push(HerederoGroup);
   }
