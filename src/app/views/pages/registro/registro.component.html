@@ -1955,18 +1955,19 @@ campo es
                 </div>
               </div>
             </div>
+
             <br>
-            <div>
-              <h5 class="titulo">
-                En caso de ser adulto mayor o que su estado de salud así lo requiera, o si es sordo o invidente, o si no
-                sabe o no puede firmar o leer o si tiene alguna dificultad con lo antes mencionado:
-              </h5>
-              <a class="btn btn-secondary mt-2" (click)="toggleExtraInfo()">
-                {{ mostrarExtraInfo ? 'Ocultar' : 'Mostrar más' }}
-              </a>
-            </div>
+            <!-- **********************************ngIf="mostrarExtraInfo"*****************************AQUI VA EL DIV DE 60+************************************************************** -->
+              <!-- **************************************************************AQUI VA EL DIV DE 60+************************************************************** -->
+                <!-- **************************************************************AQUI VA EL DIV DE 60+************************************************************** -->
             <div *ngIf="mostrarExtraInfo">
-              <br>
+              <div>
+                <h5 class="titulo">
+                  En caso de ser adulto mayor o que su estado de salud así lo requiera, o si es sordo o invidente, o si no
+                  sabe o no puede firmar o leer o si tiene alguna dificultad con lo antes mencionado:
+                </h5>
+              </div>
+               <br>
               <div>
                 <h5 class="titulo2">A. Presentar dos Certificados médicos:</h5>
               </div>
@@ -2007,7 +2008,11 @@ campo es
                   </div>
                 </div>
               </div>
-              <br>
+            </div>
+             <!-- **************************************************************AQUI TERMINA EL DIV DE 60+************************************************************** -->
+               <!-- **************************************************************AQUI TERMINA EL DIV DE 60+************************************************************** -->
+                 <!-- **************************************************************AQUI TERMINA EL DIV DE 60+************************************************************** -->
+  
               <!-- <div>
                 <h5 class="titulo2">B. Presentar tres testigos que no sean familiares del testador o testadora, y
                   proporcionar de cada testigo lo siguiente:</h5>
@@ -2191,7 +2196,7 @@ campo es
               </div> -->
 
 
-            </div>
+           
 
             <div class="row">
               <div class="col-sm-12">

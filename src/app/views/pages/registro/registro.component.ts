@@ -528,14 +528,14 @@ export class RegistroComponent {
   }
 
   //PARA MOSTRAR EL DIV EN CASO DE QUE HAYA TESTIGOS
-  toggleExtraInfo(): void {
-      this.mostrarExtraInfo = !this.mostrarExtraInfo;
-      if (this.mostrarExtraInfo) {
-        this.testigos =true;
-      } else {
-        this.testigos =false;
-      }
-    }
+  // toggleExtraInfo(): void {
+  //     this.mostrarExtraInfo = !this.mostrarExtraInfo;
+  //     if (this.mostrarExtraInfo) {
+  //       this.testigos =true;
+  //     } else {
+  //       this.testigos =false;
+  //     }
+  //   }
   //PARA OBTENER LAS LOCALIDADES DEPENDIENDO DEL CODIGO POSTAL
   getLocalidad(){
     const cp= this.formTestamento.get('f_cp')?.value
@@ -639,6 +639,9 @@ export class RegistroComponent {
           }
           if (response.data.f_fecha_nacimiento) {
             const edad = this.calcularEdad(response.data.f_fecha_nacimiento);
+            if(edad > 29){
+              this.mostrarExtraInfo = !this.mostrarExtraInfo;
+            }
             this.formTestamento.patchValue({ edad: edad + ' años' });
           }
         },
