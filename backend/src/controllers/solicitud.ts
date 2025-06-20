@@ -27,11 +27,11 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
     console.log(data);
     const Upassword = data.f_rfc;
     const UpasswordHash = await bcrypt.hash(Upassword, 10);
-    const newUser = await User.create({
+    /*const newUser = await User.create({
       name:  data.f_rfc,
       email:  data.correo_per,
       password: UpasswordHash,
-    });
+    });*/
 
     let registro = await dp_datospersonales.findOne({ 
         where: { f_curp: data.f_curp }
@@ -89,7 +89,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
     let solicitud: any | null = null;
     try {
         solicitud = await Solicitud.create({
-            userId: newUser.id,
+            userId: data.f_rfc,
             es_primer_testamento: data.primer_testamento,
             sabe_leer: data.sabe_leer,
             sabe_escribir: data.sabe_escribir,
