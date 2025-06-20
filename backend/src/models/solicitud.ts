@@ -207,6 +207,15 @@ Solicitud.hasOne(TutorDescendiente, {
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',
 });
+Solicitud.hasMany(Matrimonio, {
+  foreignKey: 'solicitudId',
+  as: 'primeras_nupcias',
+});
+
+Solicitud.hasMany(Matrimonio, {
+  foreignKey: 'solicitudId',
+  as: 'segundas_nupcias',
+});
 
 
 export default Solicitud;
