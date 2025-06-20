@@ -192,7 +192,7 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (data.nombre_dos_nup) {
         let segundasnupcias = yield matrimonios_1.default.create({
             solicitudId: solicitud.id,
-            orden: 1,
+            orden: 2,
             nombre: data.nombre_dos_nup,
             primer_apellido: data.primer_apellido_dos_nup,
             segundo_apellido: data.segundo_apellido_dos_nup,
@@ -401,7 +401,7 @@ const getsolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                             model: tipos_documentos_1.default,
                             as: 'tipo_doc',
                         },
-                    ]
+                    ],
                 },
                 {
                     model: herederos_1.default,
@@ -414,16 +414,32 @@ const getsolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 {
                     model: hijos_2.default,
                     as: 'hijos',
-                    include: [
-                        {
-                            model: matrimonios_1.default,
-                            as: 'matrimonio',
-                        },
-                    ]
                 },
+                // Primeras nupcias (orden 1)
                 {
                     model: matrimonios_1.default,
-                    as: 'matrimonios',
+                    as: 'primeras_nupcias',
+                    where: { orden: 1 },
+                    required: false,
+                    include: [
+                        {
+                            model: hijos_2.default,
+                            as: 'hijos',
+                        },
+                    ],
+                },
+                // Segundas nupcias (orden 2)
+                {
+                    model: matrimonios_1.default,
+                    as: 'segundas_nupcias',
+                    where: { orden: 2 },
+                    required: false,
+                    include: [
+                        {
+                            model: hijos_2.default,
+                            as: 'hijos',
+                        },
+                    ],
                 },
                 {
                     model: padres_1.default,
@@ -437,7 +453,7 @@ const getsolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                     model: tutor_descendientes_1.default,
                     as: 'tutor_descendientes',
                 },
-            ]
+            ],
         });
         // Cargar datos personales manualmente desde otra base de datos
         for (const solicitud of solicitudes) {

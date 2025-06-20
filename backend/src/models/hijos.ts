@@ -96,11 +96,15 @@ Hijo.init(
 //   onUpdate: 'CASCADE',
 // });
 
-Hijo.belongsTo(Matrimonio, {
-  foreignKey: 'matrimonioId',
-  as: 'matrimonio',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-});
+// Hijo.belongsTo(Matrimonio, {
+//   foreignKey: 'matrimonioId',
+//   onDelete: 'CASCADE',
+//   onUpdate: 'CASCADE',
+// });
+
+// Hijo.belongsTo(Matrimonio, {
+//   foreignKey: 'matrimonioId',
+//   as: 'matrimonio',
+// });
 
 export default Hijo;
