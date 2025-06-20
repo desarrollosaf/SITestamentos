@@ -24,33 +24,33 @@
             [offset]="page" (page)="setPage($event)" [loadingIndicator]="loading">
             <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Nombre completo">
               <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.user.datos_user.f_nombre}} {{row.user.datos_user.f_primer_apellido}}
-                {{row.user.datos_user.f_segundo_apellido}}
+                {{row.datos_user.f_nombre}} {{row.datos_user.f_primer_apellido}}
+                {{row.datos_user.f_segundo_apellido}}
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Correo">
               <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.user.datos_user.correo_per}}
+                {{row.datos_user.correo_per}}
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Numero de telefono">
               <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.user.datos_user.numero_tel}}
+                {{row.datos_user.numero_tel}}
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Numero de celular">
               <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.user.datos_user.numero_cel}}
+                {{row.datos_user.numero_cel}}
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Curp">
               <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.user.datos_user.f_curp}}
+                {{row.datos_user.f_curp}}
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Fecha de solicitud">
               <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.fecha_envio}}
+                {{ row.createdAt | date: 'dd/MM/yyyy' }}
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Ver">
