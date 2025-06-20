@@ -13,7 +13,7 @@ export class RegistroService {
   private http = inject( HttpClient );
 
   constructor() {
-    this.myAppUrl = 'http://localhost:3002/';   //'http://localhost:3001/' 'https://dev7.siasaf.gob.mx/'
+    this.myAppUrl = 'https://dev7.siasaf.gob.mx/';   //'http://localhost:3001/' 'https://dev7.siasaf.gob.mx/'
     this.myAPIUrl = 'api/datosp';
     this.myAPIUrl2 = 'api/estados';
     this.myAPIUrl3 = 'api/solicitudes';

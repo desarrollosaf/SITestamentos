@@ -13,7 +13,7 @@ export class SolicitudesService {
     private http = inject( HttpClient );
 
     constructor() {
-    this.myAppUrl = 'http://localhost:3002/';
+    this.myAppUrl = 'https://dev7.siasaf.gob.mx/';
     this.myAPIUrl = 'api/datosp';
     this.myAPIUrl2 = 'api/estados';
     this.myAPIUrl3 = 'api/solicitudes';
