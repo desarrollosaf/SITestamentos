@@ -307,7 +307,8 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     const buildIndexedPath = (field, index) => {
         var _a;
-        const file = (_a = files[field]) === null || _a === void 0 ? void 0 : _a[index];
+        const fullFieldName = `testigos[${index}][${field}]`;
+        const file = (_a = files[fullFieldName]) === null || _a === void 0 ? void 0 : _a[0];
         return file ? path_1.default.join('storage', data.f_curp, file.filename) : null;
     };
     try {
