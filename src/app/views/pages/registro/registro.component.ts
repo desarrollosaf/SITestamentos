@@ -27,6 +27,8 @@ export class RegistroComponent {
   mostrarCamposMenorDeEdad = false;
 
   mostrarDoctoIdentifica = false;
+
+  mostrarNacServ = false;
   labelDocumentoIdentifica = '';
 
 
@@ -41,15 +43,15 @@ export class RegistroComponent {
     comprobante_domicilio: null,
     certificado_publico: null,
     certificado_privado: null,
-    t1_identificacion: null,
-    t1_curp: null,
-    t1_comprobante_domicilio: null,
-    t2_identificacion: null,
-    t2_curp: null,
-    t2_comprobante_domicilio: null,
-    t3_identificacion: null,
-    t3_curp: null,
-    t3_comprobante_domicilio: null,
+    // t1_identificacion: null,
+    // t1_curp: null,
+    // t1_comprobante_domicilio: null,
+    // t2_identificacion: null,
+    // t2_curp: null,
+    // t2_comprobante_domicilio: null,
+    // t3_identificacion: null,
+    // t3_curp: null,
+    // t3_comprobante_domicilio: null,
     primer_testamento_doc :null,
     comprobante_residencia: null
   };
@@ -247,7 +249,7 @@ export class RegistroComponent {
 
  //PARA MOSTRAR EL DIV nacionalidad_serv
     this.formTestamento.get('nacionalidad_serv')?.valueChanges.subscribe(valor => {
-      this.mostrarCamposTestamento = valor === '0';
+      this.mostrarNacServ = valor === '0';
       const campos = [
         'indique_nacionalidad_serv',
         'documento_residencia_serv'
@@ -314,6 +316,20 @@ export class RegistroComponent {
     });
   }
 
+
+  get mostrarBtnTestigo(): boolean {
+  const valores = this.formTestamento.value;
+  return (
+    valores.sabe_leer === '0' ||
+    valores.sabe_escribir === '0' ||
+    valores.puede_hablar === '0' ||
+    valores.puede_ver === '0' ||
+    valores.puede_oir === '0'
+  );
+}
+
+
+
   get testigosF(): FormArray {
   return this.formTestamento.get('testigoArr') as FormArray;
   }
@@ -368,34 +384,6 @@ export class RegistroComponent {
     });
     this.documentosTestigos = nuevosArchivos;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
  //PARA AGREGAR HEREDERO SUSTITUTO
   get herederoSustit(): FormArray {
@@ -452,7 +440,9 @@ export class RegistroComponent {
     const hijoPrimernGroup = this.fb.group({
       hijo_nombre_primer_nup: [''],
       hijo_primer_apellido_primer_nup: [''],
-     hijo_segundo_apellido_primer_nup: ['']
+     hijo_segundo_apellido_primer_nup: [''],
+     hijo_edad_primer_nup: [''],
+     hijo_vf_primer_nup: ['']
     });
     this.hijos.push(hijoPrimernGroup);
   }
@@ -472,7 +462,9 @@ export class RegistroComponent {
     const hijoDosnGroup = this.fb.group({
       hijo_nombre_dos_nup: [''],
       hijo_primer_apellido_dos_nup: [''],
-     hijo_segundo_apellido_dos_nup: ['']
+      hijo_segundo_apellido_dos_nup: [''],
+      hijo_edad_dos_nup: [''],
+      hijo_vf_dos_nup: ['']
     });
     this.hijosDos.push(hijoDosnGroup);
   }
@@ -492,7 +484,9 @@ export class RegistroComponent {
     const hijoFueraGroup = this.fb.group({
       fuera_hijo_nombre: [''],
       fuera_hijo_primer_apellido: [''],
-     fuera_hijo_segundo_apellido: ['']
+     fuera_hijo_segundo_apellido: [''],
+     fuera_hijo_edad: [''],
+      fuera_hijo_vf: ['']
     });
     this.hijosFuera.push(hijoFueraGroup);
   }
@@ -685,99 +679,144 @@ export class RegistroComponent {
   //PARA QUE SE HAGAN REQUERIDOS LOS INPUT DE LOS TESTIGOS EN CASO DE QUE SE CUMPLA LA CONDICION
   documentosExtraRequeridosLlenos(): boolean {
     return this.documentos.certificado_publico !== null &&
-          this.documentos.certificado_privado !== null &&
-          this.documentos.t1_identificacion !== null &&
-          this.documentos.t1_curp !== null &&
-          this.documentos.t1_comprobante_domicilio !== null &&
-          this.documentos.t2_identificacion !== null &&
-          this.documentos.t2_curp !== null &&
-          this.documentos.t2_comprobante_domicilio !== null &&
-          this.documentos.t3_identificacion !== null &&
-          this.documentos.t3_curp !== null &&
-          this.documentos.t3_comprobante_domicilio !== null;
+          this.documentos.certificado_privado !== null;
+          // this.documentos.t1_identificacion !== null &&
+          // this.documentos.t1_curp !== null &&
+          // this.documentos.t1_comprobante_domicilio !== null &&
+          // this.documentos.t2_identificacion !== null &&
+          // this.documentos.t2_curp !== null &&
+          // this.documentos.t2_comprobante_domicilio !== null &&
+          // this.documentos.t3_identificacion !== null &&
+          // this.documentos.t3_curp !== null &&
+          // this.documentos.t3_comprobante_domicilio !== null;
   }
 
   //GUARDA DATOS
   enviarDatos(): void {
-    if (!this.documentosRequeridosLlenos()) {
-      Swal.fire({
-            position: "center",
-            icon: "warning",
-            title: "¡Atención!",
-            text: "Los documentos con (*) son obligatorios.",
-            showConfirmButton: false,
-            timer: 3000
-          });
-    return;
-    }
-    if (this.testigos && !this.documentosExtraRequeridosLlenos()) {
-          Swal.fire({
-                position: "center",
-                icon: "warning",
-                title: "¡Atención!",
-                text: "Los documentos extra son obligatorios.",
-                showConfirmButton: false,
-                timer: 3000
-              });
-        return;
-        }
 
-    const formData = new FormData();
-    for (const key in this.documentos) {
-      if (this.documentos[key]) {
-        formData.append(key, this.documentos[key] as File);
+
+
+const formData = new FormData();
+
+  // Agregar datos de los testigos
+  this.testigosF.controls.forEach((control, index) => {
+    const testigo = control.value;
+
+    // Agregar cada campo del testigo al FormData
+    Object.keys(testigo).forEach(key => {
+      const formKey = `testigos[${index}][${key}]`;
+      formData.append(formKey, testigo[key]);
+    });
+
+    // Agregar los archivos asociados (si existen)
+    const archivos = this.documentosTestigos[index];
+    if (archivos) {
+      if (archivos.identificacion_t) {
+        formData.append(`testigos[${index}][identificacion_t]`, archivos.identificacion_t);
+      }
+      if (archivos.curp_t) {
+        formData.append(`testigos[${index}][curp_t]`, archivos.curp_t);
+      }
+      if (archivos.comprobante_domicilio_t) {
+        formData.append(`testigos[${index}][comprobante_domicilio_t]`, archivos.comprobante_domicilio_t);
       }
     }
-    formData.append('f_rfc', String(this.formTestamento.value.f_rfc));
-    formData.append('f_curp', String(this.formTestamento.value.f_curp));
-    formData.append('f_nombre', String(this.formTestamento.value.f_nombre));
-    formData.append('f_primer_apellido', String(this.formTestamento.value.f_primer_apellido));
-    formData.append('f_segundo_apellido', String(this.formTestamento.value.f_segundo_apellido));
-    formData.append('f_fecha_nacimiento', String(this.formTestamento.value.f_fecha_nacimiento));
-    formData.append('lugar_nacimiento', String(this.formTestamento.value.lugar_nacimiento));
-    formData.append('f_cp', String(this.formTestamento.value.f_cp));
-    formData.append('estado_id', String(this.formTestamento.value.estado_id));
-    formData.append('municipio_id', String(this.formTestamento.value.municipio_id));
-    formData.append('colonia_id', String(this.formTestamento.value.colonia_id));
-    formData.append('f_domicilio', String(this.formTestamento.value.f_domicilio));
-    formData.append('numext', String(this.formTestamento.value.numext));
-    formData.append('numero_tel', String(this.formTestamento.value.numero_tel));
-    formData.append('numero_cel', String(this.formTestamento.value.numero_cel));
-    formData.append('correo_per', String(this.formTestamento.value.correo_per));
-    formData.append('testigos', String(this.testigos));
+  });
+
+  formData.forEach((valor, clave) => {
+      console.log(clave, valor);
+    });
+
+
+    if (this.formTestamento.valid) {
+      console.log('Formulario enviado:', this.formTestamento.value);
+    } else {
+      console.log('Formulario no válido');
+    }
+
+
+
+    // if (!this.documentosRequeridosLlenos()) {
+    //   Swal.fire({
+    //         position: "center",
+    //         icon: "warning",
+    //         title: "¡Atención!",
+    //         text: "Los documentos con (*) son obligatorios.",
+    //         showConfirmButton: false,
+    //         timer: 3000
+    //       });
+    // return;
+    // }
+    // if (this.testigos && !this.documentosExtraRequeridosLlenos()) {
+    //       Swal.fire({
+    //             position: "center",
+    //             icon: "warning",
+    //             title: "¡Atención!",
+    //             text: "Los documentos extra son obligatorios.",
+    //             showConfirmButton: false,
+    //             timer: 3000
+    //           });
+    //     return;
+    //     }
+
+    // const formData = new FormData();
+    // for (const key in this.documentos) {
+    //   if (this.documentos[key]) {
+    //     formData.append(key, this.documentos[key] as File);
+    //   }
+    // }
+    // formData.append('f_rfc', String(this.formTestamento.value.f_rfc));
+    // formData.append('f_curp', String(this.formTestamento.value.f_curp));
+    // formData.append('f_nombre', String(this.formTestamento.value.f_nombre));
+    // formData.append('f_primer_apellido', String(this.formTestamento.value.f_primer_apellido));
+    // formData.append('f_segundo_apellido', String(this.formTestamento.value.f_segundo_apellido));
+    // formData.append('f_fecha_nacimiento', String(this.formTestamento.value.f_fecha_nacimiento));
+    // formData.append('lugar_nacimiento', String(this.formTestamento.value.lugar_nacimiento));
+    // formData.append('f_cp', String(this.formTestamento.value.f_cp));
+    // formData.append('estado_id', String(this.formTestamento.value.estado_id));
+    // formData.append('municipio_id', String(this.formTestamento.value.municipio_id));
+    // formData.append('colonia_id', String(this.formTestamento.value.colonia_id));
+    // formData.append('f_domicilio', String(this.formTestamento.value.f_domicilio));
+    // formData.append('numext', String(this.formTestamento.value.numext));
+    // formData.append('numero_tel', String(this.formTestamento.value.numero_tel));
+    // formData.append('numero_cel', String(this.formTestamento.value.numero_cel));
+    // formData.append('correo_per', String(this.formTestamento.value.correo_per));
+    // formData.append('testigos', String(this.testigos));
 
     // formData.forEach((valor, clave) => {
     //   console.log(clave, valor);
     // });
-    const curpUsr = this.formTestamento.value.f_curp;
-    this._registroService.saveRegistro(formData,curpUsr).subscribe({
-      next: (response: any) => {
-        Swal.fire({
-          position: "center", 
-          icon: "success",
-          title: "Tu registro ha sido enviado.",
-          showConfirmButton: false,
-          timer: 3000
-        });
-        window.location.reload();
-      },
-      error: (e: HttpErrorResponse) => {
-        if (e.error && e.error.msg) {
-          console.error('Error del servidor:', e.error.msg);
-        } else {
-           console.error('Error desconocido:', e);
-              Swal.fire({
-            position: "center",
-            icon: "error",
-            title: "¡Atención!",
-            text: `Error al guardar, consulte al administrador del sistema.`,
-            showConfirmButton: false,
-            timer: 2000
-          });
-        }
-      },
-    })
+    // const curpUsr = this.formTestamento.value.f_curp;
+    // this._registroService.saveRegistro(formData,curpUsr).subscribe({
+    //   next: (response: any) => {
+    //     Swal.fire({
+    //       position: "center", 
+    //       icon: "success",
+    //       title: "Tu registro ha sido enviado.",
+    //       showConfirmButton: false,
+    //       timer: 3000
+    //     });
+    //     window.location.reload();
+    //   },
+    //   error: (e: HttpErrorResponse) => {
+    //     if (e.error && e.error.msg) {
+    //       console.error('Error del servidor:', e.error.msg);
+    //     } else {
+    //        console.error('Error desconocido:', e);
+    //           Swal.fire({
+    //         position: "center",
+    //         icon: "error",
+    //         title: "¡Atención!",
+    //         text: `Error al guardar, consulte al administrador del sistema.`,
+    //         showConfirmButton: false,
+    //         timer: 2000
+    //       });
+    //     }
+    //   },
+    // })
   }
+
+  
   //LIMPIAR FORMULARIO Y ESTADO DE INPUTS
   limpiaForm(){
     ['f_rfc', 'f_nombre', 'f_primer_apellido', 'f_segundo_apellido', 'f_fecha_nacimiento'
