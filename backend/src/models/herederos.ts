@@ -16,7 +16,9 @@ class Heredero extends Model<
 > {
   declare id: CreationOptional<string>;
   declare solicitudId: ForeignKey<Solicitud['id']>;
-  declare nombre_completo: string;
+  declare nombre_heredero: string;
+  declare primer_apellido_heredero: string;
+  declare segundo_apellido_heredero: string;
   declare edad: number;
   declare parentesco: number;
   declare porcentaje: string;
@@ -37,7 +39,15 @@ Heredero.init(
       type: DataTypes.UUID,
       allowNull: false,
     },
-    nombre_completo: {
+    nombre_heredero: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    primer_apellido_heredero: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    segundo_apellido_heredero: {
       type: DataTypes.STRING,
       allowNull: false,
     },

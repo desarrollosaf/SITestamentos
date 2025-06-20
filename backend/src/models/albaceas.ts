@@ -15,8 +15,12 @@ class Albacea extends Model<
 > {
   declare id: CreationOptional<string>;
   declare solicitudId: ForeignKey<string>;
-  declare nombre_completo: string | null;
-  declare a_su_fata: string | null;
+  declare nombre_albacea: string | null;
+  declare primer_apellido_albacea: string | null;
+  declare segundo_apellido_albacea: string | null;
+  declare nombre_falta_albacea: string | null;
+  declare primer_apellido_falta_albacea: string | null;
+  declare segundo_apellido_falta_albacea: string | null;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
@@ -33,11 +37,27 @@ Albacea.init(
       type: DataTypes.UUID,
       allowNull: false,
     },
-    nombre_completo: {
+    nombre_albacea: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    a_su_fata: {
+    primer_apellido_albacea: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    segundo_apellido_albacea: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    nombre_falta_albacea: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    primer_apellido_falta_albacea: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    segundo_apellido_falta_albacea: {
       type: DataTypes.STRING,
       allowNull: true,
     },

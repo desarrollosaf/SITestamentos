@@ -15,20 +15,21 @@ const baseFields = [
     'certificado_privado',
     'acta_nacimiento',
     'ine',
-    // 'comprobante_domicilio',
-    'documento_residencia',
+    'comprobante_residencia',
+    // 'documento_residencia',
     // 'curp',
     // 'identificacion',
-    'copia_testamento',
+    'primer_testamento_doc',
+    'documento_residencia_serv'
 ].map(name => ({ name, maxCount: 1 }));
 // Campos repetidos por testigo (hasta 3 testigos)
-const testigoDocumentFields = [
-    'identificacion',
-    'curp',
-    'comprobante_domicilio'
+const testigosDocumentFields = [
+    'identificacion_t',
+    'curp_t',
+    'comprobante_domicilio_t'
 ].map(name => ({ name, maxCount: 10 })); // Ajusta maxCount según cuántos testigos permitas
 // Combina todos los campos
-const allFields = [...baseFields, ...testigoDocumentFields];
+const allFields = [...baseFields, ...testigosDocumentFields];
 // Configura almacenamiento de archivos
 const storage = multer_1.default.diskStorage({
     destination: (req, file, cb) => {

@@ -17,7 +17,15 @@ Testigo.init({
         type: sequelize_1.DataTypes.UUID,
         allowNull: false,
     },
-    nombre_completo: {
+    nombre_testigo: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    primer_apellido_testigo: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    segundo_apellido_testigo: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },

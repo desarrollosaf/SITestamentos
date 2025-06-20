@@ -15,10 +15,18 @@ class TutorDescendiente extends Model<
 > {
   declare id: CreationOptional<string>;
   declare solicitudId: ForeignKey<string>;
-  declare nombre: string | null;
+  declare nombre_tutor: string | null;
+  declare primer_apellido_tutor: string | null;
+  declare segundo_apellido_tutor: string | null;
   declare nombre_tutor_sustituto: string | null;
+  declare primer_apellido_tutor_sustituto: string | null;
+  declare segundo_apellido_tutor_sustituto: string | null;
   declare nombre_curador: string | null;
-  declare nombre_curador_falta: string | null;
+  declare primer_apellido_curador: string | null;
+  declare segundo_apellido_curador: string | null;
+  declare nombre_a_su_falta_curador: string | null;
+  declare primer_apellido_a_su_falta_curador: string | null;
+  declare segundo_apellido_a_su_falta_curador: string | null;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
@@ -35,7 +43,15 @@ TutorDescendiente.init(
       type: DataTypes.UUID,
       allowNull: false,
     },
-    nombre: {
+    nombre_tutor: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    primer_apellido_tutor: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    segundo_apellido_tutor: {
       type: DataTypes.STRING,
       allowNull: true,
     },
@@ -43,11 +59,35 @@ TutorDescendiente.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
+     primer_apellido_tutor_sustituto: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    segundo_apellido_tutor_sustituto: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     nombre_curador: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    nombre_curador_falta: {
+     primer_apellido_curador: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    segundo_apellido_curador: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    nombre_a_su_falta_curador: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    primer_apellido_a_su_falta_curador: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    segundo_apellido_a_su_falta_curador: {
       type: DataTypes.STRING,
       allowNull: true,
     },

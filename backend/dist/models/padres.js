@@ -23,7 +23,15 @@ Padre.init({
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
-    nombre_completo: {
+    nombre: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    primer_apellido: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    segundo_apellido: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
@@ -32,6 +40,10 @@ Padre.init({
         allowNull: false,
     },
     nacionalidad: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        allowNull: true,
+    },
+    especifique_nacionalidad: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },

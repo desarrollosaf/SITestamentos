@@ -19,11 +19,29 @@ module.exports = {
         onDelete: 'CASCADE', 
         onUpdate: 'CASCADE'
       },
-      nombre_completo: {
-        type: Sequelize.STRING
+      nombre_albacea: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
-      a_su_fata: {
-        type: Sequelize.STRING
+       primer_apellido_albacea: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+       segundo_apellido_albacea: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+       nombre_falta_albacea: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+       primer_apellido_falta_albacea: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+       segundo_apellido_falta_albacea: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

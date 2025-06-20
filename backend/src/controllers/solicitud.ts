@@ -55,6 +55,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
              f_homclave: '',
              f_cp: data.f_cp,
              estadocivil_id: data.estadocivil_id
+        
          });    
     }else{
             await registro.update({
@@ -88,15 +89,26 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
     const solicituddata: any = {
         userId: newUser.id,
         fecha_envio: new Date(),
-        documento_residencia: buildPath(`documento_residencia`),
-        nacionalidad: data.nacionalidad === '2' ? data.otranacionalidad : 'Mexicana',
+        primer_testamento: data.primer_testamento,
+        sabe_leer: data.sabe_leer,
+        sabe_escribir: data.sabe_escribir,
+        puede_hablar: data.puede_hablar,
+        puede_ver: data.puede_ver,
+        puede_oir: data.puede_oir,
+        dificultad_comunicacion: data.presenta_dificultad,
+        heredero_menor_edad: data.menor_de_edad,  
+        documento_identifica: data.documento_identifica,
+        numero_documento_identifica: data.numero_documento_identifica,
+        nacionalidad: data.nacionalidad_serv,
+        indique_nacionalidad_serv: data.indique_nacionalidad_serv,
+        documento_residencia: data.documento_residencia_serv,
     };
     const solicitud = await Solicitud.create(solicituddata);
 
     const documentosFields = [
         'acta_nacimiento', 'acta_matrimonio', 'identificacion', 'curp',
         'comprobante_domicilio', 'certificado_privado', 'certificado_publico',
-        'ine'
+        'ine', 'comprobante_residencia'
     ];
 
     const documentosPaths: { [key: string]: string | null } = {};
@@ -122,120 +134,162 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
     const padre = await Padre.create({
         solicitudId: solicitud.id,
         tipo: '1',
-        nombre_completo: data.nombre_padre,
-        vive: data.vivepadre,
-        nacionalidad: data.nacionalidadpadre === '2' ? data.otranacionalidadpadre : 'Mexicana',
+        nombre: data.f_nombre_padre,
+        primer_apellido: data.f_primer_apellido_padre,
+        segundo_apellido: data.f_segundo_apellido_padre,
+        vive: data.vive_padre,
+        nacionalidad: data.nacionalidad_padre,
+        especifique_nacionalidad: data.especifique_nac_padre,
     });
     const madre = await Padre.create({
         solicitudId: solicitud.id,
-        tipo: '2',
-        nombre_completo: data.nombre_madre,
-        vive: data.vivemadre,
-        nacionalidad: data.nacionalidadmadre === '2' ? data.otranacionalidadmadre : 'Mexicana',
+        tipo: '1',
+        nombre: data.f_nombre_madre,
+        primer_apellido: data.f_primer_apellido_madre,
+        segundo_apellido: data.f_segundo_apellido_pmadre,
+        vive: data.vive_madre,
+        nacionalidad: data.nacionalidad_madre,
+        especifique_nacionalidad: data.especifique_nac_madre,
     });
 
     const primerasnupcias = await Matrimonio.create({
         solicitudId: solicitud.id,
         orden: 1,
-        conyuge_nombre: data.conyuge_nombre,
-        regimen_patrimonial: data.regimen_patrimonial,
-        vive: data.vivemadre,
+        nombre: data.nombre_primer_nup,
+        primer_apellido:  data.primer_apellido_primer_nup,
+        segundo_apellido:  data.segundo_apellido_primer_nup,
+        regimen_patrimonial: data.regimen_patrimonial_primer_nup,
+        vive: data.vive_primer_nup,
+        
     });
 
-    for (const hijosprimer of data.hijosprimer) {
-        const hijosprimerasnupcias = await Hijos.create({
-            solicitudId: solicitud.id,
-            matrimonioId: primerasnupcias.id,
-            nombre_completo: hijosprimer.nombre,
-            edad: hijosprimer.edad,
-            vive: hijosprimer.vivemadre,
-            reconocido: true,
-            fuera_de_matrimonio: false,
-            nombre_fuera: ''
-        });
+    if(data.hijosPrimer){
+         for (const hijosprimer of data.hijosPrimer) {
+            const hijosprimerasnupcias = await Hijos.create({
+                solicitudId: solicitud.id,
+                matrimonioId: primerasnupcias.id,
+                nombre: hijosprimer.hijo_nombre_primer_nup,
+                primer_apellido: hijosprimer.hijo_primer_apellido_primer_nup,
+                segundo_apellido: hijosprimer.hijo_segundo_apellido_primer_nup,
+                edad: hijosprimer.hijo_edad_primer_nup,
+                vive: hijosprimer.hijo_vf_primer_nup,
+                reconocido: true,
+                fuera_de_matrimonio: false,
+                nombre_fuera: ''
+            });
+        }
     }
-
+   
     const segundasnupcias = await Matrimonio.create({
         solicitudId: solicitud.id,
-        orden: 2,
-        conyuge_nombre: data.conyuge_nombre,
-        regimen_patrimonial: data.regimen_patrimonial2,
-        vive: data.vivemadre2,
+        orden: 1,
+        nombre: data.nombre_dos_nup,
+        primer_apellido:  data.primer_apellido_dos_nup,
+        segundo_apellido:  data.segundo_apellido_dos_nup,
+        regimen_patrimonial: data.regimen_patrimonial_dos_nup,
+        vive: data.vive_dos_nup,
     });
 
-    for (const hijossegundos of data.hisjossegundo) {
-        const hijossegundasnupcias = await Hijos.create({
-            solicitudId: solicitud.id,
-            matrimonioId: segundasnupcias.id,
-            nombre_completo: hijossegundos.nombre,
-            edad: hijossegundos.edad,
-            vive: hijossegundos.vivemadre,
-            reconocido: true,
-            fuera_de_matrimonio: false,
-            nombre_fuera: ''
-        });
+    if(data.hijosSegundo){
+        for (const hijossegundos of data.hijosSegundo) {
+            const hijossegundasnupcias = await Hijos.create({
+                solicitudId: solicitud.id,
+                matrimonioId: segundasnupcias.id,
+                nombre: hijossegundos.hijo_nombre_primer_nup,
+                primer_apellido: hijossegundos.hijo_primer_apellido_primer_nup,
+                segundo_apellido: hijossegundos.hijo_segundo_apellido_primer_nup,
+                edad: hijossegundos.hijo_edad_dos_nup,
+                vive: hijossegundos.hijo_vf_dos_nup,
+                reconocido: true,
+                fuera_de_matrimonio: false,
+                nombre_fuera: ''
+            });
+        }
     }
-
-    for (const hijosfuera of data.hijosfuera) {
-        const hijosfueramatrimonio = await Hijos.create({
-            solicitudId: solicitud.id,
-            matrimonioId: '',
-            nombre_completo: hijosfuera.nombre,
-            edad: hijosfuera.edad,
-            vive: hijosfuera.vivemadre,
-            reconocido: false,
-            fuera_de_matrimonio: true,
-            nombre_fuera: data.nombre_fuera
-        });
+    
+    if(data.hijosFueraMatrim){
+         for (const hijosfuera of data.hijosFueraMatrim) {
+            const hijosfueramatrimonio = await Hijos.create({
+                solicitudId: solicitud.id,
+                matrimonioId: '',
+                nombre: hijosfuera.fuera_hijo_nombre,
+                primer_apellido: hijosfuera.fuera_hijo_primer_apellido,
+                segundo_apellido: hijosfuera.fuera_hijo_segundo_apellido,
+                edad: hijosfuera.fuera_hijo_edad,
+                vive: hijosfuera.fuera_hijo_vf,
+                reconocido: false,
+                fuera_de_matrimonio: true,
+                nombre_fuera: data.nombre_fuera
+            });
+        }
     }
-
+   
     if(data.primer_testamento == false){
         const tienetestamento = await TestamentoPasados.create({
             solicitudId: solicitud.id,
-            fecha_tramite: data.fecha_tramite,
-            notaria: data.notaria,
-            instrumento_volumen: data.instrumento_volumen,
-            path_testamento: buildPath(`path_testamento`),
+            fecha_tramite: data.fecha_primer_testamento,
+            notaria: data.notaria_primer_testamento,
+            instrumento_volumen: data.instrumento_primer_testamento,
+            path_testamento: buildPath(`primer_testamento_doc`),
         });
     }
 
-    if(data.herederos){
-         for (const heredero of data.herederos) {
+    if(data.herederoAdd){
+         for (const heredero of data.herederoAdd) {
             const herederos = await Heredero.create({
                 solicitudId: solicitud.id,
-                nombre_completo: heredero.nombre_completo_heredero,
-                porcentaje: heredero.porcentaje,
-                derecho_acrecer: heredero.derecho_acrecer,
-                edad: heredero.edad,
-                parentesco: heredero.parentesco
+                nombre_heredero: heredero.nombre_heredero,
+                primer_apellido_heredero: heredero.primer_apellido_heredero,
+                segundo_apellido_heredero: heredero.segundo_apellido_heredero,
+                porcentaje: heredero.porcentaje_heredero,
+                edad: heredero.edad_heredero,
+                parentesco: heredero.parentesco_heredero,
+                derecho_acrecer: data.derecho_acrecer,
+            
             });
          }  
     }
 
-     if(data.herederossustitutos){
-         for (const herederosustituto of data.herederossustitutos) {
+     if(data.herederoSustituto){
+         for (const herederosustituto of data.herederoSustituto) {
             const herederosustitut = await HerederoSustituto.create({
                 solicitudId: solicitud.id,
-                nombre_completo: herederosustituto.nombre_completo_heredero,
-                nombre_completo_asustituir: herederosustituto.nombre_completo_asustituir,
-                derecho_acrecer: herederosustituto.derecho_acrecer
+                nombre_sustituto: herederosustituto.nombre_sustituto,
+                primer_apellido_sustituto: herederosustituto.primer_apellido_sustituto,
+                segundo_apellido_sustituto: herederosustituto.segundo_apellido_sustituto,
+                nombre_a_sustituir: herederosustituto.nombre_a_sustituir,
+                primer_apellido_a_sustituir: herederosustituto.primer_apellido_a_sustituir,
+                segundo_apellido_a_sustituir: herederosustituto.segundo_apellido_a_sustituir,
+                derecho_acrecer: data.derecho_acrecer_sustituto
             });
          }  
     }
 
     const albacea = await Albacea.create({
                 solicitudId: solicitud.id,
-                nombre_completo: data.nombre_completo_albacea,
-                a_su_fata: data.a_su_falta,
+                nombre_albacea: data.nombre_albacea,
+                primer_apellido_albacea: data.primer_apellido_albacea,
+                segundo_apellido_albacea: data.segundo_apellido_albacea,
+                nombre_falta_albacea: data.nombre_falta_albacea,
+                primer_apellido_falta_albacea: data.primer_apellido_falta_albacea,
+                segundo_apellido_falta_albacea: data.segundo_apellido_falta_albacea,
     });
 
-    if(data.heredero_menor_edad == 1){
+    if(data.menor_de_edad == 1){
         const tutor = await TutorDescendiente.create({
                 solicitudId: solicitud.id,
-                nombre: data.nombre_tutor,
+                nombre_tutor: data.nombre_tutor,
+                primer_apellido_tutor: data.nombre_tutor,
+                segundo_apellido_tutor: data.segundo_apellido_tutor,
                 nombre_tutor_sustituto: data.nombre_tutor_sustituto,
+                primer_apellido_tutor_sustituto: data.nombre_tutor_sustituto,
+                segundo_apellido_tutor_sustituto: data.nombre_tutor_sustituto,
                 nombre_curador: data.nombre_curador,
-                nombre_curador_falta: data.nombre_curador_falta,
+                primer_apellido_curador:  data.nombre_curador,
+                segundo_apellido_curador: data.nombre_curador,
+                nombre_a_su_falta_curador: data.nombre_a_su_falta_curador,
+                primer_apellido_a_su_falta_curador: data.primer_apellido_a_su_falta_curador,
+                segundo_apellido_a_su_falta_curador: data.segundo_apellido_a_su_falta_curador
         });
     }
     
@@ -251,17 +305,19 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
 
             const testig = await Testigo.create({
             solicitudId: solicitud.id,
-            nombre_completo: itemtest.nombre_completo,
-            nacionalidad: itemtest.nacionalidad,
-            fecha_naciento: itemtest.fecha_naciento,
-            lugar_nacimiento: itemtest.lugar_nacimiento,
-            curp_dato: itemtest.curp_dato,
-            estado_civil: itemtest.estado_civil,
-            ocupacion: itemtest.ocupacion,
-            domicilio: itemtest.domicilio,
-            cp: itemtest.cp,
-            telefono: itemtest.telefono,
-            rfc: itemtest.rfc,
+            nombre_testigo: itemtest.nombre_testigo,
+            primer_apellido_testigo: itemtest.primer_apellido_testigo,
+            segundo_apellido_testigo: itemtest.segundo_apellido_testigo,
+            nacionalidad: itemtest.nacionalidad_testigo,
+            fecha_naciento: itemtest.fecha_nacimiento_testigo,
+            lugar_nacimiento: itemtest.lugar_nacimiento_testigo,
+            curp_dato: itemtest.curp_testigo,
+            estado_civil: itemtest.estado_civil_testigo,
+            ocupacion: itemtest.ocupacion_testigo,
+            domicilio: itemtest.domicilio_testigo,
+            cp: itemtest.cp_testigo,
+            telefono: itemtest.telefono_testigo,
+            rfc: itemtest.rfc_testigo,
             identificacion: buildIndexedPath('identificacion', i),
             curp: buildIndexedPath('curp', i),
             comprobante_domicilio: buildIndexedPath('comprobante_domicilio', i)

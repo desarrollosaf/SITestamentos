@@ -23,7 +23,15 @@ Hijo.init({
         type: sequelize_1.DataTypes.UUID,
         allowNull: true,
     },
-    nombre_completo: {
+    nombre: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    primer_apellido: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    segundo_apellido: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },

@@ -17,7 +17,9 @@ class Matrimonio extends Model<
   declare id: CreationOptional<string>;
   declare solicitudId: ForeignKey<Solicitud['id']>;
   declare orden: number;
-  declare conyuge_nombre: string;
+  declare nombre: string;
+  declare primer_apellido: string;
+  declare segundo_apellido: string;
   declare regimen_patrimonial: string;
   declare vive: boolean;
 
@@ -41,7 +43,13 @@ Matrimonio.init(
     orden: {
       type: DataTypes.INTEGER,
     },
-    conyuge_nombre: {
+    nombre: {
+      type: DataTypes.STRING,
+    },
+    primer_apellido: {
+      type: DataTypes.STRING,
+    },
+    segundo_apellido: {
       type: DataTypes.STRING,
     },
     regimen_patrimonial: {

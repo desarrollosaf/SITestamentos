@@ -16,9 +16,12 @@ class Padre extends Model<
   declare id: CreationOptional<number>;
   declare solicitudId: ForeignKey<string>;
   declare tipo: string;
-  declare nombre_completo: string;
+  declare nombre: string;
+  declare primer_apellido: string;
+  declare segundo_apellido: string; 
   declare vive: boolean;
-  declare nacionalidad: string;
+  declare nacionalidad: string; 
+  declare especifique_nacionalidad: string;
   declare updatedAt: CreationOptional<Date>;
 }
 
@@ -38,7 +41,15 @@ Padre.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    nombre_completo: {
+    nombre: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    primer_apellido: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    segundo_apellido: {
       type: DataTypes.STRING,
       allowNull: true,
     },
@@ -47,6 +58,10 @@ Padre.init(
       allowNull: false,
     },
     nacionalidad: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    especifique_nacionalidad: {
       type: DataTypes.STRING,
       allowNull: true,
     },

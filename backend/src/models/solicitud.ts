@@ -18,19 +18,22 @@ export class Solicitud extends Model<
   declare userId: string | null;
   declare nacionalidad: string | null;
   declare es_primer_testamento: boolean | null;
-  declare sabe_leer: boolean | null;
+  declare sabe_leer: boolean | null; 
   declare sabe_escribir: boolean | null;
   declare puede_hablar: boolean | null;
   declare puede_ver: boolean | null;
   declare puede_oir: boolean | null;
+  declare primer_testamento: boolean | null;
   declare dificultad_comunicacion: boolean | null;
   declare no_pasaporte: string | null;
   declare cedula_profesional: string | null;
   declare documento_residencia: boolean | null;
   declare heredero_menor_edad: boolean | null;
+  declare documento_identifica: string | null;
+  declare numero_documento_identifica: string | null; 
+  declare indique_nacionalidad_serv: string | null;
   declare user?: User;
   declare testigos?: Testigo[];
-
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
   declare deletedAt: CreationOptional<Date | null>;
@@ -75,7 +78,11 @@ Solicitud.init(
     puede_oir: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
-    },
+    },   
+    primer_testamento: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    }, 
     dificultad_comunicacion: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
@@ -94,6 +101,18 @@ Solicitud.init(
     },
     heredero_menor_edad: {
       type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+     documento_identifica: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    numero_documento_identifica: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    indique_nacionalidad_serv: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
     createdAt: {

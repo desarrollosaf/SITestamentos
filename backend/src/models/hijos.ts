@@ -19,7 +19,9 @@ class Hijo extends Model<
   declare solicitudId: ForeignKey<Solicitud['id']>;
   declare matrimonioId: ForeignKey<Matrimonio['id']> | null;
 
-  declare nombre_completo: string;
+  declare nombre: string;
+  declare primer_apellido: string;
+   declare segundo_apellido: string;
   declare edad: number | null;
   declare vive: string | null;
   declare reconocido: boolean;
@@ -45,7 +47,15 @@ Hijo.init(
       type: DataTypes.UUID,
       allowNull: true,
     },
-    nombre_completo: {
+    nombre: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    primer_apellido: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    segundo_apellido: {
       type: DataTypes.STRING,
       allowNull: false,
     },

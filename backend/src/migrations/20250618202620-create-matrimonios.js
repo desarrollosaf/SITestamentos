@@ -22,7 +22,13 @@ module.exports = {
       orden: {
         type: Sequelize.INTEGER
       },
-      conyuge_nombre: {
+      nombre: {
+        type: Sequelize.STRING
+      },
+      primer_apellido: {
+        type: Sequelize.STRING
+      },
+      segundo_apellido: {
         type: Sequelize.STRING
       },
       regimen_patrimonial: {

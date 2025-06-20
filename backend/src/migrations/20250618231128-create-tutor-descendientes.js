@@ -19,17 +19,53 @@ module.exports = {
         onDelete: 'CASCADE', 
         onUpdate: 'CASCADE'
       },
-      nombre: {
-        type: Sequelize.STRING
+      nombre_tutor: {
+        type: Sequelize.STRING,
+         allowNull: true,
+      },
+      primer_apellido_tutor: {
+        type: Sequelize.STRING,
+         allowNull: true,
+      },
+      segundo_apellido_tutor: {
+        type: Sequelize.STRING,
+         allowNull: true,
       },
       nombre_tutor_sustituto: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      primer_apellido_tutor_sustituto: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      segundo_apellido_tutor_sustituto: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       nombre_curador: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: true,
       },
-      nombre_curador_falta: {
-        type: Sequelize.STRING
+      primer_apellido_curador: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      segundo_apellido_curador: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      nombre_a_su_falta_curador: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      primer_apellido_a_su_falta_curador: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      segundo_apellido_a_su_falta_curador: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,

@@ -19,11 +19,27 @@ Albacea.init({
         type: sequelize_1.DataTypes.UUID,
         allowNull: false,
     },
-    nombre_completo: {
+    nombre_albacea: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
-    a_su_fata: {
+    primer_apellido_albacea: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    segundo_apellido_albacea: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    nombre_falta_albacea: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    primer_apellido_falta_albacea: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    segundo_apellido_falta_albacea: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },

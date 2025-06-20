@@ -16,8 +16,12 @@ class HerederoSustituto extends Model<
 > {
   declare id: CreationOptional<number>;
   declare solicitudId: ForeignKey<Solicitud['id']>;
-  declare nombre_completo: string;
-  declare nombre_completo_asustituir: string;
+  declare nombre_sustituto: string;
+  declare primer_apellido_sustituto: string;
+  declare segundo_apellido_sustituto: string;
+  declare nombre_a_sustituir: string;
+  declare primer_apellido_a_sustituir: string;
+  declare segundo_apellido_a_sustituir: string;
   declare derecho_acrecer: boolean;
 
   declare createdAt: CreationOptional<Date>;
@@ -35,11 +39,27 @@ HerederoSustituto.init(
       type: DataTypes.UUID,
       allowNull: false,
     },
-    nombre_completo: {
+    nombre_sustituto: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    nombre_completo_asustituir: {
+     primer_apellido_sustituto: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+     segundo_apellido_sustituto: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    nombre_a_sustituir: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    primer_apellido_a_sustituir: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    segundo_apellido_a_sustituir: {
       type: DataTypes.STRING,
       allowNull: false,
     },
