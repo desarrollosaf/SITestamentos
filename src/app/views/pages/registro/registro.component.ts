@@ -694,129 +694,247 @@ export class RegistroComponent {
   //GUARDA DATOS
   enviarDatos(): void {
 
+  if (!this.documentosRequeridosLlenos()) {
+      Swal.fire({
+            position: "center",
+            icon: "warning",
+            title: "¡Atención!",
+            text: "Los documentos con (*) son obligatorios.",
+            showConfirmButton: false,
+            timer: 3000
+          });
+    return;
+    }
+    if (this.testigos && !this.documentosExtraRequeridosLlenos()) {
+          Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: "¡Atención!",
+                text: "Los documentos extra son obligatorios.",
+                showConfirmButton: false,
+                timer: 3000
+              });
+        return;
+        }
+
+    const formData = new FormData();
+    formData.append('f_rfc', String(this.formTestamento.value.f_rfc));
+    formData.append('f_curp', String(this.formTestamento.value.f_curp));
+    formData.append('f_nombre', String(this.formTestamento.value.f_nombre));
+    formData.append('f_primer_apellido', String(this.formTestamento.value.f_primer_apellido));
+    formData.append('f_segundo_apellido', String(this.formTestamento.value.f_segundo_apellido));
+    formData.append('f_fecha_nacimiento', String(this.formTestamento.value.f_fecha_nacimiento));
+    formData.append('lugar_nacimiento', String(this.formTestamento.value.lugar_nacimiento));
+    formData.append('f_cp', String(this.formTestamento.value.f_cp));
+    formData.append('estado_id', String(this.formTestamento.value.estado_id));
+    formData.append('municipio_id', String(this.formTestamento.value.municipio_id));
+    formData.append('colonia_id', String(this.formTestamento.value.colonia_id));
+    formData.append('f_domicilio', String(this.formTestamento.value.f_domicilio));
+    formData.append('numext', String(this.formTestamento.value.numext));
+    formData.append('numero_tel', String(this.formTestamento.value.numero_tel));
+    formData.append('numero_cel', String(this.formTestamento.value.numero_cel));
+    formData.append('correo_per', String(this.formTestamento.value.correo_per));
+
+    formData.append('documento_identifica', String(this.formTestamento.value.documento_identifica));
+    if(this.formTestamento.value.documento_identifica =='Pasaporte' || this.formTestamento.value.documento_identifica =='Cédula profesional'){
+      formData.append('numero_documento_identifica', String(this.formTestamento.value.numero_documento_identifica));
+    }
+
+    formData.append('nacionalidad_serv', String(this.formTestamento.value.nacionalidad_serv));
+    if(this.formTestamento.value.nacionalidad_serv =='0'){
+          formData.append('indique_nacionalidad_serv', String(this.formTestamento.value.indique_nacionalidad_serv));
+          formData.append('documento_residencia_serv', String(this.formTestamento.value.documento_residencia_serv));       
+    }
+
+    formData.append('f_nombre_padre', String(this.formTestamento.value.f_nombre_padre));
+    formData.append('f_primer_apellido_padre', String(this.formTestamento.value.f_primer_apellido_padre));
+    formData.append('f_segundo_apellido_padre', String(this.formTestamento.value.f_segundo_apellido_padre));
+    formData.append('vive_padre', String(this.formTestamento.value.vive_padre));
+    formData.append('nacionalidad_padre', String(this.formTestamento.value.nacionalidad_padre));
+    if(this.formTestamento.value.nacionalidad_padre =='0'){
+      formData.append('especifique_nac_padre', String(this.formTestamento.value.especifique_nac_padre)); 
+    }
 
 
-const formData = new FormData();
+    formData.append('f_nombre_madre', String(this.formTestamento.value.f_nombre_madre));
+    formData.append('f_primer_apellido_madre', String(this.formTestamento.value.f_primer_apellido_madre));
+    formData.append('f_segundo_apellido_pmadre', String(this.formTestamento.value.f_segundo_apellido_pmadre));
+    formData.append('vive_madre', String(this.formTestamento.value.vive_madre));
+    formData.append('nacionalidad_madre', String(this.formTestamento.value.nacionalidad_madre));
+    if(this.formTestamento.value.nacionalidad_madre == '0'){
+      formData.append('especifique_nac_madre', String(this.formTestamento.value.especifique_nac_madre)); 
+    }
 
-  // Agregar datos de los testigos
-  this.testigosF.controls.forEach((control, index) => {
-    const testigo = control.value;
 
-    // Agregar cada campo del testigo al FormData
-    Object.keys(testigo).forEach(key => {
-      const formKey = `testigos[${index}][${key}]`;
-      formData.append(formKey, testigo[key]);
-    });
 
-    // Agregar los archivos asociados (si existen)
-    const archivos = this.documentosTestigos[index];
-    if (archivos) {
-      if (archivos.identificacion_t) {
-        formData.append(`testigos[${index}][identificacion_t]`, archivos.identificacion_t);
-      }
-      if (archivos.curp_t) {
-        formData.append(`testigos[${index}][curp_t]`, archivos.curp_t);
-      }
-      if (archivos.comprobante_domicilio_t) {
-        formData.append(`testigos[${index}][comprobante_domicilio_t]`, archivos.comprobante_domicilio_t);
+    formData.append('nombre_primer_nup', String(this.formTestamento.value.nombre_primer_nup));
+    formData.append('primer_apellido_primer_nup', String(this.formTestamento.value.primer_apellido_primer_nup));
+    formData.append('segundo_apellido_primer_nup', String(this.formTestamento.value.segundo_apellido_primer_nup));
+    formData.append('vive_primer_nup', String(this.formTestamento.value.vive_primer_nup));
+    formData.append('regimen_patrimonial_primer_nup', String(this.formTestamento.value.regimen_patrimonial_primer_nup));
+    if (this.hijos.length > 0) {
+      this.hijos.controls.forEach((control, index) => {
+        const hijo = control.value;
+        Object.keys(hijo).forEach(key => {
+          formData.append(`hijosPrimerMatrimonio[${index}][${key}]`, hijo[key]);
+        });
+      });
+    }
+
+
+    formData.append('nombre_dos_nup', String(this.formTestamento.value.nombre_dos_nup));
+    formData.append('primer_apellido_dos_nup', String(this.formTestamento.value.primer_apellido_dos_nup));
+    formData.append('segundo_apellido_dos_nup', String(this.formTestamento.value.segundo_apellido_dos_nup));
+    formData.append('vive_dos_nup', String(this.formTestamento.value.vive_dos_nup));
+    formData.append('regimen_patrimonial_dos_nup', String(this.formTestamento.value.regimen_patrimonial_dos_nup));
+    if (this.hijosDos.length > 0) {
+      this.hijosDos.controls.forEach((control, index) => {
+        const hijo2 = control.value;
+        Object.keys(hijo2).forEach(key => {
+          formData.append(`hijosSegundoMatrimonio[${index}][${key}]`, hijo2[key]);
+        });
+      });
+    }
+
+    formData.append('nombre_fuera_matri', String(this.formTestamento.value.nombre_fuera_matri));
+    formData.append('primer_apellido_fuera_matri', String(this.formTestamento.value.primer_apellido_fuera_matri));
+    formData.append('segundo_apellido_fuera_matri', String(this.formTestamento.value.segundo_apellido_fuera_matri));
+    if (this.hijosFuera.length > 0) {
+      this.hijosFuera.controls.forEach((control, index) => {
+        const hijoF = control.value;
+        Object.keys(hijoF).forEach(key => {
+          formData.append(`hijosFueraMatrimonio[${index}][${key}]`, hijoF[key]);
+        });
+      });
+    }
+
+    formData.append('primer_testamento', String(this.formTestamento.value.primer_testamento));
+    formData.append('fecha_primer_testamento', String(this.formTestamento.value.fecha_primer_testamento));
+    formData.append('notaria_primer_testamento', String(this.formTestamento.value.notaria_primer_testamento));
+    formData.append('instrumento_primer_testamento', String(this.formTestamento.value.instrumento_primer_testamento));
+
+    
+    formData.append('sabe_leer', String(this.formTestamento.value.sabe_leer));
+    formData.append('sabe_escribir', String(this.formTestamento.value.sabe_escribir));
+    formData.append('puede_hablar', String(this.formTestamento.value.puede_hablar));
+    formData.append('puede_ver', String(this.formTestamento.value.puede_ver));
+    formData.append('puede_oir', String(this.formTestamento.value.puede_oir));
+    formData.append('presenta_dificultad', String(this.formTestamento.value.presenta_dificultad));
+    if (this.testigosF.length > 0) {
+      // Agregar datos de los testigos
+      this.testigosF.controls.forEach((control, index) => {
+        const testigo = control.value;
+        // Agregar cada campo del testigo al FormData
+        Object.keys(testigo).forEach(key => {
+          const formKey = `testigos[${index}][${key}]`;
+          formData.append(formKey, testigo[key]);
+        });
+        // Agregar los archivos asociados (si existen)
+        const archivos = this.documentosTestigos[index];
+        if (archivos) {
+          if (archivos.identificacion_t) {
+            formData.append(`testigos[${index}][identificacion_t]`, archivos.identificacion_t);
+          }
+          if (archivos.curp_t) {
+            formData.append(`testigos[${index}][curp_t]`, archivos.curp_t);
+          }
+          if (archivos.comprobante_domicilio_t) {
+            formData.append(`testigos[${index}][comprobante_domicilio_t]`, archivos.comprobante_domicilio_t);
+          }
+        }
+      });
+    }
+
+    formData.append('menor_de_edad', String(this.formTestamento.value.menor_de_edad));
+
+    formData.append('nombre_tutor', String(this.formTestamento.value.nombre_tutor));
+    formData.append('primer_apellido_tutor', String(this.formTestamento.value.primer_apellido_tutor));
+    formData.append('segundo_apellido_tutor', String(this.formTestamento.value.segundo_apellido_tutor));
+    formData.append('nombre_tutor_sustituto', String(this.formTestamento.value.nombre_tutor_sustituto));
+    formData.append('primer_apellido_tutor_sustituto', String(this.formTestamento.value.primer_apellido_tutor_sustituto));
+    formData.append('segundo_apellido_tutor_sustituto', String(this.formTestamento.value.segundo_apellido_tutor_sustituto));
+
+    formData.append('nombre_curador', String(this.formTestamento.value.nombre_curador));
+    formData.append('primer_apellido_curador', String(this.formTestamento.value.primer_apellido_curador));
+    formData.append('segundo_apellido_curador', String(this.formTestamento.value.segundo_apellido_curador));
+    formData.append('nombre_a_su_falta_curador', String(this.formTestamento.value.nombre_a_su_falta_curador));
+    formData.append('primer_apellido_a_su_falta_curador', String(this.formTestamento.value.primer_apellido_a_su_falta_curador));
+    formData.append('segundo_apellido_a_su_falta_curador', String(this.formTestamento.value.segundo_apellido_a_su_falta_curador));
+
+    formData.append('derecho_acrecer', String(this.formTestamento.value.derecho_acrecer));
+    if (this.herederos.length > 0) {
+        this.herederos.controls.forEach((control, index) => {
+        const herederos1 = control.value;
+        Object.keys(herederos1).forEach(key => {
+          formData.append(`herederos[${index}][${key}]`, herederos1[key]);
+        });
+      });
+    }
+    formData.append('derecho_acrecer_sustituto', String(this.formTestamento.value.derecho_acrecer_sustituto));
+
+    if (this.herederoSustit.length > 0) {
+      this.herederoSustit.controls.forEach((control, index) => {
+        const herederosus = control.value;
+        Object.keys(herederosus).forEach(key => {
+          formData.append(`herederoSustituto[${index}][${key}]`, herederosus[key]);
+        });
+      });
+    }
+
+    formData.append('nombre_albacea', String(this.formTestamento.value.nombre_albacea));
+    formData.append('primer_apellido_albacea', String(this.formTestamento.value.primer_apellido_albacea));
+    formData.append('segundo_apellido_albacea', String(this.formTestamento.value.segundo_apellido_albacea));
+    formData.append('nombre_falta_albacea', String(this.formTestamento.value.nombre_falta_albacea));
+    formData.append('primer_apellido_falta_albacea', String(this.formTestamento.value.primer_apellido_falta_albacea));
+    formData.append('segundo_apellido_falta_albacea', String(this.formTestamento.value.segundo_apellido_falta_albacea));
+
+
+
+    for (const key in this.documentos) {
+      if (this.documentos[key]) {
+        formData.append(key, this.documentos[key] as File);
       }
     }
-  });
-
-  formData.forEach((valor, clave) => {
-      console.log(clave, valor);
-    });
-
-
-    if (this.formTestamento.valid) {
-      console.log('Formulario enviado:', this.formTestamento.value);
-    } else {
-      console.log('Formulario no válido');
-    }
-
-
-
-    // if (!this.documentosRequeridosLlenos()) {
-    //   Swal.fire({
-    //         position: "center",
-    //         icon: "warning",
-    //         title: "¡Atención!",
-    //         text: "Los documentos con (*) son obligatorios.",
-    //         showConfirmButton: false,
-    //         timer: 3000
-    //       });
-    // return;
+    // if (this.formTestamento.valid) {
+    //   console.log('Formulario enviado:', this.formTestamento.value);
+    // } else {
+    //   console.log('Formulario no válido');
     // }
-    // if (this.testigos && !this.documentosExtraRequeridosLlenos()) {
-    //       Swal.fire({
-    //             position: "center",
-    //             icon: "warning",
-    //             title: "¡Atención!",
-    //             text: "Los documentos extra son obligatorios.",
-    //             showConfirmButton: false,
-    //             timer: 3000
-    //           });
-    //     return;
-    //     }
-
-    // const formData = new FormData();
-    // for (const key in this.documentos) {
-    //   if (this.documentos[key]) {
-    //     formData.append(key, this.documentos[key] as File);
-    //   }
-    // }
-    // formData.append('f_rfc', String(this.formTestamento.value.f_rfc));
-    // formData.append('f_curp', String(this.formTestamento.value.f_curp));
-    // formData.append('f_nombre', String(this.formTestamento.value.f_nombre));
-    // formData.append('f_primer_apellido', String(this.formTestamento.value.f_primer_apellido));
-    // formData.append('f_segundo_apellido', String(this.formTestamento.value.f_segundo_apellido));
-    // formData.append('f_fecha_nacimiento', String(this.formTestamento.value.f_fecha_nacimiento));
-    // formData.append('lugar_nacimiento', String(this.formTestamento.value.lugar_nacimiento));
-    // formData.append('f_cp', String(this.formTestamento.value.f_cp));
-    // formData.append('estado_id', String(this.formTestamento.value.estado_id));
-    // formData.append('municipio_id', String(this.formTestamento.value.municipio_id));
-    // formData.append('colonia_id', String(this.formTestamento.value.colonia_id));
-    // formData.append('f_domicilio', String(this.formTestamento.value.f_domicilio));
-    // formData.append('numext', String(this.formTestamento.value.numext));
-    // formData.append('numero_tel', String(this.formTestamento.value.numero_tel));
-    // formData.append('numero_cel', String(this.formTestamento.value.numero_cel));
-    // formData.append('correo_per', String(this.formTestamento.value.correo_per));
     // formData.append('testigos', String(this.testigos));
-
     // formData.forEach((valor, clave) => {
     //   console.log(clave, valor);
     // });
-    // const curpUsr = this.formTestamento.value.f_curp;
-    // this._registroService.saveRegistro(formData,curpUsr).subscribe({
-    //   next: (response: any) => {
-    //     Swal.fire({
-    //       position: "center", 
-    //       icon: "success",
-    //       title: "Tu registro ha sido enviado.",
-    //       showConfirmButton: false,
-    //       timer: 3000
-    //     });
-    //     window.location.reload();
-    //   },
-    //   error: (e: HttpErrorResponse) => {
-    //     if (e.error && e.error.msg) {
-    //       console.error('Error del servidor:', e.error.msg);
-    //     } else {
-    //        console.error('Error desconocido:', e);
-    //           Swal.fire({
-    //         position: "center",
-    //         icon: "error",
-    //         title: "¡Atención!",
-    //         text: `Error al guardar, consulte al administrador del sistema.`,
-    //         showConfirmButton: false,
-    //         timer: 2000
-    //       });
-    //     }
-    //   },
-    // })
+    const curpUsr = this.formTestamento.value.f_curp;
+    this._registroService.saveRegistro(formData,curpUsr).subscribe({
+      next: (response: any) => {
+        Swal.fire({
+          position: "center", 
+          icon: "success",
+          title: "Tu registro ha sido enviado.",
+          showConfirmButton: false,
+          timer: 3000
+        });
+        window.location.reload();
+      },
+      error: (e: HttpErrorResponse) => {
+        if (e.error && e.error.msg) {
+          console.error('Error del servidor:', e.error.msg);
+        } else {
+           console.error('Error desconocido:', e);
+              Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "¡Atención!",
+            text: `Error al guardar, consulte al administrador del sistema.`,
+            showConfirmButton: false,
+            timer: 2000
+          });
+        }
+      },
+    })
   }
 
-  
+
   //LIMPIAR FORMULARIO Y ESTADO DE INPUTS
   limpiaForm(){
     ['f_rfc', 'f_nombre', 'f_primer_apellido', 'f_segundo_apellido', 'f_fecha_nacimiento'
