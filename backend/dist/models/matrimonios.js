@@ -34,7 +34,7 @@ Matrimonio.init({
         type: sequelize_1.DataTypes.STRING,
     },
     vive: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.INTEGER,
     },
     createdAt: {
         type: sequelize_1.DataTypes.DATE,

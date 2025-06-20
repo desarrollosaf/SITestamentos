@@ -26,17 +26,17 @@ export class Solicitud extends Model<
   declare id: CreationOptional<string>;
   declare userId: string | null;
   declare nacionalidad: string | null;
-  declare es_primer_testamento: boolean | null;
-  declare sabe_leer: boolean | null; 
-  declare sabe_escribir: boolean | null;
-  declare puede_hablar: boolean | null;
-  declare puede_ver: boolean | null;
-  declare puede_oir: boolean | null;
-  declare dificultad_comunicacion: boolean | null;
+  declare es_primer_testamento: number | null;
+  declare sabe_leer: number | null; 
+  declare sabe_escribir: number | null;
+  declare puede_hablar: number | null;
+  declare puede_ver: number | null;
+  declare puede_oir: number | null;
+  declare dificultad_comunicacion: number | null;
   declare no_pasaporte: string | null;
   declare cedula_profesional: string | null;
-  declare documento_residencia: boolean | null;
-  declare heredero_menor_edad: boolean | null;
+  declare documento_residencia: number | null;
+  declare heredero_menor_edad: number | null;
   declare documento_identifica: string | null;
   declare numero_documento_identifica: string | null; 
   declare indique_nacionalidad_serv: string | null;
@@ -65,31 +65,31 @@ Solicitud.init(
       allowNull: true,
     },
     es_primer_testamento: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     sabe_leer: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     sabe_escribir: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     puede_hablar: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     puede_ver: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     puede_oir: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },   
     dificultad_comunicacion: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     no_pasaporte: {
@@ -101,11 +101,11 @@ Solicitud.init(
       allowNull: true,
     },
     documento_residencia: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     heredero_menor_edad: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
      documento_identifica: {
@@ -215,6 +215,12 @@ Solicitud.hasMany(Matrimonio, {
 Solicitud.hasMany(Matrimonio, {
   foreignKey: 'solicitudId',
   as: 'segundas_nupcias',
+});
+Solicitud.hasMany(Hijo, {
+  foreignKey: 'solicitudId',
+  as: 'hijo_fuera',
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
 });
 
 

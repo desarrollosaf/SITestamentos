@@ -42,7 +42,7 @@ Heredero.init({
         allowNull: false,
     },
     derecho_acrecer: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
     },
     createdAt: sequelize_1.DataTypes.DATE,
