@@ -78,10 +78,10 @@ Heredero.init(
 );
 
 // Relación con Solicitud
-Heredero.belongsTo(Solicitud, {
-  foreignKey: 'solicitudId',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-});
+// Heredero.belongsTo(Solicitud, {
+//   foreignKey: 'solicitudId',
+//   onDelete: 'CASCADE',
+//   onUpdate: 'CASCADE',
+// });
 
 export default Heredero;

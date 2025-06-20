@@ -79,11 +79,11 @@ Padre.init(
 );
 
 // Relaciones
-Padre.belongsTo(Solicitud, {
-  foreignKey: 'solicitudId',
-  as: 'solicitud',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-});
+// Padre.belongsTo(Solicitud, {
+//   foreignKey: 'solicitudId',
+//   as: 'solicitud',
+//   onDelete: 'CASCADE',
+//   onUpdate: 'CASCADE',
+// });
 
 export default Padre;

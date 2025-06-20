@@ -17,6 +17,7 @@ import HerederoSustituto from '../models/herederos_sustitutos';
 import testigos from '../models/testigos';
 import Albacea from '../models/albaceas';
 import TutorDescendiente from '../models/tutor_descendientes';
+import Hijo from '../models/hijos';
 
 
 dp_datospersonales.initModel(sequelizefun);
@@ -362,32 +363,24 @@ export const getsolicitudes = async (req: Request, res: Response): Promise<any> 
         let solicitudes = await Solicitud.findAll({
             include: [
                 {
-                    model: Testigo,
-                    as: 'testigos',
+                model: Testigo,
+                as: 'testigos',
                 },
-                {
-                    model: User,
-                    as: 'user',
-                }
-            ]
+            ],
         });
-
-        // Cargar datos personales manualmente desde otra base de datos
         for (const solicitud of solicitudes) {
-            const user = solicitud.user;
-            if (user && user.name) {
-                console.log('hola si usuario:', user.name )
+            if (solicitud.userId) {
+                console.log('📌 Buscando datos personales para:', solicitud.userId);
+
                 const datos = await dp_datospersonales.findOne({
-                    where: { f_rfc: user.name }, 
+                where: { f_rfc: solicitud.userId },
                 });
-                console.log(datos)
-                // Simular el include dentro de usuarios
+
                 if (datos) {
-                    user.setDataValue('datos_user', datos);
+                solicitud.setDataValue('datos_user', datos);
                 }
             }
         }
-
         if (solicitudes.length > 0) {
             return res.json(solicitudes);
         } else {
@@ -411,22 +404,67 @@ export const getsolicitud = async (req: Request, res: Response): Promise<any> =>
                     as: 'testigos',
                 },
                 {
-                    model: User,
-                    as: 'user',
-                }
+                    model: Albacea,
+                    as: 'albacea',
+                },
+                {
+                    model: Documento,
+                    as: 'documentos',
+                     include: [
+                        {
+                        model: TipoDocumento,
+                        as: 'tipo_doc',
+                        },
+                     ]
+                },
+                {
+                    model: Heredero,
+                    as: 'herederos',
+                },
+                {
+                    model: HerederoSustituto,
+                    as: 'herederos_susti',
+                },
+                {
+                    model: Hijo,
+                    as: 'hijos',
+                     include: [
+                        {
+                        model: Matrimonio,
+                        as: 'matrimonio',
+                        },
+                     ]
+                },
+                {
+                    model: Matrimonio,
+                    as: 'matrimonios',
+                },
+                {
+                    model: Padre,
+                    as: 'padres',
+                },
+                {
+                    model: TestamentoPasados,
+                    as: 'testamentos_pasados',
+                },
+                {
+                    model: TutorDescendiente,
+                    as: 'tutor_descendientes',
+                },
             ]
         });
 
         // Cargar datos personales manualmente desde otra base de datos
         for (const solicitud of solicitudes) {
-            const user = solicitud.user;
-            if (user && user.name) {
+            if (solicitud.userId) {
+                console.log('📌 Buscando datos personales para:', solicitud.userId);
+
                 const datos = await dp_datospersonales.findOne({
-                    where: { f_rfc: user.name }, 
+                where: { f_rfc: solicitud.userId },
                 });
-                // Simular el include dentro de usuarios
+
                 if (datos) {
-                    user.setDataValue('datos_user', datos);
+                solicitud.setDataValue('datos_user', datos);
                 }
             }
         }
