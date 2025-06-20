@@ -401,73 +401,79 @@ export const getsolicitud = async (req: Request, res: Response): Promise<any> =>
             where: { id: id },
                 include: [
                     {
-                    model: Testigo,
-                    as: 'testigos',
+                        model: Testigo,
+                        as: 'testigos',
                     },
                     {
-                    model: Albacea,
-                    as: 'albacea',
+                        model: Albacea,
+                        as: 'albacea',
                     },
                     {
-                    model: Documento,
-                    as: 'documentos',
-                    include: [
-                        {
-                        model: TipoDocumento,
-                        as: 'tipo_doc',
-                        },
-                    ],
+                        model: Documento,
+                        as: 'documentos',
+                        include: [
+                            {
+                            model: TipoDocumento,
+                            as: 'tipo_doc',
+                            },
+                        ],
                     },
                     {
-                    model: Heredero,
-                    as: 'herederos',
+                        model: Heredero,
+                        as: 'herederos',
                     },
                     {
-                    model: HerederoSustituto,
-                    as: 'herederos_susti',
+                        model: HerederoSustituto,
+                        as: 'herederos_susti',
                     },
                     {
-                    model: Hijo,
-                    as: 'hijos',
+                        model: Hijo,
+                        as: 'hijos',
                     },
                     // Primeras nupcias (orden 1)
                     {
-                    model: Matrimonio,
-                    as: 'primeras_nupcias',
-                    where: { orden: 1 },
-                    required: false,
-                    include: [
-                        {
-                        model: Hijo,
-                        as: 'hijos',
-                        },
-                    ],
+                        model: Matrimonio,
+                        as: 'primeras_nupcias',
+                        where: { orden: 1 },
+                        required: false,
+                            include: [
+                                {
+                                model: Hijo,
+                                as: 'hijos',
+                                },
+                            ],
                     },
                     // Segundas nupcias (orden 2)
                     {
-                    model: Matrimonio,
-                    as: 'segundas_nupcias',
-                    where: { orden: 2 },
-                    required: false,
-                    include: [
-                        {
+                        model: Matrimonio,
+                        as: 'segundas_nupcias',
+                        where: { orden: 2 },
+                        required: false,
+                            include: [
+                                {
+                                model: Hijo,
+                                as: 'hijos',
+                                },
+                            ],
+                    },
+                    {
+                        model: Padre,
+                        as: 'padres',
+                    },
+                    {
+                        model: TestamentoPasados,
+                        as: 'testamentos_pasados',
+                    },
+                    {
+                        model: TutorDescendiente,
+                        as: 'tutor_descendientes',
+                    },
+                    {
                         model: Hijo,
-                        as: 'hijos',
-                        },
-                    ],
-                    },
-                    {
-                    model: Padre,
-                    as: 'padres',
-                    },
-                    {
-                    model: TestamentoPasados,
-                    as: 'testamentos_pasados',
-                    },
-                    {
-                    model: TutorDescendiente,
-                    as: 'tutor_descendientes',
-                    },
+                        as: 'hijo_fuera',
+                        where: { fuera_de_matrimonio: true },
+                        required: false,
+                    }
                 ],
             });
 

@@ -454,6 +454,12 @@ const getsolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                     model: tutor_descendientes_1.default,
                     as: 'tutor_descendientes',
                 },
+                {
+                    model: hijos_2.default,
+                    as: 'hijo_fuera',
+                    where: { fuera_de_matrimonio: true },
+                    required: false,
+                }
             ],
         });
         // Cargar datos personales manualmente desde otra base de datos

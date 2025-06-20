@@ -22,7 +22,7 @@ class Heredero extends Model<
   declare edad: number;
   declare parentesco: string;
   declare porcentaje: string;
-  declare derecho_acrecer: boolean;
+  declare derecho_acrecer: number;
 
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
@@ -64,7 +64,7 @@ Heredero.init(
       allowNull: false,
     },
     derecho_acrecer: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     createdAt: DataTypes.DATE,

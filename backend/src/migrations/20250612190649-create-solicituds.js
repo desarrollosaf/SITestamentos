@@ -16,31 +16,31 @@ module.exports = {
         type: Sequelize.STRING 
       },
       es_primer_testamento: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.INTEGER,
         allowNull: true, 
       },
       sabe_leer: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.INTEGER,
         allowNull: true, 
       },
       sabe_escribir: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.INTEGER,
         allowNull: true, 
       },
       puede_hablar: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.INTEGER,
         allowNull: true, 
       },
       puede_ver: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.INTEGER,
         allowNull: true, 
       },
       puede_oir: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.INTEGER,
         allowNull: true, 
       },
       dificultad_comunicacion: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.INTEGER,
         allowNull: true, 
       },
       no_pasaporte: {
@@ -52,11 +52,11 @@ module.exports = {
         allowNull: true, 
       },
       documento_residencia: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.INTEGER,
         allowNull: true, 
       },
       heredero_menor_edad: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.INTEGER,
         allowNull: true, 
       },
       documento_identifica: {
