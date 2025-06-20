@@ -243,114 +243,171 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
                         <div>
-                            <h5 class="titulo">Documentación requerida:</h5>
+                            <h5 class="titulo3">Datos del padre:</h5>
                         </div>
                         <br>
-                        <ng-container *ngFor="let row of documentoChunks">
-                            <div class="row g-4 mb-4"> <!-- <- Aquí -->
-                                <ng-container *ngFor="let doc of row">
-                                    <div class="col-md-6">
-                                        <div class="card h-100 p-3">
-                                            <label class="form-label fw-bold">{{ doc.label }}:</label>
+  <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nombre(s):*</label>
+                  <input formControlName="f_nombre_padre" type="text" class="form-control"
+                    placeholder="Ejemplo: Juan Carlos" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('f_nombre_padre')?.hasError('required') && formTestamento.get('f_nombre_padre')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
 
-                                            <ng-container *ngIf="documentos[doc.key]; else noDocumento">
-                                                <a [href]="'https://dev7.siasaf.gob.mx/'+documentos[doc.key]" target="_blank"
-                                                    class="d-flex justify-content-center align-items-center mt-3 text-decoration-none">
-                                                    <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
-                                                </a>
-                                            </ng-container>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Primer apellido:*</label>
+                  <input formControlName="f_primer_apellido_padre" type="text" class="form-control"
+                    placeholder="Ejemplo: Jimenez" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('f_primer_apellido_padre')?.hasError('required') && formTestamento.get('f_primer_apellido_padre')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
 
-                                            <ng-template #noDocumento>
-                                                <p class="d-flex justify-content-center align-items-center mt-3">No
-                                                    disponible</p>
-                                            </ng-template>
-                                        </div>
-                                    </div>
-                                </ng-container>
-                            </div>
-                        </ng-container>
-                        <br>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Segundo apellido:*</label>
+                  <input formControlName="f_segundo_apellido_padre" type="text" class="form-control"
+                    placeholder="Ejemplo: Gonzalez" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('f_segundo_apellido_padre')?.hasError('required') && formTestamento.get('f_segundo_apellido_padre')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+            </div>
 
-                        <div>
-                            <h5 class="titulo">
-                                En caso de ser adulto mayor o que su estado de salud así lo requiera, o si es sordo o
-                                invidente, o si no
-                                sabe o no puede firmar o leer o si tiene alguna dificultad con lo antes mencionado:
-                            </h5>
-                            <a class="btn btn-secondary mt-2" (click)="toggleExtraInfo()">
-                                {{ mostrarExtraInfo ? 'Ocultar' : 'Mostrar más' }}
-                            </a>
-                        </div>
-                        <div *ngIf="mostrarExtraInfo">
-                            <br>
-                            <div>
-                                <h5 class="titulo2">A. Presentar dos Certificados médicos:</h5>
-                            </div>
-                            <br>
-                            <ng-container *ngFor="let row of documentoChunks2">
-                                <div class="row g-4 mb-4"> <!-- <- Aquí -->
-                                    <ng-container *ngFor="let doc of row">
-                                        <div class="col-md-6">
-                                            <div class="card h-100 p-3">
-                                                <label class="form-label fw-bold">{{ doc.label }}:</label>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Indicar si vive:*</label>
+                  <select class="form-select" id="vive_padre" formControlName="vive_padre">
+                    <option *ngFor="let vives of vive" [value]="vives.id">
+                      {{ vives.name }}
+                    </option>
+                  </select>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('vive_padre')?.hasError('required') && formTestamento.get('vive_padre')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nacionalidad:*</label>
+                  <select class="form-select" id="nacionalidad_padre" formControlName="nacionalidad_padre">
+                    <option *ngFor="let nacion of nacionalidad" [value]="nacion.id">
+                      {{ nacion.name }}
+                    </option>
+                  </select>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('nacionalidad_padre')?.hasError('required') && formTestamento.get('nacionalidad_padre')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+<!-- *ngIf="mostrarCampo('nacionalidad_padre')" -->
+              <div  class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Especifique:*</label>
+                  <input formControlName="especifique_nac_padre" type="text" class="form-control"
+                    placeholder="Ejemplo: Peruana" />
+                </div>
+              </div>
+            </div>
 
-                                                <ng-container *ngIf="documentos[doc.key]; else noDocumento">
-                                                    <a [href]="'https://dev7.siasaf.gob.mx/'+documentos[doc.key]"
-                                                        target="_blank"
-                                                        class="d-flex justify-content-center align-items-center mt-3 text-decoration-none">
-                                                        <img src="assets/images/pdf.png" alt="PDF" width="50"
-                                                            height="60" />
-                                                    </a>
-                                                </ng-container>
+              <div>
+              <h5 class="titulo3">Datos de la madre:</h5>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nombre(s):*</label>
+                  <input formControlName="f_nombre_madre" type="text" class="form-control"
+                    placeholder="Ejemplo: Sofia" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('f_nombre_madre')?.hasError('required') && formTestamento.get('f_nombre_madre')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
 
-                                                <ng-template #noDocumento>
-                                                    <p class="d-flex justify-content-center align-items-center mt-3">No
-                                                        disponible</p>
-                                                </ng-template>
-                                            </div>
-                                        </div>
-                                    </ng-container>
-                                </div>
-                            </ng-container>
-                            <br>
-                            <div>
-                                <h5 class="titulo2">B. Presentar tres testigos que no sean familiares del testador o
-                                    testadora, y
-                                    proporcionar de cada testigo lo siguiente:</h5>
-                            </div>
-                            <br>
-                            <div class="row g-4 mt-4">
-                                <ng-container *ngFor="let testigo of docs; let i = index">
-                                    <div>
-                                        <h5 class="titulo3">Testigo {{ i + 1 }}</h5>
-                                    </div>
-                                    <br>
-                                    <ng-container *ngFor="let doc of documentoTesFields">
-                                        <div class="col-md-4">
-                                            <div class="card h-100 p-3">
-                                                <label class="form-label fw-bold">{{ doc.label }}:</label>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Primer apellido:*</label>
+                  <input formControlName="f_primer_apellido_madre" type="text" class="form-control"
+                    placeholder="Ejemplo: Jimenez" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('f_primer_apellido_madre')?.hasError('required') && formTestamento.get('f_primer_apellido_madre')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
 
-                                                <ng-container *ngIf="testigo[doc.key]; else noDoc">
-                                                    <a [href]="'https://dev7.siasaf.gob.mx/' + testigo[doc.key]"
-                                                        target="_blank"
-                                                        class="d-flex justify-content-center align-items-center mt-2 text-decoration-none">
-                                                        <img src="assets/images/pdf.png" alt="PDF" width="50"
-                                                            height="60" />
-                                                    </a>
-                                                </ng-container>
+                </div>
+              </div>
 
-                                                <ng-template #noDoc>
-                                                    <p class="text-muted text-center mt-2">No disponible</p>
-                                                </ng-template>
-                                            </div>
-                                        </div>
-                                    </ng-container>
-                                </ng-container>
-                            </div>
-                        </div>
-                        <br />
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Segundo apellido:*</label>
+                  <input formControlName="f_segundo_apellido_pmadre" type="text" class="form-control"
+                    placeholder="Ejemplo: Gonzalez" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('f_segundo_apellido_pmadre')?.hasError('required') && formTestamento.get('f_segundo_apellido_pmadre')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
 
+            </div>
+
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Indicar si vive:*</label>
+                  <select class="form-select" id="vive_madre" formControlName="vive_madre">
+                    <option *ngFor="let vives of vive" [value]="vives.id">
+                      {{ vives.name }}
+                    </option>
+                  </select>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('vive_madre')?.hasError('required') && formTestamento.get('vive_madre')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nacionalidad:*</label>
+                  <select class="form-select" id="nacionalidad_madre" formControlName="nacionalidad_madre">
+                    <option *ngFor="let nacion of nacionalidad" [value]="nacion.id">
+                      {{ nacion.name }}
+                    </option>
+                  </select>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('nacionalidad_madre')?.hasError('required') && formTestamento.get('nacionalidad_madre')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+              <!-- *ngIf="mostrarCampo('nacionalidad_madre')"  -->
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Especifique:*</label>
+                  <input formControlName="especifique_nac_madre" type="text" class="form-control"
+                    placeholder="Ejemplo: Peruana" />
+                </div>
+              </div>
+            </div>
+                        <br/>
                         <div class="text-center mt-4">
                             <a routerLink="/solicitudes" class="btn btn-secondary">
                                 Cancelar
