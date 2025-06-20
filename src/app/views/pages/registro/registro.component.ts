@@ -639,6 +639,11 @@ export class RegistroComponent {
             const edad = this.calcularEdad(response.data.f_fecha_nacimiento);
             if(edad > 60){
               this.mostrarExtraInfo = !this.mostrarExtraInfo;
+                if (this.mostrarExtraInfo) {
+                  this.testigos =true;
+                } else {
+                  this.testigos =false;
+                }
             }
             this.formTestamento.patchValue({ edad: edad + ' años' });
           }
@@ -674,8 +679,9 @@ export class RegistroComponent {
   //PARA QUE SE HAGAN REQUERIDOS LOS INPUT DE LOS PRIMEROS DOCUMENTOS
   documentosRequeridosLlenos(): boolean {
     return this.documentos.acta_nacimiento !== null &&
-          this.documentos.identificacion !== null &&
+          this.documentos.ine !== null &&
           this.documentos.comprobante_domicilio !== null &&
+          this.documentos.constancia_situacion_fiscal !== null &&
           this.documentos.curp !== null;
   }
   //PARA QUE SE HAGAN REQUERIDOS LOS INPUT DE LOS TESTIGOS EN CASO DE QUE SE CUMPLA LA CONDICION
@@ -717,7 +723,7 @@ export class RegistroComponent {
                 timer: 3000
               });
         return;
-        }
+    }
 
     const formData = new FormData();
     formData.append('f_rfc', String(this.formTestamento.value.f_rfc));
