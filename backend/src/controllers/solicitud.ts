@@ -316,7 +316,8 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
     }
     
     const buildIndexedPath = (field: string, index: number): string | null => {
-        const file = files[field]?.[index];
+        const fullFieldName = `testigos[${index}][${field}]`; 
+        const file = files[fullFieldName]?.[0];
         return file ? path.join('storage', data.f_curp, file.filename) : null;
     };
 
