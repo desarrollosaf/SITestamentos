@@ -586,9 +586,10 @@ export class RegistroComponent {
   }
   //PARA LLENAR LOS DATOS DEL USUARIO DEPENDIENDO DEL CURP
   buscarDatosPorCurp(curp: string) {
-      this.limpiaForm()
+      this.limpiaForm();
       this.msgcurp = curp;
-      this._registroService.getDatosUser(curp).subscribe({
+      console.log(curp);
+      this._registroService.getDatosUser(this.msgcurp).subscribe({
         next: (response: any) => {
           this.formTestamento.patchValue({
             f_rfc: response.data.f_rfc,
