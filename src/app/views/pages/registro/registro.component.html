@@ -11,8 +11,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">CURP:*</label>
-                  <input formControlName="f_curp" type="text" class="form-control"
-                    placeholder="Ejemplo: MACJ750101HDFRRL01" maxlength="18" />
+                  <input formControlName="f_curp" type="text" class="form-control input-simulado-disabled"
+                    placeholder="Ejemplo: MACJ750101HDFRRL01" maxlength="18" [readonly]="true" />
                   <small class="colorsm" *ngIf="formTestamento.get('f_curp')?.hasError('pattern')">
                     <strong> CURP inválida o incompleta.</strong>
                   </small>

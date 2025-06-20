@@ -592,6 +592,7 @@ export class RegistroComponent {
       this._registroService.getDatosUser(this.msgcurp).subscribe({
         next: (response: any) => {
           this.formTestamento.patchValue({
+            f_curp: response.data.f_curp,
             f_rfc: response.data.f_rfc,
             ocupacion: 'Servidor público',
             f_nombre: response.data.f_nombre,
