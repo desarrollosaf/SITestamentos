@@ -23,12 +23,13 @@ const baseFields = [
     'primer_testamento_doc',
     'documento_residencia_serv'
 ].map(name => ({ name, maxCount: 1 }));
-const testigosDocumentFields = [];
-for (let i = 0; i < 10; i++) {
-    testigosDocumentFields.push({ name: `testigos[${i}][identificacion_t]`, maxCount: 1 });
-    testigosDocumentFields.push({ name: `testigos[${i}][curp_t]`, maxCount: 1 });
-    testigosDocumentFields.push({ name: `testigos[${i}][comprobante_domicilio_t]`, maxCount: 1 });
-}
+// Campos repetidos por testigo (hasta 3 testigos)
+const testigosDocumentFields = [
+    'identificacion_t',
+    'curp_t',
+    'comprobante_domicilio_t'
+].map(name => ({ name, maxCount: 10 })); // Ajusta maxCount según cuántos testigos permitas
+// Combina todos los campos
 const allFields = [...baseFields, ...testigosDocumentFields];
 const storage = multer_1.default.diskStorage({
     destination: (req, file, cb) => {
