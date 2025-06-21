@@ -199,14 +199,14 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             regimen_patrimonial: data.regimen_patrimonial_dos_nup,
             vive: data.vive_dos_nup,
         });
-        if (data.hijosSegundo) {
-            for (const hijossegundos of data.hijosSegundo) {
+        if (data.hijosSegundoMatrimonio) {
+            for (const hijossegundos of data.hijosSegundoMatrimonio) {
                 const hijossegundasnupcias = yield hijos_1.default.create({
                     solicitudId: solicitud.id,
                     matrimonioId: segundasnupcias.id,
-                    nombre: hijossegundos.hijo_nombre_primer_nup,
-                    primer_apellido: hijossegundos.hijo_primer_apellido_primer_nup,
-                    segundo_apellido: hijossegundos.hijo_segundo_apellido_primer_nup,
+                    nombre: hijossegundos.hijo_nombre_dos_nup,
+                    primer_apellido: hijossegundos.hijo_primer_apellido_dos_nup,
+                    segundo_apellido: hijossegundos.hijo_segundo_apellido_dos_nup,
                     edad: hijossegundos.hijo_edad_dos_nup,
                     vive: hijossegundos.hijo_vf_dos_nup,
                     reconocido: true,
@@ -216,21 +216,25 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             }
         }
     }
-    if (data.hijosFueraMatrim) {
-        for (const hijosfuera of data.hijosFueraMatrim) {
-            const hijosfueramatrimonio = yield hijos_1.default.create({
-                solicitudId: solicitud.id,
-                matrimonioId: '',
-                nombre: hijosfuera.fuera_hijo_nombre,
-                primer_apellido: hijosfuera.fuera_hijo_primer_apellido,
-                segundo_apellido: hijosfuera.fuera_hijo_segundo_apellido,
-                edad: hijosfuera.fuera_hijo_edad,
-                vive: hijosfuera.fuera_hijo_vf,
-                reconocido: false,
-                fuera_de_matrimonio: true,
-                nombre_fuera: data.nombre_fuera
-            });
+    try {
+        if (data.hijosFueraMatrimonio) {
+            for (const hijosfuera of data.hijosFueraMatrimonio) {
+                const hijosfueramatrimonio = yield hijos_1.default.create({
+                    solicitudId: solicitud.id,
+                    nombre: hijosfuera.fuera_hijo_nombre,
+                    primer_apellido: hijosfuera.fuera_hijo_primer_apellido,
+                    segundo_apellido: hijosfuera.fuera_hijo_segundo_apellido,
+                    edad: hijosfuera.fuera_hijo_edad,
+                    vive: hijosfuera.fuera_hijo_vf,
+                    reconocido: false,
+                    fuera_de_matrimonio: true,
+                    nombre_fuera: data.nombre_fuera_matri
+                });
+            }
         }
+    }
+    catch (error) {
+        console.error('❌ Error al crear el bastardo :', error);
     }
     try {
         if (data.primer_testamento == false) {
