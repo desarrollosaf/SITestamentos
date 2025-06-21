@@ -21,12 +21,6 @@ const baseFields = [
   'documento_residencia_serv'
 ].map(name => ({ name, maxCount: 1 }));
 
-/*Campos repetidos por testigo (hasta 3 testigos)
-const testigosDocumentFields = [
-  'identificacion_t',
-  'curp_t',
-  'comprobante_domicilio_t'
-].map(name => ({ name, maxCount: 10 })); // Ajusta maxCount según cuántos testigos permitas*/
 
 const testigosDocumentFields = [];
 
@@ -36,10 +30,8 @@ for (let i = 0; i < 10; i++) {
   testigosDocumentFields.push({ name: `testigos[${i}][comprobante_domicilio_t]`, maxCount: 1 });
 }
 
-// Combina todos los campos
 const allFields = [...baseFields, ...testigosDocumentFields];
 
-// Configura almacenamiento de archivos
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const usuarioId = req.params.curp;
@@ -58,5 +50,5 @@ const storage = multer.diskStorage({
   }
 });
 
-// Exporta el middleware para usar en tu ruta
+
 export const upload = multer({ storage }).fields(allFields);

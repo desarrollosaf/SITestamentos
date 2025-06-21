@@ -333,7 +333,43 @@
                 </div>
               </div>
             </div>
-
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="mb-3 d-flex flex-column h-100">
+                  <label class="form-label1 negri">INE:*</label>
+                  <div class="position-relative d-flex flex-column flex-grow-1"
+                    style="min-height: 10px; padding-bottom: 1rem;">
+                    <input class="form-control" type="file" id="ine" accept="application/pdf" #inputine
+                      (change)="onFileSelect($event, 'ine')" />
+                    <div *ngIf="documentos['ine']" style="position: absolute; bottom: 0; left: 0;">
+                      <button type="button" class="boton-danger-sm" (click)="eliminarArchivo('ine', inputine)">
+                        <i class="feather icon-trash btn-icon-prepend"></i>
+                        Eliminar archivo
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="mb-3 d-flex flex-column h-100">
+                  <label class="form-label1 negri">Constancia de situación fiscal:*</label>
+                  <div class="position-relative d-flex flex-column flex-grow-1"
+                    style="min-height: 10px; padding-bottom: 1rem;">
+                    <input class="form-control" type="file" id="constancia_situacion_fiscal" accept="application/pdf"
+                      #inputconstancia_situacion_fiscal
+                      (change)="onFileSelect($event, 'constancia_situacion_fiscal')" />
+                    <div *ngIf="documentos['constancia_situacion_fiscal']"
+                      style="position: absolute; bottom: 0; left: 0;">
+                      <button type="button" class="boton-danger-sm"
+                        (click)="eliminarArchivo('constancia_situacion_fiscal', inputconstancia_situacion_fiscal)">
+                        <i class="feather icon-trash btn-icon-prepend"></i>
+                        Eliminar archivo
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <br>
             <div>
               <h5 class="titulo3">Datos del padre:</h5>
@@ -1046,255 +1082,10 @@ campo es
                 </div>
               </div>
 
-              <div class="col-sm-4" *ngIf="mostrarBtnTestigo">
-                <div class="mb-3">
-                  <div class="hijos-container">
-                    <label class="form-label">Agregar testigos (3 o más):*</label>
-                    <button type="button" class="add-hijo-btn" (click)="agregarTestigo()">
-                      ➕ Agregar testigos
-                    </button>
-                  </div>
-                </div>
-              </div>
+              
             </div>
 
-            <div class="row">
-              <div formArrayName="testigoArr">
-                <div *ngFor="let hijo of testigosF.controls; let i = index" [formGroupName]="i"
-                  class="row border p-3 mb-3 rounded bg-light">
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <div class="mb-3">
-                        <label class="form-label negri">Nombre(s):*</label>
-                        <input formControlName="nombre_testigo" type="text" class="form-control"
-                          placeholder="Ejemplo: Sofía" />
-                        <small class="colorsm"
-                          *ngIf="testigosF.at(i).get('nombre_testigo')?.hasError('required') && testigosF.at(i).get('nombre_testigo')?.touched">Este
-                          campo es
-                          <strong>requerido</strong></small>
-                      </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                      <div class="mb-3">
-                        <label class="form-label negri">Primer apellido:*</label>
-                        <input formControlName="primer_apellido_testigo" type="text" class="form-control"
-                          placeholder="Ejemplo: Jiménez" />
-                        <small class="colorsm"
-                          *ngIf="testigosF.at(i).get('primer_apellido_testigo')?.hasError('required') && testigosF.at(i).get('primer_apellido_testigo')?.touched">Este
-                          campo es
-                          <strong>requerido</strong></small>
-                      </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                      <div class="mb-3">
-                        <label class="form-label negri">Segundo apellido:*</label>
-                        <input formControlName="segundo_apellido_testigo" type="text" class="form-control"
-                          placeholder="Ejemplo: González" />
-                        <small class="colorsm"
-                          *ngIf="testigosF.at(i).get('segundo_apellido_testigo')?.hasError('required') && testigosF.at(i).get('segundo_apellido_testigo')?.touched">Este
-                          campo es
-                          <strong>requerido</strong></small>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <div class="mb-3">
-                        <label class="form-label negri">Nacionalidad:*</label>
-                        <input formControlName="nacionalidad_testigo" type="text" class="form-control"
-                          placeholder="Ejemplo: 18 años" />
-                        <small class="colorsm"
-                          *ngIf="testigosF.at(i).get('nacionalidad_testigo')?.hasError('required') && testigosF.at(i).get('nacionalidad_testigo')?.touched">Este
-                          campo es
-                          <strong>requerido</strong></small>
-                      </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                      <div class="mb-3">
-                        <label class="form-label negri">fecha de nacimiento:*</label>
-                        <input formControlName="fecha_nacimiento_testigo" type="date" class="form-control"
-                          placeholder="Ejemplo: Hijo" />
-                        <small class="colorsm"
-                          *ngIf="testigosF.at(i).get('fecha_nacimiento_testigo')?.hasError('required') && testigosF.at(i).get('fecha_nacimiento_testigo')?.touched">Este
-                          campo es
-                          <strong>requerido</strong></small>
-                      </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="mb-3">
-                        <label class="form-label negri">Lugar de nacimiento:*</label>
-                        <input formControlName="lugar_nacimiento_testigo" type="text" class="form-control"
-                          placeholder="Ejemplo: 100" />
-                        <small class="colorsm"
-                          *ngIf="testigosF.at(i).get('lugar_nacimiento_testigo')?.hasError('required') && testigosF.at(i).get('lugar_nacimiento_testigo')?.touched">Este
-                          campo es
-                          <strong>requerido</strong></small>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <div class="mb-3">
-                        <label class="form-label negri">Curp:*</label>
-                        <input formControlName="curp_testigo" type="text" class="form-control"
-                          placeholder="Ejemplo: 18 años" />
-                        <small class="colorsm"
-                          *ngIf="testigosF.at(i).get('curp_testigo')?.hasError('required') && testigosF.at(i).get('curp_testigo')?.touched">Este
-                          campo es
-                          <strong>requerido</strong></small>
-                      </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                      <div class="mb-3">
-                        <label class="form-label negri">Estado civil:*</label>
-                        <input formControlName="estado_civil_testigo" type="text" class="form-control"
-                          placeholder="Ejemplo: Hijo" />
-                        <small class="colorsm"
-                          *ngIf="testigosF.at(i).get('estado_civil_testigo')?.hasError('required') && testigosF.at(i).get('estado_civil_testigo')?.touched">Este
-                          campo es
-                          <strong>requerido</strong></small>
-                      </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="mb-3">
-                        <label class="form-label negri">Ocupación:*</label>
-                        <input formControlName="ocupacion_testigo" type="text" class="form-control"
-                          placeholder="Ejemplo: 100" />
-                        <small class="colorsm"
-                          *ngIf="testigosF.at(i).get('ocupacion_testigo')?.hasError('required') && testigosF.at(i).get('ocupacion_testigo')?.touched">Este
-                          campo es
-                          <strong>requerido</strong></small>
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <div class="mb-3">
-                        <label class="form-label negri">Domicilio:*</label>
-                        <input formControlName="domicilio_testigo" type="text" class="form-control"
-                          placeholder="Ejemplo: 18 años" />
-                        <small class="colorsm"
-                          *ngIf="testigosF.at(i).get('domicilio_testigo')?.hasError('required') && testigosF.at(i).get('domicilio_testigo')?.touched">Este
-                          campo es
-                          <strong>requerido</strong></small>
-                      </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="mb-3">
-                        <label class="form-label negri">Codigo postal:*</label>
-                        <input formControlName="cp_testigo" type="number" class="form-control"
-                          placeholder="Ejemplo: 100" />
-                        <small class="colorsm"
-                          *ngIf="testigosF.at(i).get('cp_testigo')?.hasError('required') && testigosF.at(i).get('cp_testigo')?.touched">Este
-                          campo es
-                          <strong>requerido</strong></small>
-                      </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="mb-3">
-                        <label class="form-label negri">Télefono:*</label>
-                        <input formControlName="telefono_testigo" type="text" class="form-control"
-                          placeholder="Ejemplo: 18 años" />
-                        <small class="colorsm"
-                          *ngIf="testigosF.at(i).get('telefono_testigo')?.hasError('required') && testigosF.at(i).get('telefono_testigo')?.touched">Este
-                          campo es
-                          <strong>requerido</strong></small>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <div class="mb-3">
-                        <label class="form-label negri">RFC:*</label>
-                        <input formControlName="rfc_testigo" type="text" class="form-control"
-                          placeholder="Ejemplo: Hijo" />
-                        <small class="colorsm"
-                          *ngIf="testigosF.at(i).get('rfc_testigo')?.hasError('required') && testigosF.at(i).get('rfc_testigo')?.touched">Este
-                          campo es
-                          <strong>requerido</strong></small>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-
-                    <div class="col-sm-4">
-                      <div class="mb-3 d-flex flex-column h-100">
-                        <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Identificación oficial
-                          vigente
-                          (Credencial para votar, pasaporte o
-                          cédula profesional):</label>
-                        <div class="position-relative d-flex flex-column flex-grow-1"
-                          style="min-height: 10px; padding-bottom: 1rem;">
-                          <input class="form-control" type="file" id="identificacion_t" accept="application/pdf"
-                            (change)="onFileSelecTestigos($event, i, 'identificacion_t')" #fileIdentificacion_t />
-                          <div *ngIf="documentosTestigos[i]?.identificacion_t"
-                            style="position: absolute; bottom: 0; left: 0;">
-                            <button type="button" class="boton-danger-sm"
-                              (click)="eliminarArchivoTestigos(i, 'identificacion_t', fileIdentificacion_t)">
-                              <i class="feather icon-trash btn-icon-prepend"></i>
-                              Eliminar archivo
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                      <div class="mb-3 d-flex flex-column h-100">
-                        <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave unica de registro de
-                          población:</label>
-                        <div class="position-relative d-flex flex-column flex-grow-1"
-                          style="min-height: 10px; padding-bottom: 1rem;">
-                          <input class="form-control" type="file" id="curp_t" accept="application/pdf"
-                            (change)="onFileSelecTestigos($event, i, 'curp_t')" #fileCurp_t />
-                          <div *ngIf="documentosTestigos[i]?.curp_t" style="position: absolute; bottom: 0; left: 0;">
-                            <button type="button" class="boton-danger-sm"
-                              (click)="eliminarArchivoTestigos(i, 'curp_t', fileCurp_t)">
-                              <i class="feather icon-trash btn-icon-prepend"></i>
-                              Eliminar archivo
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                      <div class="mb-3 d-flex flex-column h-100">
-                        <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de
-                          domicilio:</label>
-                        <div class="position-relative d-flex flex-column flex-grow-1"
-                          style="min-height: 10px; padding-bottom: 1rem;">
-                          <input class="form-control" type="file" id="comprobante_domicilio_t" accept="application/pdf"
-                            (change)="onFileSelecTestigos($event, i, 'comprobante_domicilio_t')" #fileComprobante_t />
-                          <div *ngIf="documentosTestigos[i]?.comprobante_domicilio_t"
-                            style="position: absolute; bottom: 0; left: 0;">
-                            <button type="button" class="boton-danger-sm"
-                              (click)="eliminarArchivoTestigos(i, 'comprobante_domicilio_t', fileComprobante_t)">
-                              <i class="feather icon-trash btn-icon-prepend"></i>
-                              Eliminar archivo
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12 text-center">
-                    <button style="background-color: #c82333; color: white;" type="button" (click)="eliminarTestigo(i)"
-                      class="btn btn-sm mt-2">
-                      🗑️ Eliminar testigo
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
 
             <div class="row">
               <div class="col-sm-12">
@@ -1332,7 +1123,7 @@ campo es
             <div class="row">
               <div class="col-sm-12">
                 <div class="mb-3 d-flex flex-column h-100">
-                  <label class="form-label1 negri">Heredero (s):*</label>
+                  <label class="form-label1 negri">PRIMERO.- Heredero (s):*</label>
                   <p style="text-align: justify;">
                     Es quien sin saberlo es beneficiaria o beneficiario a título universal de sus bienes, recibe de
                     usted tanto su
@@ -1365,222 +1156,7 @@ campo es
             <!-- ******************************************dentro de esto se va a ocultar****************************************************************
 ****************************************** dentro de  esto se va a ocultar****************************************************************
 ****************************************** dentro de  esto se va a ocultar**************************************************************** -->
-            <div *ngIf="mostrarCamposMenorDeEdad">
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="mb-3 d-flex flex-column h-100">
-                    <label class="form-label1 negri">TUTOR PARA EL CASO DE DESCENDIENTES:</label>
-                    <p style="text-align: justify;">
-                      Es la persona física que a falta de usted
-                      como titular de patria potestad de un menor de edad o de un incapaz, se encargará del mismo o de
-                      los mismos,
-                      quien tendrá la obligación de proteger y administrara los bienes mientras llegan a la mayoría de
-                      edad o cesa
-                      la incapacidad, puede ser tutor testamentario un familiar o una amistad.
-                      El tutor tiene derecho a exigir respeto y obediencia del tutelado, a percibir una retribución y a
-                      ser
-                      indemnizado por los daños y perjuicios sufridos. Tiene el deber de realizar un inventario,
-                      representar al menor
-                      o incapacitado, llevar su guarda y protección, administrar el patrimonio, e informar y rendir
-                      cuentas a la
-                      autoridad judicial.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="mb-3 d-flex flex-column h-100">
-                    <label class="form-label1 negri">TUTOR PARA EL CASO DE DESCENDIENTES:</label>
-                    <p style="text-align: justify;">
-                      Es la persona física que a falta de usted
-                      como titular de patria potestad de un menor de edad o de un incapaz, se encargará del mismo o de
-                      los mismos,
-                      quien tendrá la obligación de proteger y administrara los bienes mientras llegan a la mayoría de
-                      edad o cesa
-                      la incapacidad, puede ser tutor testamentario un familiar o una amistad.
-                      El tutor tiene derecho a exigir respeto y obediencia del tutelado, a percibir una retribución y a
-                      ser
-                      indemnizado por los daños y perjuicios sufridos. Tiene el deber de realizar un inventario,
-                      representar al menor
-                      o incapacitado, llevar su guarda y protección, administrar el patrimonio, e informar y rendir
-                      cuentas a la
-                      autoridad judicial.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <label class="form-label1 negri">TUTOR:</label>
-                <div class="col-sm-4">
-                  <div class="mb-3">
-                    <label class="form-label negri">Nombre(s):*</label>
-                    <input formControlName="nombre_tutor" type="text" class="form-control"
-                      placeholder="Ejemplo: Sofía" />
-                    <small class="colorsm"
-                      *ngIf="formTestamento.get('nombre_tutor')?.hasError('required') && formTestamento.get('nombre_tutor')?.touched">Este
-                      campo es
-                      <strong>requerido</strong></small>
-                  </div>
-                </div>
-
-                <div class="col-sm-4">
-                  <div class="mb-3">
-                    <label class="form-label negri">Primer apellido:*</label>
-                    <input formControlName="primer_apellido_tutor" type="text" class="form-control"
-                      placeholder="Ejemplo: Jiménez" />
-                    <small class="colorsm"
-                      *ngIf="formTestamento.get('primer_apellido_tutor')?.hasError('required') && formTestamento.get('primer_apellido_tutor')?.touched">Este
-                      campo es
-                      <strong>requerido</strong></small>
-                  </div>
-                </div>
-
-                <div class="col-sm-4">
-                  <div class="mb-3">
-                    <label class="form-label negri">Segundo apellido:*</label>
-                    <input formControlName="segundo_apellido_tutor" type="text" class="form-control"
-                      placeholder="Ejemplo: González" />
-                    <small class="colorsm"
-                      *ngIf="formTestamento.get('segundo_apellido_tutor')?.hasError('required') && formTestamento.get('segundo_apellido_tutor')?.touched">Este
-                      campo es
-                      <strong>requerido</strong></small>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <label class="form-label1 negri">TUTOR SUSTITUTO:</label>
-                <div class="col-sm-4">
-                  <div class="mb-3">
-                    <label class="form-label negri">Nombre(s):*</label>
-                    <input formControlName="nombre_tutor_sustituto" type="text" class="form-control"
-                      placeholder="Ejemplo: Sofía" />
-                    <small class="colorsm"
-                      *ngIf="formTestamento.get('nombre_tutor_sustituto')?.hasError('required') && formTestamento.get('nombre_tutor_sustituto')?.touched">Este
-                      campo es
-                      <strong>requerido</strong></small>
-                  </div>
-                </div>
-
-                <div class="col-sm-4">
-                  <div class="mb-3">
-                    <label class="form-label negri">Primer apellido:*</label>
-                    <input formControlName="primer_apellido_tutor_sustituto" type="text" class="form-control"
-                      placeholder="Ejemplo: Jiménez" />
-                    <small class="colorsm"
-                      *ngIf="formTestamento.get('primer_apellido_tutor_sustituto')?.hasError('required') && formTestamento.get('primer_apellido_tutor_sustituto')?.touched">Este
-                      campo es
-                      <strong>requerido</strong></small>
-                  </div>
-                </div>
-
-                <div class="col-sm-4">
-                  <div class="mb-3">
-                    <label class="form-label negri">Segundo apellido:*</label>
-                    <input formControlName="segundo_apellido_tutor_sustituto" type="text" class="form-control"
-                      placeholder="Ejemplo: González" />
-                    <small class="colorsm"
-                      *ngIf="formTestamento.get('segundo_apellido_tutor_sustituto')?.hasError('required') && formTestamento.get('segundo_apellido_tutor_sustituto')?.touched">Este
-                      campo es
-                      <strong>requerido</strong></small>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="mb-3 d-flex flex-column h-100">
-                    <label class="form-label1 negri">CURADOR:</label>
-                    <p style="text-align: justify;">
-                      Persona física encargada de vigilar el desempeño del tutor
-                      respecto del cuidado y administración de los bienes de los menores o incapaces. Puede ser curador
-                      un
-                      pariente o extraño, pero <strong>"ENTRE TUTOR Y CURADOR NO PUEDE HABER PARENTESCO".</strong>
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <label class="form-label1 negri">CURADOR:</label>
-                <div class="col-sm-4">
-                  <div class="mb-3">
-                    <label class="form-label negri">Nombre(s):*</label>
-                    <input formControlName="nombre_curador" type="text" class="form-control"
-                      placeholder="Ejemplo: Sofía" />
-                    <small class="colorsm"
-                      *ngIf="formTestamento.get('nombre_curador')?.hasError('required') && formTestamento.get('nombre_curador')?.touched">Este
-                      campo es
-                      <strong>requerido</strong></small>
-                  </div>
-                </div>
-
-                <div class="col-sm-4">
-                  <div class="mb-3">
-                    <label class="form-label negri">Primer apellido:*</label>
-                    <input formControlName="primer_apellido_curador" type="text" class="form-control"
-                      placeholder="Ejemplo: Jiménez" />
-                    <small class="colorsm"
-                      *ngIf="formTestamento.get('primer_apellido_curador')?.hasError('required') && formTestamento.get('primer_apellido_curador')?.touched">Este
-                      campo es
-                      <strong>requerido</strong></small>
-                  </div>
-                </div>
-
-                <div class="col-sm-4">
-                  <div class="mb-3">
-                    <label class="form-label negri">Segundo apellido:*</label>
-                    <input formControlName="segundo_apellido_curador" type="text" class="form-control"
-                      placeholder="Ejemplo: González" />
-                    <small class="colorsm"
-                      *ngIf="formTestamento.get('segundo_apellido_curador')?.hasError('required') && formTestamento.get('segundo_apellido_curador')?.touched">Este
-                      campo es
-                      <strong>requerido</strong></small>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <label class="form-label1 negri">A SU FALTA:</label>
-                <div class="col-sm-4">
-                  <div class="mb-3">
-                    <label class="form-label negri">Nombre(s):*</label>
-                    <input formControlName="nombre_a_su_falta_curador" type="text" class="form-control"
-                      placeholder="Ejemplo: Sofía" />
-                    <small class="colorsm"
-                      *ngIf="formTestamento.get('nombre_a_su_falta_curador')?.hasError('required') && formTestamento.get('nombre_a_su_falta_curador')?.touched">Este
-                      campo es
-                      <strong>requerido</strong></small>
-                  </div>
-                </div>
-
-                <div class="col-sm-4">
-                  <div class="mb-3">
-                    <label class="form-label negri">Primer apellido:*</label>
-                    <input formControlName="primer_apellido_a_su_falta_curador" type="text" class="form-control"
-                      placeholder="Ejemplo: Jiménez" />
-                    <small class="colorsm"
-                      *ngIf="formTestamento.get('primer_apellido_a_su_falta_curador')?.hasError('required') && formTestamento.get('primer_apellido_a_su_falta_curador')?.touched">Este
-                      campo es
-                      <strong>requerido</strong></small>
-                  </div>
-
-                </div>
-
-                <div class="col-sm-4">
-                  <div class="mb-3">
-                    <label class="form-label negri">Segundo apellido:*</label>
-                    <input formControlName="segundo_apellido_a_su_falta_curador" type="text" class="form-control"
-                      placeholder="Ejemplo: González" />
-                    <small class="colorsm"
-                      *ngIf="formTestamento.get('segundo_apellido_a_su_falta_curador')?.hasError('required') && formTestamento.get('segundo_apellido_a_su_falta_curador')?.touched">Este
-                      campo es
-                      <strong>requerido</strong></small>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
             <!-- ****************************************** dentro de  esto se va a ocultar****************************************************************
 ****************************************** dentro de  esto se va a ocultar****************************************************************
 ****************************************** dentro de  esto se va a ocultar**************************************************************** -->
@@ -1843,7 +1419,7 @@ campo es
             <div class="row">
               <div class="col-sm-12">
                 <div class="mb-3 d-flex flex-column h-100">
-                  <label class="form-label1 negri">ALBACEA</label>
+                  <label class="form-label1 negri">SEGUNDO.- ALBACEA</label>
                   <p style="text-align: justify;">
                     Es la persona (de confianza) designada por el testador encargada de ejecutar y vigilar la correcta
                     ejecución de un
@@ -1933,7 +1509,462 @@ campo es
                 </div>
               </div>
             </div>
+            <div *ngIf="mostrarCamposMenorDeEdad">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label1 negri">Tercero.-  TUTOR PARA EL CASO DE DESCENDIENTES:</label>
+                    <p style="text-align: justify;">
+                      Es la persona física que a falta de usted
+                      como titular de patria potestad de un menor de edad o de un incapaz, se encargará del mismo o de
+                      los mismos,
+                      quien tendrá la obligación de proteger y administrara los bienes mientras llegan a la mayoría de
+                      edad o cesa
+                      la incapacidad, puede ser tutor testamentario un familiar o una amistad.
+                      El tutor tiene derecho a exigir respeto y obediencia del tutelado, a percibir una retribución y a
+                      ser
+                      indemnizado por los daños y perjuicios sufridos. Tiene el deber de realizar un inventario,
+                      representar al menor
+                      o incapacitado, llevar su guarda y protección, administrar el patrimonio, e informar y rendir
+                      cuentas a la
+                      autoridad judicial.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
+              
+              <div class="row">
+                <label class="form-label1 negri">TUTOR:</label>
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Nombre(s):*</label>
+                    <input formControlName="nombre_tutor" type="text" class="form-control"
+                      placeholder="Ejemplo: Sofía" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('nombre_tutor')?.hasError('required') && formTestamento.get('nombre_tutor')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Primer apellido:*</label>
+                    <input formControlName="primer_apellido_tutor" type="text" class="form-control"
+                      placeholder="Ejemplo: Jiménez" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('primer_apellido_tutor')?.hasError('required') && formTestamento.get('primer_apellido_tutor')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Segundo apellido:*</label>
+                    <input formControlName="segundo_apellido_tutor" type="text" class="form-control"
+                      placeholder="Ejemplo: González" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('segundo_apellido_tutor')?.hasError('required') && formTestamento.get('segundo_apellido_tutor')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <label class="form-label1 negri">TUTOR SUSTITUTO:</label>
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Nombre(s):*</label>
+                    <input formControlName="nombre_tutor_sustituto" type="text" class="form-control"
+                      placeholder="Ejemplo: Sofía" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('nombre_tutor_sustituto')?.hasError('required') && formTestamento.get('nombre_tutor_sustituto')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Primer apellido:*</label>
+                    <input formControlName="primer_apellido_tutor_sustituto" type="text" class="form-control"
+                      placeholder="Ejemplo: Jiménez" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('primer_apellido_tutor_sustituto')?.hasError('required') && formTestamento.get('primer_apellido_tutor_sustituto')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Segundo apellido:*</label>
+                    <input formControlName="segundo_apellido_tutor_sustituto" type="text" class="form-control"
+                      placeholder="Ejemplo: González" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('segundo_apellido_tutor_sustituto')?.hasError('required') && formTestamento.get('segundo_apellido_tutor_sustituto')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label1 negri">Cuarto:- CURADOR:</label>
+                    <p style="text-align: justify;">
+                      Persona física encargada de vigilar el desempeño del tutor
+                      respecto del cuidado y administración de los bienes de los menores o incapaces. Puede ser curador
+                      un
+                      pariente o extraño, pero <strong>"ENTRE TUTOR Y CURADOR NO PUEDE HABER PARENTESCO".</strong>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <label class="form-label1 negri">CURADOR:</label>
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Nombre(s):*</label>
+                    <input formControlName="nombre_curador" type="text" class="form-control"
+                      placeholder="Ejemplo: Sofía" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('nombre_curador')?.hasError('required') && formTestamento.get('nombre_curador')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Primer apellido:*</label>
+                    <input formControlName="primer_apellido_curador" type="text" class="form-control"
+                      placeholder="Ejemplo: Jiménez" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('primer_apellido_curador')?.hasError('required') && formTestamento.get('primer_apellido_curador')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Segundo apellido:*</label>
+                    <input formControlName="segundo_apellido_curador" type="text" class="form-control"
+                      placeholder="Ejemplo: González" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('segundo_apellido_curador')?.hasError('required') && formTestamento.get('segundo_apellido_curador')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <label class="form-label1 negri">A SU FALTA:</label>
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Nombre(s):*</label>
+                    <input formControlName="nombre_a_su_falta_curador" type="text" class="form-control"
+                      placeholder="Ejemplo: Sofía" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('nombre_a_su_falta_curador')?.hasError('required') && formTestamento.get('nombre_a_su_falta_curador')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Primer apellido:*</label>
+                    <input formControlName="primer_apellido_a_su_falta_curador" type="text" class="form-control"
+                      placeholder="Ejemplo: Jiménez" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('primer_apellido_a_su_falta_curador')?.hasError('required') && formTestamento.get('primer_apellido_a_su_falta_curador')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Segundo apellido:*</label>
+                    <input formControlName="segundo_apellido_a_su_falta_curador" type="text" class="form-control"
+                      placeholder="Ejemplo: González" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('segundo_apellido_a_su_falta_curador')?.hasError('required') && formTestamento.get('segundo_apellido_a_su_falta_curador')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12" *ngIf="mostrarBtnTestigo">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label1 negri">Quinto:- TESTIGOS:</label>
+                    <p style="text-align: justify;">
+                      Persona física encargada de vigilar el desempeño del tutor
+                      respecto del cuidado y administración de los bienes de los menores o incapaces. Puede ser curador
+                      un
+                      pariente o extraño, pero <strong>"ENTRE TUTOR Y CURADOR NO PUEDE HABER PARENTESCO".</strong>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="mb-3">
+                  <div class="hijos-container">
+                    <label class="form-label">Agregar testigos (3 o más):*</label>
+                    <button type="button" class="add-hijo-btn" (click)="agregarTestigo()">
+                      ➕ Agregar testigos
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div formArrayName="testigoArr">
+                    <div *ngFor="let hijo of testigosF.controls; let i = index" [formGroupName]="i"
+                      class="row border p-3 mb-3 rounded bg-light">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Nombre(s):*</label>
+                            <input formControlName="nombre_testigo" type="text" class="form-control"
+                              placeholder="Ejemplo: Sofía" />
+                            <small class="colorsm"
+                              *ngIf="testigosF.at(i).get('nombre_testigo')?.hasError('required') && testigosF.at(i).get('nombre_testigo')?.touched">Este
+                              campo es
+                              <strong>requerido</strong></small>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Primer apellido:*</label>
+                            <input formControlName="primer_apellido_testigo" type="text" class="form-control"
+                              placeholder="Ejemplo: Jiménez" />
+                            <small class="colorsm"
+                              *ngIf="testigosF.at(i).get('primer_apellido_testigo')?.hasError('required') && testigosF.at(i).get('primer_apellido_testigo')?.touched">Este
+                              campo es
+                              <strong>requerido</strong></small>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Segundo apellido:*</label>
+                            <input formControlName="segundo_apellido_testigo" type="text" class="form-control"
+                              placeholder="Ejemplo: González" />
+                            <small class="colorsm"
+                              *ngIf="testigosF.at(i).get('segundo_apellido_testigo')?.hasError('required') && testigosF.at(i).get('segundo_apellido_testigo')?.touched">Este
+                              campo es
+                              <strong>requerido</strong></small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Nacionalidad:*</label>
+                            <input formControlName="nacionalidad_testigo" type="text" class="form-control"
+                              placeholder="Ejemplo: 18 años" />
+                            <small class="colorsm"
+                              *ngIf="testigosF.at(i).get('nacionalidad_testigo')?.hasError('required') && testigosF.at(i).get('nacionalidad_testigo')?.touched">Este
+                              campo es
+                              <strong>requerido</strong></small>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">fecha de nacimiento:*</label>
+                            <input formControlName="fecha_nacimiento_testigo" type="date" class="form-control"
+                              placeholder="Ejemplo: Hijo" />
+                            <small class="colorsm"
+                              *ngIf="testigosF.at(i).get('fecha_nacimiento_testigo')?.hasError('required') && testigosF.at(i).get('fecha_nacimiento_testigo')?.touched">Este
+                              campo es
+                              <strong>requerido</strong></small>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Lugar de nacimiento:*</label>
+                            <input formControlName="lugar_nacimiento_testigo" type="text" class="form-control"
+                              placeholder="Ejemplo: 100" />
+                            <small class="colorsm"
+                              *ngIf="testigosF.at(i).get('lugar_nacimiento_testigo')?.hasError('required') && testigosF.at(i).get('lugar_nacimiento_testigo')?.touched">Este
+                              campo es
+                              <strong>requerido</strong></small>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Curp:*</label>
+                            <input formControlName="curp_testigo" type="text" class="form-control"
+                              placeholder="Ejemplo: 18 años" />
+                            <small class="colorsm"
+                              *ngIf="testigosF.at(i).get('curp_testigo')?.hasError('required') && testigosF.at(i).get('curp_testigo')?.touched">Este
+                              campo es
+                              <strong>requerido</strong></small>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Estado civil:*</label>
+                            <input formControlName="estado_civil_testigo" type="text" class="form-control"
+                              placeholder="Ejemplo: Hijo" />
+                            <small class="colorsm"
+                              *ngIf="testigosF.at(i).get('estado_civil_testigo')?.hasError('required') && testigosF.at(i).get('estado_civil_testigo')?.touched">Este
+                              campo es
+                              <strong>requerido</strong></small>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Ocupación:*</label>
+                            <input formControlName="ocupacion_testigo" type="text" class="form-control"
+                              placeholder="Ejemplo: 100" />
+                            <small class="colorsm"
+                              *ngIf="testigosF.at(i).get('ocupacion_testigo')?.hasError('required') && testigosF.at(i).get('ocupacion_testigo')?.touched">Este
+                              campo es
+                              <strong>requerido</strong></small>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Domicilio:*</label>
+                            <input formControlName="domicilio_testigo" type="text" class="form-control"
+                              placeholder="Ejemplo: 18 años" />
+                            <small class="colorsm"
+                              *ngIf="testigosF.at(i).get('domicilio_testigo')?.hasError('required') && testigosF.at(i).get('domicilio_testigo')?.touched">Este
+                              campo es
+                              <strong>requerido</strong></small>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Codigo postal:*</label>
+                            <input formControlName="cp_testigo" type="number" class="form-control"
+                              placeholder="Ejemplo: 100" />
+                            <small class="colorsm"
+                              *ngIf="testigosF.at(i).get('cp_testigo')?.hasError('required') && testigosF.at(i).get('cp_testigo')?.touched">Este
+                              campo es
+                              <strong>requerido</strong></small>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Télefono:*</label>
+                            <input formControlName="telefono_testigo" type="text" class="form-control"
+                              placeholder="Ejemplo: 18 años" />
+                            <small class="colorsm"
+                              *ngIf="testigosF.at(i).get('telefono_testigo')?.hasError('required') && testigosF.at(i).get('telefono_testigo')?.touched">Este
+                              campo es
+                              <strong>requerido</strong></small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">RFC:*</label>
+                            <input formControlName="rfc_testigo" type="text" class="form-control"
+                              placeholder="Ejemplo: Hijo" />
+                            <small class="colorsm"
+                              *ngIf="testigosF.at(i).get('rfc_testigo')?.hasError('required') && testigosF.at(i).get('rfc_testigo')?.touched">Este
+                              campo es
+                              <strong>requerido</strong></small>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+
+                        <div class="col-sm-4">
+                          <div class="mb-3 d-flex flex-column h-100">
+                            <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Identificación oficial
+                              vigente
+                              (Credencial para votar, pasaporte o
+                              cédula profesional):</label>
+                            <div class="position-relative d-flex flex-column flex-grow-1"
+                              style="min-height: 10px; padding-bottom: 1rem;">
+                              <input class="form-control" type="file" id="identificacion_t" accept="application/pdf"
+                                (change)="onFileSelecTestigos($event, i, 'identificacion_t')" #fileIdentificacion_t />
+                              <div *ngIf="documentosTestigos[i]?.identificacion_t"
+                                style="position: absolute; bottom: 0; left: 0;">
+                                <button type="button" class="boton-danger-sm"
+                                  (click)="eliminarArchivoTestigos(i, 'identificacion_t', fileIdentificacion_t)">
+                                  <i class="feather icon-trash btn-icon-prepend"></i>
+                                  Eliminar archivo
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="mb-3 d-flex flex-column h-100">
+                            <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave unica de registro de
+                              población:</label>
+                            <div class="position-relative d-flex flex-column flex-grow-1"
+                              style="min-height: 10px; padding-bottom: 1rem;">
+                              <input class="form-control" type="file" id="curp_t" accept="application/pdf"
+                                (change)="onFileSelecTestigos($event, i, 'curp_t')" #fileCurp_t />
+                              <div *ngIf="documentosTestigos[i]?.curp_t" style="position: absolute; bottom: 0; left: 0;">
+                                <button type="button" class="boton-danger-sm"
+                                  (click)="eliminarArchivoTestigos(i, 'curp_t', fileCurp_t)">
+                                  <i class="feather icon-trash btn-icon-prepend"></i>
+                                  Eliminar archivo
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="mb-3 d-flex flex-column h-100">
+                            <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de
+                              domicilio:</label>
+                            <div class="position-relative d-flex flex-column flex-grow-1"
+                              style="min-height: 10px; padding-bottom: 1rem;">
+                              <input class="form-control" type="file" id="comprobante_domicilio_t" accept="application/pdf"
+                                (change)="onFileSelecTestigos($event, i, 'comprobante_domicilio_t')" #fileComprobante_t />
+                              <div *ngIf="documentosTestigos[i]?.comprobante_domicilio_t"
+                                style="position: absolute; bottom: 0; left: 0;">
+                                <button type="button" class="boton-danger-sm"
+                                  (click)="eliminarArchivoTestigos(i, 'comprobante_domicilio_t', fileComprobante_t)">
+                                  <i class="feather icon-trash btn-icon-prepend"></i>
+                                  Eliminar archivo
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 text-center">
+                        <button style="background-color: #c82333; color: white;" type="button" (click)="eliminarTestigo(i)"
+                          class="btn btn-sm mt-2">
+                          🗑️ Eliminar testigo
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             <br>
             <div>
               <h5 class="titulo">Documentación requerida:</h5>
@@ -1981,13 +2012,13 @@ campo es
             <div class="row">
               <div class="col-sm-6">
                 <div class="mb-3 d-flex flex-column h-100">
-                  <label class="form-label1 negri">INE:*</label>
+                  <label class="form-label1 negri">Clave única de registro de población:*</label>
                   <div class="position-relative d-flex flex-column flex-grow-1"
                     style="min-height: 10px; padding-bottom: 1rem;">
-                    <input class="form-control" type="file" id="ine" accept="application/pdf" #inputine
-                      (change)="onFileSelect($event, 'ine')" />
-                    <div *ngIf="documentos['ine']" style="position: absolute; bottom: 0; left: 0;">
-                      <button type="button" class="boton-danger-sm" (click)="eliminarArchivo('ine', inputine)">
+                    <input class="form-control" type="file" id="curp" accept="application/pdf" #inputcurp
+                      (change)="onFileSelect($event, 'curp')" />
+                    <div *ngIf="documentos['curp']" style="position: absolute; bottom: 0; left: 0;">
+                      <button type="button" class="boton-danger-sm" (click)="eliminarArchivo('curp', inputcurp)">
                         <i class="feather icon-trash btn-icon-prepend"></i>
                         Eliminar archivo
                       </button>
@@ -2014,43 +2045,7 @@ campo es
               </div>
             </div>
             <br>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="mb-3 d-flex flex-column h-100">
-                  <label class="form-label1 negri">Clave única de registro de población:*</label>
-                  <div class="position-relative d-flex flex-column flex-grow-1"
-                    style="min-height: 10px; padding-bottom: 1rem;">
-                    <input class="form-control" type="file" id="curp" accept="application/pdf" #inputcurp
-                      (change)="onFileSelect($event, 'curp')" />
-                    <div *ngIf="documentos['curp']" style="position: absolute; bottom: 0; left: 0;">
-                      <button type="button" class="boton-danger-sm" (click)="eliminarArchivo('curp', inputcurp)">
-                        <i class="feather icon-trash btn-icon-prepend"></i>
-                        Eliminar archivo
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="mb-3 d-flex flex-column h-100">
-                  <label class="form-label1 negri">Constancia de situación fiscal:*</label>
-                  <div class="position-relative d-flex flex-column flex-grow-1"
-                    style="min-height: 10px; padding-bottom: 1rem;">
-                    <input class="form-control" type="file" id="constancia_situacion_fiscal" accept="application/pdf"
-                      #inputconstancia_situacion_fiscal
-                      (change)="onFileSelect($event, 'constancia_situacion_fiscal')" />
-                    <div *ngIf="documentos['constancia_situacion_fiscal']"
-                      style="position: absolute; bottom: 0; left: 0;">
-                      <button type="button" class="boton-danger-sm"
-                        (click)="eliminarArchivo('constancia_situacion_fiscal', inputconstancia_situacion_fiscal)">
-                        <i class="feather icon-trash btn-icon-prepend"></i>
-                        Eliminar archivo
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
 
             <br>
             <!-- **********************************ngIf="mostrarExtraInfo"*****************************AQUI VA EL DIV DE 60+************************************************************** -->
