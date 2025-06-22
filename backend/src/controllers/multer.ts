@@ -3,8 +3,6 @@ import path from 'path';
 import fs from 'fs';
 
 
-
-// Campos base individuales (1 archivo por campo)
 const baseFields = [
   'constancia_situacion_fiscal',
   'certificado_publico',
@@ -29,7 +27,6 @@ for (let i = 0; i < 10; i++) {
   testigosDocumentFields.push({ name: `testigos[${i}][curp_t]`, maxCount: 1 });
   testigosDocumentFields.push({ name: `testigos[${i}][comprobante_domicilio_t]`, maxCount: 1 });
 }
-
 const allFields = [...baseFields, ...testigosDocumentFields];
 
 const storage = multer.diskStorage({

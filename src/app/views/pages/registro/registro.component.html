@@ -290,7 +290,7 @@
                   <div class="mb-3">
                     <label class="form-label negri">Indique nacionalidad:</label>
                     <input formControlName="indique_nacionalidad_serv" type="text" class="form-control"
-                      placeholder="Ejemplo: 123456789" />
+                      placeholder="Ejemplo: Venezolana, Colombiana" />
                     <small class="colorsm"
                       *ngIf="formTestamento.get('indique_nacionalidad_serv')?.hasError('required') && formTestamento.get('indique_nacionalidad_serv')?.touched">Este
                       campo es
@@ -447,7 +447,7 @@
                 <div class="mb-3">
                   <label class="form-label negri">Especifique:*</label>
                   <input formControlName="especifique_nac_padre" type="text" class="form-control"
-                    placeholder="Ejemplo: Peruana" />
+                    placeholder="Ejemplo: Venezolana, Colombiana" />
                 </div>
               </div>
             </div>
@@ -530,7 +530,7 @@
                 <div class="mb-3">
                   <label class="form-label negri">Especifique:*</label>
                   <input formControlName="especifique_nac_madre" type="text" class="form-control"
-                    placeholder="Ejemplo: Peruana" />
+                    placeholder="Ejemplo: Venezolana, Colombiana" />
                 </div>
               </div>
             </div>
@@ -654,7 +654,7 @@ campo es
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label class="form-label negri">Edad*</label>
+                        <label class="form-label negri">Edad:*</label>
                         <input formControlName="hijo_edad_primer_nup" type="number" class="form-control"
                           placeholder="Ejemplo: 18" />
                       </div>
@@ -801,7 +801,7 @@ campo es
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label class="form-label negri">Edad*</label>
+                        <label class="form-label negri">Edad:*</label>
                         <input formControlName="hijo_edad_dos_nup" type="number" class="form-control"
                           placeholder="Ejemplo: 18" />
                       </div>
@@ -826,7 +826,7 @@ campo es
             </div>
 
             <div>
-              <h5 class="titulo3">Existen otra hija o hijo, "no" reconocido por usted:</h5>
+              <h5 class="titulo3">Existen otra hija o hijo, “no” reconocido por usted: (Usted puede reconocer en su testamento a una hija o hijo, que no esté reconocido como tal ante el registro civil, por usted.):</h5>
             </div>
             <br>
             <p> <strong>Hijos fuera del matrimonio con:</strong> </p>
@@ -896,7 +896,7 @@ campo es
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label class="form-label negri">Edad*</label>
+                        <label class="form-label negri">Edad:*</label>
                         <input formControlName="fuera_hijo_edad" type="number" class="form-control"
                           placeholder="Ejemplo: 18" />
                       </div>
@@ -1107,13 +1107,10 @@ campo es
 
 
 
-
-            <div>
-              <h5 class="titulo">
-                Si no sabe o no puede firmar, si es sorda, invidente o no sabe leer, necesariamente requiere la
+             <div>
+              <h5 class="titulo3">Si no sabe o no puede firmar, si es sorda, invidente o no sabe leer, necesariamente requiere la
                 presencia de al menos tres testigos, uno de los cuales firmara en nombre del testador. Los testigos lo
-                deben conocer, e identificarse con documento oficial.
-              </h5>
+                deben conocer, e identificarse con documento oficial.</h5>
             </div>
             <br>
             <div>
@@ -1123,7 +1120,9 @@ campo es
             <div class="row">
               <div class="col-sm-12">
                 <div class="mb-3 d-flex flex-column h-100">
-                  <label class="form-label1 negri">PRIMERO.- Heredero (s):*</label>
+                   <label class="form-label1 negri fs-4" style="font-weight: bold;">
+                      PRIMERO.- Heredero(s):*
+                    </label>
                   <p style="text-align: justify;">
                     Es quien sin saberlo es beneficiaria o beneficiario a título universal de sus bienes, recibe de
                     usted tanto su
@@ -1137,7 +1136,7 @@ campo es
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-4">
+              <div class="col-sm-12">
                 <div class="mb-3">
                   <label class="form-label negri">Dentro de sus herederos considera designar a un "menor de
                     edad":*</label>
@@ -1162,17 +1161,7 @@ campo es
 ****************************************** dentro de  esto se va a ocultar**************************************************************** -->
             <br>
 
-            <div class="row">
-              <p style="text-align: justify;">
-                El derecho de acrecer en una herencia queda recogido en el Código Civil, y para que llegue a darse es
-                preciso que dos o más sean llamados a una misma herencia o a una misma porción de ella, sin especial
-                designación de partes, que quede una porción de la herencia vacante porque uno de los herederos muera
-                antes que el testador o renuncie a la herencia o sea incapaz de recibirla, que el testador no haya
-                establecido que no ha de proceder el acrecimiento o que el testador no haya establecido la existencia de
-                un sustituto, caso en el que pasará al mismo la porción vacante y no habrá lugar al derecho de acrecer.
-              </p>
-            </div>
-            <br>
+            
             <div class="row">
               <div class="col-sm-4">
                 <div class="mb-3">
@@ -1411,15 +1400,23 @@ campo es
               </div>
             </div>
 
-
-
-
+            <div class="row">
+              <p style="text-align: justify;">
+                El derecho de acrecer en una herencia queda recogido en el Código Civil, y para que llegue a darse es
+                preciso que dos o más sean llamados a una misma herencia o a una misma porción de ella, sin especial
+                designación de partes, que quede una porción de la herencia vacante porque uno de los herederos muera
+                antes que el testador o renuncie a la herencia o sea incapaz de recibirla, que el testador no haya
+                establecido que no ha de proceder el acrecimiento o que el testador no haya establecido la existencia de
+                un sustituto, caso en el que pasará al mismo la porción vacante y no habrá lugar al derecho de acrecer.
+              </p>
+            </div>
+            <br>
 
 
             <div class="row">
               <div class="col-sm-12">
                 <div class="mb-3 d-flex flex-column h-100">
-                  <label class="form-label1 negri">SEGUNDO.- ALBACEA</label>
+                  <label class="form-label1 negri fs-4" style="font-weight: bold;">SEGUNDO.- Albacea:*</label>
                   <p style="text-align: justify;">
                     Es la persona (de confianza) designada por el testador encargada de ejecutar y vigilar la correcta
                     ejecución de un
@@ -1513,7 +1510,7 @@ campo es
               <div class="row">
                 <div class="col-sm-12">
                   <div class="mb-3 d-flex flex-column h-100">
-                    <label class="form-label1 negri">Tercero.-  TUTOR PARA EL CASO DE DESCENDIENTES:</label>
+                    <label class="form-label1 negri fs-4" style="font-weight: bold;">TERCERO.- Tutor para el caso de descendientes:*</label>
                     <p style="text-align: justify;">
                       Es la persona física que a falta de usted
                       como titular de patria potestad de un menor de edad o de un incapaz, se encargará del mismo o de
@@ -1614,7 +1611,7 @@ campo es
               <div class="row">
                 <div class="col-sm-12">
                   <div class="mb-3 d-flex flex-column h-100">
-                    <label class="form-label1 negri">Cuarto:- CURADOR:</label>
+                    <label class="form-label1 negri fs-4" style="font-weight: bold;">CUARTO.- Curador:*</label>
                     <p style="text-align: justify;">
                       Persona física encargada de vigilar el desempeño del tutor
                       respecto del cuidado y administración de los bienes de los menores o incapaces. Puede ser curador
@@ -1708,7 +1705,7 @@ campo es
               <div class="row">
                 <div class="col-sm-12">
                   <div class="mb-3 d-flex flex-column h-100">
-                    <label class="form-label1 negri">Quinto:- TESTIGOS:</label>
+                   <label class="form-label1 negri fs-4" style="font-weight: bold;">QUINTO.- Testigos:*</label>
                     <p style="text-align: justify;">
                       Persona física encargada de vigilar el desempeño del tutor
                       respecto del cuidado y administración de los bienes de los menores o incapaces. Puede ser curador
@@ -1729,78 +1726,67 @@ campo es
                 </div>
                 <div class="row">
                   <div formArrayName="testigoArr">
-                    <div *ngFor="let hijo of testigosF.controls; let i = index" [formGroupName]="i"
-                      class="row border p-3 mb-3 rounded bg-light">
+                    <div *ngFor="let hijo of testigosF.controls; let i = index" [formGroupName]="i" class="row border p-3 mb-3 rounded bg-light">
                       <div class="row">
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label class="form-label negri">Nombre(s):*</label>
-                            <input formControlName="nombre_testigo" type="text" class="form-control"
-                              placeholder="Ejemplo: Sofía" />
-                            <small class="colorsm"
-                              *ngIf="testigosF.at(i).get('nombre_testigo')?.hasError('required') && testigosF.at(i).get('nombre_testigo')?.touched">Este
-                              campo es
-                              <strong>requerido</strong></small>
+                            <input formControlName="nombre_testigo" type="text" class="form-control" placeholder="Ejemplo: Sofía" />
+                            <small class="colorsm" *ngIf="testigosF.at(i).get('nombre_testigo')?.hasError('required') && testigosF.at(i).get('nombre_testigo')?.touched">
+                              Este campo es <strong>requerido</strong>
+                            </small>
                           </div>
                         </div>
 
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label class="form-label negri">Primer apellido:*</label>
-                            <input formControlName="primer_apellido_testigo" type="text" class="form-control"
-                              placeholder="Ejemplo: Jiménez" />
-                            <small class="colorsm"
-                              *ngIf="testigosF.at(i).get('primer_apellido_testigo')?.hasError('required') && testigosF.at(i).get('primer_apellido_testigo')?.touched">Este
-                              campo es
-                              <strong>requerido</strong></small>
+                            <input formControlName="primer_apellido_testigo" type="text" class="form-control" placeholder="Ejemplo: Jiménez" />
+                            <small class="colorsm" *ngIf="testigosF.at(i).get('primer_apellido_testigo')?.hasError('required') && testigosF.at(i).get('primer_apellido_testigo')?.touched">
+                              Este campo es <strong>requerido</strong>
+                            </small>
                           </div>
                         </div>
 
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label class="form-label negri">Segundo apellido:*</label>
-                            <input formControlName="segundo_apellido_testigo" type="text" class="form-control"
-                              placeholder="Ejemplo: González" />
-                            <small class="colorsm"
-                              *ngIf="testigosF.at(i).get('segundo_apellido_testigo')?.hasError('required') && testigosF.at(i).get('segundo_apellido_testigo')?.touched">Este
-                              campo es
-                              <strong>requerido</strong></small>
+                            <input formControlName="segundo_apellido_testigo" type="text" class="form-control" placeholder="Ejemplo: González" />
+                            <small class="colorsm" *ngIf="testigosF.at(i).get('segundo_apellido_testigo')?.hasError('required') && testigosF.at(i).get('segundo_apellido_testigo')?.touched">
+                              Este campo es <strong>requerido</strong>
+                            </small>
                           </div>
                         </div>
                       </div>
+
                       <div class="row">
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label class="form-label negri">Nacionalidad:*</label>
-                            <input formControlName="nacionalidad_testigo" type="text" class="form-control"
-                              placeholder="Ejemplo: 18 años" />
-                            <small class="colorsm"
-                              *ngIf="testigosF.at(i).get('nacionalidad_testigo')?.hasError('required') && testigosF.at(i).get('nacionalidad_testigo')?.touched">Este
-                              campo es
-                              <strong>requerido</strong></small>
+                            <input formControlName="nacionalidad_testigo" type="text" class="form-control" placeholder="Ejemplo: Mexicana" />
+                            <small class="colorsm" *ngIf="testigosF.at(i).get('nacionalidad_testigo')?.hasError('required') && testigosF.at(i).get('nacionalidad_testigo')?.touched">
+                              Este campo es <strong>requerido</strong>
+                            </small>
                           </div>
                         </div>
 
                         <div class="col-sm-4">
                           <div class="mb-3">
-                            <label class="form-label negri">fecha de nacimiento:*</label>
-                            <input formControlName="fecha_nacimiento_testigo" type="date" class="form-control"
-                              placeholder="Ejemplo: Hijo" />
-                            <small class="colorsm"
-                              *ngIf="testigosF.at(i).get('fecha_nacimiento_testigo')?.hasError('required') && testigosF.at(i).get('fecha_nacimiento_testigo')?.touched">Este
-                              campo es
-                              <strong>requerido</strong></small>
+                            <label class="form-label negri">Fecha de nacimiento:*</label>
+                            <input formControlName="fecha_nacimiento_testigo" type="date" class="form-control" placeholder="Seleccione una fecha" />
+                            <small class="colorsm" *ngIf="testigosF.at(i).get('fecha_nacimiento_testigo')?.hasError('required') && testigosF.at(i).get('fecha_nacimiento_testigo')?.touched">
+                              Este campo es <strong>requerido</strong>
+                            </small>
                           </div>
                         </div>
+
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label class="form-label negri">Lugar de nacimiento:*</label>
-                            <input formControlName="lugar_nacimiento_testigo" type="text" class="form-control"
-                              placeholder="Ejemplo: 100" />
-                            <small class="colorsm"
-                              *ngIf="testigosF.at(i).get('lugar_nacimiento_testigo')?.hasError('required') && testigosF.at(i).get('lugar_nacimiento_testigo')?.touched">Este
-                              campo es
-                              <strong>requerido</strong></small>
+                            <input formControlName="lugar_nacimiento_testigo" type="text" class="form-control" placeholder="Ejemplo: Mexico" />
+                            <small class="colorsm" *ngIf="testigosF.at(i).get('lugar_nacimiento_testigo')?.hasError('required') && testigosF.at(i).get('lugar_nacimiento_testigo')?.touched">
+                              Este campo es <strong>requerido</strong>
+                            </small>
                           </div>
                         </div>
                       </div>
@@ -1808,108 +1794,91 @@ campo es
                       <div class="row">
                         <div class="col-sm-4">
                           <div class="mb-3">
-                            <label class="form-label negri">Curp:*</label>
-                            <input formControlName="curp_testigo" type="text" class="form-control"
-                              placeholder="Ejemplo: 18 años" />
-                            <small class="colorsm"
-                              *ngIf="testigosF.at(i).get('curp_testigo')?.hasError('required') && testigosF.at(i).get('curp_testigo')?.touched">Este
-                              campo es
-                              <strong>requerido</strong></small>
+                            <label class="form-label negri">CURP:*</label>
+                            <input formControlName="curp_testigo" type="text" class="form-control" placeholder="Ejemplo: JUAN800101HDFABC01" />
+                            <small class="colorsm" *ngIf="testigosF.at(i).get('curp_testigo')?.hasError('required') && testigosF.at(i).get('curp_testigo')?.touched">
+                              Este campo es <strong>requerido</strong>
+                            </small>
                           </div>
                         </div>
 
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label class="form-label negri">Estado civil:*</label>
-                            <input formControlName="estado_civil_testigo" type="text" class="form-control"
-                              placeholder="Ejemplo: Hijo" />
-                            <small class="colorsm"
-                              *ngIf="testigosF.at(i).get('estado_civil_testigo')?.hasError('required') && testigosF.at(i).get('estado_civil_testigo')?.touched">Este
-                              campo es
-                              <strong>requerido</strong></small>
+                            <input formControlName="estado_civil_testigo" type="text" class="form-control" placeholder="Ejemplo: Soltero" />
+                            <small class="colorsm" *ngIf="testigosF.at(i).get('estado_civil_testigo')?.hasError('required') && testigosF.at(i).get('estado_civil_testigo')?.touched">
+                              Este campo es <strong>requerido</strong>
+                            </small>
                           </div>
                         </div>
+
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label class="form-label negri">Ocupación:*</label>
-                            <input formControlName="ocupacion_testigo" type="text" class="form-control"
-                              placeholder="Ejemplo: 100" />
-                            <small class="colorsm"
-                              *ngIf="testigosF.at(i).get('ocupacion_testigo')?.hasError('required') && testigosF.at(i).get('ocupacion_testigo')?.touched">Este
-                              campo es
-                              <strong>requerido</strong></small>
+                            <input formControlName="ocupacion_testigo" type="text" class="form-control" placeholder="Ejemplo: Empleado" />
+                            <small class="colorsm" *ngIf="testigosF.at(i).get('ocupacion_testigo')?.hasError('required') && testigosF.at(i).get('ocupacion_testigo')?.touched">
+                              Este campo es <strong>requerido</strong>
+                            </small>
                           </div>
                         </div>
                       </div>
-
 
                       <div class="row">
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label class="form-label negri">Domicilio:*</label>
-                            <input formControlName="domicilio_testigo" type="text" class="form-control"
-                              placeholder="Ejemplo: 18 años" />
-                            <small class="colorsm"
-                              *ngIf="testigosF.at(i).get('domicilio_testigo')?.hasError('required') && testigosF.at(i).get('domicilio_testigo')?.touched">Este
-                              campo es
-                              <strong>requerido</strong></small>
+                            <input formControlName="domicilio_testigo" type="text" class="form-control" placeholder="Ejemplo: Av. Reforma #123, CDMX" />
+                            <small class="colorsm" *ngIf="testigosF.at(i).get('domicilio_testigo')?.hasError('required') && testigosF.at(i).get('domicilio_testigo')?.touched">
+                              Este campo es <strong>requerido</strong>
+                            </small>
                           </div>
                         </div>
+
                         <div class="col-sm-4">
                           <div class="mb-3">
-                            <label class="form-label negri">Codigo postal:*</label>
-                            <input formControlName="cp_testigo" type="number" class="form-control"
-                              placeholder="Ejemplo: 100" />
-                            <small class="colorsm"
-                              *ngIf="testigosF.at(i).get('cp_testigo')?.hasError('required') && testigosF.at(i).get('cp_testigo')?.touched">Este
-                              campo es
-                              <strong>requerido</strong></small>
+                            <label class="form-label negri">Código postal:*</label>
+                            <input formControlName="cp_testigo" type="number" class="form-control" placeholder="Ejemplo: 06500" />
+                            <small class="colorsm" *ngIf="testigosF.at(i).get('cp_testigo')?.hasError('required') && testigosF.at(i).get('cp_testigo')?.touched">
+                              Este campo es <strong>requerido</strong>
+                            </small>
                           </div>
                         </div>
+
                         <div class="col-sm-4">
                           <div class="mb-3">
-                            <label class="form-label negri">Télefono:*</label>
-                            <input formControlName="telefono_testigo" type="text" class="form-control"
-                              placeholder="Ejemplo: 18 años" />
-                            <small class="colorsm"
-                              *ngIf="testigosF.at(i).get('telefono_testigo')?.hasError('required') && testigosF.at(i).get('telefono_testigo')?.touched">Este
-                              campo es
-                              <strong>requerido</strong></small>
+                            <label class="form-label negri">Teléfono:*</label>
+                            <input formControlName="telefono_testigo" type="number" class="form-control" placeholder="Ejemplo: 5512345678" />
+                            <small class="colorsm" *ngIf="testigosF.at(i).get('telefono_testigo')?.hasError('required') && testigosF.at(i).get('telefono_testigo')?.touched">
+                              Este campo es <strong>requerido</strong>
+                            </small>
                           </div>
                         </div>
                       </div>
+
                       <div class="row">
                         <div class="col-sm-4">
                           <div class="mb-3">
                             <label class="form-label negri">RFC:*</label>
-                            <input formControlName="rfc_testigo" type="text" class="form-control"
-                              placeholder="Ejemplo: Hijo" />
-                            <small class="colorsm"
-                              *ngIf="testigosF.at(i).get('rfc_testigo')?.hasError('required') && testigosF.at(i).get('rfc_testigo')?.touched">Este
-                              campo es
-                              <strong>requerido</strong></small>
+                            <input formControlName="rfc_testigo" type="text" class="form-control" placeholder="Ejemplo: GODE561231GR8" />
+                            <small class="colorsm" *ngIf="testigosF.at(i).get('rfc_testigo')?.hasError('required') && testigosF.at(i).get('rfc_testigo')?.touched">
+                              Este campo es <strong>requerido</strong>
+                            </small>
                           </div>
                         </div>
                       </div>
 
                       <div class="row">
-
                         <div class="col-sm-4">
                           <div class="mb-3 d-flex flex-column h-100">
-                            <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Identificación oficial
-                              vigente
-                              (Credencial para votar, pasaporte o
-                              cédula profesional):</label>
-                            <div class="position-relative d-flex flex-column flex-grow-1"
-                              style="min-height: 10px; padding-bottom: 1rem;">
+                            <label class="form-label negri text-wrap" style="min-height: 3.5rem;">
+                              Identificación oficial vigente (Credencial para votar, pasaporte o cédula profesional):
+                            </label>
+                            <div class="position-relative d-flex flex-column flex-grow-1" style="padding-bottom: 1rem;">
                               <input class="form-control" type="file" id="identificacion_t" accept="application/pdf"
                                 (change)="onFileSelecTestigos($event, i, 'identificacion_t')" #fileIdentificacion_t />
-                              <div *ngIf="documentosTestigos[i]?.identificacion_t"
-                                style="position: absolute; bottom: 0; left: 0;">
-                                <button type="button" class="boton-danger-sm"
-                                  (click)="eliminarArchivoTestigos(i, 'identificacion_t', fileIdentificacion_t)">
-                                  <i class="feather icon-trash btn-icon-prepend"></i>
-                                  Eliminar archivo
+                              <div *ngIf="documentosTestigos[i]?.identificacion_t" style="position: absolute; bottom: 0; left: 0;">
+                                <button type="button" class="boton-danger-sm" (click)="eliminarArchivoTestigos(i, 'identificacion_t', fileIdentificacion_t)">
+                                  <i class="feather icon-trash btn-icon-prepend"></i> Eliminar archivo
                                 </button>
                               </div>
                             </div>
@@ -1918,17 +1887,13 @@ campo es
 
                         <div class="col-sm-4">
                           <div class="mb-3 d-flex flex-column h-100">
-                            <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave unica de registro de
-                              población:</label>
-                            <div class="position-relative d-flex flex-column flex-grow-1"
-                              style="min-height: 10px; padding-bottom: 1rem;">
+                            <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave Única de Registro de Población:</label>
+                            <div class="position-relative d-flex flex-column flex-grow-1" style="padding-bottom: 1rem;">
                               <input class="form-control" type="file" id="curp_t" accept="application/pdf"
                                 (change)="onFileSelecTestigos($event, i, 'curp_t')" #fileCurp_t />
                               <div *ngIf="documentosTestigos[i]?.curp_t" style="position: absolute; bottom: 0; left: 0;">
-                                <button type="button" class="boton-danger-sm"
-                                  (click)="eliminarArchivoTestigos(i, 'curp_t', fileCurp_t)">
-                                  <i class="feather icon-trash btn-icon-prepend"></i>
-                                  Eliminar archivo
+                                <button type="button" class="boton-danger-sm" (click)="eliminarArchivoTestigos(i, 'curp_t', fileCurp_t)">
+                                  <i class="feather icon-trash btn-icon-prepend"></i> Eliminar archivo
                                 </button>
                               </div>
                             </div>
@@ -1937,32 +1902,28 @@ campo es
 
                         <div class="col-sm-4">
                           <div class="mb-3 d-flex flex-column h-100">
-                            <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de
-                              domicilio:</label>
-                            <div class="position-relative d-flex flex-column flex-grow-1"
-                              style="min-height: 10px; padding-bottom: 1rem;">
+                            <label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de domicilio:</label>
+                            <div class="position-relative d-flex flex-column flex-grow-1" style="padding-bottom: 1rem;">
                               <input class="form-control" type="file" id="comprobante_domicilio_t" accept="application/pdf"
                                 (change)="onFileSelecTestigos($event, i, 'comprobante_domicilio_t')" #fileComprobante_t />
-                              <div *ngIf="documentosTestigos[i]?.comprobante_domicilio_t"
-                                style="position: absolute; bottom: 0; left: 0;">
-                                <button type="button" class="boton-danger-sm"
-                                  (click)="eliminarArchivoTestigos(i, 'comprobante_domicilio_t', fileComprobante_t)">
-                                  <i class="feather icon-trash btn-icon-prepend"></i>
-                                  Eliminar archivo
+                              <div *ngIf="documentosTestigos[i]?.comprobante_domicilio_t" style="position: absolute; bottom: 0; left: 0;">
+                                <button type="button" class="boton-danger-sm" (click)="eliminarArchivoTestigos(i, 'comprobante_domicilio_t', fileComprobante_t)">
+                                  <i class="feather icon-trash btn-icon-prepend"></i> Eliminar archivo
                                 </button>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
+
                       <div class="col-12 text-center">
-                        <button style="background-color: #c82333; color: white;" type="button" (click)="eliminarTestigo(i)"
-                          class="btn btn-sm mt-2">
+                        <button style="background-color: #c82333; color: white;" type="button" (click)="eliminarTestigo(i)" class="btn btn-sm mt-2">
                           🗑️ Eliminar testigo
                         </button>
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             <br>
@@ -2287,16 +2248,6 @@ Eliminar archivo
 </div>
 </div> -->
 
-
-
-
-            <div class="row">
-              <div class="col-sm-12">
-                <p class="form-text mb-3" style="margin-left: 2px;">
-                  Los campos marcados con (<strong>*</strong>) son obligatorios.
-                </p>
-              </div>
-            </div>
             <br />
 
             <div class="text-center mt-4">
