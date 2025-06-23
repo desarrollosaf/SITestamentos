@@ -457,6 +457,10 @@ export class RegistroComponent {
   //****************************************************************************
 
 
+
+
+
+
   //PARA AGREGAR O ELIMINAR HIJOS SEGUNDO MATRIMONIO
   get hijosDos(): FormArray {
     return this.formTestamento.get('hijosSegundo') as FormArray;
