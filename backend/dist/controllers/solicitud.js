@@ -228,7 +228,9 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     vive: hijosfuera.fuera_hijo_vf,
                     reconocido: false,
                     fuera_de_matrimonio: true,
-                    nombre_fuera: data.nombre_fuera_matri
+                    nombre_fuera: data.nombre_fuera_matri,
+                    primer_apellido_fuera_matri: data.primer_apellido_fuera_matri,
+                    segundo_apellido_fuera_matri: data.segundo_apellido_fuera_matri
                 });
             }
         }

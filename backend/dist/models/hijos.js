@@ -53,6 +53,14 @@ Hijo.init({
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
+    primer_apellido_fuera_matri: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    segundo_apellido_fuera_matri: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
     createdAt: sequelize_1.DataTypes.DATE,
     updatedAt: sequelize_1.DataTypes.DATE,
 }, {
