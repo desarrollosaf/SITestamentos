@@ -81,7 +81,7 @@ export class DetalleSolicitudComponent {
   documentos: { [key: string]: string | null } = {};
   documentosMed: { [key: string]: string | null } = {};
   documentosTest: { [key: string]: string | null } = {};
-
+  estadoCivilArray: { id: number | string; name: string }[] = [];
   //****************************************************************************************************** */
   public _registroService = inject(RegistroService);
   localidadSeleccionada: number | null = null;
