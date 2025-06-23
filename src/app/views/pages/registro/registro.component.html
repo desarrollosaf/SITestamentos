@@ -6,6 +6,69 @@
           <h6 class="fw-bold mb-4 text-center" style="color: #96134b; font-size: 1.2rem;">
             SOLICITUD DE TESTAMENTO
           </h6>
+          @if(!mostrarFormulario){
+            <div class="bienvenida">
+              <h2 class="text-center">¡Bienvenido!</h2>
+
+              <section>
+                <h3>¿Qué es un testamento?</h3>
+                <p>
+                  “...El Testamento es un acto personalísimo, revocable, libre y solemne, por el cual una persona dispone de sus bienes y derechos, y declara o cumple deberes para después de su muerte...”
+                  <br>
+                  <strong>(Artículo 6.12 del Código Civil del Estado de México)</strong>
+                </p>
+              </section>
+              <br><br>
+              <section>
+                <h3>¿Por qué es importante hacer un testamento?</h3>
+                <p>
+                  Contar con un testamento es una responsabilidad no sólo con usted, sino también con su familia y seres queridos.
+                  Al hacerlo, no solo hereda bienes, sino también tranquilidad.
+                </p>
+                <p>
+                  Evita gastos innecesarios, pérdida de tiempo y conflictos familiares. Si hay testamento, no es necesario un juicio
+                  sucesorio intestamentario, que suele ser caro, tedioso y largo.
+                </p>
+                <p>
+                  Con un testamento, al fallecer el testador, los bienes se transfieren a las personas y en la proporción que él disponga.
+                  Es una medida para proteger su patrimonio.
+                </p>
+              </section>
+              <br><br>
+              <section>
+                <h3>Requisitos generales para el testamento:</h3>
+                <ul>
+                  <li>Llenar la solicitud.</li>
+                  <li>Acta de nacimiento y acta de matrimonio (si aplica).</li>
+                  <li>Identificación oficial vigente (INE, Pasaporte o Cédula Profesional).</li>
+                  <li>CURP, RFC y comprobante de domicilio.</li>
+                </ul>
+              </section>
+              <br>
+              <section>
+                <h3>Requisitos adicionales si aplica alguna condición especial:</h3>
+                <p>
+                  Si es adulto mayor, tiene alguna discapacidad, no puede firmar o leer, es invidente o sordo:
+                </p>
+                <ul>
+                  <li>Dos certificados médicos: uno de institución pública y otro de institución privada.</li>
+                  <li>Tres testigos no familiares del testador o testadora.</li>
+                </ul>
+
+                <h4>De cada testigo se requiere:</h4>
+                <ul>
+                  <li>Identificación oficial vigente (INE, Pasaporte o Cédula Profesional).</li>
+                  <li>CURP, RFC y comprobante de domicilio.</li>
+                </ul>
+              </section>
+
+              <div class="text-center mt-4">
+                <button class="btn btn-primary" (click)="empezar()">Empezar</button>
+              </div>
+            </div>
+
+          }@else{
+         
           <form [formGroup]="formTestamento" (ngSubmit)="enviarDatos()" class="forms-sample">
             <div class="row">
               <div class="col-sm-4">
@@ -2098,200 +2161,29 @@ campo es
             <!-- **************************************************************AQUI TERMINA EL DIV DE 60+************************************************************** -->
             <!-- **************************************************************AQUI TERMINA EL DIV DE 60+************************************************************** -->
 
-            <!-- <div>
-<h5 class="titulo2">B. Presentar tres testigos que no sean familiares del testador o testadora, y
-proporcionar de cada testigo lo siguiente:</h5>
-</div>
-<br>
-<div class="row">
-<div class="col-sm-4">
-<div class="mb-3 d-flex flex-column h-100">
-<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Identificación oficial vigente
-(Credencial para votar, pasaporte o
-cédula profesional):</label>
-<div class="position-relative d-flex flex-column flex-grow-1"
-style="min-height: 10px; padding-bottom: 1rem;">
-<input class="form-control" type="file" id="t1_identificacion" accept="application/pdf"
-#inputt1_identificacion (change)="onFileSelect($event, 't1_identificacion')" />
-<div *ngIf="documentos['t1_identificacion']" style="position: absolute; bottom: 0; left: 0;">
-<button type="button" class="boton-danger-sm"
-(click)="eliminarArchivo('t1_identificacion', inputt1_identificacion)">
-<i class="feather icon-trash btn-icon-prepend"></i>
-Eliminar archivo
-</button>
-</div>
-</div>
-</div>
-</div>
-<div class="col-sm-4">
-<div class="mb-3 d-flex flex-column h-100">
-<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave unica de registro de
-población:</label>
-<div class="position-relative d-flex flex-column flex-grow-1"
-style="min-height: 10px; padding-bottom: 1rem;">
-<input class="form-control" type="file" id="t1_curp" accept="application/pdf" #inputt1_curp
-(change)="onFileSelect($event, 't1_curp')" />
-<div *ngIf="documentos['t1_curp']" style="position: absolute; bottom: 0; left: 0;">
-<button type="button" class="boton-danger-sm"
-(click)="eliminarArchivo('t1_curp', inputt1_curp)">
-<i class="feather icon-trash btn-icon-prepend"></i>
-Eliminar archivo
-</button>
-</div>
-</div>
-</div>
-</div>
-<div class="col-sm-4">
-<div class="mb-3 d-flex flex-column h-100">
-<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de
-domicilio:</label>
-<div class="position-relative d-flex flex-column flex-grow-1"
-style="min-height: 10px; padding-bottom: 1rem;">
-<input class="form-control" type="file" id="t1_comprobante_domicilio" accept="application/pdf"
-#inputt1_comprobante_domicilio (change)="onFileSelect($event, 't1_comprobante_domicilio')" />
-<div *ngIf="documentos['t1_comprobante_domicilio']"
-style="position: absolute; bottom: 0; left: 0;">
-<button type="button" class="boton-danger-sm"
-(click)="eliminarArchivo('t1_comprobante_domicilio', inputt1_comprobante_domicilio)">
-<i class="feather icon-trash btn-icon-prepend"></i>
-Eliminar archivo
-</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-<br>
-<div class="row">
-<div class="col-sm-4">
-<div class="mb-3 d-flex flex-column h-100">
-<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Identificación oficial vigente
-(Credencial para votar, pasaporte o
-cédula profesional):</label>
-<div class="position-relative d-flex flex-column flex-grow-1"
-style="min-height: 10px; padding-bottom: 1rem;">
-<input class="form-control" type="file" id="t2_identificacion" accept="application/pdf"
-#inputt2_identificacion (change)="onFileSelect($event, 't2_identificacion')" />
-<div *ngIf="documentos['t2_identificacion']" style="position: absolute; bottom: 0; left: 0;">
-<button type="button" class="boton-danger-sm"
-(click)="eliminarArchivo('t2_identificacion', inputt2_identificacion)">
-<i class="feather icon-trash btn-icon-prepend"></i>
-Eliminar archivo
-</button>
-</div>
-</div>
-</div>
-</div>
-<div class="col-sm-4">
-<div class="mb-3 d-flex flex-column h-100">
-<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave unica de registro de
-población:</label>
-<div class="position-relative d-flex flex-column flex-grow-1"
-style="min-height: 10px; padding-bottom: 1rem;">
-<input class="form-control" type="file" id="t2_curp" accept="application/pdf" #inputt2_curp
-(change)="onFileSelect($event, 't2_curp')" />
-<div *ngIf="documentos['t2_curp']" style="position: absolute; bottom: 0; left: 0;">
-<button type="button" class="boton-danger-sm"
-(click)="eliminarArchivo('t2_curp', inputt2_curp)">
-<i class="feather icon-trash btn-icon-prepend"></i>
-Eliminar archivo
-</button>
-</div>
-</div>
-</div>
-</div>
-<div class="col-sm-4">
-<div class="mb-3 d-flex flex-column h-100">
-<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de
-domicilio:</label>
-<div class="position-relative d-flex flex-column flex-grow-1"
-style="min-height: 10px; padding-bottom: 1rem;">
-<input class="form-control" type="file" id="t2_comprobante_domicilio" accept="application/pdf"
-#inputt2_comprobante_domicilio (change)="onFileSelect($event, 't2_comprobante_domicilio')" />
-<div *ngIf="documentos['t2_comprobante_domicilio']"
-style="position: absolute; bottom: 0; left: 0;">
-<button type="button" class="boton-danger-sm"
-(click)="eliminarArchivo('t2_comprobante_domicilio', inputt2_comprobante_domicilio)">
-<i class="feather icon-trash btn-icon-prepend"></i>
-Eliminar archivo
-</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-<br>
-<div class="row">
-<div class="col-sm-4">
-<div class="mb-3 d-flex flex-column h-100">
-<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Identificación oficial vigente
-(Credencial para votar, pasaporte o
-cédula profesional):</label>
-<div class="position-relative d-flex flex-column flex-grow-1"
-style="min-height: 10px; padding-bottom: 1rem;">
-<input class="form-control" type="file" id="t3_identificacion" accept="application/pdf"
-#inputt3_identificacion (change)="onFileSelect($event, 't3_identificacion')" />
-<div *ngIf="documentos['t3_identificacion']" style="position: absolute; bottom: 0; left: 0;">
-<button type="button" class="boton-danger-sm"
-(click)="eliminarArchivo('t3_identificacion', inputt3_identificacion)">
-<i class="feather icon-trash btn-icon-prepend"></i>
-Eliminar archivo
-</button>
-</div>
-</div>
-</div>
-</div>
-<div class="col-sm-4">
-<div class="mb-3 d-flex flex-column h-100">
-<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Clave unica de registro de
-población:</label>
-<div class="position-relative d-flex flex-column flex-grow-1"
-style="min-height: 10px; padding-bottom: 1rem;">
-<input class="form-control" type="file" id="t3_curp" accept="application/pdf" #inputt3_curp
-(change)="onFileSelect($event, 't3_curp')" />
-<div *ngIf="documentos['t3_curp']" style="position: absolute; bottom: 0; left: 0;">
-<button type="button" class="boton-danger-sm"
-(click)="eliminarArchivo('t3_curp', inputt3_curp)">
-<i class="feather icon-trash btn-icon-prepend"></i>
-Eliminar archivo
-</button>
-</div>
-</div>
-</div>
-</div>
-<div class="col-sm-4">
-<div class="mb-3 d-flex flex-column h-100">
-<label class="form-label negri text-wrap" style="min-height: 3.5rem;">Comprobante de
-domicilio:</label>
-<div class="position-relative d-flex flex-column flex-grow-1"
-style="min-height: 10px; padding-bottom: 1rem;">
-<input class="form-control" type="file" id="t3_comprobante_domicilio" accept="application/pdf"
-#inputt3_comprobante_domicilio (change)="onFileSelect($event, 't3_comprobante_domicilio')" />
-<div *ngIf="documentos['t3_comprobante_domicilio']"
-style="position: absolute; bottom: 0; left: 0;">
-<button type="button" class="boton-danger-sm"
-(click)="eliminarArchivo('t3_comprobante_domicilio', inputt3_comprobante_domicilio)">
-<i class="feather icon-trash btn-icon-prepend"></i>
-Eliminar archivo
-</button>
-</div>
-</div>
-</div>
-</div>
-</div> -->
-
             <br />
 
             <div class="text-center mt-4">
               <button type="submit" class="btn btn-primary px-4">
                 Registrarse
               </button>
-              <!-- <button [disabled]="formTestamento.invalid" type="submit" class="btn btn-primary px-4">
-Registrarse
-</button> -->
+
             </div>
           </form>
+        }
         </div>
+       <ng-template #xlModal let-modal>
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Titulo</h5>
+            <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>MENSAJE MENSAJE MENSAJE</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Cerrar</button>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

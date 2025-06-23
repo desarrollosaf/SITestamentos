@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, inject, QueryList, ViewChildren, ViewChild, TemplateRef } from '@angular/core';
 import { FormArray, FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { UserService } from '../../../core/services/user.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-registro',
@@ -25,12 +26,13 @@ export class RegistroComponent {
   mostrarExtraInfo: boolean = false;
   mostrarCamposTestamento = false;
   mostrarCamposMenorDeEdad = false;
+  @ViewChild('xlModal', { static: true }) xlModal!: TemplateRef<any>;
 
   mostrarDoctoIdentifica = false;
 
   mostrarNacServ = false;
   labelDocumentoIdentifica = '';
-
+  mostrarFormulario = false;
 
   testigos: boolean = false;
   formTestamento: FormGroup;
@@ -107,7 +109,7 @@ export class RegistroComponent {
 
   currentUser: any;
 
-  constructor(private fb: FormBuilder, private router: Router, private _userService: UserService){
+  constructor(private fb: FormBuilder, private router: Router, private _userService: UserService, private modalService: NgbModal){
       this.formTestamento = this.fb.group({
         f_rfc:['', Validators.required],
         f_curp:['',[
@@ -338,6 +340,10 @@ export class RegistroComponent {
   get testigosF(): FormArray {
   return this.formTestamento.get('testigoArr') as FormArray;
   }
+  
+  empezar(): void {
+    this.mostrarFormulario = true;
+  }
 
   agregarTestigo() {
     const group = this.fb.group({
@@ -525,6 +531,9 @@ export class RegistroComponent {
   //****************************************************************************************** */
 
   ngOnInit(): void {
+    this.modalService.open(this.xlModal, {size: 'lg'}).result.then((result) => {
+      console.log("Modal closed" + result);
+    }).catch((res) => {});
     this.currentUser = this._userService.currentUserValue;
     console.log('Usuario Logueado:', this.currentUser);
     this.buscarDatosPorCurp(this.currentUser.rfc);
@@ -729,7 +738,7 @@ export class RegistroComponent {
             position: "center",
             icon: "warning",
             title: "¡Atención!",
-            text: "Los documentos con (*) son obligatorios.",
+            text: "Todos los campos señalados con un asterisco (*) son obligatorios. Es necesario completarlos para el correcto envío de la información.",
             showConfirmButton: false,
             timer: 3000
           });
@@ -740,7 +749,7 @@ export class RegistroComponent {
                 position: "center",
                 icon: "warning",
                 title: "¡Atención!",
-                text: "Los documentos extra son obligatorios.",
+                text: "Todos los campos señalados con un asterisco (*) son obligatorios. Es necesario completarlos para el correcto envío de la información.",
                 showConfirmButton: false,
                 timer: 3000
               });
@@ -932,10 +941,10 @@ export class RegistroComponent {
     // } else {
     //   console.log('Formulario no válido');
     // }
-    formData.append('testigos', String(this.testigos));
-    formData.forEach((valor, clave) => {
+    //formData.append('testigos', String(this.testigos));
+    /*formData.forEach((valor, clave) => {
       console.log(clave, valor);
-    });
+    });*/
     const curpUsr = this.formTestamento.value.f_curp;
     this._registroService.saveRegistro(formData,curpUsr).subscribe({
       next: (response: any) => {
