@@ -19,14 +19,14 @@ class Hijo extends Model<
   declare solicitudId: ForeignKey<Solicitud['id']>;
   declare matrimonioId: ForeignKey<Matrimonio['id']> | null;
 
-  declare nombre: string;
-  declare primer_apellido: string;
-   declare segundo_apellido: string;
+  declare nombre: string | null;
+  declare primer_apellido: string | null;
+  declare segundo_apellido: string | null ;
   declare edad: number | null;
   declare vive: string | null;
   declare reconocido: boolean;
   declare fuera_de_matrimonio: boolean;
-  declare nombre_fuera: string;
+  declare nombre_fuera: string | null;
   declare primer_apellido_fuera_matri: string |null;
   declare segundo_apellido_fuera_matri: string |null;
 

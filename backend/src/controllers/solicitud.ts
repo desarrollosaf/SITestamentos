@@ -55,7 +55,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
              correo_per: data.correo_per,
              f_homclave: '',
              f_cp: data.f_cp,
-             estadocivil_id: data.estadocivil_id
+             estadocivil_id: data.estadodo_civil
         
          });    
     }else{
@@ -76,7 +76,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
              correo_per: data.correo_per,
              f_homclave: '',
              f_cp: data.f_cp,
-             estadocivil_id: data.estadocivil_id
+             estadocivil_id: data.estadodo_civil
             });
     }
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
@@ -187,7 +187,9 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
                     vive: hijosprimer.hijo_vf_primer_nup,
                     reconocido: true,
                     fuera_de_matrimonio: false,
-                    nombre_fuera: ''
+                    nombre_fuera: '',
+                    primer_apellido_fuera_matri: '',
+                    segundo_apellido_fuera_matri: ''
                 });
             }
         }
@@ -213,7 +215,9 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
                     vive: hijossegundos.hijo_vf_dos_nup,
                     reconocido: true,
                     fuera_de_matrimonio: false,
-                    nombre_fuera: ''
+                    nombre_fuera: '',
+                    primer_apellido_fuera_matri: '',
+                    segundo_apellido_fuera_matri: ''
                 });
             }
         }
@@ -357,7 +361,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
         console.error('❌ Error al crear el HEREDEROS :', error);
 
     }
-    return 500
+  
     return res.status(200).json({
         message: 'Documento guardado exitosamente'
     });

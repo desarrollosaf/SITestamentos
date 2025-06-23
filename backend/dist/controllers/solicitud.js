@@ -63,7 +63,7 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             correo_per: data.correo_per,
             f_homclave: '',
             f_cp: data.f_cp,
-            estadocivil_id: data.estadocivil_id
+            estadocivil_id: data.estadodo_civil
         });
     }
     else {
@@ -84,7 +84,7 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             correo_per: data.correo_per,
             f_homclave: '',
             f_cp: data.f_cp,
-            estadocivil_id: data.estadocivil_id
+            estadocivil_id: data.estadodo_civil
         });
     }
     const files = req.files;
@@ -185,7 +185,9 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 vive: hijosprimer.hijo_vf_primer_nup,
                 reconocido: true,
                 fuera_de_matrimonio: false,
-                nombre_fuera: ''
+                nombre_fuera: '',
+                primer_apellido_fuera_matri: '',
+                segundo_apellido_fuera_matri: ''
             });
         }
     }
@@ -211,7 +213,9 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     vive: hijossegundos.hijo_vf_dos_nup,
                     reconocido: true,
                     fuera_de_matrimonio: false,
-                    nombre_fuera: ''
+                    nombre_fuera: '',
+                    primer_apellido_fuera_matri: '',
+                    segundo_apellido_fuera_matri: ''
                 });
             }
         }
@@ -346,7 +350,6 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     catch (error) {
         console.error('❌ Error al crear el HEREDEROS :', error);
     }
-    return 500;
     return res.status(200).json({
         message: 'Documento guardado exitosamente'
     });
