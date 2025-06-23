@@ -30,6 +30,7 @@ const herederos_sustitutos_1 = __importDefault(require("../models/herederos_sust
 const albaceas_1 = __importDefault(require("../models/albaceas"));
 const tutor_descendientes_1 = __importDefault(require("../models/tutor_descendientes"));
 const hijos_2 = __importDefault(require("../models/hijos"));
+const dp_estado_civil_1 = __importDefault(require("../models/fun/dp_estado_civil"));
 dp_datospersonales_1.dp_datospersonales.initModel(fun_1.default);
 const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
@@ -63,7 +64,7 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             correo_per: data.correo_per,
             f_homclave: '',
             f_cp: data.f_cp,
-            estadocivil_id: data.estadodo_civil
+            estadocivil_id: data.estado_civil
         });
     }
     else {
@@ -84,7 +85,7 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             correo_per: data.correo_per,
             f_homclave: '',
             f_cp: data.f_cp,
-            estadocivil_id: data.estadodo_civil
+            estadocivil_id: data.estado_civil
         });
     }
     const files = req.files;
@@ -348,8 +349,9 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
     }
     catch (error) {
-        console.error('❌ Error al crear el HEREDEROS :', error);
+        console.error('Error al crear el HEREDEROS :', error);
     }
+    return 500;
     return res.status(200).json({
         message: 'Documento guardado exitosamente'
     });
@@ -367,7 +369,7 @@ const getsolicitudes = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
         for (const solicitud of solicitudes) {
             if (solicitud.userId) {
-                console.log('📌 Buscando datos personales para:', solicitud.userId);
+                console.log('Buscando datos personales para:', solicitud.userId);
                 const datos = yield dp_datospersonales_1.dp_datospersonales.findOne({
                     where: { f_rfc: solicitud.userId },
                 });
@@ -474,7 +476,7 @@ const getsolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         // Cargar datos personales manualmente desde otra base de datos
         for (const solicitud of solicitudes) {
             if (solicitud.userId) {
-                console.log('📌 Buscando datos personales para:', solicitud.userId);
+                console.log('Buscando datos personales para:', solicitud.userId);
                 const datos = yield dp_datospersonales_1.dp_datospersonales.findOne({
                     where: { f_rfc: solicitud.userId },
                 });
@@ -483,8 +485,13 @@ const getsolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 }
             }
         }
+        const civil = yield dp_estado_civil_1.default.findAll();
         if (solicitudes) {
-            return res.json(solicitudes);
+            // return res.json(solicitudes);
+            return res.json({
+                solicitud: solicitudes,
+                estadocivil: civil
+            });
         }
         else {
             return res.status(404).json({ msg: `No existe el id ${id}` });

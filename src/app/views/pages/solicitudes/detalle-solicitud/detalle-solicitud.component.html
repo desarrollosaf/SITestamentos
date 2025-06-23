@@ -243,6 +243,91 @@
                                 </div>
                             </div>
                         </div>
+        <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Estado civil:*</label>
+                  <ng-select
+                    [items]="estadoCivilArray"
+                    bindLabel="name"
+                    bindValue="id"
+                    formControlName="estado_civil"
+                    placeholder="Selecciona estado civil">
+                  </ng-select>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('estado_civil')?.hasError('required') && formTestamento.get('estado_civil')?.touched">
+                    Este campo es <strong>requerido</strong>
+                  </small>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Documento con que se identifica:*</label>
+                  <select class="form-select" id="documento_identifica" formControlName="documento_identifica">
+                    <option *ngFor="let vives of doctoIdentifica" [value]="vives.id">
+                      {{ vives.name }}
+                    </option>
+                  </select>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('documento_identifica')?.hasError('required') && formTestamento.get('documento_identifica')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nacionalidad:*</label>
+                  <select class="form-select" id="nacionalidad_serv" formControlName="nacionalidad_serv">
+                    <option *ngFor="let vives of nacionalidad" [value]="vives.id">
+                      {{ vives.name }}
+                    </option>
+                  </select>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('nacionalidad_serv')?.hasError('required') && formTestamento.get('nacionalidad_serv')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         <br>
                         <div>
                             <h5 class="titulo3">Datos del padre:</h5>
