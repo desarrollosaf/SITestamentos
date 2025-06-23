@@ -10,7 +10,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">CURP:*</label>
+                  <label class="form-label negri">CURP:</label>
                   <input formControlName="f_curp" type="text" class="form-control"
                     placeholder="Ejemplo: MACJ750101HDFRRL01" maxlength="18" />
                   <small class="colorsm" *ngIf="formTestamento.get('f_curp')?.hasError('pattern')">
@@ -27,7 +27,7 @@
               </div>
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">RFC:*</label>
+                  <label class="form-label negri">RFC:</label>
                   <input formControlName="f_rfc" type="text" class="form-control " placeholder="Ejemplo: MACJ750101"
                     maxlength="10" />
                   <div>
@@ -51,7 +51,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Nombre completo:*</label>
+                  <label class="form-label negri">Nombre completo:</label>
                   <input formControlName="f_nombre" type="text" class="form-control "
                     placeholder="Ejemplo: Juan Carlos" />
                   <small class="colorsm"
@@ -62,7 +62,7 @@
               </div>
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Apellido paterno:*</label>
+                  <label class="form-label negri">Apellido paterno:</label>
                   <input formControlName="f_primer_apellido" type="text" class="form-control "
                     placeholder="Ejemplo: Martínez" />
                   <small class="colorsm"
@@ -73,7 +73,7 @@
               </div>
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Apellido materno:*</label>
+                  <label class="form-label negri">Apellido materno:</label>
                   <input formControlName="f_segundo_apellido" type="text" class="form-control "
                     placeholder="Ejemplo: López" />
                   <small class="colorsm"
@@ -87,7 +87,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Fecha de nacimiento:*</label>
+                  <label class="form-label negri">Fecha de nacimiento:</label>
                   <input formControlName="f_fecha_nacimiento" type="date" class="form-control "
                     placeholder="Ejemplo: usuario@dominio.com" />
                   <div>
@@ -107,7 +107,7 @@
               </div>
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Lugar de nacimiento:*</label>
+                  <label class="form-label negri">Lugar de nacimiento:</label>
                   <input formControlName="lugar_nacimiento" type="text" class="form-control"
                     placeholder="Ejemplo: Veracruz" />
                   <small class="colorsm"
@@ -193,7 +193,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Teléfono:*</label>
+                  <label class="form-label negri">Teléfono:</label>
                   <input formControlName="numero_tel" type="number" class="form-control"
                     placeholder="Ejemplo: 5512345678" />
                   <small class="colorsm" *ngIf="formTestamento.get('numero_tel')?.hasError('pattern')">
@@ -210,7 +210,7 @@
               </div>
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Celular:*</label>
+                  <label class="form-label negri">Celular:</label>
                   <input formControlName="numero_cel" type="number" class="form-control"
                     placeholder="Ejemplo: 5512345678" />
                   <small class="colorsm" *ngIf="formTestamento.get('numero_cel')?.hasError('pattern')">
@@ -225,7 +225,7 @@
 
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Correo electrónico:*</label>
+                  <label class="form-label negri">Correo electrónico:</label>
                   <input formControlName="correo_per" type="email" class="form-control"
                     placeholder="Ejemplo: usuario@dominio.com" />
                   <small class="colorsm"
@@ -239,7 +239,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Estado civil:*</label>
+                  <label class="form-label negri">Estado civil:</label>
                   <ng-select [items]="estadoCivilArray" bindLabel="name" bindValue="id" formControlName="estado_civil"
                     placeholder="Selecciona estado civil">
                   </ng-select>
@@ -251,7 +251,7 @@
               </div>
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Documento con que se identifica:*</label>
+                  <label class="form-label negri">Documento con que se identifica:</label>
                   <select class="form-select" id="documento_identifica" formControlName="documento_identifica">
                     <option *ngFor="let vives of doctoIdentifica" [value]="vives.id">
                       {{ vives.name }}
@@ -266,7 +266,7 @@
 
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Nacionalidad:*</label>
+                  <label class="form-label negri">Nacionalidad:</label>
                   <select class="form-select" id="nacionalidad_serv" formControlName="nacionalidad_serv">
                     <option *ngFor="let vives of nacionalidad" [value]="vives.id">
                       {{ vives.name }}
@@ -285,7 +285,7 @@
             <div class="row">
               <div class="col-sm-12" *ngIf="mostrarDoctoIdentifica">
                 <div class="mb-3">
-                  <label class="form-label negri">{{ labelDocumentoIdentifica }}:*</label>
+                  <label class="form-label negri">{{ labelDocumentoIdentifica }}:</label>
                   <input formControlName="numero_documento_identifica" type="text" class="form-control"
                     placeholder="Ejemplo: 123456789" />
                   <small class="colorsm"
@@ -427,7 +427,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Nombre(s):*</label>
+                  <label class="form-label negri">Nombre(s):</label>
                   <input formControlName="f_nombre_padre" type="text" class="form-control"
                     placeholder="Ejemplo: Juan Carlos" />
                   <small class="colorsm"
@@ -439,7 +439,7 @@
 
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Primer apellido:*</label>
+                  <label class="form-label negri">Primer apellido:</label>
                   <input formControlName="f_primer_apellido_padre" type="text" class="form-control"
                     placeholder="Ejemplo: Jimenez" />
                   <small class="colorsm"
@@ -451,7 +451,7 @@
 
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Segundo apellido:*</label>
+                  <label class="form-label negri">Segundo apellido:</label>
                   <input formControlName="f_segundo_apellido_padre" type="text" class="form-control"
                     placeholder="Ejemplo: Gonzalez" />
                   <small class="colorsm"
@@ -465,7 +465,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Indicar si vive:*</label>
+                  <label class="form-label negri">Indicar si vive:</label>
                   <select class="form-select" id="vive_padre" formControlName="vive_padre">
                     <option *ngFor="let vives of vive" [value]="vives.id">
                       {{ vives.name }}
@@ -479,7 +479,7 @@
               </div>
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Nacionalidad:*</label>
+                  <label class="form-label negri">Nacionalidad:</label>
                   <select class="form-select" id="nacionalidad_padre" formControlName="nacionalidad_padre">
                     <option *ngFor="let nacion of nacionalidad" [value]="nacion.id">
                       {{ nacion.name }}
@@ -494,7 +494,7 @@
               <!-- *ngIf="mostrarCampo('nacionalidad_padre')" -->
               <div *ngIf="padreNac" class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Especifique:*</label>
+                  <label class="form-label negri">Especifique:</label>
                   <input formControlName="especifique_nac_padre" type="text" class="form-control"
                     placeholder="Ejemplo: Peruana" />
                 </div>
@@ -508,7 +508,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Nombre(s):*</label>
+                  <label class="form-label negri">Nombre(s):</label>
                   <input formControlName="f_nombre_madre" type="text" class="form-control"
                     placeholder="Ejemplo: Sofia" />
                   <small class="colorsm"
@@ -520,7 +520,7 @@
 
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Primer apellido:*</label>
+                  <label class="form-label negri">Primer apellido:</label>
                   <input formControlName="f_primer_apellido_madre" type="text" class="form-control"
                     placeholder="Ejemplo: Jimenez" />
                   <small class="colorsm"
@@ -533,7 +533,7 @@
 
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Segundo apellido:*</label>
+                  <label class="form-label negri">Segundo apellido:</label>
                   <input formControlName="f_segundo_apellido_pmadre" type="text" class="form-control"
                     placeholder="Ejemplo: Gonzalez" />
                   <small class="colorsm"
@@ -548,7 +548,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Indicar si vive:*</label>
+                  <label class="form-label negri">Indicar si vive:</label>
                   <select class="form-select" id="vive_madre" formControlName="vive_madre">
                     <option *ngFor="let vives of vive" [value]="vives.id">
                       {{ vives.name }}
@@ -562,7 +562,7 @@
               </div>
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Nacionalidad:*</label>
+                  <label class="form-label negri">Nacionalidad:</label>
                   <select class="form-select" id="nacionalidad_madre" formControlName="nacionalidad_madre">
                     <option *ngFor="let nacion of nacionalidad" [value]="nacion.id">
                       {{ nacion.name }}
@@ -576,7 +576,7 @@
               </div>
               <div *ngIf="madreNac" class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Especifique:*</label>
+                  <label class="form-label negri">Especifique:</label>
                   <input formControlName="especifique_nac_madre" type="text" class="form-control"
                     placeholder="Ejemplo: Peruana" />
                 </div>
@@ -639,12 +639,13 @@
               </div>
             </div>
             <div formArrayName="hijosPrimer">
+              <label class="form-label">Hijos primer matrimonio:</label>
               <div *ngFor="let hijo of hijos.controls; let i = index" [formGroupName]="i"
                 class="row border p-3 mb-3 rounded bg-light">
                 <div class="row">
                   <div class="col-sm-4">
                     <div class="mb-3">
-                      <label class="form-label negri">Nombre(s):*</label>
+                      <label class="form-label negri">Nombre(s):</label>
                       <input formControlName="hijo_nombre_primer_nup" type="text" class="form-control"
                         placeholder="Ejemplo: Sofía" />
                     </div>
@@ -652,7 +653,7 @@
 
                   <div class="col-sm-4">
                     <div class="mb-3">
-                      <label class="form-label negri">Primer apellido:*</label>
+                      <label class="form-label negri">Primer apellido:</label>
                       <input formControlName="hijo_primer_apellido_primer_nup" type="text" class="form-control"
                         placeholder="Ejemplo: Jiménez" />
                     </div>
@@ -660,7 +661,7 @@
 
                   <div class="col-sm-4">
                     <div class="mb-3">
-                      <label class="form-label negri">Segundo apellido:*</label>
+                      <label class="form-label negri">Segundo apellido:</label>
                       <input formControlName="hijo_segundo_apellido_primer_nup" type="text" class="form-control"
                         placeholder="Ejemplo: González" />
                     </div>
@@ -677,14 +678,14 @@
 
                   <!-- <div class="col-sm-4">
                     <div class="mb-3">
-                      <label class="form-label negri">Vive o Finado:*</label>
+                      <label class="form-label negri">Vive o Finado:</label>
                       <input formControlName="hijo_vf_primer_nup" type="text" class="form-control"
                         placeholder="Ejemplo: Vivo" />
                     </div>
                   </div> -->
                        <div class="col-sm-4">
                       <div class="mb-3">
-                        <label class="form-label negri">Vive o Finado:*</label>
+                        <label class="form-label negri">Vive o Finado:</label>
                         <select class="form-select" id="hijo_vf_primer_nup" formControlName="hijo_vf_primer_nup">
                           <option *ngFor="let vives of vive" [value]="vives.id">
                             {{ vives.name }}
@@ -731,7 +732,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Indicar si vive:*</label>
+                  <label class="form-label negri">Indicar si vive:</label>
                   <select class="form-select" id="vive_dos_nup" formControlName="vive_dos_nup">
                     <option *ngFor="let vives of vive" [value]="vives.id">
                       {{ vives.name }}
@@ -742,7 +743,7 @@
 
               <div class="col-sm-4">
                 <div class="mb-3">
-                  <label class="form-label negri">Régimen patrimonial:*</label>
+                  <label class="form-label negri">Régimen patrimonial:</label>
                   <select class="form-select" id="regimen_patrimonial_dos_nup"
                     formControlName="regimen_patrimonial_dos_nup">
                     <option *ngFor="let vives of regimenP" [value]="vives.id">
@@ -755,13 +756,14 @@
 
 
             <div formArrayName="hijosSegundo">
+              <label class="form-label">Hijos segundo matrimonio:</label>
               <div *ngFor="let hijo of hijosDos.controls; let i = index" [formGroupName]="i"
                 class="row border p-3 mb-3 rounded bg-light">
 
                 <div class="row">
                   <div class="col-sm-4">
                     <div class="mb-3">
-                      <label class="form-label negri">Nombre(s):*</label>
+                      <label class="form-label negri">Nombre(s):</label>
                       <input formControlName="hijo_nombre_dos_nup" type="text" class="form-control"
                         placeholder="Ejemplo: Sofía" />
                     </div>
@@ -769,7 +771,7 @@
 
                   <div class="col-sm-4">
                     <div class="mb-3">
-                      <label class="form-label negri">Primer apellido:*</label>
+                      <label class="form-label negri">Primer apellido:</label>
                       <input formControlName="hijo_primer_apellido_dos_nup" type="text" class="form-control"
                         placeholder="Ejemplo: Jiménez" />
                     </div>
@@ -777,7 +779,7 @@
 
                   <div class="col-sm-4">
                     <div class="mb-3">
-                      <label class="form-label negri">Segundo apellido:*</label>
+                      <label class="form-label negri">Segundo apellido:</label>
                       <input formControlName="hijo_segundo_apellido_dos_nup" type="text" class="form-control"
                         placeholder="Ejemplo: González" />
                     </div>
@@ -795,7 +797,7 @@
                   </div>
                       <div class="col-sm-4">
                       <div class="mb-3">
-                        <label class="form-label negri">Vive o Finado:*</label>
+                        <label class="form-label negri">Vive o Finado:</label>
                         <select class="form-select" id="hijo_vf_dos_nup" formControlName="hijo_vf_dos_nup">
                           <option *ngFor="let vives of vive" [value]="vives.id">
                             {{ vives.name }}
@@ -805,7 +807,7 @@
                     </div>
                   <!-- <div class="col-sm-4">
                     <div class="mb-3">
-                      <label class="form-label negri">Vive o Finado:*</label>
+                      <label class="form-label negri">Vive o Finado:</label>
                       <input formControlName="hijo_vf_dos_nup" type="text" class="form-control"
                         placeholder="Ejemplo: Vivo" />
                     </div>
@@ -852,12 +854,13 @@
 
 
         <div formArrayName="hijosFueraMatrim">
+            <label class="form-label">Hijos fuera del matrimonio:</label>
                 <div *ngFor="let hijo of hijosFuera.controls; let i = index" [formGroupName]="i"
                   class="row border p-3 mb-3 rounded bg-light">
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label class="form-label negri">Nombre(s):*</label>
+                        <label class="form-label negri">Nombre(s):</label>
                         <input formControlName="fuera_hijo_nombre" type="text" class="form-control"
                           placeholder="Ejemplo: Sofía" />
                       </div>
@@ -865,7 +868,7 @@
 
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label class="form-label negri">Primer apellido:*</label>
+                        <label class="form-label negri">Primer apellido:</label>
                         <input formControlName="fuera_hijo_primer_apellido" type="text" class="form-control"
                           placeholder="Ejemplo: Jiménez" />
                       </div>
@@ -873,7 +876,7 @@
 
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label class="form-label negri">Segundo apellido:*</label>
+                        <label class="form-label negri">Segundo apellido:</label>
                         <input formControlName="fuera_hijo_segundo_apellido" type="text" class="form-control"
                           placeholder="Ejemplo: González" />
                       </div>
@@ -882,14 +885,14 @@
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label class="form-label negri">Edad:*</label>
+                        <label class="form-label negri">Edad:</label>
                         <input formControlName="fuera_hijo_edad" type="number" class="form-control"
                           placeholder="Ejemplo: 18" />
                       </div>
                     </div>
                     <div class="col-sm-4">
                       <div class="mb-3">
-                        <label class="form-label negri">Vive o Finado:*</label>
+                        <label class="form-label negri">Vive o Finado:</label>
                         <select class="form-select" id="fuera_hijo_vf" formControlName="fuera_hijo_vf">
                           <option *ngFor="let vives of vive" [value]="vives.id">
                             {{ vives.name }}
@@ -901,12 +904,893 @@
                 </div>
               </div>
 
+     <div>
+              <h5 class="titulo3"></h5>
+            </div>
+            <br>
+
+                 <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Es el primer testamento que otorga:</label>
+                  <select class="form-select" id="primer_testamento" formControlName="primer_testamento">
+                    <option *ngFor="let vives of primerTestamento" [value]="vives.id">
+                      {{ vives.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
 
 
 
 
+            <div *ngIf="mostrarCamposTestamento">
+              <p> <strong>En caso de no ser su primer testamento, le solicitamos tenga a bien exhibir una copia
+                  del mismo, así como indicarnos:</strong> </p>
+              <br>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri"> La fecha en que realizo el tramite:</label>
+                    <input formControlName="fecha_primer_testamento" type="date" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri"> Ante que Notaría lo realizo:</label>
+                    <input formControlName="notaria_primer_testamento" type="text" class="form-control"
+                      placeholder="Ejemplo: 81" />
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri"> Número de instrumento y volumen:</label>
+                    <input formControlName="instrumento_primer_testamento" type="text" class="form-control"
+                      placeholder="Ejemplo: Escriba el número de instrumento y volumen" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-4 mb-4">
+                  <div class="card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                      <h5 class="card-title">Copia de tu testamento:</h5>
+
+                      <div class="w-100 d-flex flex-column justify-content-center align-items-center"
+                        style="min-height: 150px;">
+                        <ng-container *ngIf="doctos['comprobante_residencia']; else noDisponible">
+                          <a [href]="doctos['comprobante_residencia']" target="_blank" class="text-decoration-none">
+                            <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
+                            <div class="mt-2">Ver documento</div>
+                          </a>
+                        </ng-container>
+
+                        <ng-template #noDisponible>
+                          <span class="text-muted">No hay documento disponible</span>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
+
+  <div>
+              <h5 class="titulo3">Bajo protesta de decir verdad manifiesta que</h5>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Sabe y puede leer:</label>
+                  <select class="form-select" id="sabe_leer" formControlName="sabe_leer">
+                    <option *ngFor="let nacion of bajoProtesta" [value]="nacion.id">
+                      {{ nacion.name }}
+                    </option>
+                  </select>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('sabe_leer')?.hasError('required') && formTestamento.get('sabe_leer')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Sabe y puede escribir:</label>
+                  <select class="form-select" id="sabe_escribir" formControlName="sabe_escribir">
+                    <option *ngFor="let nacion of bajoProtesta" [value]="nacion.id">
+                      {{ nacion.name }}
+                    </option>
+                  </select>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('sabe_escribir')?.hasError('required') && formTestamento.get('sabe_escribir')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Puede hablar:</label>
+                  <select class="form-select" id="puede_hablar" formControlName="puede_hablar">
+                    <option *ngFor="let nacion of bajoProtesta" [value]="nacion.id">
+                      {{ nacion.name }}
+                    </option>
+                  </select>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('puede_hablar')?.hasError('required') && formTestamento.get('puede_hablar')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Puede ver:</label>
+                  <select class="form-select" id="puede_ver" formControlName="puede_ver">
+                    <option *ngFor="let nacion of bajoProtesta" [value]="nacion.id">
+                      {{ nacion.name }}
+                    </option>
+                  </select>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('puede_ver')?.hasError('required') && formTestamento.get('puede_ver')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Puede oír:</label>
+                  <select class="form-select" id="puede_oir" formControlName="puede_oir">
+                    <option *ngFor="let nacion of bajoProtesta" [value]="nacion.id">
+                      {{ nacion.name }}
+                    </option>
+                  </select>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('puede_oir')?.hasError('required') && formTestamento.get('puede_oir')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="mb-3">
+                  <label class="form-label negri">En caso de presentar alguna dificultad, le solicitamos manifestarlo a
+                    continuación:</label>
+                  <input formControlName="presenta_dificultad" type="text" class="form-control"
+                    placeholder="Ejemplo:" />
+                </div>
+              </div>
+            </div>
+               <div>
+              <h5 class="titulo3">Si no sabe o no puede firmar, si es sorda, invidente o no sabe leer, necesariamente requiere la
+                presencia de al menos tres testigos, uno de los cuales firmara en nombre del testador. Los testigos lo
+                deben conocer, e identificarse con documento oficial.</h5>
+            </div>
+            <br>
+            <div>
+              <h5 class="titulo">DISPOSICIONES TESTAMENTARIAS</h5>
+            </div>
+            <br>
+                   <div class="row">
+              <div class="col-sm-12">
+                <div class="mb-3 d-flex flex-column h-100">
+                   <label class="form-label1 negri fs-4" style="font-weight: bold;">
+                      PRIMERO.- Heredero(s):
+                    </label>
+                  <p style="text-align: justify;">
+                    Es quien sin saberlo es beneficiaria o beneficiario a título universal de sus bienes, recibe de
+                    usted tanto su
+                    activo como su pasivo y, por tanto, debe responder también de todas sus deudas, salvo que renuncie a
+                    serlo.
+                    Puede usted designar a uno o varios herederos, por partes iguales o en los porcentajes que
+                    libremente usted
+                    determine:<br><strong>Designo como Herederos a:</strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="mb-3">
+                  <label class="form-label negri">Dentro de sus herederos considera designar a un "menor de
+                    edad":</label>
+                  <select class="form-select" id="menor_de_edad" formControlName="menor_de_edad">
+                    <option *ngFor="let vives of primerTestamento" [value]="vives.id">
+                      {{ vives.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+     <br>   
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Derecho de Acrecer:</label>
+                  <select class="form-select" id="derecho_acrecer" formControlName="derecho_acrecer">
+                    <option *ngFor="let vives of primerTestamento" [value]="vives.id">
+                      {{ vives.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div formArrayName="herederoAdd">
+                <label class="form-label negri">Herederos:</label>
+                <div *ngFor="let hijo of herederos.controls; let i = index" [formGroupName]="i"
+                  class="row border p-3 mb-3 rounded bg-light">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Nombre(s):</label>
+                        <input formControlName="nombre_heredero" type="text" class="form-control"
+                          placeholder="Ejemplo: Sofía" />
+                        <small class="colorsm"
+                          *ngIf="herederos.at(i).get('nombre_heredero')?.hasError('required') && herederos.at(i).get('nombre_heredero')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Primer apellido:</label>
+                        <input formControlName="primer_apellido_heredero" type="text" class="form-control"
+                          placeholder="Ejemplo: Jiménez" />
+                        <small class="colorsm"
+                          *ngIf="herederos.at(i).get('primer_apellido_heredero')?.hasError('required') && herederos.at(i).get('primer_apellido_heredero')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Segundo apellido:</label>
+                        <input formControlName="segundo_apellido_heredero" type="text" class="form-control"
+                          placeholder="Ejemplo: González" />
+                        <small class="colorsm"
+                          *ngIf="herederos.at(i).get('segundo_apellido_heredero')?.hasError('required') && herederos.at(i).get('segundo_apellido_heredero')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Edad:</label>
+                        <input formControlName="edad_heredero" type="number" class="form-control"
+                          placeholder="Ejemplo: 18 años" />
+                        <small class="colorsm"
+                          *ngIf="herederos.at(i).get('edad_heredero')?.hasError('required') && herederos.at(i).get('edad_heredero')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Parentesco:</label>
+                        <input formControlName="parentesco_heredero" type="text" class="form-control"
+                          placeholder="Ejemplo: Hijo" />
+                        <small class="colorsm"
+                          *ngIf="herederos.at(i).get('parentesco_heredero')?.hasError('required') && herederos.at(i).get('parentesco_heredero')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Porcentaje:</label>
+                        <input formControlName="porcentaje_heredero" type="number" class="form-control"
+                          placeholder="Ejemplo: 100" />
+                        <small class="colorsm"
+                          *ngIf="herederos.at(i).get('porcentaje_heredero')?.hasError('required') && herederos.at(i).get('porcentaje_heredero')?.touched">Este
+                          campo es
+                          <strong>requerido</strong></small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+    <div class="row">
+              <br>
+              <p> <strong>Herederos Sustitutos:</strong> </p>
+              <br>
+              <br>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Derecho de Acrecer:</label>
+                  <select class="form-select" id="derecho_acrecer_sustituto"
+                    formControlName="derecho_acrecer_sustituto">
+                    <option *ngFor="let vives of primerTestamento" [value]="vives.id">
+                      {{ vives.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+     <div class="row">
+              <div formArrayName="herederoSustituto">
+                <div *ngFor="let hijo of herederoSustit.controls; let i = index" [formGroupName]="i"
+                  class="row border p-3 mb-3 rounded bg-light">
+                  <div class="row">
+                    <label class="form-label1 negri">Heredero sustituto</label>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Nombre(s):</label>
+                        <input formControlName="nombre_sustituto" type="text" class="form-control"
+                          placeholder="Ejemplo: Sofía" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Primer apellido:</label>
+                        <input formControlName="primer_apellido_sustituto" type="text" class="form-control"
+                          placeholder="Ejemplo: Jiménez" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Segundo apellido:</label>
+                        <input formControlName="segundo_apellido_sustituto" type="text" class="form-control"
+                          placeholder="Ejemplo: González" />
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <label class="form-label1 negri">Heredero a sustituir:</label>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Nombre(s):</label>
+                        <input formControlName="nombre_a_sustituir" type="text" class="form-control"
+                          placeholder="Ejemplo: Sofía" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Primer apellido:</label>
+                        <input formControlName="primer_apellido_a_sustituir" type="text" class="form-control"
+                          placeholder="Ejemplo: Jiménez" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Segundo apellido:</label>
+                        <input formControlName="segundo_apellido_a_sustituir" type="text" class="form-control"
+                          placeholder="Ejemplo: González" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+     <div class="row">
+              <p style="text-align: justify;">
+                El derecho de acrecer en una herencia queda recogido en el Código Civil, y para que llegue a darse es
+                preciso que dos o más sean llamados a una misma herencia o a una misma porción de ella, sin especial
+                designación de partes, que quede una porción de la herencia vacante porque uno de los herederos muera
+                antes que el testador o renuncie a la herencia o sea incapaz de recibirla, que el testador no haya
+                establecido que no ha de proceder el acrecimiento o que el testador no haya establecido la existencia de
+                un sustituto, caso en el que pasará al mismo la porción vacante y no habrá lugar al derecho de acrecer.
+              </p>
+            </div>
+            <br>
+
+
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="mb-3 d-flex flex-column h-100">
+                  <label class="form-label1 negri fs-4" style="font-weight: bold;">SEGUNDO.- Albacea:</label>
+                  <p style="text-align: justify;">
+                    Es la persona (de confianza) designada por el testador encargada de ejecutar y vigilar la correcta
+                    ejecución de un
+                    testamento. Pueden ser nombrados uno o más albaceas, mancomunados o solidarios. Entre sus funciones
+                    ordinarias se
+                    encuentran las siguientes: satisfacer legados, velar por los bienes de la herencia y ejecutar la
+                    misma, es un cargo
+                    voluntario, renunciable, personalísimo, normalmente gratuito y temporal.
+                  </p>
+                </div>
+              </div>
+            </div>
+                  <div class="row">
+              <label class="form-label1 negri">Albacea:</label>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nombre(s):</label>
+                  <input formControlName="nombre_albacea" type="text" class="form-control"
+                    placeholder="Ejemplo: Sofía" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('nombre_albacea')?.hasError('required') && formTestamento.get('nombre_albacea')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Primer apellido:</label>
+                  <input formControlName="primer_apellido_albacea" type="text" class="form-control"
+                    placeholder="Ejemplo: Jiménez" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('primer_apellido_albacea')?.hasError('required') && formTestamento.get('primer_apellido_albacea')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Segundo apellido:</label>
+                  <input formControlName="segundo_apellido_albacea" type="text" class="form-control"
+                    placeholder="Ejemplo: González" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('segundo_apellido_albacea')?.hasError('required') && formTestamento.get('segundo_apellido_albacea')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="form-label1 negri">A su falta:</label>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nombre(s):</label>
+                  <input formControlName="nombre_falta_albacea" type="text" class="form-control"
+                    placeholder="Ejemplo: Sofía" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('nombre_falta_albacea')?.hasError('required') && formTestamento.get('nombre_falta_albacea')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Primer apellido:</label>
+                  <input formControlName="primer_apellido_falta_albacea" type="text" class="form-control"
+                    placeholder="Ejemplo: Jiménez" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('primer_apellido_falta_albacea')?.hasError('required') && formTestamento.get('primer_apellido_falta_albacea')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Segundo apellido:</label>
+                  <input formControlName="segundo_apellido_falta_albacea" type="text" class="form-control"
+                    placeholder="Ejemplo: González" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('segundo_apellido_falta_albacea')?.hasError('required') && formTestamento.get('segundo_apellido_falta_albacea')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+            </div>
+
+
+   <div *ngIf="mostrarCamposMenorDeEdad">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label1 negri fs-4" style="font-weight: bold;">TERCERO.- Tutor para el caso de descendientes:</label>
+                    <p style="text-align: justify;">
+                      Es la persona física que a falta de usted
+                      como titular de patria potestad de un menor de edad o de un incapaz, se encargará del mismo o de
+                      los mismos,
+                      quien tendrá la obligación de proteger y administrara los bienes mientras llegan a la mayoría de
+                      edad o cesa
+                      la incapacidad, puede ser tutor testamentario un familiar o una amistad.
+                      El tutor tiene derecho a exigir respeto y obediencia del tutelado, a percibir una retribución y a
+                      ser
+                      indemnizado por los daños y perjuicios sufridos. Tiene el deber de realizar un inventario,
+                      representar al menor
+                      o incapacitado, llevar su guarda y protección, administrar el patrimonio, e informar y rendir
+                      cuentas a la
+                      autoridad judicial.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              
+              <div class="row">
+                <label class="form-label1 negri">TUTOR:</label>
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Nombre(s):</label>
+                    <input formControlName="nombre_tutor" type="text" class="form-control"
+                      placeholder="Ejemplo: Sofía" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('nombre_tutor')?.hasError('required') && formTestamento.get('nombre_tutor')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Primer apellido:</label>
+                    <input formControlName="primer_apellido_tutor" type="text" class="form-control"
+                      placeholder="Ejemplo: Jiménez" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('primer_apellido_tutor')?.hasError('required') && formTestamento.get('primer_apellido_tutor')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Segundo apellido:</label>
+                    <input formControlName="segundo_apellido_tutor" type="text" class="form-control"
+                      placeholder="Ejemplo: González" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('segundo_apellido_tutor')?.hasError('required') && formTestamento.get('segundo_apellido_tutor')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <label class="form-label1 negri">TUTOR SUSTITUTO:</label>
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Nombre(s):</label>
+                    <input formControlName="nombre_tutor_sustituto" type="text" class="form-control"
+                      placeholder="Ejemplo: Sofía" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('nombre_tutor_sustituto')?.hasError('required') && formTestamento.get('nombre_tutor_sustituto')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Primer apellido:</label>
+                    <input formControlName="primer_apellido_tutor_sustituto" type="text" class="form-control"
+                      placeholder="Ejemplo: Jiménez" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('primer_apellido_tutor_sustituto')?.hasError('required') && formTestamento.get('primer_apellido_tutor_sustituto')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Segundo apellido:</label>
+                    <input formControlName="segundo_apellido_tutor_sustituto" type="text" class="form-control"
+                      placeholder="Ejemplo: González" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('segundo_apellido_tutor_sustituto')?.hasError('required') && formTestamento.get('segundo_apellido_tutor_sustituto')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="mb-3 d-flex flex-column h-100">
+                    <label class="form-label1 negri fs-4" style="font-weight: bold;">CUARTO.- Curador:</label>
+                    <p style="text-align: justify;">
+                      Persona física encargada de vigilar el desempeño del tutor
+                      respecto del cuidado y administración de los bienes de los menores o incapaces. Puede ser curador
+                      un
+                      pariente o extraño, pero <strong>"ENTRE TUTOR Y CURADOR NO PUEDE HABER PARENTESCO".</strong>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <label class="form-label1 negri">CURADOR:</label>
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Nombre(s):</label>
+                    <input formControlName="nombre_curador" type="text" class="form-control"
+                      placeholder="Ejemplo: Sofía" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('nombre_curador')?.hasError('required') && formTestamento.get('nombre_curador')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Primer apellido:</label>
+                    <input formControlName="primer_apellido_curador" type="text" class="form-control"
+                      placeholder="Ejemplo: Jiménez" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('primer_apellido_curador')?.hasError('required') && formTestamento.get('primer_apellido_curador')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Segundo apellido:</label>
+                    <input formControlName="segundo_apellido_curador" type="text" class="form-control"
+                      placeholder="Ejemplo: González" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('segundo_apellido_curador')?.hasError('required') && formTestamento.get('segundo_apellido_curador')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <label class="form-label1 negri">A SU FALTA:</label>
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Nombre(s):</label>
+                    <input formControlName="nombre_a_su_falta_curador" type="text" class="form-control"
+                      placeholder="Ejemplo: Sofía" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('nombre_a_su_falta_curador')?.hasError('required') && formTestamento.get('nombre_a_su_falta_curador')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Primer apellido:</label>
+                    <input formControlName="primer_apellido_a_su_falta_curador" type="text" class="form-control"
+                      placeholder="Ejemplo: Jiménez" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('primer_apellido_a_su_falta_curador')?.hasError('required') && formTestamento.get('primer_apellido_a_su_falta_curador')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="mb-3">
+                    <label class="form-label negri">Segundo apellido:</label>
+                    <input formControlName="segundo_apellido_a_su_falta_curador" type="text" class="form-control"
+                      placeholder="Ejemplo: González" />
+                    <small class="colorsm"
+                      *ngIf="formTestamento.get('segundo_apellido_a_su_falta_curador')?.hasError('required') && formTestamento.get('segundo_apellido_a_su_falta_curador')?.touched">Este
+                      campo es
+                      <strong>requerido</strong></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-12" *ngIf="mostrarBtnTestigo">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="mb-3 d-flex flex-column h-100">
+                   <label class="form-label1 negri fs-4" style="font-weight: bold;">QUINTO.- Testigos:*</label>
+                    <p style="text-align: justify;">
+                      Persona física encargada de vigilar el desempeño del tutor
+                      respecto del cuidado y administración de los bienes de los menores o incapaces. Puede ser curador
+                      un
+                      pariente o extraño, pero <strong>"ENTRE TUTOR Y CURADOR NO PUEDE HABER PARENTESCO".</strong>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="mb-3">
+                  <!-- <div class="hijos-container">
+                    <label class="form-label">Agregar testigos (3 o más):*</label>
+                    <button type="button" class="add-hijo-btn" (click)="agregarTestigo()">
+                      ➕ Agregar testigos
+                    </button>
+                  </div> -->
+                </div>
+                <div class="row">
+                  <div formArrayName="testigoArr">
+                    <div *ngFor="let hijo of testigosF.controls; let i = index" [formGroupName]="i" class="row border p-3 mb-3 rounded bg-light">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Nombre(s):*</label>
+                            <input formControlName="nombre_testigo" type="text" class="form-control" placeholder="Ejemplo: Sofía" />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Primer apellido:*</label>
+                            <input formControlName="primer_apellido_testigo" type="text" class="form-control" placeholder="Ejemplo: Jiménez" />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Segundo apellido:*</label>
+                            <input formControlName="segundo_apellido_testigo" type="text" class="form-control" placeholder="Ejemplo: González" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Nacionalidad:*</label>
+                            <input formControlName="nacionalidad_testigo" type="text" class="form-control" placeholder="Ejemplo: Mexicana" />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Fecha de nacimiento:*</label>
+                            <input formControlName="fecha_nacimiento_testigo" type="date" class="form-control" placeholder="Seleccione una fecha" />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Lugar de nacimiento:*</label>
+                            <input formControlName="lugar_nacimiento_testigo" type="text" class="form-control" placeholder="Ejemplo: Mexico" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">CURP:*</label>
+                            <input formControlName="curp_testigo" type="text" class="form-control" placeholder="Ejemplo: JUAN800101HDFABC01" />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Estado civil:*</label>
+                            <input formControlName="estado_civil_testigo" type="text" class="form-control" placeholder="Ejemplo: Soltero" />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Ocupación:*</label>
+                            <input formControlName="ocupacion_testigo" type="text" class="form-control" placeholder="Ejemplo: Empleado" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Domicilio:*</label>
+                            <input formControlName="domicilio_testigo" type="text" class="form-control" placeholder="Ejemplo: Av. Reforma #123, CDMX" />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Código postal:*</label>
+                            <input formControlName="cp_testigo" type="number" class="form-control" placeholder="Ejemplo: 06500" />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">Teléfono:*</label>
+                            <input formControlName="telefono_testigo" type="number" class="form-control" placeholder="Ejemplo: 5512345678" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label negri">RFC:*</label>
+                            <input formControlName="rfc_testigo" type="text" class="form-control" placeholder="Ejemplo: GODE561231GR8" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <pre>{{ hijo.get('doctos')?.value | json }}</pre>
+                    <div class="col-sm-4 mb-4">
+                  <div class="card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                      <h5 class="card-title">Identificación oficial vigente (Credencial para votar, pasaporte o cédula profesional)</h5>
+
+                      <div class="w-100 d-flex flex-column justify-content-center align-items-center"
+                        style="min-height: 150px;">
+                         <ng-container *ngIf="hijo.get('identificaciont')?.value; else noDisponible">
+            <a [href]="hijo.get('identificaciont')?.value" target="_blank" class="text-decoration-none">
+              <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
+              <div class="mt-2">Ver documento</div>
+            </a>
+          </ng-container>
+          <ng-template #noDisponible>
+            <span class="text-muted">No hay documento disponible</span>
+          </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-4 mb-4">
+                  <div class="card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                      <h5 class="card-title">Clave Única de Registro de Población:</h5>
+
+                      <div class="w-100 d-flex flex-column justify-content-center align-items-center"
+                        style="min-height: 150px;">
+                              <ng-container *ngIf="hijo.get('curpt')?.value; else noDisponible">
+            <a [href]="hijo.get('curpt')?.value" target="_blank" class="text-decoration-none">
+              <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
+              <div class="mt-2">Ver documento</div>
+            </a>
+          </ng-container>
+          <ng-template #noDisponible>
+            <span class="text-muted">No hay documento disponible</span>
+          </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-4 mb-4">
+                  <div class="card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                      <h5 class="card-title">Comprobante de domicilio</h5>
+
+                      <div class="w-100 d-flex flex-column justify-content-center align-items-center"
+                        style="min-height: 150px;">
+                        <ng-container *ngIf="hijo.get('comprobante_domiciliot')?.value; else noDisponible">
+            <a [href]="hijo.get('comprobante_domiciliot')?.value" target="_blank" class="text-decoration-none">
+              <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
+              <div class="mt-2">Ver documento</div>
+            </a>
+          </ng-container>
+          <ng-template #noDisponible>
+            <span class="text-muted">No hay documento disponible</span>
+          </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
 
 
 

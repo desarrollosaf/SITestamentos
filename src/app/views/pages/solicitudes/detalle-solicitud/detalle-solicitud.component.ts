@@ -80,9 +80,16 @@ export class DetalleSolicitudComponent {
   doctos: { [key: string]: string | null } = {
       comprobante_residencia: null,
       ine:null,
-      situacion_fiscal:null
-
+      situacion_fiscal:null,
+      primer_testamento_doc:null,
   };
+
+
+
+
+
+
+
   documentos: { [key: string]: string | null } = {};
   documentosMed: { [key: string]: string | null } = {};
   documentosTest: { [key: string]: string | null } = {};
@@ -92,7 +99,7 @@ export class DetalleSolicitudComponent {
   localidadSeleccionada: number | null = null;
   mostrarCamposTestamento = false;
   mostrarCamposMenorDeEdad = false;
-
+mostrarBtnTestigo = false;
   mostrarDoctoIdentifica = false;
   padreNac = false;
   madreNac = false;
@@ -301,6 +308,20 @@ export class DetalleSolicitudComponent {
    get hijosDos(): FormArray {
     return this.formTestamento.get('hijosSegundo') as FormArray;
   }
+    get hijosFuera(): FormArray {
+    return this.formTestamento.get('hijosFueraMatrim') as FormArray;
+  }
+  get herederos(): FormArray {
+    return this.formTestamento.get('herederoAdd') as FormArray;
+  }
+  get herederoSustit(): FormArray {
+    return this.formTestamento.get('herederoSustituto') as FormArray;
+  }
+   get testigosF(): FormArray {
+  return this.formTestamento.get('testigoArr') as FormArray;
+  }
+
+
   ngOnInit(): void {
     this._solicitudService.getsolicitud(this.id).subscribe({
       next: (response: any) => {
@@ -443,13 +464,147 @@ export class DetalleSolicitudComponent {
         }
         if(response.solicitud[0].hijo_fuera.length > 0){
           this.formTestamento.patchValue({
-              nombre_fuera_matri:response.solicitud[0].hijo_fuera[0].nombre,
-              primer_apellido_fuera_matri: response.solicitud[0].hijo_fuera[0].primer_apellido,
-              segundo_apellido_fuera_matri: response.solicitud[0].hijo_fuera[0].segundo_apellido,
+              nombre_fuera_matri:response.solicitud[0].hijo_fuera[0].nombre_fuera,
+              primer_apellido_fuera_matri: response.solicitud[0].hijo_fuera[0].primer_apellido_fuera_matri,
+              segundo_apellido_fuera_matri: response.solicitud[0].hijo_fuera[0].segundo_apellido_fuera_matri,
+          });
+            response.solicitud[0].hijo_fuera.forEach((hijo: any) => {
+                const hijoFueraGroup = this.fb.group({
+                  fuera_hijo_nombre: [hijo.nombre],
+                  fuera_hijo_primer_apellido: [hijo.primer_apellido],
+                  fuera_hijo_segundo_apellido: [hijo.segundo_apellido],
+                  fuera_hijo_edad: [hijo.edad],
+                  fuera_hijo_vf: [hijo.vive]
+                });
+                this.hijosFuera.push(hijoFueraGroup);
+              });
+        }
+        this.formTestamento.get('primer_testamento')?.setValue(response.solicitud[0].es_primer_testamento);
+        
+        if(response.solicitud[0].es_primer_testamento == '0'){
+            this.mostrarCamposTestamento = true;
+            const fechaFormateada = this.formatearFecha(response.solicitud[0].testamentos_pasados.fecha_tramite);
+            this.formTestamento.patchValue({
+              fecha_primer_testamento: fechaFormateada,
+              notaria_primer_testamento: response.solicitud[0].testamentos_pasados.notaria,
+              instrumento_primer_testamento: response.solicitud[0].testamentos_pasados.instrumento_volumen
+          });
+          this.doctos['primer_testamento_doc'] = response.solicitud[0].testamentos_pasados.path_testamento || null; 
+        }
+        this.formTestamento.get('sabe_leer')?.setValue(response.solicitud[0].sabe_leer);
+        this.formTestamento.get('sabe_escribir')?.setValue(response.solicitud[0].sabe_escribir);
+        this.formTestamento.get('puede_hablar')?.setValue(response.solicitud[0].puede_hablar);
+        this.formTestamento.get('puede_ver')?.setValue(response.solicitud[0].puede_ver);
+        this.formTestamento.get('puede_oir')?.setValue(response.solicitud[0].puede_oir);
+        this.formTestamento.patchValue({
+              fecha_primer_testamento: response.solicitud[0].dificultad_comunicacion,
+        });
+
+      // AGREGAR LA FUNCIONN PARA LOS TESTIGOS*****************************************************************************
+        this.mostrarBtnTestigo = [
+          response.solicitud[0].sabe_leer,
+          response.solicitud[0].sabe_escribir,
+          response.solicitud[0].puede_hablar,
+          response.solicitud[0].puede_ver,
+          response.solicitud[0].puede_oir
+        ].some(valor => valor === 0);
+        if(response.solicitud[0].testigos.length > 0){
+        console.log('si hay tetsugo');
+
+
+      response.solicitud[0].testigos.forEach((testigo: any) => {
+                const testigosGroup = this.fb.group({
+                  nombre_testigo: [testigo.nombre_testigo],
+                  primer_apellido_testigo: [testigo.primer_apellido_testigo],
+                  segundo_apellido_testigo: [testigo.segundo_apellido_testigo],
+                  nacionalidad_testigo: [testigo.nacionalidad],
+                  fecha_nacimiento_testigo: [testigo.fecha_naciento],
+                  lugar_nacimiento_testigo: [testigo.lugar_nacimiento],
+                  curp_testigo: [testigo.curp],
+                  estado_civil_testigo: [testigo.estado_civil],
+                  ocupacion_testigo: [testigo.ocupacion],
+                  domicilio_testigo: [testigo.domicilio],
+                  cp_testigo: [testigo.cp],
+                  telefono_testigo:[testigo.telefono],
+                  rfc_testigo: [testigo.rfc],
+                  curpt: [testigo.curp || null],
+                  comprobante_domiciliot: [testigo.comprobante_domicilio || null],
+                  identificaciont: [testigo.identificacion || null]
+                });
+                this.testigosF.push(testigosGroup);
+              });
+        }
+
+
+
+
+      // AGREGAR LA FUNCIONN PARA LOS TESTIGOS*****************************************************************************
+        this.formTestamento.get('menor_de_edad')?.setValue(response.solicitud[0].heredero_menor_edad);
+        if(response.solicitud[0].heredero_menor_edad =='1'){
+          this.mostrarCamposMenorDeEdad = true;
+          this.formTestamento.patchValue({
+            nombre_tutor: response.solicitud[0].tutor_descendientes.nombre_tutor,
+            primer_apellido_tutor: response.solicitud[0].tutor_descendientes.primer_apellido_tutor,
+            segundo_apellido_tutor: response.solicitud[0].tutor_descendientes.segundo_apellido_tutor,
+            nombre_tutor_sustituto: response.solicitud[0].tutor_descendientes.nombre_tutor_sustituto,
+            primer_apellido_tutor_sustituto: response.solicitud[0].tutor_descendientes.primer_apellido_tutor_sustituto,
+            segundo_apellido_tutor_sustituto: response.solicitud[0].tutor_descendientes.segundo_apellido_tutor_sustituto,
+            nombre_curador: response.solicitud[0].tutor_descendientes.nombre_curador,
+            primer_apellido_curador: response.solicitud[0].tutor_descendientes.primer_apellido_curador,
+            segundo_apellido_curador: response.solicitud[0].tutor_descendientes.segundo_apellido_curador,
+            nombre_a_su_falta_curador: response.solicitud[0].tutor_descendientes.nombre_a_su_falta_curador,
+            primer_apellido_a_su_falta_curador: response.solicitud[0].tutor_descendientes.primer_apellido_a_su_falta_curador,
+            segundo_apellido_a_su_falta_curador: response.solicitud[0].tutor_descendientes.segundo_apellido_a_su_falta_curador
           });
         }
-        
-        
+
+
+
+
+
+
+        if(response.solicitud[0].herederos.length > 0){
+          this.formTestamento.get('derecho_acrecer')?.setValue(response.solicitud[0].herederos[0].derecho_acrecer);
+          response.solicitud[0].herederos.forEach((hijo: any) => {
+                const HerederosGroup = this.fb.group({
+                  nombre_heredero: [hijo.nombre_heredero],
+                  primer_apellido_heredero: [hijo.primer_apellido_heredero],
+                  segundo_apellido_heredero: [hijo.segundo_apellido_heredero],
+                  edad_heredero: [hijo.edad],
+                  parentesco_heredero: [hijo.parentesco],
+                   porcentaje_heredero: [hijo.porcentaje]
+                });
+                this.herederos.push(HerederosGroup);
+              });
+        }
+          
+        if(response.solicitud[0].herederos_susti.length > 0){
+          this.formTestamento.get('derecho_acrecer_sustituto')?.setValue(response.solicitud[0].herederos_susti[0].derecho_acrecer);
+          response.solicitud[0].herederos_susti.forEach((hijo: any) => {
+                const HerederosSustGroup = this.fb.group({
+                  nombre_sustituto: [hijo.nombre_sustituto],
+                  primer_apellido_sustituto: [hijo.segundo_apellido_sustituto],
+                  segundo_apellido_sustituto: [hijo.segundo_apellido_sustituto],
+                  nombre_a_sustituir: [hijo.nombre_a_sustituir],
+                  primer_apellido_a_sustituir: [hijo.primer_apellido_a_sustituir],
+                  segundo_apellido_a_sustituir: [hijo.segundo_apellido_a_sustituir]
+                });
+                this.herederoSustit.push(HerederosSustGroup);
+              });
+        }
+        this.formTestamento.patchValue({
+          nombre_albacea: response.solicitud[0].albacea.nombre_albacea,
+          primer_apellido_albacea: response.solicitud[0].albacea.primer_apellido_albacea,
+          segundo_apellido_albacea: response.solicitud[0].albacea.segundo_apellido_albacea,
+           nombre_falta_albacea: response.solicitud[0].albacea.nombre_falta_albacea,
+          primer_apellido_falta_albacea: response.solicitud[0].albacea.primer_apellido_falta_albacea,
+           segundo_apellido_falta_albacea: response.solicitud[0].albacea.segundo_apellido_falta_albacea
+        });
+
+
+
+
+
 
         this.documentos = {};
         Object.entries(response[0]).forEach(([key, val]) => {
@@ -528,7 +683,13 @@ export class DetalleSolicitudComponent {
 
 
 
-       
+       formatearFecha(fechaStr: string | Date): string {
+  const fecha = new Date(fechaStr);
+  const dia = fecha.getDate().toString().padStart(2, '0');
+  const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Enero = 0
+  const anio = fecha.getFullYear();
+  return `${anio}-${mes}-${dia}`;
+}
 
   toggleExtraInfo(): void {
     this.mostrarExtraInfo = !this.mostrarExtraInfo;
