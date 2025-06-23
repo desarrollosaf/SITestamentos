@@ -56,7 +56,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
              correo_per: data.correo_per,
              f_homclave: '',
              f_cp: data.f_cp,
-             estadocivil_id: data.estadodo_civil
+             estadocivil_id: data.estado_civil
         
          });    
     }else{
@@ -77,7 +77,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
              correo_per: data.correo_per,
              f_homclave: '',
              f_cp: data.f_cp,
-             estadocivil_id: data.estadodo_civil
+             estadocivil_id: data.estado_civil
             });
     }
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
@@ -359,7 +359,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
             }
         }
     } catch (error) {
-        console.error('❌ Error al crear el HEREDEROS :', error);
+        console.error('Error al crear el HEREDEROS :', error);
 
     }
     return 500
@@ -382,7 +382,7 @@ export const getsolicitudes = async (req: Request, res: Response): Promise<any> 
         });
         for (const solicitud of solicitudes) {
             if (solicitud.userId) {
-                console.log('📌 Buscando datos personales para:', solicitud.userId);
+                console.log('Buscando datos personales para:', solicitud.userId);
 
                 const datos = await dp_datospersonales.findOne({
                 where: { f_rfc: solicitud.userId },
@@ -492,7 +492,7 @@ export const getsolicitud = async (req: Request, res: Response): Promise<any> =>
         // Cargar datos personales manualmente desde otra base de datos
         for (const solicitud of solicitudes) {
             if (solicitud.userId) {
-                console.log('📌 Buscando datos personales para:', solicitud.userId);
+                console.log('Buscando datos personales para:', solicitud.userId);
 
                 const datos = await dp_datospersonales.findOne({
                 where: { f_rfc: solicitud.userId },

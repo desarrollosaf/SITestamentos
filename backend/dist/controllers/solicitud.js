@@ -64,7 +64,7 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             correo_per: data.correo_per,
             f_homclave: '',
             f_cp: data.f_cp,
-            estadocivil_id: data.estadodo_civil
+            estadocivil_id: data.estado_civil
         });
     }
     else {
@@ -85,7 +85,7 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             correo_per: data.correo_per,
             f_homclave: '',
             f_cp: data.f_cp,
-            estadocivil_id: data.estadodo_civil
+            estadocivil_id: data.estado_civil
         });
     }
     const files = req.files;
@@ -349,7 +349,7 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
     }
     catch (error) {
-        console.error('❌ Error al crear el HEREDEROS :', error);
+        console.error('Error al crear el HEREDEROS :', error);
     }
     return 500;
     return res.status(200).json({
@@ -369,7 +369,7 @@ const getsolicitudes = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
         for (const solicitud of solicitudes) {
             if (solicitud.userId) {
-                console.log('📌 Buscando datos personales para:', solicitud.userId);
+                console.log('Buscando datos personales para:', solicitud.userId);
                 const datos = yield dp_datospersonales_1.dp_datospersonales.findOne({
                     where: { f_rfc: solicitud.userId },
                 });
@@ -476,7 +476,7 @@ const getsolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         // Cargar datos personales manualmente desde otra base de datos
         for (const solicitud of solicitudes) {
             if (solicitud.userId) {
-                console.log('📌 Buscando datos personales para:', solicitud.userId);
+                console.log('Buscando datos personales para:', solicitud.userId);
                 const datos = yield dp_datospersonales_1.dp_datospersonales.findOne({
                     where: { f_rfc: solicitud.userId },
                 });
