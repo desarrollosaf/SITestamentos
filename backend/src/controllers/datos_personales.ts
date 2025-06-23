@@ -15,6 +15,14 @@ export const getregistro = async (req: Request, res: Response): Promise<any> => 
     const { id } = req.params;
     console.log('si entro:',id);
   try {
+    let soli = false; 
+    const solicitud = await Solicitud.findOne({
+      where: { userId: id }
+    })
+    if (solicitud) {
+       soli = true;
+    }
+
    
     let registro: dp_datospersonales | dp_fum_datos_generales | null = await dp_datospersonales.findOne({ 
       where: { f_rfc: id }
@@ -28,13 +36,6 @@ export const getregistro = async (req: Request, res: Response): Promise<any> => 
           return res.status(500).json({ error: 'No se tiene ningun registro' });
       }
     }
-    const solicitud = await User.findOne({
-      where: { name: registro.f_rfc }
-    })
-    if (solicitud) {
-          return res.status(400).json({ error: 'Este servidor ya cuenta con un registro' });
-    }
-
     const regimen = await RegimenPatrimonial.findAll();
     const civil = await dp_estado_civil.findAll();
 
@@ -42,7 +43,8 @@ export const getregistro = async (req: Request, res: Response): Promise<any> => 
       msg: `Lista obtenida exitosamente`,
       data: registro,
       regimen: regimen,
-      estadocivil: civil
+      estadocivil: civil,
+      solicitud: soli
     });
   } catch (error) {
     console.error(error);
