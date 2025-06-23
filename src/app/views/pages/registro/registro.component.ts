@@ -2,7 +2,7 @@ import { Component, ElementRef, inject, QueryList, ViewChildren, ViewChild, Temp
 import { FormArray, FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { RegistroService } from '../../../service/registro.service';
@@ -19,6 +19,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.scss'
 })
+
 export class RegistroComponent {
   public _registroService = inject(RegistroService);
   public localidades: any[] = [];
@@ -346,6 +347,19 @@ export class RegistroComponent {
     this.mostrarFormulario = true;
   }
 
+  
+  fechaMaximaValidator(maxDate: Date): ValidatorFn {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      const control = (formGroup as FormGroup).get('fecha_primer_testamento');
+      if (!control || !control.value) return null;
+
+      const fecha = new Date(control.value);
+      if (isNaN(fecha.getTime())) return null;
+
+      return fecha > maxDate ? { fechaMaxima: true } : null;
+    };
+  }
+
   agregarTestigo() {
     const group = this.fb.group({
       nombre_testigo: ['', Validators.required],
@@ -354,13 +368,13 @@ export class RegistroComponent {
       nacionalidad_testigo: ['', Validators.required],
       fecha_nacimiento_testigo: ['', Validators.required],
       lugar_nacimiento_testigo: ['', Validators.required],
-      curp_testigo: ['', Validators.required],
+      curp_testigo: ['', [Validators.required, Validators.pattern(/^[A-Z]{1}[AEIOU]{1}[A-Z]{2}\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[HM]{1}(AS|BC|BS|CC|CL|CM|CS|CH|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}\d{1}$/)]],
       estado_civil_testigo: ['', Validators.required],
       ocupacion_testigo: ['', Validators.required],
       domicilio_testigo: ['', Validators.required],
       cp_testigo: ['', Validators.required],
       telefono_testigo: ['', Validators.required],
-      rfc_testigo: ['', Validators.required]
+      rfc_testigo: ['',[Validators.required, Validators.pattern(/^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$/)]],
     });
 
     this.testigosF.push(group);
@@ -700,6 +714,8 @@ export class RegistroComponent {
       })
   }
   
+  
+
   //PARA LLENAR LA EDAD TOMANDO LA FECHA DE NACIMIENTO
   calcularEdad(fechaNacimiento: string | Date): number {
     const nacimiento = new Date(fechaNacimiento);
@@ -712,6 +728,7 @@ export class RegistroComponent {
     return edad;
   }
 
+  
   //PARA QUE SE HAGAN REQUERIDOS LOS INPUT DE LOS PRIMEROS DOCUMENTOS
   documentosRequeridosLlenos(): boolean {
     return this.documentos.acta_nacimiento !== null &&
@@ -956,11 +973,12 @@ export class RegistroComponent {
         Swal.fire({
           position: "center", 
           icon: "success",
-          title: "Tu registro ha sido enviado.",
+          title: "¡Registro exitoso!",
+          text: `El registro de su trámite testamentario se ha efectuado de manera satisfactoria. Se le solicita mantenerse atento a los medios de contacto proporcionados, ya que en breve será contactado(a) para dar seguimiento y continuidad al procedimiento correspondiente.`,
           showConfirmButton: false,
           timer: 10000
         });
-        //window.location.reload();
+        this.router.navigate(['/registro']);
       },
       error: (e: HttpErrorResponse) => {
         if (e.error && e.error.msg) {

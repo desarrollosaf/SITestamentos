@@ -3,14 +3,17 @@
     <div class="col-md-10 stretch-card">
       <div class="card">
         <div class="card-body">
-          <h6 class="fw-bold mb-4 text-center" style="color: #96134b; font-size: 1.2rem;">
-            SOLICITUD DE TESTAMENTO
-          </h6>
           <div class="d-flex justify-content-end">
-            <button class="btn btn-outline-danger btn-sm" (click)="onLogout($event)">
+           <button 
+              class="btn btn-sm" 
+              style="background-color: #ecbb87; color: #000; border: none;" 
+              (click)="onLogout($event)">
               <i class="feather icon-log-out me-1"></i> Cerrar sesión
             </button>
           </div>  
+          <h2 class="fw-bold mb-4 text-center" style="color: #161616;">
+            SOLICITUD DE TESTAMENTO
+          </h2>
           @if(!mostrarFormulario){
             <div class="bienvenida">
               <h2 class="text-center">¡Bienvenido!</h2>
@@ -68,35 +71,31 @@
               </section>
               <br><br>
               <section>
-                <h3>Datos del testador</h3>
-
-
-                          <div class="table-responsive">
-                            <table class="table table-striped">
-                              <thead>
-                                <tr>
-                                  <th>Nombre del testador</th>
-                                  <th>Rfc</th>
-                                  <th>Curp</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td class="py-1">
-                                    {{ this.datos_personales.f_nombre }}  {{ this.datos_personales.f_primer_apellido }}  {{ this.datos_personales.f_segundo_apellido }}
-                                  </td>
-                                  <td>{{ this.datos_personales.f_rfc }}</td>
-                                  <td>{{ this.datos_personales.f_curp }}</td>
-                                </tr>
-                                
-                              </tbody>
-                            </table>
-                          </div>
-                          
+                <h3>Datos del Testador</h3>
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>Nombre del testador</th>
+                          <th>Rfc</th>
+                          <th>Curp</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="py-1">
+                            {{ this.datos_personales.f_nombre }}  {{ this.datos_personales.f_primer_apellido }}  {{ this.datos_personales.f_segundo_apellido }}
+                          </td>
+                          <td>{{ this.datos_personales.f_rfc }}</td>
+                          <td>{{ this.datos_personales.f_curp }}</td>
+                        </tr>
                         
+                      </tbody>
+                    </table>
+                  </div>
               </section>
               <div class="text-center mt-4">
-                @if(!this.estatusSolicitud){ <button class="btn btn-primary" (click)="empezar()">Empezar</button> }@else{ <h4>SOLICITUD ENVIADA</h4> }
+                @if(!this.estatusSolicitud){ <button class="btn btn-primary" style="background-color: #ecbb87; color: #000; border: none;"  (click)="empezar()">Empezar</button> }@else{ <h4>Registro exitoso</h4> }
               </div>
             </div>
 
@@ -736,7 +735,7 @@ campo es
               <div class="hijos-container">
                 <label class="form-label">Hijos del primer matrimonio o concubinato:*</label>
                 <button type="button" class="add-hijo-btn" (click)="agregarHijo()">
-                  ➕ Agregar hijo
+                  <i class="feather icon-plus" style="color: black;"></i> Agregar hijo
                 </button>
               </div>
 
@@ -884,7 +883,7 @@ campo es
               <div class="hijos-container">
                 <label class="form-label">Hijos del segundo matrimonio o concubinato:*</label>
                 <button type="button" class="add-hijo-btn" (click)="agregarDosHijo()">
-                  ➕ Agregar hijo
+                  <i class="feather icon-plus" style="color: black;"></i> Agregar hijo
                 </button>
               </div>
 
@@ -985,7 +984,7 @@ campo es
               <div class="hijos-container">
                 <label class="form-label">Hijos fuera del matrimonio:*</label>
                 <button type="button" class="add-hijo-btn" (click)="agregarFueraHijo()">
-                  ➕ Agregar hijo
+                  <i class="feather icon-plus" style="color: black;"></i> Agregar hijo
                 </button>
               </div>
 
@@ -1074,11 +1073,15 @@ campo es
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri"> La fecha en que realizo el tramite:*</label>
-                    <input formControlName="fecha_primer_testamento" type="date" class="form-control" />
-                    <small class="colorsm"
+                    <input formControlName="fecha_primer_testamento" type="date" class="form-control" [attr.max]="'2025-06-25'" />
+                      <small class="colorsm"
                       *ngIf="formTestamento.get('fecha_primer_testamento')?.hasError('required') && formTestamento.get('fecha_primer_testamento')?.touched">Este
                       campo es
                       <strong>requerido</strong></small>
+                      <small class="colorsm"
+                        *ngIf="formTestamento.get('fecha_primer_testamento')?.hasError('fechaMaxima') && formTestamento.get('fecha_primer_testamento')?.touched">
+                        La fecha no puede ser posterior al <strong>25 de junio de 2025</strong>.
+                      </small>
                   </div>
                 </div>
                 <div class="col-sm-4">
@@ -1263,7 +1266,7 @@ campo es
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-12">
+              <div class="col-sm-6">
                 <div class="mb-3">
                   <label class="form-label negri">Dentro de sus herederos considera designar a un "menor de
                     edad":*</label>
@@ -1309,7 +1312,7 @@ campo es
                   <div class="hijos-container">
                     <label class="form-label">Agregar heredero:*</label>
                     <button type="button" class="add-hijo-btn" (click)="agregarHeredero()">
-                      ➕ Agregar heredero
+                      <i class="feather icon-plus" style="color: black;"></i> Agregar heredero
                     </button>
                   </div>
                 </div>
@@ -1428,7 +1431,7 @@ campo es
                   <div class="hijos-container">
                     <label class="form-label">Agregar heredero sustituto:*</label>
                     <button type="button" class="add-hijo-btn" (click)="agregarSustituto()">
-                      ➕ Agregar heredero sustituto
+                      <i class="feather icon-plus" style="color: black;"></i> Agregar heredero sustituto
                     </button>
                   </div>
                 </div>
@@ -1848,7 +1851,7 @@ campo es
                   <div class="hijos-container">
                     <label class="form-label">Agregar testigos (3 o más):*</label>
                     <button type="button" class="add-hijo-btn" (click)="agregarTestigo()">
-                      ➕ Agregar testigos
+                      <i class="feather icon-plus" style="color: black;"></i> Agregar testigos
                     </button>
                   </div>
                 </div>
@@ -1927,6 +1930,10 @@ campo es
                             <small class="colorsm" *ngIf="testigosF.at(i).get('curp_testigo')?.hasError('required') && testigosF.at(i).get('curp_testigo')?.touched">
                               Este campo es <strong>requerido</strong>
                             </small>
+                            <small class="colorsm"
+                              *ngIf="testigosF.at(i).get('curp_testigo')?.hasError('pattern') && testigosF.at(i).get('curp_testigo')?.touched">
+                              Formato de CURP <strong>inválido</strong>
+                            </small>
                           </div>
                         </div>
 
@@ -1990,6 +1997,10 @@ campo es
                             <input formControlName="rfc_testigo" type="text" class="form-control" placeholder="Ejemplo: GODE561231GR8" />
                             <small class="colorsm" *ngIf="testigosF.at(i).get('rfc_testigo')?.hasError('required') && testigosF.at(i).get('rfc_testigo')?.touched">
                               Este campo es <strong>requerido</strong>
+                            </small>
+                             <small class="colorsm"
+                              *ngIf="testigosF.at(i).get('rfc_testigo')?.hasError('pattern') && testigosF.at(i).get('rfc_testigo')?.touched">
+                              Formato de RFC <strong>inválido</strong>
                             </small>
                           </div>
                         </div>
@@ -2197,7 +2208,7 @@ campo es
             <br />
 
             <div class="text-center mt-4">
-              <button type="submit" class="btn btn-primary px-4">
+              <button type="submit" class="btn btn-primary px-4" style="background-color: #ecbb87; color: #000; border: none;" >
                 Registrarse
               </button>
 
