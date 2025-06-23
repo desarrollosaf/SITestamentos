@@ -104,6 +104,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
             nacionalidad: data.nacionalidad_serv,
             indique_nacionalidad_serv: data.indique_nacionalidad_serv,
             documento_residencia: data.documento_residencia_serv,
+            dificultad_comunicacion:  data.presenta_dificultad,
         });    
     } catch (error) {
         console.error('❌ Error al crear la solicitud:', error);
@@ -362,7 +363,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
         console.error('Error al crear el HEREDEROS :', error);
 
     }
-    // return 500
+    return 500
     return res.status(200).json({
         message: 'Documento guardado exitosamente'
     });
