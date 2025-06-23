@@ -239,7 +239,24 @@
               </div>
             </div>
 
+
             <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Estado civil:*</label>
+                  <ng-select
+                    [items]="estadoCivilArray"
+                    bindLabel="name"
+                    bindValue="id"
+                    formControlName="estado_civil"
+                    placeholder="Selecciona estado civil">
+                  </ng-select>
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('estado_civil')?.hasError('required') && formTestamento.get('estado_civil')?.touched">
+                    Este campo es <strong>requerido</strong>
+                  </small>
+                </div>
+              </div>
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Documento con que se identifica:*</label>
@@ -255,20 +272,6 @@
                 </div>
               </div>
 
-              <div class="col-sm-4" *ngIf="mostrarDoctoIdentifica">
-                <div class="mb-3">
-                  <label class="form-label negri">{{ labelDocumentoIdentifica }}:*</label>
-                  <input formControlName="numero_documento_identifica" type="text" class="form-control"
-                    placeholder="Ejemplo: 123456789" />
-                  <small class="colorsm"
-                    *ngIf="formTestamento.get('numero_documento_identifica')?.hasError('required') && formTestamento.get('numero_documento_identifica')?.touched">Este
-                    campo es
-                    <strong>requerido</strong></small>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Nacionalidad:*</label>
@@ -284,6 +287,25 @@
                 </div>
               </div>
             </div>
+
+            
+
+            <div class="row">
+              
+              <div class="col-sm-12" *ngIf="mostrarDoctoIdentifica">
+                <div class="mb-3">
+                  <label class="form-label negri">{{ labelDocumentoIdentifica }}:*</label>
+                  <input formControlName="numero_documento_identifica" type="text" class="form-control"
+                    placeholder="Ejemplo: 123456789" />
+                  <small class="colorsm"
+                    *ngIf="formTestamento.get('numero_documento_identifica')?.hasError('required') && formTestamento.get('numero_documento_identifica')?.touched">Este
+                    campo es
+                    <strong>requerido</strong></small>
+                </div>
+              </div>
+              
+            </div>
+
             <div *ngIf="mostrarNacServ">
               <div class="row">
                 <div class="col-sm-4">
@@ -663,8 +685,11 @@ campo es
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Vive o Finado:*</label>
-                        <input formControlName="hijo_vf_primer_nup" type="text" class="form-control"
-                          placeholder="Ejemplo: Vivo" />
+                        <select class="form-select" id="hijo_vf_primer_nup" formControlName="hijo_vf_primer_nup">
+                          <option *ngFor="let vives of vive" [value]="vives.id">
+                            {{ vives.name }}
+                          </option>
+                        </select>
                       </div>
                     </div>
 
@@ -809,8 +834,11 @@ campo es
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Vive o Finado:*</label>
-                        <input formControlName="hijo_vf_dos_nup" type="text" class="form-control"
-                          placeholder="Ejemplo: Vivo" />
+                        <select class="form-select" id="hijo_vf_dos_nup" formControlName="hijo_vf_dos_nup">
+                          <option *ngFor="let vives of vive" [value]="vives.id">
+                            {{ vives.name }}
+                          </option>
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -904,8 +932,11 @@ campo es
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Vive o Finado:*</label>
-                        <input formControlName="fuera_hijo_vf" type="text" class="form-control"
-                          placeholder="Ejemplo: Vivo" />
+                        <select class="form-select" id="fuera_hijo_vf" formControlName="fuera_hijo_vf">
+                          <option *ngFor="let vives of vive" [value]="vives.id">
+                            {{ vives.name }}
+                          </option>
+                        </select>
                       </div>
                     </div>
                   </div>

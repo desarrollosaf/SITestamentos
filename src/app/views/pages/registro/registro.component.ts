@@ -65,7 +65,7 @@ export class RegistroComponent {
       comprobante_domicilio_t?: File | null;
     };
   } = {};
-
+  estadoCivilArray: { id: number | string; name: string }[] = [];
 
   vive = [
       { id: '', name: '--Selecciona--' },
@@ -104,6 +104,7 @@ export class RegistroComponent {
     { id: 'Cédula profesional', name: 'Cédula profesional' }
   ];
 
+
   currentUser: any;
 
   constructor(private fb: FormBuilder, private router: Router, private _userService: UserService){
@@ -120,6 +121,7 @@ export class RegistroComponent {
         lugar_nacimiento:['', Validators.required],
         edad:['',],
         ocupacion:[''],
+        estado_civil: ['', Validators.required],
         f_cp:['', Validators.required],
         estado_id:['', Validators.required],
         municipio_id:['', Validators.required],
@@ -591,6 +593,14 @@ export class RegistroComponent {
       console.log(curp);
       this._registroService.getDatosUser(this.msgcurp).subscribe({
         next: (response: any) => {
+          console.log(response)
+          this.estadoCivilArray = [
+            { id: '', name: '--Selecciona--' },
+            ...response.estadocivil.map((item: { id: number; estado_civil: string }) => ({
+              id: item.id,
+              name: item.estado_civil
+            }))
+          ];
           this.formTestamento.patchValue({
             f_curp: response.data.f_curp,
             f_rfc: response.data.f_rfc,
@@ -637,6 +647,11 @@ export class RegistroComponent {
               },
             })
           }
+          if(response.data.estadocivil_id){
+            const estado_civil = response.data.estadocivil_id;
+            this.formTestamento.get('estado_civil')?.setValue(estado_civil);
+           
+          }
           if (response.data.f_fecha_nacimiento) {
             const edad = this.calcularEdad(response.data.f_fecha_nacimiento);
             if(edad > 60){
@@ -666,6 +681,7 @@ export class RegistroComponent {
         },
       })
   }
+  
   //PARA LLENAR LA EDAD TOMANDO LA FECHA DE NACIMIENTO
   calcularEdad(fechaNacimiento: string | Date): number {
     const nacimiento = new Date(fechaNacimiento);
@@ -744,6 +760,7 @@ export class RegistroComponent {
     formData.append('numero_tel', String(this.formTestamento.value.numero_tel));
     formData.append('numero_cel', String(this.formTestamento.value.numero_cel));
     formData.append('correo_per', String(this.formTestamento.value.correo_per));
+    formData.append('estado_civil', this.formTestamento.value.estado_civil);
 
     formData.append('documento_identifica', String(this.formTestamento.value.documento_identifica));
     if(this.formTestamento.value.documento_identifica =='Pasaporte' || this.formTestamento.value.documento_identifica =='Cédula profesional'){
@@ -911,10 +928,10 @@ export class RegistroComponent {
     // } else {
     //   console.log('Formulario no válido');
     // }
-    // formData.append('testigos', String(this.testigos));
-    // formData.forEach((valor, clave) => {
-    //   console.log(clave, valor);
-    // });
+    formData.append('testigos', String(this.testigos));
+    formData.forEach((valor, clave) => {
+      console.log(clave, valor);
+    });
     const curpUsr = this.formTestamento.value.f_curp;
     this._registroService.saveRegistro(formData,curpUsr).subscribe({
       next: (response: any) => {
@@ -923,9 +940,9 @@ export class RegistroComponent {
           icon: "success",
           title: "Tu registro ha sido enviado.",
           showConfirmButton: false,
-          timer: 3000
+          timer: 10000
         });
-        window.location.reload();
+        //window.location.reload();
       },
       error: (e: HttpErrorResponse) => {
         if (e.error && e.error.msg) {
@@ -970,4 +987,5 @@ export class RegistroComponent {
     });
     this.localidades = [];
   }
+  
 }
