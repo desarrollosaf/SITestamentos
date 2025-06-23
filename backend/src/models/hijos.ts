@@ -27,6 +27,8 @@ class Hijo extends Model<
   declare reconocido: boolean;
   declare fuera_de_matrimonio: boolean;
   declare nombre_fuera: string;
+  declare primer_apellido_fuera_matri: string |null;
+  declare segundo_apellido_fuera_matri: string |null;
 
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
@@ -76,6 +78,14 @@ Hijo.init(
       allowNull: false,
     },
     nombre_fuera: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    primer_apellido_fuera_matri: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    segundo_apellido_fuera_matri: {
       type: DataTypes.STRING,
       allowNull: false,
     },

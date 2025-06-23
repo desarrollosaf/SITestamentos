@@ -232,7 +232,10 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
                     vive: hijosfuera.fuera_hijo_vf,
                     reconocido: false,
                     fuera_de_matrimonio: true,
-                    nombre_fuera: data.nombre_fuera_matri
+                    nombre_fuera: data.nombre_fuera_matri,
+                    primer_apellido_fuera_matri: data.primer_apellido_fuera_matri,
+                    segundo_apellido_fuera_matri: data.segundo_apellido_fuera_matri
+
                 });
             }
         }

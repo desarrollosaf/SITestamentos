@@ -59,6 +59,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      primer_apellido_fuera_matri: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      segundo_apellido_fuera_matri: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

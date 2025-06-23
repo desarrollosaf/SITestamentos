@@ -316,7 +316,7 @@
                 </div>
               </div>
 <!-- *ngIf="mostrarCampo('nacionalidad_padre')" -->
-              <div  class="col-sm-4">
+              <div  *ngIf="padreNac" class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Especifique:*</label>
                   <input formControlName="especifique_nac_padre" type="text" class="form-control"
@@ -398,8 +398,7 @@
                     <strong>requerido</strong></small>
                 </div>
               </div>
-              <!-- *ngIf="mostrarCampo('nacionalidad_madre')"  -->
-              <div class="col-sm-4">
+              <div   *ngIf="madreNac"  class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Especifique:*</label>
                   <input formControlName="especifique_nac_madre" type="text" class="form-control"
@@ -407,6 +406,271 @@
                 </div>
               </div>
             </div>
+     <div>
+              <h5 class="titulo3">Casado(a) en primeras nupcias o concubinato con:</h5>
+            </div>
+            <br>
+            
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nombre(s):</label>
+                  <input formControlName="nombre_primer_nup" type="text" class="form-control"
+                    placeholder="Ejemplo: Sofia" />
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Primer apellido:</label>
+                  <input formControlName="primer_apellido_primer_nup" type="text" class="form-control"
+                    placeholder="Ejemplo: Jimenez" />
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Segundo apellido:</label>
+                  <input formControlName="segundo_apellido_primer_nup" type="text" class="form-control"
+                    placeholder="Ejemplo: Gonzalez" />
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Indicar si vive:</label>
+                  <select class="form-select" id="vive_primer_nup" formControlName="vive_primer_nup">
+                    <option *ngFor="let vives of vive" [value]="vives.id">
+                      {{ vives.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Régimen patrimonial:</label>
+                  <select class="form-select" id="regimen_patrimonial_primer_nup"
+                    formControlName="regimen_patrimonial_primer_nup">
+                    <option *ngFor="let vives of regimenP" [value]="vives.id">
+                      {{ vives.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+    <div formArrayName="hijosPrimer">
+                <div *ngFor="let hijo of hijos.controls; let i = index" [formGroupName]="i"
+                  class="row border p-3 mb-3 rounded bg-light">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Nombre(s):*</label>
+                        <input formControlName="hijo_nombre_primer_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: Sofía" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Primer apellido:*</label>
+                        <input formControlName="hijo_primer_apellido_primer_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: Jiménez" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Segundo apellido:*</label>
+                        <input formControlName="hijo_segundo_apellido_primer_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: González" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Edad*</label>
+                        <input formControlName="hijo_edad_primer_nup" type="number" class="form-control"
+                          placeholder="Ejemplo: 18" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Vive o Finado:*</label>
+                        <input formControlName="hijo_vf_primer_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: Vivo" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+         
+            <div>
+                <h5 class="titulo3">Casado(a) en segundo matrimonio o concubinato con:</h5>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="mb-3">
+                        <label class="form-label negri">Nombre(s):</label>
+                        <input formControlName="nombre_dos_nup" type="text" class="form-control" placeholder="Ejemplo: Sofia" />
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="mb-3">
+                        <label class="form-label negri">Primer apellido:</label>
+                        <input formControlName="primer_apellido_dos_nup" type="text" class="form-control"
+                            placeholder="Ejemplo: Jimenez" />
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="mb-3">
+                        <label class="form-label negri">Segundo apellido:</label>
+                        <input formControlName="segundo_apellido_dos_nup" type="text" class="form-control"
+                            placeholder="Ejemplo: Gonzalez" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="mb-3">
+                        <label class="form-label negri">Indicar si vive:*</label>
+                        <select class="form-select" id="vive_dos_nup" formControlName="vive_dos_nup">
+                            <option *ngFor="let vives of vive" [value]="vives.id">
+                                {{ vives.name }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="mb-3">
+                        <label class="form-label negri">Régimen patrimonial:*</label>
+                        <select class="form-select" id="regimen_patrimonial_dos_nup" formControlName="regimen_patrimonial_dos_nup">
+                            <option *ngFor="let vives of regimenP" [value]="vives.id">
+                                {{ vives.name }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+  <div formArrayName="hijosSegundo">
+                <div *ngFor="let hijo of hijosDos.controls; let i = index" [formGroupName]="i"
+                  class="row border p-3 mb-3 rounded bg-light">
+
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Nombre(s):*</label>
+                        <input formControlName="hijo_nombre_dos_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: Sofía" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Primer apellido:*</label>
+                        <input formControlName="hijo_primer_apellido_dos_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: Jiménez" />
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Segundo apellido:*</label>
+                        <input formControlName="hijo_segundo_apellido_dos_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: González" />
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Edad*</label>
+                        <input formControlName="hijo_edad_dos_nup" type="number" class="form-control"
+                          placeholder="Ejemplo: 18" />
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <label class="form-label negri">Vive o Finado:*</label>
+                        <input formControlName="hijo_vf_dos_nup" type="text" class="form-control"
+                          placeholder="Ejemplo: Vivo" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+ <div>
+              <h5 class="titulo3">Existen otra hija o hijo, "no" reconocido por usted:</h5>
+            </div>
+            <br>
+            <p> <strong>Hijos fuera del matrimonio con:</strong> </p>
+            <br>
+                      <div class="row">
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Nombre(s):</label>
+                  <input formControlName="nombre_fuera_matri" type="text" class="form-control"
+                    placeholder="Ejemplo: Sofía" />
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Primer apellido:</label>
+                  <input formControlName="primer_apellido_fuera_matri" type="text" class="form-control"
+                    placeholder="Ejemplo: Jiménez" />
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label negri">Segundo apellido:</label>
+                  <input formControlName="segundo_apellido_fuera_matri" type="text" class="form-control"
+                    placeholder="Ejemplo: González" />
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         <br/>
                         <div class="text-center mt-4">
                             <a routerLink="/solicitudes" class="btn btn-secondary">
