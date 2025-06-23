@@ -32,7 +32,7 @@ export class Solicitud extends Model<
   declare puede_hablar: number | null;
   declare puede_ver: number | null;
   declare puede_oir: number | null;
-  declare dificultad_comunicacion: number | null;
+  declare dificultad_comunicacion: string | null;
   declare no_pasaporte: string | null;
   declare cedula_profesional: string | null;
   declare documento_residencia: number | null;
@@ -89,7 +89,7 @@ Solicitud.init(
       allowNull: true,
     },   
     dificultad_comunicacion: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     no_pasaporte: {

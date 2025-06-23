@@ -40,7 +40,7 @@ module.exports = {
         allowNull: true, 
       },
       dificultad_comunicacion: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true, 
       },
       no_pasaporte: {
