@@ -755,7 +755,8 @@ export class RegistroComponent {
   //GUARDA DATOS
   enviarDatos(): void {
 
-  if (!this.documentosRequeridosLlenos()) {
+    if (!this.formTestamento.valid || !this.documentosRequeridosLlenos()) {
+      this.formTestamento.markAllAsTouched();
       Swal.fire({
             position: "center",
             icon: "warning",
@@ -763,8 +764,8 @@ export class RegistroComponent {
             text: "Todos los campos señalados con un asterisco (*) son obligatorios. Es necesario completarlos para el correcto envío de la información.",
             showConfirmButton: false,
             timer: 3000
-          });
-    return;
+      });
+      return;
     }
     if (this.testigos && !this.documentosExtraRequeridosLlenos()) {
           Swal.fire({
@@ -976,9 +977,11 @@ export class RegistroComponent {
           title: "¡Registro exitoso!",
           text: `El registro de su trámite testamentario se ha efectuado de manera satisfactoria. Se le solicita mantenerse atento a los medios de contacto proporcionados, ya que en breve será contactado(a) para dar seguimiento y continuidad al procedimiento correspondiente.`,
           showConfirmButton: false,
-          timer: 10000
+          timer: 7000
+        }).then(() => {
+          this.mostrarFormulario = false;
+          this.estatusSolicitud = true;         
         });
-        this.router.navigate(['/registro']);
       },
       error: (e: HttpErrorResponse) => {
         if (e.error && e.error.msg) {

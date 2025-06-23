@@ -363,7 +363,6 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
         console.error('Error al crear el HEREDEROS :', error);
 
     }
-    return 500
     return res.status(200).json({
         message: 'Documento guardado exitosamente'
     });

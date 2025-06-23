@@ -352,7 +352,6 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     catch (error) {
         console.error('Error al crear el HEREDEROS :', error);
     }
-    return 500;
     return res.status(200).json({
         message: 'Documento guardado exitosamente'
     });
