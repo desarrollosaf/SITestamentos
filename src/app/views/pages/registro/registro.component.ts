@@ -106,8 +106,9 @@ export class RegistroComponent {
     { id: 'Cédula profesional', name: 'Cédula profesional' }
   ];
 
-
+  datos_personales: any = {};
   currentUser: any;
+  estatusSolicitud: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private _userService: UserService, private modalService: NgbModal){
       this.formTestamento = this.fb.group({
@@ -340,7 +341,7 @@ export class RegistroComponent {
   get testigosF(): FormArray {
   return this.formTestamento.get('testigoArr') as FormArray;
   }
-  
+
   empezar(): void {
     this.mostrarFormulario = true;
   }
@@ -606,7 +607,11 @@ export class RegistroComponent {
       console.log(curp);
       this._registroService.getDatosUser(this.msgcurp).subscribe({
         next: (response: any) => {
-          console.log(response)
+
+          this.datos_personales = response.data
+          if(response.solicitud){
+            this.estatusSolicitud = true;
+          }
           this.estadoCivilArray = [
             { id: '', name: '--Selecciona--' },
             ...response.estadocivil.map((item: { id: number; estado_civil: string }) => ({
@@ -975,6 +980,16 @@ export class RegistroComponent {
     })
   }
 
+  onLogout(e: Event) {
+      e.preventDefault();
+
+      localStorage.setItem('isLoggedin', 'false');
+      localStorage.removeItem('myToken')
+      localStorage.removeItem('currentUser')
+      if (localStorage.getItem('isLoggedin') === 'false') {
+        this.router.navigate(['/auth/login']);
+      }
+  }
 
   //LIMPIAR FORMULARIO Y ESTADO DE INPUTS
   limpiaForm(){
