@@ -113,27 +113,6 @@ export class DetalleSolicitudComponent {
   testigos: boolean = false;
   formTestamento: FormGroup;
   msgcurp: string;
-  // documentos: { [key: string]: File | null } = {
-  //   acta_nacimiento: null,
-  //   acta_matrimonio: null,
-  //   ine: null,
-  //   curp: null,
-  //   comprobante_domicilio: null,
-  //   certificado_publico: null,
-  //   certificado_privado: null,
-  //   constancia_situacion_fiscal: null,
-  //   // t1_identificacion: null,
-  //   // t1_curp: null,
-  //   // t1_comprobante_domicilio: null,
-  //   // t2_identificacion: null,
-  //   // t2_curp: null,
-  //   // t2_comprobante_domicilio: null,
-  //   // t3_identificacion: null,
-  //   // t3_curp: null,
-  //   // t3_comprobante_domicilio: null,
-  //   primer_testamento_doc :null,
-  //   comprobante_residencia: null
-  // };
 
   documentosTestigos: {
     [index: number]: {
@@ -294,16 +273,6 @@ export class DetalleSolicitudComponent {
       nacionalidad_serv: ['', Validators.required],
       indique_nacionalidad_serv: [''],
       documento_residencia_serv: [''],
-      // nacionalidad_testigo:[''],
-      // fecha_nacimiento_testigo:[''],
-      // lugar_nacimiento_testigo:[''],
-      // curp_testigo:[''],
-      // estado_civil_testigo:[''],
-      // ocupacion_testigo:[''],
-      // domicilio_testigo:[''],
-      // cp_testigo:[''],
-      // telefono_testigo:[''],
-      // rfc_testigo:[''],
     });
   }
   get hijos(): FormArray {
@@ -442,6 +411,12 @@ export class DetalleSolicitudComponent {
               this.hijos.push(hijoGroup);
             });
           }
+        }else{
+            this.formTestamento.patchValue({
+              nombre_primer_nup: 'Sin información',
+              primer_apellido_primer_nup: 'Sin información',
+              segundo_apellido_primer_nup: 'Sin información',
+          });
         }
 
         if (response.solicitud[0].segundas_nupcias.length > 0) {
@@ -466,6 +441,14 @@ export class DetalleSolicitudComponent {
             });
           }
         }
+        else{
+           this.formTestamento.patchValue({
+            nombre_dos_nup: 'Sin información',
+            primer_apellido_dos_nup: 'Sin información',
+            segundo_apellido_dos_nup: 'Sin información',
+          });
+
+        }
         if (response.solicitud[0].hijo_fuera.length > 0) {
           this.formTestamento.patchValue({
             nombre_fuera_matri: response.solicitud[0].hijo_fuera[0].nombre_fuera,
@@ -482,12 +465,19 @@ export class DetalleSolicitudComponent {
             });
             this.hijosFuera.push(hijoFueraGroup);
           });
+        }else{
+            this.formTestamento.patchValue({
+              nombre_fuera_matri: 'Sin información',
+              primer_apellido_fuera_matri: 'Sin información',
+              segundo_apellido_fuera_matri: 'Sin información',
+            });
         }
         this.formTestamento.get('primer_testamento')?.setValue(response.solicitud[0].es_primer_testamento);
 
         if (response.solicitud[0].es_primer_testamento == '0') {
           this.mostrarCamposTestamento = true;
           const fechaFormateada = this.formatearFecha(response.solicitud[0].testamentos_pasados.fecha_tramite);
+          // console.log(fechaFormateada);
           this.formTestamento.patchValue({
             fecha_primer_testamento: fechaFormateada,
             notaria_primer_testamento: response.solicitud[0].testamentos_pasados.notaria,
@@ -605,11 +595,12 @@ export class DetalleSolicitudComponent {
         });
 
         response.solicitud[0].documentos.forEach((doc: any) => {
+          // console.log(doc.tipo_doc.tipo );
           if (doc.tipo_doc.tipo == 'comprobante_domicilio') {
             this.doctos['comprobante_domicilio'] = doc.archivo_path || null;
           }
-          if (doc.tipo_doc.tipo == 'constancia_situacion_fiscal') {
-            this.doctos['constancia_situacion_fiscal'] = doc.archivo_path || null;
+          if (doc.tipo_doc.tipo == 'acta_nacimiento') {
+            this.doctos['acta_nacimiento'] = doc.archivo_path || null;
           }
           if (doc.tipo_doc.tipo == 'acta_matrimonio') {
             this.doctos['acta_matrimonio'] = doc.archivo_path || null;

@@ -1828,8 +1828,8 @@ placeholder="Ejemplo: Vivo" />
 
                       <div class="w-100 d-flex flex-column justify-content-center align-items-center"
                         style="min-height: 150px;">
-                        <ng-container *ngIf="doctos['comprobante_residencia']; else noDisponible">
-                          <a [href]="doctos['comprobante_residencia']" target="_blank" class="text-decoration-none">
+                        <ng-container *ngIf="doctos['acta_nacimiento']; else noDisponible">
+                          <a [href]="doctos['acta_nacimiento']" target="_blank" class="text-decoration-none">
                             <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
                             <div class="mt-2">Ver documento</div>
                           </a>
@@ -1851,8 +1851,8 @@ placeholder="Ejemplo: Vivo" />
 
                       <div class="w-100 d-flex flex-column justify-content-center align-items-center"
                         style="min-height: 150px;">
-                        <ng-container *ngIf="doctos['comprobante_residencia']; else noDisponible">
-                          <a [href]="doctos['comprobante_residencia']" target="_blank" class="text-decoration-none">
+                        <ng-container *ngIf="doctos['acta_matrimonio']; else noDisponible">
+                          <a [href]="doctos['acta_matrimonio']" target="_blank" class="text-decoration-none">
                             <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
                             <div class="mt-2">Ver documento</div>
                           </a>
@@ -1875,8 +1875,8 @@ placeholder="Ejemplo: Vivo" />
 
                       <div class="w-100 d-flex flex-column justify-content-center align-items-center"
                         style="min-height: 150px;">
-                        <ng-container *ngIf="doctos['comprobante_residencia']; else noDisponible">
-                          <a [href]="doctos['comprobante_residencia']" target="_blank" class="text-decoration-none">
+                        <ng-container *ngIf="doctos['curp']; else noDisponible">
+                          <a [href]="doctos['curp']" target="_blank" class="text-decoration-none">
                             <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
                             <div class="mt-2">Ver documento</div>
                           </a>
@@ -1898,8 +1898,8 @@ placeholder="Ejemplo: Vivo" />
 
                       <div class="w-100 d-flex flex-column justify-content-center align-items-center"
                         style="min-height: 150px;">
-                        <ng-container *ngIf="doctos['comprobante_residencia']; else noDisponible">
-                          <a [href]="doctos['comprobante_residencia']" target="_blank" class="text-decoration-none">
+                        <ng-container *ngIf="doctos['comprobante_domicilio']; else noDisponible">
+                          <a [href]="doctos['comprobante_domicilio']" target="_blank" class="text-decoration-none">
                             <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
                             <div class="mt-2">Ver documento</div>
                           </a>
@@ -1913,12 +1913,6 @@ placeholder="Ejemplo: Vivo" />
                   </div>
                 </div>
           </div>
-
-
-
-
-
-
             <br />
             <div class="text-center mt-4">
               <a routerLink="/solicitudes" class="btn btn-secondary">
