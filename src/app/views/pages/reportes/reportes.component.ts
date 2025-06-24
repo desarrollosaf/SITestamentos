@@ -168,7 +168,7 @@ export class ReportesComponent {
     this.lineChartData = {
       labels: response.map(item => item.fecha), 
       datasets: [{
-        data: response.map(item => item.valor),
+        data:  response.map(item => item.total),
         label: 'Registros fechas',
         borderColor: '#ff0000',
         backgroundColor: 'transparent',
