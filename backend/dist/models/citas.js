@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
-const testamentosConnection_1 = __importDefault(require("../database/testamentosConnection"));
+const testamentosConnection_1 = __importDefault(require("../database/testamentosConnection")); // Ajusta la ruta si es necesario
 class Cita extends sequelize_1.Model {
 }
 Cita.init({
@@ -12,26 +12,21 @@ Cita.init({
         type: sequelize_1.DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+        allowNull: false,
     },
-    curp: {
+    rfc: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
     fecha: {
-        type: sequelize_1.DataTypes.DATE,
+        type: sequelize_1.DataTypes.DATEONLY,
         allowNull: true,
     },
-    createdAt: {
-        type: sequelize_1.DataTypes.DATEONLY,
-        allowNull: false,
-    },
-    updatedAt: {
-        type: sequelize_1.DataTypes.DATE,
-        allowNull: false,
-    },
+    createdAt: sequelize_1.DataTypes.DATE,
+    updatedAt: sequelize_1.DataTypes.DATE,
 }, {
     sequelize: testamentosConnection_1.default,
     tableName: 'citas',
-    timestamps: true,
+    timestamps: true, // Sequelize generará y actualizará automáticamente createdAt y updatedAt
 });
 exports.default = Cita;

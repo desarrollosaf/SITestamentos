@@ -34,23 +34,30 @@ export const getservidor = async (req: Request, res: Response): Promise<any> => 
   }
 };
 
+const MAX_CITAS = 20;
+
 export const validafecha = async (req: Request, res: Response): Promise<any> => {
-    const { id } = req.params;
+  const { id } = req.params;
+
   try {
     const totalCitas = await Cita.count({ 
       where: { fecha: id }
     });
 
-    if (totalCitas >= 20) {
+    const disponibles = MAX_CITAS - totalCitas;
+
+    if (totalCitas >= MAX_CITAS) {
       return res.status(400).json({ 
         error: 'Ya no se pueden agendar más citas para esta fecha. Límite alcanzado (20).' 
       });
     }
     
     return res.json({
-      msg: `si tenemos disponibilidad`,
+      msg: `Sí tenemos disponibilidad`,
+      disponibles,
       estatus: '200'
     });
+
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
@@ -58,14 +65,18 @@ export const validafecha = async (req: Request, res: Response): Promise<any> => 
 };
 
 export const saveregistro = async (req: Request, res: Response): Promise<any> => {
-    const { data } = req.body;
+    const  data  = req.body;
   try {
-    //  await Cita.create({
-    //       curp: data.curp,
-    //       fecha: data.fecha,
-    //   }); 
+     const cita = await Cita.create({
+       rfc: data.rfc,
+       fecha: data.fecha,
+     }); 
+     return res.json({
+      msg: `cita guardada`,
+      estatus: 200
+    });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
+    return res.status(500).json({ error: 'No  se guardo' });
   }
 };
