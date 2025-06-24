@@ -21,4 +21,8 @@ export class ReportesService {
   getInfo(): Observable<string> {
     return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/getinfo`)
   }
+
+  getRegistros(datos: { [key: string]: any }): Observable<any> {
+    return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl}/getregistros`, datos)
+  }
 }

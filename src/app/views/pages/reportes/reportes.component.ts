@@ -40,6 +40,10 @@ export class ReportesComponent {
   people: Person[] = [];
   graficaGenerada = false;
   dependencias: any = {};
+  lineChartData!: ChartConfiguration<'line'>['data'];
+  lineChartOptions!: ChartConfiguration<'line'>['options'];
+  lineChartType: 'line' = 'line';
+  lineChartPlugins: any[] = [];
 
   private themeCssVariableService = inject(ThemeCssVariableService);
   themeCssVariables = this.themeCssVariableService.getThemeCssVariables();
@@ -96,68 +100,7 @@ export class ReportesComponent {
     ],
   };
 
-  public lineChartData: ChartConfiguration['data'] = {
-      labels: Array.from({ length: 30 }, (_, i) => `${i + 1} Junio 2025`),
-      datasets: [{
-          data: Array.from({ length: 30 }, () => Math.floor(Math.random() * (25 - 5 + 1)) + 5),
-        label: "Registros fechas",
-        borderColor: this.themeCssVariables.danger,
-        backgroundColor: "transparent",
-        fill: true,
-        pointBackgroundColor: this.themeCssVariables.light,
-        pointHoverBackgroundColor: this.themeCssVariables.light,
-        pointBorderColor: this.themeCssVariables.danger,
-        pointHoverBorderColor: this.themeCssVariables.danger,
-        pointBorderWidth: 2,
-        pointHoverBorderWidth: 3,
-        tension: .3
-      }
-    ]
-  };
-  public lineChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    plugins: {
-      legend: { 
-        display: true,
-        labels: {
-          color: this.themeCssVariables.secondary,
-          font: {
-            size: 13,
-            family: this.themeCssVariables.fontFamily
-          }
-        }
-      },
-    },
-    scales: {
-      x: {
-        display: true,
-        grid: {
-          display: true,
-          color: this.themeCssVariables.gridBorder,
-        },
-        ticks: {
-          color: this.themeCssVariables.secondary,
-          font: {
-            size: 12
-          }
-        }
-      },
-      y: {
-        grid: {
-          display: true,
-          color: this.themeCssVariables.gridBorder,
-        },
-        ticks: {
-          color: this.themeCssVariables.secondary,
-          font: {
-            size: 12
-          }
-        }
-      }
-    }
-  };
-  public lineChartType: ChartType = 'line';
-  public lineChartPlugins = [];
+  
 
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
@@ -168,7 +111,22 @@ export class ReportesComponent {
       
       if (this.selectedPersonId) {
         this.graficaGenerada = true;
-        //this.generarGrafica(); // opcional si usas Chart.js u otra
+        const datos = {
+          fecha_inicial: this.formatter.format(this.fromDate),
+          fecha_final: this.formatter.format(this.toDate),
+          dependencia: this.selectedPersonId,
+        };
+        this.reporteService.getRegistros(datos).subscribe({
+          next: (response: any) => {
+            console.log(response)
+           this.generarGrafica(response.porfecha);
+          },
+          error: (e: HttpErrorResponse) => {
+            const msg = e.error?.msg || 'Error desconocido';
+            console.error('Error del servidor:', msg);
+          },
+        })
+        
       } else {
         this.graficaGenerada = false;
         Swal.fire({
@@ -205,6 +163,67 @@ export class ReportesComponent {
     const parsed = this.formatter.parse(input);
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
+
+  generarGrafica(response: any[]){
+    this.lineChartData = {
+      labels: response.map(item => item.fecha), 
+      datasets: [{
+        data: response.map(item => item.valor),
+        label: 'Registros fechas',
+        borderColor: '#ff0000',
+        backgroundColor: 'transparent',
+        fill: true,
+        tension: 0.3
+      }]
+    };
+
+    this.lineChartOptions = {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          labels: {
+            color: this.themeCssVariables.secondary,
+            font: {
+              size: 13,
+              family: this.themeCssVariables.fontFamily
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          display: true,
+          grid: {
+            display: true,
+            color: this.themeCssVariables.gridBorder
+          },
+          ticks: {
+            color: this.themeCssVariables.secondary,
+            font: {
+              size: 12
+            }
+          }
+        },
+        y: {
+          grid: {
+            display: true,
+            color: this.themeCssVariables.gridBorder
+          },
+          ticks: {
+            color: this.themeCssVariables.secondary,
+            font: {
+              size: 12
+            }
+          }
+        }
+      }
+    };
+
+    this.lineChartType = 'line';
+    this.lineChartPlugins = [];
+  }
+  
 
   ngOnInit(): void {
     this.people = PeoplesData.peoples;
