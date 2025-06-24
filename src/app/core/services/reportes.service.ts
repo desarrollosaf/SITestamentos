@@ -7,20 +7,18 @@ import { enviroment } from '../../../enviroments/enviroment';
 @Injectable({
   providedIn: 'root'
 })
-export class SolicitudService {
+export class ReportesService {
+
   private myAppUrl: string;
   private myAPIUrl: string;
   private http = inject( HttpClient );
 
   constructor() {
     this.myAppUrl = enviroment.endpoint;
-    this.myAPIUrl = 'api/solicitud';
-
-
+    this.myAPIUrl = 'api/reporte';
   }
 
-  getSolicitudes(user : String): Observable<string> {
-    return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/getsolicitud/${user}`)
+  getInfo(): Observable<string> {
+    return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/getinfo`)
   }
-
 }

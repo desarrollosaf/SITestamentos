@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 import { Injectable, signal, inject, computed } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { enviroment } from '../../../enviroments/enviroment'; 
 
 
 @Injectable({
@@ -17,7 +18,7 @@ export class UserService {
   public currentUser$ = this.currentUserSubject.asObservable();
 
   constructor() {
-    this.myAppUrl = 'https://dev7.siasaf.gob.mx/'; //'https://dev4.siasaf.gob.mx/'   //'http://localhost:3001/'
+    this.myAppUrl = enviroment.endpoint;
     this.myAPIUrl = 'api/user';
 
     const storedUser = localStorage.getItem('currentUser');

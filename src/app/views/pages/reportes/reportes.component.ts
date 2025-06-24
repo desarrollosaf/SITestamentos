@@ -8,6 +8,9 @@ import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent as MyNgSelectComponent } from '@ng-select/ng-select';
 import { PeoplesData, Person } from '../../../core/dummy-datas/peoples.data';
+import Swal from 'sweetalert2';
+import { ReportesService } from '../../../core/services/reportes.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-reportes',
@@ -29,12 +32,15 @@ import { PeoplesData, Person } from '../../../core/dummy-datas/peoples.data';
 export class ReportesComponent {
   calendar = inject(NgbCalendar);
   formatter = inject(NgbDateParserFormatter);
+  public reporteService = inject(ReportesService);
   selectedPersonId: string = '';
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null = this.calendar.getToday();
   toDate: NgbDate | null = this.calendar.getNext(this.calendar.getToday(), 'd', 10);
   people: Person[] = [];
-  
+  graficaGenerada = false;
+  dependencias: any = {};
+
   private themeCssVariableService = inject(ThemeCssVariableService);
   themeCssVariables = this.themeCssVariableService.getThemeCssVariables();
 
@@ -156,12 +162,31 @@ export class ReportesComponent {
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
+
     } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
       this.toDate = date;
+      
+      if (this.selectedPersonId) {
+        this.graficaGenerada = true;
+        //this.generarGrafica(); // opcional si usas Chart.js u otra
+      } else {
+        this.graficaGenerada = false;
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "¡Atención!",
+          text: `Por favor, seleccione una dependencia.`,
+          showConfirmButton: false,
+          timer: 2000
+        });
+      }
     } else {
       this.toDate = null;
       this.fromDate = date;
+      this.graficaGenerada = false; 
     }
+
+    console.log('Desde:', this.fromDate, 'Hasta:', this.toDate, 'Persona:', this.selectedPersonId);
   }
 
   isHovered(date: NgbDate) {
@@ -182,10 +207,19 @@ export class ReportesComponent {
   }
 
   ngOnInit(): void {
-    
-    // array of objects
     this.people = PeoplesData.peoples;
+    this.reporteService.getInfo().subscribe({
+      next: (response: any) => {
+        console.log(response)
+        this.dependencias = response
+      },
+      error: (e: HttpErrorResponse) => {
+        const msg = e.error?.msg || 'Error desconocido';
+        console.error('Error del servidor:', msg);
+      },
+    })
 
   }
+
 
 }
