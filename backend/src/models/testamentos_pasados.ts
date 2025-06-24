@@ -36,7 +36,7 @@ TestamentoPasados.init(
       allowNull: false,
     },
     fecha_tramite: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: true,
     },
     notaria: {
