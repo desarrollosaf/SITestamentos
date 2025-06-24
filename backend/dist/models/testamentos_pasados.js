@@ -19,7 +19,7 @@ TestamentoPasados.init({
         allowNull: false,
     },
     fecha_tramite: {
-        type: sequelize_1.DataTypes.DATE,
+        type: sequelize_1.DataTypes.DATEONLY,
         allowNull: true,
     },
     notaria: {

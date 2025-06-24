@@ -20,7 +20,7 @@ module.exports = {
         onUpdate: 'CASCADE'
       },
       fecha_tramite: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       notaria: {
         type: Sequelize.STRING

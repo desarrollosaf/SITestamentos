@@ -4,9 +4,12 @@ import path from 'path';
 import routesEstados from '../routes/fun/estados'
 import routesDatosp from '../routes/fun/datosp'
 import routesUser from '../routes/user'
-import routesSolicitud from '../routes/solicitudes'
+import routesSolicitud from '../routes/solicitudes'  
 import routesCitas from '../routes/citas'
 import UsersSafs from '../models/saf/users'
+import { verifyToken } from '../middlewares/auth';
+import routesReportes from '../routes/reportes' 
+
 
 class Server {
 
@@ -36,6 +39,7 @@ class Server {
         this.app.use(routesUser);
         this.app.use(routesSolicitud);
         this.app.use(routesCitas);
+        this.app.use(routesReportes);
     }
 
     
@@ -44,6 +48,7 @@ class Server {
         this.app.use(express.json())
         this.app.use(cors())
         this.app.use('/storage', express.static(path.join(process.cwd(), 'storage')));
+        // this.app.use(verifyToken);
 
     }
 
