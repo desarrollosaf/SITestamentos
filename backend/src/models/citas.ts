@@ -5,17 +5,17 @@ import {
   InferCreationAttributes,
   CreationOptional,
 } from 'sequelize';
-import sequelize from '../database/testamentosConnection';
+import sequelize from '../database/testamentosConnection'; // Ajusta la ruta si es necesario
 
 class Cita extends Model<
   InferAttributes<Cita>,
   InferCreationAttributes<Cita>
 > {
   declare id: CreationOptional<number>;
-  declare curp: string;
-  declare fecha: Date;
-  declare createdAt: Date;
-  declare updatedAt: Date;
+  declare rfc: string | null;
+  declare fecha: Date | null;
+  declare createdAt: CreationOptional<Date>;
+  declare updatedAt: CreationOptional<Date>;
 }
 
 Cita.init(
@@ -24,28 +24,23 @@ Cita.init(
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+      allowNull: false,
     },
-    curp: {
+    rfc: {
       type: DataTypes.STRING,
       allowNull: true,
     },
     fecha: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: true,
     },
-    createdAt: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
   },
   {
     sequelize,
     tableName: 'citas',
-    timestamps: true,
+    timestamps: true, // Sequelize generará y actualizará automáticamente createdAt y updatedAt
   }
 );
 

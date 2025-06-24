@@ -9,15 +9,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      curp: {
+      rfc: {
         type: Sequelize.STRING
       },
       fecha: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATEONLY
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
