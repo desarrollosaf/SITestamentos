@@ -16,6 +16,7 @@ exports.getregistros = exports.getinfo = void 0;
 const solicitud_1 = __importDefault(require("../models/solicitud"));
 const sequelize_1 = require("sequelize");
 const s_usuario_1 = __importDefault(require("../models/saf/s_usuario"));
+const t_dependencia_1 = __importDefault(require("../models/saf/t_dependencia"));
 const getinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const opciones = {
         day: 'numeric',
@@ -27,9 +28,11 @@ const getinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     };
     const fechaFormateada = new Date().toLocaleString('es-MX', opciones);
     const total = yield solicitud_1.default.count();
+    const dependencias = yield t_dependencia_1.default.findAll();
     return res.json({
         fechaactual: fechaFormateada,
-        total: total
+        total: total,
+        dependencias: dependencias
     });
 });
 exports.getinfo = getinfo;

@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from 'express'
 import Solicitud from '../models/solicitud';
 import { col, fn, Op } from 'sequelize';
 import SUsuario from '../models/saf/s_usuario';
+import Dependencia from '../models/saf/t_dependencia';
 
 export const getinfo = async (req: Request, res: Response): Promise<any> => {
     const opciones: Intl.DateTimeFormatOptions = {
@@ -16,10 +17,12 @@ export const getinfo = async (req: Request, res: Response): Promise<any> => {
 
     const fechaFormateada = new Date().toLocaleString('es-MX', opciones);
     const total = await Solicitud.count();
+    const dependencias = await Dependencia.findAll();
 
     return res.json({
         fechaactual: fechaFormateada,
-        total: total
+        total: total,
+        dependencias: dependencias
     });
 }
 
