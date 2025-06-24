@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable, signal, inject, computed } from '@angular/core';
+import { enviroment } from '../../enviroments/enviroment'; 
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +14,7 @@ export class SolicitudesService {
     private http = inject( HttpClient );
 
     constructor() {
-    this.myAppUrl = 'http://localhost:3002/';
+    this.myAppUrl = enviroment.endpoint;
     this.myAPIUrl = 'api/datosp';
     this.myAPIUrl2 = 'api/estados';
     this.myAPIUrl3 = 'api/solicitudes';

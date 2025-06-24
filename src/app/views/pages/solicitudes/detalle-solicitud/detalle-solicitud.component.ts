@@ -25,6 +25,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { SolicitudesService } from '../../../../service/solicitudes.service';
 import { AfterViewInit } from '@angular/core';
 import { RegistroService } from '../../../../service/registro.service';
+import { enviroment } from '../../../../../enviroments/enviroment';
 
 declare var bootstrap: any;
 @Component({
@@ -45,6 +46,7 @@ export class DetalleSolicitudComponent {
   id: string;
   docs: any;
   mostrarExtraInfo: boolean = false;
+  enviro = enviroment.endpoint;
   documentoReqFields = [
     { key: 'acta_nacimiento', label: 'Acta de nacimiento' },
     { key: 'acta_matrimonio', label: 'Acta de matrimonio' },
@@ -476,10 +478,10 @@ export class DetalleSolicitudComponent {
 
         if (response.solicitud[0].es_primer_testamento == '0') {
           this.mostrarCamposTestamento = true;
-          const fechaFormateada = this.formatearFecha(response.solicitud[0].testamentos_pasados.fecha_tramite);
+          // const fechaFormateada = this.formatearFecha(response.solicitud[0].testamentos_pasados.fecha_tramite);
           // console.log(fechaFormateada);
           this.formTestamento.patchValue({
-            fecha_primer_testamento: fechaFormateada,
+            fecha_primer_testamento: response.solicitud[0].testamentos_pasados.fecha_tramite,
             notaria_primer_testamento: response.solicitud[0].testamentos_pasados.notaria,
             instrumento_primer_testamento: response.solicitud[0].testamentos_pasados.instrumento_volumen
           });
