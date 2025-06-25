@@ -132,10 +132,17 @@ abrirModal() {
 
 
   enviarDatos(): void {
-      if (this.horaSeleccionada < '09:00' || this.horaSeleccionada > '18:00') {
-    alert('Selecciona una hora entre 09:00 y 18:00');
-    return;
-  }
+    if (this.horaSeleccionada < '09:00' || this.horaSeleccionada > '18:00') {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: "¡Atención!",
+          text: "Selecciona una hora entre 09:00 y 18:00.",
+          showConfirmButton: false,
+          timer: 4000
+        });
+      return;
+    }
     this.currentUser = this._userService.currentUserValue;
 
     const year = this.fechaSeleccionada.getFullYear();
@@ -151,7 +158,6 @@ abrirModal() {
     };
     this._citasService.saveCita(datos).subscribe({
       next: (response: any) => {
-        console.log(response);
         this.banderaCita = 1;
         this.agregarEventoAlCalendario(datos);
         Swal.fire({
@@ -167,7 +173,6 @@ abrirModal() {
         }
       },
       error: (e: HttpErrorResponse) => {
-        console.log(e.status);
         if(e.status == 400){
           Swal.fire({
             position: 'center',
@@ -201,7 +206,7 @@ abrirModal() {
       datos.citas.forEach((cita: any) => {
         const fechaHora = `${cita.fecha}T${cita.hora}`;
         const nuevoEvento = {
-          title: `Tiene una nueva cita`,
+          title: `Tiene una cita`,
           start: fechaHora,
           allDay: false
         };
@@ -216,7 +221,7 @@ abrirModal() {
     }else{ 
       const fechaHora = `${datos.fecha}T${datos.hora}`;
       const nuevoEvento = {
-        title: `Tiene una nueva cita.`,
+        title: `Tiene una cita.`,
         // title: `Cita de ${datos.rfc}`,
         start: fechaHora,
         allDay: false

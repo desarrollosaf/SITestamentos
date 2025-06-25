@@ -1,50 +1,53 @@
 <div class="container-fluid auth-background">
-    <div class="row justify-content-center">
-        <div class="col-md-10 stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="fw-bold mb-4 text-center" style="color: #96134b; font-size: 1.2rem;">
-                        Citas
-                    </h6>
-<div class="d-flex justify-content-center">
-  <div style="width: 1300px;">
-    <div class="calendar-wrapper">
-      <full-calendar #fullcalendar [options]="calendarOptions"></full-calendar>
+  <div class="row justify-content-center">
+    <div class="col-md-10 stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="fw-bold mb-4 text-center" style="color: #96134b; font-size: 1.2rem;">
+            Citas
+          </h6>
+          <div class="d-flex justify-content-center">
+            <div style="width: 1300px;">
+              <div class="calendar-wrapper">
+                <full-calendar #fullcalendar [options]="calendarOptions"></full-calendar>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <ng-template #xlModal let-modal>
   <div class="modal-header">
     <h5 class="modal-title" id="exampleModalLabel">Seleccionar horario de atención</h5>
-    
+
     <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
   </div>
   <div class="modal-body">
-     <div class="mb-2 text-end text-muted">
+    <div class="mb-2 text-end text-muted">
       <strong>Fecha seleccionada: </strong>{{ fechaSeleccionada | date:'fullDate' }}
     </div>
-    <div class="p-2 text-white" [ngClass]="numeroLugares > 0 ? 'bg-success' : 'bg-warning'">
-      Número de lugares disponibles: <strong>{{ this.numeroLugares}}</strong>
+    <div class="p-2 text-white" [ngClass]="{
+        'bg-success': numeroLugares > 5,
+        'bg-warning': numeroLugares <= 5,
+        'bg-danger': numeroLugares === 0
+      }">
+      Número de lugares disponibles:
+      <strong>
+        {{ numeroLugares === 0 ? 'Sin lugares disponibles' : numeroLugares }}
+      </strong>
     </div>
     <br>
     <div class="mb-3">
       <label for="hora" class="form-label">Hora</label>
-      <input 
-       type="time"
-  id="hora"
-  class="form-control"
-  [(ngModel)]="horaSeleccionada">
+      <input type="time" id="hora" class="form-control" [(ngModel)]="horaSeleccionada">
     </div>
   </div>
 
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Cerrar</button>
-    <button type="button" class="btn btn-primary" (click)="enviarDatos()">Enviar</button>
+    <button type="button" class="btn btn-primary" [disabled]="numeroLugares <= 0" (click)="enviarDatos()">Enviar</button>
   </div>
 </ng-template>
