@@ -24,6 +24,7 @@ import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { CitasService } from '../../../service/citas.service';
 import { UserService } from '../../../core/services/user.service';
+import { FullCalendarComponent } from '@fullcalendar/angular';
 
 registerLocaleData(localeEs, 'es');
 
@@ -50,7 +51,7 @@ export class CitasComponent {
   numeroLugares: number = 0;
   currentUser: any;
   public _citasService = inject(CitasService);
-
+@ViewChild('fullcalendar') calendarComponent: FullCalendarComponent;
   @ViewChild('xlModal', { static: true }) xlModal!: TemplateRef<any>;
   constructor(private fb: FormBuilder, private router: Router, private modalService: NgbModal,private _userService: UserService) {
     this.formCitas = this.fb.group({
@@ -64,6 +65,7 @@ export class CitasComponent {
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
+    events: [],
     locale: 'es',
     dateClick: this.onDateClick.bind(this),
     dayCellDidMount: (info) => {
@@ -85,10 +87,7 @@ export class CitasComponent {
     editable: true,
     selectable: true,
     selectMirror: true,
-    dayMaxEvents: true,
-    events: [
-      { title: 'Evento de ejemplo', date: '2025-07-15' }
-    ],
+    dayMaxEvents: true
   };
 
   ngOnInit(): void { }
@@ -133,11 +132,54 @@ export class CitasComponent {
     const month = String(this.fechaSeleccionada.getMonth() + 1).padStart(2, '0'); // Mes va de 0 a 11
     const day = String(this.fechaSeleccionada.getDate()).padStart(2, '0');
     this.fechaFormat = `${year}-${month}-${day}`;
+
+
     const datos = {
       fecha:this.fechaFormat,
       hora: this.horaSeleccionada,
       rfc: this.currentUser.rfc
     };
+
+
+
+
+    this._citasService.saveCita(datos).subscribe({
+      next: (response: any) => {
+      console.log(response);
+        this.agregarEventoAlCalendario(datos);
+      },
+      error: (e: HttpErrorResponse) => {
+        const msg = e.error?.msg || 'Error desconocido';
+        console.error('Error del servidor:', msg);
+      }
+    });
     console.log(datos);
   }
+
+
+  formatearFecha(fecha: Date): string {
+  const year = fecha.getFullYear();
+  const month = String(fecha.getMonth() + 1).padStart(2, '0');
+  const day = String(fecha.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+
+agregarEventoAlCalendario(datos: any) {
+  const fechaHora = `${datos.fecha}T${datos.hora}`;
+
+  const nuevoEvento = {
+    title: `Cita de ${datos.rfc}`,
+    start: fechaHora,
+    allDay: false
+  };
+
+ if (Array.isArray(this.calendarOptions.events)) {
+  this.calendarOptions.events = [...this.calendarOptions.events, nuevoEvento];
+} else {
+  this.calendarOptions.events = [nuevoEvento]; // inicializa si estaba vacío o indefinido
+}
+}
+
+
 }

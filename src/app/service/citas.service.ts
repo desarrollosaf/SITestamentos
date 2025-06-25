@@ -31,9 +31,10 @@ export class CitasService {
     getDisponibilidad(id:string): Observable<string> {
         return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/validafecha/${id}`)
     }
-    // getsolicitud(id:string): Observable<string> {
-    //     return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl3}/getsolicitud/${id}`)
-    // }
+
+    saveCita(data:any): Observable<string> {
+        return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl}/saveregistro/`,data)
+    }
     // getLocalidad(id: string): Observable<string> {
     //   return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl2}/getcodigo/${id}`)
     // }
