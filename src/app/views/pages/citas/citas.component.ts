@@ -19,7 +19,7 @@ import { RouterOutlet } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { CitasService } from '../../../service/citas.service';
@@ -50,6 +50,8 @@ export class CitasComponent {
   mensajeDisponibilidad: string = '';
   numeroLugares: number = 0;
   currentUser: any;
+  banderaCita: number = 0;
+  modalRef: NgbModalRef; // define esto en tu componente
   public _citasService = inject(CitasService);
 @ViewChild('fullcalendar') calendarComponent: FullCalendarComponent;
   @ViewChild('xlModal', { static: true }) xlModal!: TemplateRef<any>;
@@ -90,7 +92,9 @@ export class CitasComponent {
     dayMaxEvents: true
   };
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.getCitasUsr()
+  }
 
   onDateClick(arg: DateClickArg) {
     const today = new Date();
@@ -105,21 +109,27 @@ export class CitasComponent {
     const day = String(clickedDate.getDate()).padStart(2, '0');
 
     this.fechaFormat = `${year}-${month}-${day}`;
-    console.log(this.fechaFormat);
     this._citasService.getDisponibilidad(this.fechaFormat).subscribe({
       next: (response: any) => {
-        this.numeroLugares= response.disponibles;
-        console.log(response.disponibles)   
+        this.numeroLugares= response.disponibles;   
       },
       error: (e: HttpErrorResponse) => {
         const msg = e.error?.msg || 'Error desconocido';
         console.error('Error del servidor:', msg);
       }
     });
-    this.modalService.open(this.xlModal, { size: 'lg' }).result.then((result) => {
-      console.log("Modal closed" + result);
-    }).catch((res) => { });
+    this.abrirModal()
   }
+
+abrirModal() {
+  this.modalRef = this.modalService.open(this.xlModal, { size: 'lg' });
+  this.modalRef.result.then((result) => {
+    // console.log("Modal cerrado:", result);
+  }).catch((res) => {
+    // console.log("Modal cerrado por dismiss");
+  });
+}
+
 
   enviarDatos(): void {
       if (this.horaSeleccionada < '09:00' || this.horaSeleccionada > '18:00') {
@@ -139,47 +149,81 @@ export class CitasComponent {
       hora: this.horaSeleccionada,
       rfc: this.currentUser.rfc
     };
-
-
-
-
     this._citasService.saveCita(datos).subscribe({
       next: (response: any) => {
-      console.log(response);
+        this.banderaCita = 1;
         this.agregarEventoAlCalendario(datos);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: "Cita guardada correctamente",
+          text: "Uno de nuestros abogados se pondrá en contacto con usted.",
+          showConfirmButton: false,
+          timer: 5000
+        });
+        if (this.modalRef) {
+        this.modalRef.close('');
+        }
       },
       error: (e: HttpErrorResponse) => {
         const msg = e.error?.msg || 'Error desconocido';
         console.error('Error del servidor:', msg);
       }
     });
-    console.log(datos);
   }
 
 
   formatearFecha(fecha: Date): string {
-  const year = fecha.getFullYear();
-  const month = String(fecha.getMonth() + 1).padStart(2, '0');
-  const day = String(fecha.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
+    const year = fecha.getFullYear();
+    const month = String(fecha.getMonth() + 1).padStart(2, '0');
+    const day = String(fecha.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+  agregarEventoAlCalendario(datos: any) {
+    if(this.banderaCita == 0){
+      if (datos.citas.length > 0) {
+      datos.citas.forEach((cita: any) => {
+        const fechaHora = `${cita.fecha}T${cita.hora}`;
+        const nuevoEvento = {
+          title: `Tiene una nueva cita`,
+          start: fechaHora,
+          allDay: false
+        };
 
+        if (Array.isArray(this.calendarOptions.events)) {
+          this.calendarOptions.events = [...this.calendarOptions.events, nuevoEvento];
+        } else {
+          this.calendarOptions.events = [nuevoEvento];
+        }
+      });
+    }
+    }else{ 
+      const fechaHora = `${datos.fecha}T${datos.hora}`;
+      const nuevoEvento = {
+        title: `Tiene una nueva cita.`,
+        // title: `Cita de ${datos.rfc}`,
+        start: fechaHora,
+        allDay: false
+      };
+      if (Array.isArray(this.calendarOptions.events)) {
+        this.calendarOptions.events = [...this.calendarOptions.events, nuevoEvento];
+      } else {
+        this.calendarOptions.events = [nuevoEvento];
+      }
+    }
+  }
 
-agregarEventoAlCalendario(datos: any) {
-  const fechaHora = `${datos.fecha}T${datos.hora}`;
-
-  const nuevoEvento = {
-    title: `Cita de ${datos.rfc}`,
-    start: fechaHora,
-    allDay: false
-  };
-
- if (Array.isArray(this.calendarOptions.events)) {
-  this.calendarOptions.events = [...this.calendarOptions.events, nuevoEvento];
-} else {
-  this.calendarOptions.events = [nuevoEvento]; // inicializa si estaba vacío o indefinido
-}
-}
-
+  getCitasUsr(){
+    this.currentUser = this._userService.currentUserValue;
+    this._citasService.getCitaUser(this.currentUser.rfc).subscribe({
+      next: (response: any) => {
+        this.agregarEventoAlCalendario(response);
+      },
+      error: (e: HttpErrorResponse) => {
+        const msg = e.error?.msg || 'Error desconocido';
+        console.error('Error del servidor:', msg);
+      }
+    });  
+  }
 
 }
