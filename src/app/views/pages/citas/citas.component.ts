@@ -151,6 +151,7 @@ abrirModal() {
     };
     this._citasService.saveCita(datos).subscribe({
       next: (response: any) => {
+        console.log(response);
         this.banderaCita = 1;
         this.agregarEventoAlCalendario(datos);
         Swal.fire({
@@ -166,8 +167,23 @@ abrirModal() {
         }
       },
       error: (e: HttpErrorResponse) => {
-        const msg = e.error?.msg || 'Error desconocido';
-        console.error('Error del servidor:', msg);
+        console.log(e.status);
+        if(e.status == 400){
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: "¡Atención!",
+            text: "Ya tienes una cita activa",
+            showConfirmButton: false,
+            timer: 5000
+          });
+          if (this.modalRef) {
+            this.modalRef.close('');
+          }
+        }else{
+          const msg = e.error?.msg || 'Error desconocido';
+          console.error('Error del servidor:', msg);
+        }
       }
     });
   }
