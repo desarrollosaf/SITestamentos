@@ -14,6 +14,7 @@ class Cita extends Model<
   declare id: CreationOptional<number>;
   declare rfc: string | null;
   declare fecha: Date | null;
+  declare hora: string | null;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
@@ -32,6 +33,10 @@ Cita.init(
     },
     fecha: {
       type: DataTypes.DATEONLY,
+      allowNull: true,
+    },
+    hora: {
+      type: DataTypes.TIME,
       allowNull: true,
     },
     createdAt: DataTypes.DATE,

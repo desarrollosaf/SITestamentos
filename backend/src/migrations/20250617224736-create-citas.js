@@ -15,6 +15,9 @@ module.exports = {
       fecha: {
         type: Sequelize.DATEONLY
       },
+      hora: {
+        type: Sequelize.TIME
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
