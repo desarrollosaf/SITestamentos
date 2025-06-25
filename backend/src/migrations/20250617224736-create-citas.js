@@ -18,6 +18,12 @@ module.exports = {
       hora: {
         type: Sequelize.TIME
       },
+      estatus: {
+        type: Sequelize.INTEGER
+      },
+      observaciones: {
+        type: Sequelize.TEXT('long'),
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
