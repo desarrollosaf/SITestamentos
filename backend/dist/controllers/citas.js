@@ -84,7 +84,7 @@ const saveregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 estatus: 0
             }
         });
-        if (citasser) {
+        if (citasser.length > 0) {
             return res.status(400).json({ error: 'cuentas con una solicitud', estatus: 400 });
         }
         const cita = yield citas_1.default.create({

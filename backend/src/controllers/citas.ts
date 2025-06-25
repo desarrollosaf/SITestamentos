@@ -80,7 +80,8 @@ export const saveregistro = async (req: Request, res: Response): Promise<any> =>
           estatus: 0
         }
       });
-      if(citasser){
+     
+      if(citasser.length > 0){
         return res.status(400).json({ error: 'cuentas con una solicitud', estatus: 400  });
       }
 
