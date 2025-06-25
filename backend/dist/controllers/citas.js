@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saveregistro = exports.validafecha = exports.getservidor = void 0;
+exports.getCita = exports.saveregistro = exports.validafecha = exports.getservidor = void 0;
 const fun_1 = __importDefault(require("../database/fun")); // La conexión
 const dp_fum_datos_generales_1 = require("../models/fun/dp_fum_datos_generales");
 const dp_datospersonales_1 = require("../models/fun/dp_datospersonales");
 const citas_1 = __importDefault(require("../models/citas"));
+const sequelize_1 = require("sequelize");
 dp_datospersonales_1.dp_datospersonales.initModel(fun_1.default);
 dp_fum_datos_generales_1.dp_fum_datos_generales.initModel(fun_1.default);
 const getservidor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -88,3 +89,32 @@ const saveregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.saveregistro = saveregistro;
+const getCita = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    try {
+        const citasser = yield citas_1.default.findAll({
+            where: { rfc: id }
+        });
+        const usuario = yield dp_datospersonales_1.dp_datospersonales.findAll({
+            where: { f_rfc: id },
+            attributes: [
+                'correo_ins',
+                'correo_per',
+                'numero_tel',
+                'numero_cel',
+                [sequelize_1.Sequelize.literal(`CONCAT(f_nombre, ' ', f_primer_apellido, ' ', f_segundo_apellido)`), 'nombre_completo']
+            ],
+            raw: true
+        });
+        return res.json({
+            msg: `si existe el servidor`,
+            citas: citasser,
+            dtaosuser: usuario
+        });
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
+    }
+});
+exports.getCita = getCita;
