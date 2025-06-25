@@ -22,6 +22,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { CitasService } from '../../../service/citas.service';
+import { UserService } from '../../../core/services/user.service';
 
 registerLocaleData(localeEs, 'es');
 
@@ -40,14 +42,17 @@ export class CitasComponent {
   formCitas: FormGroup;
   showModal = false;
   selectedDate: Date | null = null;
+  fechaFormat: any;
   selectedHour: string = '';
   fechaSeleccionada: any;
   horaSeleccionada: string = '';
   mensajeDisponibilidad: string = '';
   numeroLugares: number = 0;
+  currentUser: any;
+  public _citasService = inject(CitasService);
 
   @ViewChild('xlModal', { static: true }) xlModal!: TemplateRef<any>;
-  constructor(private fb: FormBuilder, private router: Router, private modalService: NgbModal) {
+  constructor(private fb: FormBuilder, private router: Router, private modalService: NgbModal,private _userService: UserService) {
     this.formCitas = this.fb.group({
       f_curp: ['', [
         Validators.required,
@@ -96,16 +101,42 @@ export class CitasComponent {
     }
     this.selectedDate = clickedDate;
     this.fechaSeleccionada = clickedDate;
-    console.log(this.selectedDate);
+    const year = clickedDate.getFullYear();
+    const month = String(clickedDate.getMonth() + 1).padStart(2, '0'); // Mes va de 0 a 11
+    const day = String(clickedDate.getDate()).padStart(2, '0');
+
+    this.fechaFormat = `${year}-${month}-${day}`;
+    console.log(this.fechaFormat);
+    this._citasService.getDisponibilidad(this.fechaFormat).subscribe({
+      next: (response: any) => {
+        this.numeroLugares= response.disponibles;
+        console.log(response.disponibles)   
+      },
+      error: (e: HttpErrorResponse) => {
+        const msg = e.error?.msg || 'Error desconocido';
+        console.error('Error del servidor:', msg);
+      }
+    });
     this.modalService.open(this.xlModal, { size: 'lg' }).result.then((result) => {
       console.log("Modal closed" + result);
     }).catch((res) => { });
   }
 
   enviarDatos(): void {
+      if (this.horaSeleccionada < '09:00' || this.horaSeleccionada > '18:00') {
+    alert('Selecciona una hora entre 09:00 y 18:00');
+    return;
+  }
+    this.currentUser = this._userService.currentUserValue;
+
+    const year = this.fechaSeleccionada.getFullYear();
+    const month = String(this.fechaSeleccionada.getMonth() + 1).padStart(2, '0'); // Mes va de 0 a 11
+    const day = String(this.fechaSeleccionada.getDate()).padStart(2, '0');
+    this.fechaFormat = `${year}-${month}-${day}`;
     const datos = {
-      fecha: this.fechaSeleccionada,
+      fecha:this.fechaFormat,
       hora: this.horaSeleccionada,
+      rfc: this.currentUser.rfc
     };
     console.log(datos);
   }
