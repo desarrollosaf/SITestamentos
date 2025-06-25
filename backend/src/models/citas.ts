@@ -15,6 +15,8 @@ class Cita extends Model<
   declare rfc: string | null;
   declare fecha: Date | null;
   declare hora: string | null;
+  declare datos_user?: any;
+  declare dependencia?: any;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
