@@ -1748,7 +1748,7 @@ placeholder="Ejemplo: Vivo" />
                             <div class="w-100 d-flex flex-column justify-content-center align-items-center"
                               style="min-height: 150px;">
                               <ng-container *ngIf="hijo.get('identificaciont')?.value; else noDisponible">
-                                <a [href]="hijo.get('identificaciont')?.value" target="_blank"
+                                <a [href]="enviro+hijo.get('identificaciont')?.value" target="_blank"
                                   class="text-decoration-none">
                                   <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
                                   <div class="mt-2">Ver documento</div>
@@ -1771,7 +1771,7 @@ placeholder="Ejemplo: Vivo" />
                             <div class="w-100 d-flex flex-column justify-content-center align-items-center"
                               style="min-height: 150px;">
                               <ng-container *ngIf="hijo.get('curpt')?.value; else noDisponible">
-                                <a [href]="hijo.get('curpt')?.value" target="_blank" class="text-decoration-none">
+                                <a [href]="enviro+hijo.get('curpt')?.value" target="_blank" class="text-decoration-none">
                                   <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
                                   <div class="mt-2">Ver documento</div>
                                 </a>
@@ -1793,7 +1793,7 @@ placeholder="Ejemplo: Vivo" />
                             <div class="w-100 d-flex flex-column justify-content-center align-items-center"
                               style="min-height: 150px;">
                               <ng-container *ngIf="hijo.get('comprobante_domiciliot')?.value; else noDisponible">
-                                <a [href]="hijo.get('comprobante_domiciliot')?.value" target="_blank"
+                                <a [href]="enviro+hijo.get('comprobante_domiciliot')?.value" target="_blank"
                                   class="text-decoration-none">
                                   <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
                                   <div class="mt-2">Ver documento</div>

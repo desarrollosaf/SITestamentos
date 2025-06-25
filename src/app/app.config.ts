@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, LOCALE_ID,provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -17,6 +17,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CalendarModule, CalendarMonthViewComponent, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+
+registerLocaleData(localeEs, 'es');
+
 const highlightOptions = {
   coreLibraryLoader: () => import('highlight.js/lib/core'),
   languages: {
@@ -29,6 +34,8 @@ const highlightOptions = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+   provideRouter(routes),
+    { provide: LOCALE_ID, useValue: 'es' },
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'top' })), 
     provideAnimationsAsync(),
