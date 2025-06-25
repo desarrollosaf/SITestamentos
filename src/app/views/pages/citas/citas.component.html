@@ -6,27 +6,52 @@
                     <h6 class="fw-bold mb-4 text-center" style="color: #96134b; font-size: 1.2rem;">
                         Citas
                     </h6>
-                    <form [formGroup]="formCitas" (ngSubmit)="enviarDatos()" class="forms-sample">
+                    <!-- <form [formGroup]="formCitas" (ngSubmit)="enviarDatos()" class="forms-sample"> -->
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="mb-3">
-                                    <label class="form-label negri">Ingrese CURP:*</label>
-                                    <input formControlName="f_curp" type="text" class="form-control"
-                                        placeholder="Ejemplo: MACJ750101HDFRRL01" maxlength="18" />
-                                    <small class="colorsm" *ngIf="formCitas.get('f_curp')?.hasError('pattern')">
-                                        <strong> CURP inválida o incompleta.</strong>
-                                    </small>
-                                    <div>
-                                        <br/>
-                                    </div>
-                                </div>
-                            </div>
+                          <full-calendar [options]="calendarOptions"></full-calendar>
                         </div>
-                        <div class="row" >
-                  </div>
-                    </form>
+                    <!-- </form> -->
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- Modal NobleUI / Bootstrap 5 -->
+<!-- <ng-template #xlModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Titulo</h5>
+    <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <p>MENSAJE MENSAJE MENSAJE</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Cerrar</button>
+  </div>
+</ng-template> -->
+
+<ng-template #xlModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Seleccionar horario de atención</h5>
+    
+    <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+     <div class="mb-2 text-end text-muted">
+      <strong>Fecha seleccionada: </strong>{{ fechaSeleccionada | date:'fullDate' }}
+    </div>
+    <div class="p-2 text-white" [ngClass]="numeroLugares > 0 ? 'bg-success' : 'bg-warning'">
+      Número de lugares: {{ numeroLugares > 0 ? 'Disponible' : 'No disponible' }}
+    </div>
+    <br>
+    <div class="mb-3">
+      <label for="hora" class="form-label">Hora</label>
+      <input type="time" id="hora" class="form-control" [(ngModel)]="horaSeleccionada">
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Cerrar</button>
+    <button type="button" class="btn btn-primary" (click)="enviarDatos()">Enviar</button>
+  </div>
+</ng-template>
