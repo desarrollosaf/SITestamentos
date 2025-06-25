@@ -78,6 +78,7 @@ export const saveregistro = async (req: Request, res: Response): Promise<any> =>
        rfc: data.rfc,
        fecha: data.fecha,
        hora: data.hora,
+       estatus: 0,
      }); 
      return res.json({
       msg: `cita guardada`,
@@ -127,7 +128,7 @@ export const getcitas = async (req: Request, res: Response): Promise<any> => {
     const tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1);
 
-    // Convertir las fechas a formato YYYY-MM-DD si usas DATEONLY
+
     const formatDate = (date: Date) => date.toISOString().split('T')[0];
 
     const citas = await Cita.findAll({

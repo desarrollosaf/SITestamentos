@@ -82,6 +82,7 @@ const saveregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             rfc: data.rfc,
             fecha: data.fecha,
             hora: data.hora,
+            estatus: 0,
         });
         return res.json({
             msg: `cita guardada`,
@@ -128,7 +129,6 @@ const getcitas = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const today = new Date();
         const tomorrow = new Date();
         tomorrow.setDate(today.getDate() + 1);
-        // Convertir las fechas a formato YYYY-MM-DD si usas DATEONLY
         const formatDate = (date) => date.toISOString().split('T')[0];
         const citas = yield citas_1.default.findAll({
             where: {

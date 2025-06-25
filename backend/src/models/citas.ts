@@ -15,6 +15,8 @@ class Cita extends Model<
   declare rfc: string | null;
   declare fecha: Date | null;
   declare hora: string | null;
+  declare estatus: number | null;
+  declare observaciones: string | null;
   declare datos_user?: any;
   declare dependencia?: any;
   declare createdAt: CreationOptional<Date>;
@@ -39,6 +41,14 @@ Cita.init(
     },
     hora: {
       type: DataTypes.TIME,
+      allowNull: true,
+    },
+    estatus: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    observaciones: {
+      type: DataTypes.TEXT('long'),
       allowNull: true,
     },
     createdAt: DataTypes.DATE,

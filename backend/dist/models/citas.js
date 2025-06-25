@@ -26,6 +26,14 @@ Cita.init({
         type: sequelize_1.DataTypes.TIME,
         allowNull: true,
     },
+    estatus: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: true,
+    },
+    observaciones: {
+        type: sequelize_1.DataTypes.TEXT('long'),
+        allowNull: true,
+    },
     createdAt: sequelize_1.DataTypes.DATE,
     updatedAt: sequelize_1.DataTypes.DATE,
 }, {
