@@ -78,6 +78,15 @@ exports.validafecha = validafecha;
 const saveregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
     try {
+        const citasser = yield citas_1.default.findAll({
+            where: {
+                rfc: data.rfc,
+                estatus: 0
+            }
+        });
+        if (citasser) {
+            return res.status(400).json({ error: 'cuentas con una solicitud', estatus: 400 });
+        }
         const cita = yield citas_1.default.create({
             rfc: data.rfc,
             fecha: data.fecha,
