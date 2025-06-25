@@ -4,6 +4,8 @@ import { dp_fum_datos_generales } from '../models/fun/dp_fum_datos_generales';
 import { dp_datospersonales } from '../models/fun/dp_datospersonales';
 import Cita from '../models/citas';
 
+import { Sequelize, Model, DataTypes } from 'sequelize';
+
 dp_datospersonales.initModel(sequelizefun);
 dp_fum_datos_generales.initModel(sequelizefun);
 
@@ -79,5 +81,36 @@ export const saveregistro = async (req: Request, res: Response): Promise<any> =>
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'No  se guardo' });
+  }
+};
+
+export const getCita = async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+  try {
+   
+    const citasser = await Cita.findAll({
+      where: { rfc: id }
+    })
+
+   const usuario = await dp_datospersonales.findAll({
+      where: { f_rfc: id },
+        attributes: [
+          'correo_ins',
+          'correo_per',
+          'numero_tel',
+          'numero_cel',
+          [Sequelize.literal(`CONCAT(f_nombre, ' ', f_primer_apellido, ' ', f_segundo_apellido)`), 'nombre_completo']
+        ],
+      raw: true
+    });
+
+    return res.json({
+      msg: `si existe el servidor`,
+      citas: citasser,
+      dtaosuser: usuario
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
   }
 };
