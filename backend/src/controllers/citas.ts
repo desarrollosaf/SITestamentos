@@ -74,6 +74,16 @@ export const validafecha = async (req: Request, res: Response): Promise<any> => 
 export const saveregistro = async (req: Request, res: Response): Promise<any> => {
     const  data  = req.body;
   try {
+     const citasser = await Cita.findAll({
+        where: {
+          rfc: data.rfc,
+          estatus: 0
+        }
+      });
+      if(citasser){
+        return res.status(400).json({ error: 'cuentas con una solicitud', estatus: 400  });
+      }
+
      const cita = await Cita.create({
        rfc: data.rfc,
        fecha: data.fecha,
