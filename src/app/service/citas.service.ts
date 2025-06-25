@@ -35,9 +35,11 @@ export class CitasService {
     saveCita(data:any): Observable<string> {
         return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl}/saveregistro/`,data)
     }
-    // getLocalidad(id: string): Observable<string> {
-    //   return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl2}/getcodigo/${id}`)
-    // }
+
+
+    getCitaUser(id: string): Observable<string> {
+      return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/getcitaservidor/${id}`)
+    }
 
 
 }

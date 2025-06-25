@@ -8,5 +8,4 @@ router.get("/api/citas/validafecha/:id", citas_1.validafecha);
 router.post("/api/citas/saveregistro/", citas_1.saveregistro);
 router.get("/api/citas/getcitaservidor/:id", citas_1.getCita);
 router.get("/api/citas/getcitas/", citas_1.getcitas);
-
 exports.default = router;
