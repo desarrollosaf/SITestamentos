@@ -22,6 +22,10 @@ Cita.init({
         type: sequelize_1.DataTypes.DATEONLY,
         allowNull: true,
     },
+    hora: {
+        type: sequelize_1.DataTypes.TIME,
+        allowNull: true,
+    },
     createdAt: sequelize_1.DataTypes.DATE,
     updatedAt: sequelize_1.DataTypes.DATE,
 }, {
