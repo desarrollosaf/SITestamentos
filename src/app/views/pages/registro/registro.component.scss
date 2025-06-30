@@ -147,3 +147,39 @@ h5.titulo4 {
 .btn-rojo:hover {
   background-color: #c82333;
 }
+
+  .main-container {
+    background: url('/images/BANNER VOLUNTARIADO-02.svg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    padding: 5vh 5vw;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    // justify-content: flex-start;
+    // text-align: center;
+    // color: white;
+    // box-sizing: border-box;
+    // width: 100%;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Imagen 100% de ancho, sin bordes */
+ .banner-img {
+  width: 100%;
+  height: auto;
+  max-height: 100px; /* o el valor que desees */
+  display: block;
+  margin: 0;
+  padding: 0;
+  object-fit: cover; /* para asegurar buen recorte si fuera necesario */
+}
+
+  .main-container {
+    padding: 0;
+    margin: 0;
+  }
