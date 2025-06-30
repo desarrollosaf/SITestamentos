@@ -1,37 +1,26 @@
-<div class="container-fluid auth-background">
-  <div class="row w-100 mx-0 auth-page">
-    <div class="col-md-6 col-lg-5 col-xl-4 mx-auto">
-      <div class="card">
-        <div class="row">
-          <!--<div class="col-md-4 pe-md-0">
-            <div class="auth-side-wrapper" [ngStyle]="{ 'background-image': 'url(https://placehold.co/250x650)' }">
-  
-            </div>
-          </div>-->
-            <div class="auth-form-wrapper px-4 py-5">
-              <a routerLink="." class="nobleui-logo d-block mb-2"><span></span></a>
-              <h6 class="fw-bold mb-4 text-center" style="color: #96134b; font-size: 1.2rem;">
-                Iniciar sesión
-              </h6>
-              <form  #f="ngForm" (ngSubmit)="onLoggedin(f)"  class="forms-sample">
-                <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Usuario: </label>
-                  <input class="form-control" type="string" placeholder="XAXX010101000"   name="Urfc" ngModel required #Urfc="ngModel" />
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Contraseña: </label>
-                  <input class="form-control" type="password" placeholder="******"  name="Upassword" ngModel required #Upassword="ngModel" />
-                </div>
-              
-                <div>
-                  <button type="submit" class="btn btn-primary me-2 mb-2 mb-md-0" >Ingresar</button>
-                </div>
-                <!--<a routerLink="/auth/restaurar-contrasena" class="d-block mt-3 text-secondary">¿Olvidaste tu contraseña? <strong>Restablécela aquí</strong></a>-->
-              </form>
-            </div>
-         
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- nombre-del-componente.component.html -->
+<style>
+ 
+</style>
+
+<div class="main-container">
+  <img src="/images/BANNER VOLUNTARIADO-04.png" alt="Logo" class="logo" />
+
+  <h1 class="main-title">
+    <span class="title-small">TRAMITA TU</span>
+    <span class="title-large">TESTAMENTO</span>
+  </h1>
+
+  <p class="description">
+    <strong>Trabajadora o trabajador del Poder Legislativo<br> mexiquense y sus dependencias:</strong>
+    No heredes problemas<br> y aprovecha esta jornada que el Voluntariado<br> del Congreso del Estado de México tiene para ti.
+    <br><br>
+    <span class="highlight">Inicia sesión y realiza el trámite en línea.</span>
+  </p>
+
+  <form #f="ngForm" (ngSubmit)="onLoggedin(f)">
+    <input type="text" placeholder="Usuario" name="Urfc" ngModel required />
+    <input type="password" placeholder="Contraseña" name="Upassword" ngModel required />
+    <button type="submit">Ingresar</button>
+  </form>
 </div>
