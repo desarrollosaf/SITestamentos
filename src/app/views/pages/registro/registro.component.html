@@ -1402,6 +1402,21 @@ campo es
                   </div>
                 </div>
               </div>
+            <div *ngIf="herederos.length > 0">
+              <div class="alert alert-warning mt-3 text-danger text-center" *ngIf="porcentajeTotal > 100">
+                La suma de los porcentajes excede el 100%.
+              </div>
+            
+              <div class="row mt-2">
+                <div class="col-sm-4 d-flex align-items-center"></div>
+                <div class="col-sm-4 d-flex align-items-center"></div>
+                <div class="col-sm-4 d-flex align-items-center">
+                  <strong [ngClass]="{ 'text-danger': porcentajeTotal > 100 }">
+                    Total porcentaje: {{ porcentajeTotal }}%
+                  </strong>
+                </div>
+              </div>
+            </div>
             </div>
 
             <div class="row">

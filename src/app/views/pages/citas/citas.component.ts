@@ -53,9 +53,9 @@ export class CitasComponent {
   banderaCita: number = 0;
   modalRef: NgbModalRef; // define esto en tu componente
   public _citasService = inject(CitasService);
-@ViewChild('fullcalendar') calendarComponent: FullCalendarComponent;
+  @ViewChild('fullcalendar') calendarComponent: FullCalendarComponent;
   @ViewChild('xlModal', { static: true }) xlModal!: TemplateRef<any>;
-  constructor(private fb: FormBuilder, private router: Router, private modalService: NgbModal,private _userService: UserService) {
+  constructor(private fb: FormBuilder, private router: Router, private modalService: NgbModal, private _userService: UserService) {
     this.formCitas = this.fb.group({
       f_curp: ['', [
         Validators.required,
@@ -92,7 +92,7 @@ export class CitasComponent {
     dayMaxEvents: true
   };
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.getCitasUsr()
   }
 
@@ -111,7 +111,7 @@ export class CitasComponent {
     this.fechaFormat = `${year}-${month}-${day}`;
     this._citasService.getDisponibilidad(this.fechaFormat).subscribe({
       next: (response: any) => {
-        this.numeroLugares= response.disponibles;   
+        this.numeroLugares = response.disponibles;
       },
       error: (e: HttpErrorResponse) => {
         const msg = e.error?.msg || 'Error desconocido';
@@ -121,26 +121,26 @@ export class CitasComponent {
     this.abrirModal()
   }
 
-abrirModal() {
-  this.modalRef = this.modalService.open(this.xlModal, { size: 'lg' });
-  this.modalRef.result.then((result) => {
-    // console.log("Modal cerrado:", result);
-  }).catch((res) => {
-    // console.log("Modal cerrado por dismiss");
-  });
-}
+  abrirModal() {
+    this.modalRef = this.modalService.open(this.xlModal, { size: 'lg' });
+    this.modalRef.result.then((result) => {
+      // console.log("Modal cerrado:", result);
+    }).catch((res) => {
+      // console.log("Modal cerrado por dismiss");
+    });
+  }
 
 
   enviarDatos(): void {
     if (this.horaSeleccionada < '09:00' || this.horaSeleccionada > '18:00') {
-        Swal.fire({
-          position: 'center',
-          icon: 'warning',
-          title: "¡Atención!",
-          text: "Selecciona una hora entre 09:00 y 18:00.",
-          showConfirmButton: false,
-          timer: 4000
-        });
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: "¡Atención!",
+        text: "Selecciona una hora entre 09:00 y 18:00.",
+        showConfirmButton: false,
+        timer: 4000
+      });
       return;
     }
     this.currentUser = this._userService.currentUserValue;
@@ -152,7 +152,7 @@ abrirModal() {
 
 
     const datos = {
-      fecha:this.fechaFormat,
+      fecha: this.fechaFormat,
       hora: this.horaSeleccionada,
       rfc: this.currentUser.rfc
     };
@@ -169,11 +169,11 @@ abrirModal() {
           timer: 5000
         });
         if (this.modalRef) {
-        this.modalRef.close('');
+          this.modalRef.close('');
         }
       },
       error: (e: HttpErrorResponse) => {
-        if(e.status == 400){
+        if (e.status == 400) {
           Swal.fire({
             position: 'center',
             icon: 'error',
@@ -185,7 +185,7 @@ abrirModal() {
           if (this.modalRef) {
             this.modalRef.close('');
           }
-        }else{
+        } else {
           const msg = e.error?.msg || 'Error desconocido';
           console.error('Error del servidor:', msg);
         }
@@ -201,24 +201,24 @@ abrirModal() {
     return `${year}-${month}-${day}`;
   }
   agregarEventoAlCalendario(datos: any) {
-    if(this.banderaCita == 0){
+    if (this.banderaCita == 0) {
       if (datos.citas.length > 0) {
-      datos.citas.forEach((cita: any) => {
-        const fechaHora = `${cita.fecha}T${cita.hora}`;
-        const nuevoEvento = {
-          title: `Tiene una cita`,
-          start: fechaHora,
-          allDay: false
-        };
+        datos.citas.forEach((cita: any) => {
+          const fechaHora = `${cita.fecha}T${cita.hora}`;
+          const nuevoEvento = {
+            title: `Tiene una cita`,
+            start: fechaHora,
+            allDay: false
+          };
 
-        if (Array.isArray(this.calendarOptions.events)) {
-          this.calendarOptions.events = [...this.calendarOptions.events, nuevoEvento];
-        } else {
-          this.calendarOptions.events = [nuevoEvento];
-        }
-      });
-    }
-    }else{ 
+          if (Array.isArray(this.calendarOptions.events)) {
+            this.calendarOptions.events = [...this.calendarOptions.events, nuevoEvento];
+          } else {
+            this.calendarOptions.events = [nuevoEvento];
+          }
+        });
+      }
+    } else {
       const fechaHora = `${datos.fecha}T${datos.hora}`;
       const nuevoEvento = {
         title: `Tiene una cita.`,
@@ -234,7 +234,7 @@ abrirModal() {
     }
   }
 
-  getCitasUsr(){
+  getCitasUsr() {
     this.currentUser = this._userService.currentUserValue;
     this._citasService.getCitaUser(this.currentUser.rfc).subscribe({
       next: (response: any) => {
@@ -244,7 +244,7 @@ abrirModal() {
         const msg = e.error?.msg || 'Error desconocido';
         console.error('Error del servidor:', msg);
       }
-    });  
+    });
   }
 
 }
