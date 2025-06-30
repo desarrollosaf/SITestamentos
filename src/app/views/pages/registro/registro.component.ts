@@ -28,7 +28,7 @@ export class RegistroComponent {
   mostrarCamposTestamento = false;
   mostrarCamposMenorDeEdad = false;
   @ViewChild('xlModal', { static: true }) xlModal!: TemplateRef<any>;
-
+  porcentajeTotal: number = 0;
   mostrarDoctoIdentifica = false;
 
   mostrarNacServ = false;
@@ -323,6 +323,8 @@ export class RegistroComponent {
         }
       });
     });
+
+    
   }
 
 
@@ -439,8 +441,25 @@ export class RegistroComponent {
   get herederos(): FormArray {
     return this.formTestamento.get('herederoAdd') as FormArray;
   }
+  
 
   agregarHeredero(): void {
+    const total = this.herederos.controls.reduce((acc, group) => {
+    const porcentaje = Number(group.get('porcentaje_heredero')?.value || 0);
+    return acc + porcentaje;
+    }, 0);
+
+    if (total >= 100) {
+        Swal.fire({
+            position: "center",
+            icon: "warning",
+            title: "¡Atención!",
+            text: `Ya se ha alcanzado el 100%`,
+            showConfirmButton: false,
+            timer: 2000
+          });
+      return;
+    }
     const HerederoGroup = this.fb.group({
         nombre_heredero: ['', Validators.required],
         primer_apellido_heredero: ['', Validators.required],
@@ -455,6 +474,16 @@ export class RegistroComponent {
   eliminarHeredero(index: number): void {
     this.herederos.removeAt(index);
   }
+  validarPorcentajeTotal(): void {
+  this.porcentajeTotal = this.herederos.controls.reduce((acc, group) => {
+    const porcentaje = Number(group.get('porcentaje_heredero')?.value || 0);
+    return acc + porcentaje;
+  }, 0);
+
+  if (this.porcentajeTotal > 100) {
+    // alert('La suma de los porcentajes de los herederos no puede superar el 100%.');
+  }
+}
   //****************************************************************************
   //****************************************************************************
 
@@ -552,8 +581,12 @@ export class RegistroComponent {
     this.currentUser = this._userService.currentUserValue;
     console.log('Usuario Logueado:', this.currentUser);
     this.buscarDatosPorCurp(this.currentUser.rfc);
-  
+
+    this.herederos.valueChanges.subscribe(() => {
+      this.validarPorcentajeTotal();
+    });
   }
+  
 
   //PARA MOSTRAR EL DIV EN CASO DE QUE HAYA TESTIGOS
   // toggleExtraInfo(): void {
