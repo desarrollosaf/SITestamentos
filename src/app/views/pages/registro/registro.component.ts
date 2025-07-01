@@ -838,7 +838,7 @@ export class RegistroComponent {
         return;
 
     }
-    if(this.herederos.length >0){
+    if(this.herederos.length > 0){
         const total = this.herederos.controls.reduce((acc, group) => {
         const porcentaje = Number(group.get('porcentaje_heredero')?.value || 0);
         return acc + porcentaje;
@@ -855,6 +855,18 @@ export class RegistroComponent {
               });
           return;
         }
+    }
+    if(this.herederoSustit.length <= 0){
+       Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: "¡Atención!",
+                text: "Debe agregar heredero sustituto.",
+                showConfirmButton: false,
+                timer: 3000
+              });
+        return;
+
     }
 
 
