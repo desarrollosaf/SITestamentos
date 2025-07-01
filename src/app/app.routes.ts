@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { BaseComponent } from './views/layout/base/base.component';
 import { authGuard } from './core/guards/auth.guard';
+import { DetalleCitasComponent } from './views/pages/detalle-citas/detalle-citas.component';
 
 export const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./views/pages/auth/auth.routes')},
@@ -17,6 +18,10 @@ export const routes: Routes = [
       {
         path: 'solicitudes',
         loadChildren: () => import('./views/pages/solicitudes/solicitudes.route')
+      },
+      {
+        path: 'detalle-citas',
+        component: DetalleCitasComponent
       },
       {
         path: 'reportes',

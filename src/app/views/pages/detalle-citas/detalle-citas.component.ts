@@ -1,5 +1,4 @@
 import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
-import { CitasService } from '../../../../service/citas.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ColumnMode, DatatableComponent, NgxDatatableModule } from '@siemens/ngx-datatable';
 import { Router, RouterLink, RouterModule } from '@angular/router';
@@ -8,6 +7,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
+import { CitasService } from '../../../service/citas.service';
 @Component({
   selector: 'app-detalle-citas',
   imports: [NgxDatatableModule, CommonModule,RouterModule, FormsModule,
@@ -43,6 +43,7 @@ export class DetalleCitasComponent {
   getCitas() {
     this._citasService.getCitas().subscribe({
       next: (response: any) => {
+        console.log(response);
         this.originalData = [...response.citas];
         this.temp = [...this.originalData];
         this.filteredCount = this.temp.length;
@@ -87,10 +88,12 @@ export class DetalleCitasComponent {
             });
     }else{
       const data = {
-        textLink: this.formModal.value.textLink,
-        descripcion: this.formModal.value.descripcion,
-        rfc: datos.rfc
+        enlace: this.formModal.value.textLink,
+        texto: this.formModal.value.descripcion,
+        rfc: datos.rfc,
+        citaid: datos.id
       }
+
       if (this.modalRef) {
         this.modalRef.close('');
       }

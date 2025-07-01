@@ -52,7 +52,7 @@
                         <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Opciones">
                             <ng-template let-row="row" ngx-datatable-cell-template>
                                 <div class="text-center">
-                                    <button class="btn btn-primary " placement="end" ngbTooltip="Enviar Link" (click)="abrirModal(row)">
+                                    <button   [disabled]="row.estatus === 1"  class="btn btn-primary " placement="end" ngbTooltip="Enviar Link" (click)="abrirModal(row)">
                                     <i class="feather icon-link"></i>
                                     </button>
                                 </div>
