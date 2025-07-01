@@ -596,12 +596,10 @@ const getsolicitudesapi = (req, res) => __awaiter(void 0, void 0, void 0, functi
                 }
             }
         }
-        const civil = yield dp_estado_civil_1.default.findAll();
         if (solicitudes) {
             // return res.json(solicitudes);
             return res.json({
-                solicitud: solicitudes,
-                estadocivil: civil
+                solicitudes: solicitudes,
             });
         }
         else {

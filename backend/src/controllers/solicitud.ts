@@ -620,13 +620,12 @@ export const getsolicitudesapi = async (req: Request, res: Response): Promise<an
                 }
             }
         }
-        const civil = await dp_estado_civil.findAll();
+    
 
         if (solicitudes) {
             // return res.json(solicitudes);
              return res.json({
-                solicitud: solicitudes,
-                estadocivil: civil
+                solicitudes: solicitudes,
             });
 
         } else {
