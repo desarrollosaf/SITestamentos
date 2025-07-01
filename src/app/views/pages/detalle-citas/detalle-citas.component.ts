@@ -10,16 +10,16 @@ import Swal from 'sweetalert2';
 import { CitasService } from '../../../service/citas.service';
 @Component({
   selector: 'app-detalle-citas',
-  imports: [NgxDatatableModule, CommonModule,RouterModule, FormsModule,
-    ReactiveFormsModule,NgbTooltipModule],
+  imports: [NgxDatatableModule, CommonModule, RouterModule, FormsModule,
+    ReactiveFormsModule, NgbTooltipModule],
   templateUrl: './detalle-citas.component.html',
   styleUrl: './detalle-citas.component.scss'
 })
 export class DetalleCitasComponent {
   formModal: FormGroup;
   public _citasService = inject(CitasService);
-  originalData: any[] = []; 
-  temp: any[] = [];   
+  originalData: any[] = [];
+  temp: any[] = [];
   rows: any[] = [];
   page: number = 0;
   pageSize: number = 10;
@@ -29,10 +29,10 @@ export class DetalleCitasComponent {
   modalRef: NgbModalRef;
   @ViewChild('table') table: DatatableComponent;
   @ViewChild('xlModal', { static: true }) xlModal!: TemplateRef<any>;
-  constructor(private fb: FormBuilder, private modalService: NgbModal) { 
+  constructor(private fb: FormBuilder, private modalService: NgbModal, private router: Router) {
     this.formModal = this.fb.group({
       textLink: [''],
-      descripcion:['']
+      descripcion: ['']
     });
   }
 
@@ -56,11 +56,11 @@ export class DetalleCitasComponent {
       }
     });
   }
-    setPage(pageInfo: any) {
+  setPage(pageInfo: any) {
     this.page = pageInfo.offset;
     const start = this.page * this.pageSize;
     const end = start + this.pageSize;
-    this.rows = this.temp.slice(start, end); 
+    this.rows = this.temp.slice(start, end);
   }
 
   updateFilter(event: any) {
@@ -72,21 +72,21 @@ export class DetalleCitasComponent {
     });
 
     this.filteredCount = this.temp.length;
-    this.setPage({ offset: 0 }); 
+    this.setPage({ offset: 0 });
   }
 
-  enviarDatos(datos:any):void{
-    
-    if(this.formModal.value.textLink == '' || this.formModal.value.descripcion ==''){
+  enviarDatos(datos: any): void {
+
+    if (this.formModal.value.textLink == '' || this.formModal.value.descripcion == '') {
       Swal.fire({
-              position: "center",
-              icon: "warning",
-              title: "¡Atención!",
-              text: `Debe llenar los campos.`,
-              showConfirmButton: false,
-              timer: 2000
-            });
-    }else{
+        position: "center",
+        icon: "warning",
+        title: "¡Atención!",
+        text: `Debe llenar los campos.`,
+        showConfirmButton: false,
+        timer: 2000
+      });
+    } else {
       const data = {
         enlace: this.formModal.value.textLink,
         texto: this.formModal.value.descripcion,
@@ -94,16 +94,40 @@ export class DetalleCitasComponent {
         citaid: datos.id
       }
 
-      if (this.modalRef) {
-        this.modalRef.close('');
-      }
 
+
+      this._citasService.sendMsg(data).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "¡Correcto!",
+            text: `Correo enviado correctamente.`,
+            showConfirmButton: true,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              if (this.modalRef) {
+                this.modalRef.close('');
+              }
+              const currentUrl = this.router.url;
+              this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                this.router.navigate([currentUrl]);
+              });
+            } else if (result.isDenied) {
+            }
+          });
+        },
+        error: (e: HttpErrorResponse) => {
+          const msg = e.error?.msg || 'Error desconocido';
+          console.error('Error del servidor:', msg);
+        }
+      });
     }
-
   }
 
-    abrirModal(persona: any) {
-    this.personaSeleccionada =  persona;
+  abrirModal(persona: any) {
+    this.personaSeleccionada = persona;
     this.modalRef = this.modalService.open(this.xlModal, { size: 'lg' });
     setTimeout(() => {
       const elementoDentroDelModal = document.getElementById('focus-target');
@@ -116,8 +140,8 @@ export class DetalleCitasComponent {
     });
   }
 
-  limpiaf(){
-        ['textLink','descripcion'
+  limpiaf() {
+    ['textLink', 'descripcion'
     ].forEach(campo => {
       const control = this.formModal.get(campo);
       control?.setValue(null);
@@ -125,8 +149,8 @@ export class DetalleCitasComponent {
       control?.markAsUntouched();
     });
     this.formModal.patchValue({
-      textLink:'',
-      descripcion:''
+      textLink: '',
+      descripcion: ''
     });
   }
 
