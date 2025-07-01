@@ -578,7 +578,7 @@ export class DetalleSolicitudComponent {
           response.solicitud[0].herederos_susti.forEach((hijo: any) => {
             const HerederosSustGroup = this.fb.group({
               nombre_sustituto: [hijo.nombre_sustituto],
-              primer_apellido_sustituto: [hijo.segundo_apellido_sustituto],
+              primer_apellido_sustituto: [hijo.primer_apellido_sustituto],
               segundo_apellido_sustituto: [hijo.segundo_apellido_sustituto],
               nombre_a_sustituir: [hijo.nombre_a_sustituir],
               primer_apellido_a_sustituir: [hijo.primer_apellido_a_sustituir],

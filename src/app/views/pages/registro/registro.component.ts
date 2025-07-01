@@ -844,7 +844,7 @@ export class RegistroComponent {
         return acc + porcentaje;
         }, 0);
 
-        if (total > 100) {
+        if (total !== 100) {
             Swal.fire({
                 position: "center",
                 icon: "warning",

@@ -313,14 +313,14 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
         const tutor = await TutorDescendiente.create({
                 solicitudId: solicitud.id,
                 nombre_tutor: data.nombre_tutor,
-                primer_apellido_tutor: data.nombre_tutor,
+                primer_apellido_tutor: data.primer_apellido_tutor,
                 segundo_apellido_tutor: data.segundo_apellido_tutor,
                 nombre_tutor_sustituto: data.nombre_tutor_sustituto,
-                primer_apellido_tutor_sustituto: data.nombre_tutor_sustituto,
-                segundo_apellido_tutor_sustituto: data.nombre_tutor_sustituto,
+                primer_apellido_tutor_sustituto: data.primer_apellido_tutor_sustituto,
+                segundo_apellido_tutor_sustituto: data.segundo_apellido_tutor_sustituto,
                 nombre_curador: data.nombre_curador,
-                primer_apellido_curador:  data.nombre_curador,
-                segundo_apellido_curador: data.nombre_curador,
+                primer_apellido_curador:  data.primer_apellido_curador,
+                segundo_apellido_curador: data.segundo_apellido_curador,
                 nombre_a_su_falta_curador: data.nombre_a_su_falta_curador,
                 primer_apellido_a_su_falta_curador: data.primer_apellido_a_su_falta_curador,
                 segundo_apellido_a_su_falta_curador: data.segundo_apellido_a_su_falta_curador
@@ -620,13 +620,12 @@ export const getsolicitudesapi = async (req: Request, res: Response): Promise<an
                 }
             }
         }
-        const civil = await dp_estado_civil.findAll();
+    
 
         if (solicitudes) {
             // return res.json(solicitudes);
              return res.json({
-                solicitud: solicitudes,
-                estadocivil: civil
+                solicitudes: solicitudes,
             });
 
         } else {
