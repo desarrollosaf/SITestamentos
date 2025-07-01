@@ -15,7 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-registro',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgSelectModule ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgSelectModule,RouterLink ],
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.scss'
 })
