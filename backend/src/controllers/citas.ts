@@ -383,4 +383,29 @@ function generarHtmlCorreo(contenidoHtml: string): string {
   `;
 }
 
+export const atendercita= async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+    console.log(id)
+  try {
+    const citasser = await Cita.findOne
+    ({
+      where: { id: id}
+    })
+    if (!citasser) {
+      return res.status(404).json({ msg: 'Cita no encontrado' });
+    }
+    await citasser.update({
+      estatus: 1
+    });
+
+    return res.json({
+      msg: `Guardado corectamente`,
+      estatus: 200,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
+  }
+};
+
 

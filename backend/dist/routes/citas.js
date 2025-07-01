@@ -9,4 +9,5 @@ router.post("/api/citas/saveregistro/", citas_1.saveregistro);
 router.get("/api/citas/getcitaservidor/:id", citas_1.getCita);
 router.get("/api/citas/getcitas/", citas_1.getcitas);
 router.post("/api/citas/enviarliga/", citas_1.atenderconliga);
+router.post("/api/citas/atendercita/:id", citas_1.atendercita);
 exports.default = router;
