@@ -10,6 +10,6 @@ router.post("/api/citas/saveregistro/", saveregistro)
 router.get("/api/citas/getcitaservidor/:id", getCita) 
 router.get("/api/citas/getcitas/", getcitas) 
 router.post("/api/citas/enviarliga/", atenderconliga) 
-router.post("/api/citas/atendercita/:id", atendercita) 
+router.get("/api/citas/atendercita/:id", atendercita) 
 
 export default router

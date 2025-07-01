@@ -48,7 +48,10 @@ export class CitasService {
      sendMsg(data: any): Observable<string> {
       return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl}/enviarliga`,data)
     }
-
+    
+    atendercita(id: string): Observable<string> {
+      return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/atendercita/${id}`)
+    }
     
 
 
