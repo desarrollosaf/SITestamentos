@@ -49,7 +49,7 @@
 
   .title-small {
     display: block;
-    color: gray;
+    color: #353535;
     font-size: clamp(24px, 5vw, 40px);
   }
 
@@ -107,4 +107,10 @@
     .main-title {
       margin-bottom: 15px;
     }
+  }
+
+   .texto {
+    color: #353535;
+    font-size: clamp(16px, 4vw, 20px);
+    font-family: 'Montserrat', sans-serif;
   }

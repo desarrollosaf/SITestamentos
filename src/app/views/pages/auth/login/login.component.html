@@ -15,11 +15,13 @@
     <strong>Trabajadora o trabajador del Poder Legislativo<br> mexiquense y sus dependencias:</strong>
     No heredes problemas<br> y aprovecha esta jornada que el Voluntariado<br> del Congreso del Estado de México tiene para ti.
     <br><br>
-    <span class="highlight">Inicia sesión y realiza el trámite en línea.</span>
+    <span class="highlight"><strong>Inicia sesión y realiza el trámite en línea.</strong></span>
   </p>
 
   <form #f="ngForm" (ngSubmit)="onLoggedin(f)">
+    <label for="exampleInputEmail1" class="form-label texto">Matricula: </label>
     <input type="text" placeholder="Usuario" name="Urfc" ngModel required />
+    <label for="exampleInputPassword1" class="form-label texto">Contraseña: </label>
     <input type="password" placeholder="Contraseña" name="Upassword" ngModel required />
     <button type="submit">Ingresar</button>
   </form>

@@ -144,7 +144,8 @@ const getcitas = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 fecha: {
                     [sequelize_1.Op.in]: [formatDate(today), formatDate(tomorrow)]
                 }
-            }
+            },
+            order: [['fecha', 'ASC']]
         });
         for (const cita of citas) {
             if (cita.rfc) {

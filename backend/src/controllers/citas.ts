@@ -147,7 +147,8 @@ export const getcitas = async (req: Request, res: Response): Promise<any> => {
         fecha: {
           [Op.in]: [formatDate(today), formatDate(tomorrow)]
         }
-      }
+      },
+      order: [['fecha', 'ASC']]
     });
 
      for (const cita of citas) {
