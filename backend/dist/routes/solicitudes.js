@@ -7,4 +7,5 @@ const router = (0, express_1.Router)();
 router.post("/api/solicitudes/create/:curp", multer_1.upload, solicitud_1.saveinfo);
 router.get("/api/solicitudes/getsolicitudes/", solicitud_1.getsolicitudes);
 router.get("/api/solicitudes/getsolicitud/:id", solicitud_1.getsolicitud);
+router.get("/api/solicitudes/getsolicitudesapi/", solicitud_1.getsolicitudesapi);
 exports.default = router;
