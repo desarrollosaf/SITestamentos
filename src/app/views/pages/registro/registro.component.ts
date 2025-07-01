@@ -812,6 +812,18 @@ export class RegistroComponent {
         return;
     }
 
+    if(this.mostrarBtnTestigo || this.testigosF.length < 3){
+        Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: "¡Atención!",
+                text: "Debe agregar almenos 3 testigos.",
+                showConfirmButton: false,
+                timer: 3000
+              });
+        return;
+    }
+
     const formData = new FormData();
     formData.append('f_rfc', String(this.formTestamento.value.f_rfc));
     formData.append('f_curp', String(this.formTestamento.value.f_curp));
