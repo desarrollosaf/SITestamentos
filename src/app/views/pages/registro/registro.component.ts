@@ -576,10 +576,10 @@ export class RegistroComponent {
 
   ngOnInit(): void {
     this.modalService.open(this.xlModal, {size: 'lg'}).result.then((result) => {
-      console.log("Modal closed" + result);
+      // console.log("Modal closed" + result);
     }).catch((res) => {});
     this.currentUser = this._userService.currentUserValue;
-    console.log('Usuario Logueado:', this.currentUser);
+    // console.log('Usuario Logueado:', this.currentUser);
     this.buscarDatosPorCurp(this.currentUser.rfc);
 
     this.herederos.valueChanges.subscribe(() => {
@@ -651,7 +651,7 @@ export class RegistroComponent {
   buscarDatosPorCurp(curp: string) {
       this.limpiaForm();
       this.msgcurp = curp;
-      console.log(curp);
+      // console.log(curp);
       this._registroService.getDatosUser(this.msgcurp).subscribe({
         next: (response: any) => {
 
@@ -812,8 +812,9 @@ export class RegistroComponent {
         return;
     }
 
-    if(this.mostrarBtnTestigo || this.testigosF.length < 3){
-        Swal.fire({
+    if(this.mostrarBtnTestigo ){
+      if(this.testigosF.length < 3){
+           Swal.fire({
                 position: "center",
                 icon: "warning",
                 title: "¡Atención!",
@@ -822,7 +823,41 @@ export class RegistroComponent {
                 timer: 3000
               });
         return;
+      }
     }
+
+    if(this.herederos.length <= 0){
+        Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: "¡Atención!",
+                text: "Debe agregar herederos.",
+                showConfirmButton: false,
+                timer: 3000
+              });
+        return;
+
+    }
+    if(this.herederos.length >0){
+        const total = this.herederos.controls.reduce((acc, group) => {
+        const porcentaje = Number(group.get('porcentaje_heredero')?.value || 0);
+        return acc + porcentaje;
+        }, 0);
+
+        if (total > 100) {
+            Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: "¡Atención!",
+                text: `El porcentaje de herederos debe ser 100%, verifique información`,
+                showConfirmButton: false,
+                timer: 2000
+              });
+          return;
+        }
+    }
+
+
 
     const formData = new FormData();
     formData.append('f_rfc', String(this.formTestamento.value.f_rfc));
@@ -1000,7 +1035,7 @@ export class RegistroComponent {
 
     for (const key in this.documentos) {
       if (this.documentos[key]) {
-        console.log(key)
+        // console.log(key)
         formData.append(key, this.documentos[key] as File);
       }
     }
