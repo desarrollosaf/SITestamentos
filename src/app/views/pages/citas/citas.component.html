@@ -1,8 +1,17 @@
-<div class="container-fluid auth-background">
+<div class="container-fluid auth-background main-container" style="padding: 0; margin: 0;">
+  <img src="/images/BANNER VOLUNTARIADO-01.png" alt="Logo" class="banner-img" />
   <div class="row justify-content-center">
     <div class="col-md-10 stretch-card">
       <div class="card">
         <div class="card-body">
+          <div class="d-flex justify-content-end">
+           <button 
+              class="btn btn-sm" 
+              style="background-color: #ecbb87; color: #000; border: none;" 
+              [routerLink]="['/registro']">
+              <i class="feather icon-log-out me-1"></i> Regresar
+            </button>
+          </div>  
           <h6 class="fw-bold mb-4 text-center" style="color: #96134b; font-size: 1.2rem;">
             Citas
           </h6>

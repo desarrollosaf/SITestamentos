@@ -19,11 +19,6 @@ export const routes: Routes = [
         loadChildren: () => import('./views/pages/solicitudes/solicitudes.route')
       },
       {
-        path: 'citas',
-         loadChildren: () => import('./views/pages/citas/citas.route')
-        // loadComponent: () => import('./views/pages/citas/citas.component').then(c => c.CitasComponent)
-      },
-      {
         path: 'reportes',
         loadComponent: () => import('./views/pages/reportes/reportes.component').then(c => c.ReportesComponent)
       }
@@ -41,6 +36,11 @@ export const routes: Routes = [
     path: 'registro',
     canActivate: [authGuard],
     loadComponent: () => import('./views/pages/registro/registro.component').then(c => c.RegistroComponent)
+  },
+  {
+    path: 'citas',
+    canActivate: [authGuard],
+    loadComponent: () => import('./views/pages/citas/citas.component').then(c => c.CitasComponent)
   },
   { path: '**', redirectTo: 'error/404', pathMatch: 'full' }
 ];
