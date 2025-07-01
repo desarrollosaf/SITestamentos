@@ -405,6 +405,11 @@ export class RegistroComponent {
     inputEl.value = '';
   }
 
+  regresar(): void {
+    this.mostrarFormulario = false;
+  }
+  
+
   private reindexarArchivos() {
     const nuevosArchivos: typeof this.documentosTestigos = {};
     this.testigosF.controls.forEach((_, i) => {
