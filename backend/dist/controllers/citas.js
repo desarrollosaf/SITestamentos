@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.atenderconliga = exports.getcitas = exports.getCita = exports.saveregistro = exports.validafecha = exports.getservidor = void 0;
+exports.atendercita = exports.atenderconliga = exports.getcitas = exports.getCita = exports.saveregistro = exports.validafecha = exports.getservidor = void 0;
 const fun_1 = __importDefault(require("../database/fun")); // La conexión
 const dp_fum_datos_generales_1 = require("../models/fun/dp_fum_datos_generales");
 const dp_datospersonales_1 = require("../models/fun/dp_datospersonales");
@@ -358,3 +358,27 @@ function generarHtmlCorreo(contenidoHtml) {
     </html>
   `;
 }
+const atendercita = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    console.log(id);
+    try {
+        const citasser = yield citas_1.default.findOne({
+            where: { id: id }
+        });
+        if (!citasser) {
+            return res.status(404).json({ msg: 'Cita no encontrado' });
+        }
+        yield citasser.update({
+            estatus: 1
+        });
+        return res.json({
+            msg: `Guardado corectamente`,
+            estatus: 200,
+        });
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
+    }
+});
+exports.atendercita = atendercita;

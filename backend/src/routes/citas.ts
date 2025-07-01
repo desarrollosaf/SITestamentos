@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { atenderconliga, getCita, getcitas, getservidor, saveregistro, validafecha } from "../controllers/citas";
+import { atendercita, atenderconliga, getCita, getcitas, getservidor, saveregistro, validafecha } from "../controllers/citas";
 
 
 const router = Router();
@@ -10,5 +10,6 @@ router.post("/api/citas/saveregistro/", saveregistro)
 router.get("/api/citas/getcitaservidor/:id", getCita) 
 router.get("/api/citas/getcitas/", getcitas) 
 router.post("/api/citas/enviarliga/", atenderconliga) 
+router.post("/api/citas/atendercita/:id", atendercita) 
 
 export default router
