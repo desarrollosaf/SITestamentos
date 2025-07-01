@@ -43,7 +43,6 @@ export class DetalleCitasComponent {
   getCitas() {
     this._citasService.getCitas().subscribe({
       next: (response: any) => {
-        console.log(response);
         this.originalData = [...response.citas];
         this.temp = [...this.originalData];
         this.filteredCount = this.temp.length;
@@ -76,7 +75,6 @@ export class DetalleCitasComponent {
   }
 
   enviarDatos(datos: any): void {
-
     if (this.formModal.value.textLink == '' || this.formModal.value.descripcion == '') {
       Swal.fire({
         position: "center",
@@ -93,12 +91,8 @@ export class DetalleCitasComponent {
         rfc: datos.rfc,
         citaid: datos.id
       }
-
-
-
       this._citasService.sendMsg(data).subscribe({
         next: (response: any) => {
-          console.log(response);
           Swal.fire({
             position: "center",
             icon: "success",
@@ -126,6 +120,51 @@ export class DetalleCitasComponent {
     }
   }
 
+  sendAtendido(persona: any) {
+    const id = persona.id;
+    Swal.fire({
+      position: 'center',
+      icon: 'warning',
+      title: '¿Está seguro?',
+      text: 'Se marcará como atendido',
+      showDenyButton: true,
+      confirmButtonText: 'Confirmar',
+      denyButtonText: 'Cancelar',
+      customClass: {
+        confirmButton: 'swal2-confirm btn btn-success me-2',
+        denyButton: 'swal2-cancel btn btn-warning'
+      },
+      buttonsStyling: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._citasService.atendercita(id).subscribe({
+          next: (response: any) => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "¡Correcto!",
+              text: `Se marcó como atendido.`,
+              showConfirmButton: true,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                const currentUrl = this.router.url;
+                this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                  this.router.navigate([currentUrl]);
+                });
+              } else if (result.isDenied) {
+              }
+            });
+          },
+          error: (e: HttpErrorResponse) => {
+            const msg = e.error?.msg || 'Error desconocido';
+            console.error('Error del servidor:', msg);
+          }
+        });
+      } else if (result.isDenied) {
+      }
+    });
+
+  }
   abrirModal(persona: any) {
     this.personaSeleccionada = persona;
     this.modalRef = this.modalService.open(this.xlModal, { size: 'lg' });
