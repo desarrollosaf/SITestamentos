@@ -13,9 +13,7 @@
               <i class="feather icon-log-out me-1"></i> Cerrar sesión
             </button>
           </div>  
-          <h2 class="fw-bold mb-4 text-center" style="color: #161616;">
-            SOLICITUD DE TESTAMENTO
-          </h2>
+          
           @if(!mostrarFormulario){
             <div class="bienvenida">
               <h2 class="text-center">¡Bienvenido!</h2>
@@ -110,7 +108,9 @@
             </div>
 
           }@else{
-         
+         <h2 class="fw-bold mb-4 text-center" style="color: #161616;">
+            SOLICITUD DE TESTAMENTO
+          </h2>
           <form [formGroup]="formTestamento" (ngSubmit)="enviarDatos()" class="forms-sample">
             <div class="row">
               <div class="col-sm-4">
@@ -2233,7 +2233,8 @@ campo es
               <button type="submit" class="btn btn-primary px-4" style="background-color: #ecbb87; color: #000; border: none;" >
                 Registrarse
               </button>
-
+              <button type="button" class="btn btn-primary" style="background-color: #ecbb87; color: #000; border: none;"
+                  (click)="regresar()">Regresar</button>
             </div>
           </form>
         }
