@@ -520,3 +520,122 @@ export const getsolicitud = async (req: Request, res: Response): Promise<any> =>
         return res.status(500).json({ msg: 'Error interno del servidor' });
     }
 };
+
+
+export const getsolicitudesapi = async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+
+    try {
+        let solicitudes = await Solicitud.findAll({
+                include: [
+                    {
+                        model: Testigo,
+                        as: 'testigos',
+                    },
+                    {
+                        model: Albacea,
+                        as: 'albacea',
+                    },
+                    {
+                        model: Documento,
+                        as: 'documentos',
+                        include: [
+                            {
+                            model: TipoDocumento,
+                            as: 'tipo_doc',
+                            },
+                        ],
+                    },
+                    {
+                        model: Heredero,
+                        as: 'herederos',
+                    },
+                    {
+                        model: HerederoSustituto,
+                        as: 'herederos_susti',
+                    },
+                    {
+                        model: Hijo,
+                        as: 'hijos',
+                    },
+                    // Primeras nupcias (orden 1)
+                    {
+                        model: Matrimonio,
+                        as: 'primeras_nupcias',
+                        where: { orden: 1 },
+                        required: false,
+                            include: [
+                                {
+                                model: Hijo,
+                                as: 'hijos',
+                                },
+                            ],
+                    },
+                    // Segundas nupcias (orden 2)
+                    {
+                        model: Matrimonio,
+                        as: 'segundas_nupcias',
+                        where: { orden: 2 },
+                        required: false,
+                            include: [
+                                {
+                                model: Hijo,
+                                as: 'hijos',
+                                },
+                            ],
+                    },
+                    {
+                        model: Padre,
+                        as: 'padres',
+                    },
+                    {
+                        model: TestamentoPasados,
+                        as: 'testamentos_pasados',
+                    },
+                    {
+                        model: TutorDescendiente,
+                        as: 'tutor_descendientes',
+                    },
+                    {
+                        model: Hijo,
+                        as: 'hijo_fuera',
+                        where: { fuera_de_matrimonio: true },
+                        required: false,
+                    }
+                ],
+            });
+
+
+        // Cargar datos personales manualmente desde otra base de datos
+        for (const solicitud of solicitudes) {
+            if (solicitud.userId) {
+                console.log('Buscando datos personales para:', solicitud.userId);
+
+                const datos = await dp_datospersonales.findOne({
+                where: { f_rfc: solicitud.userId },
+                });
+
+                if (datos) {
+                solicitud.setDataValue('datos_user', datos);
+                }
+            }
+        }
+        const civil = await dp_estado_civil.findAll();
+
+        if (solicitudes) {
+            // return res.json(solicitudes);
+             return res.json({
+                solicitud: solicitudes,
+                estadocivil: civil
+            });
+
+        } else {
+            return res.status(404).json({ msg: `No existe el id ${id}` });
+        }
+    } catch (error) {
+        console.error('Error al obtener solicitudes:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor' });
+    }
+};
+
+
