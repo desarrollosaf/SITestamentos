@@ -229,7 +229,7 @@ const atenderconliga = (req, res) => __awaiter(void 0, void 0, void 0, function*
             ],
             raw: true
         });
-        let correo = usuario ? (usuario.correo_ins || usuario.correo_per) : null;
+        let correo = usuario ? (usuario.correo_per || usuario.correo_ins) : null;
         if (!usuario) {
             return res.status(400).json({ error: 'No se encontró el usuario' });
         }
