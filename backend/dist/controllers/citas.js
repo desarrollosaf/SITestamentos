@@ -136,6 +136,7 @@ const getCita = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getCita = getCita;
 const getcitas = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const { fecha } = req.params;
         const today = new Date();
         const tomorrow = new Date();
         tomorrow.setDate(today.getDate() + 1);
@@ -143,11 +144,12 @@ const getcitas = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const citas = yield citas_1.default.findAll({
             where: {
                 fecha: {
-                    [sequelize_1.Op.in]: [formatDate(today), formatDate(tomorrow)]
+                    [sequelize_1.Op.eq]: fecha
                 }
             },
             order: [['fecha', 'ASC']]
         });
+        console.log(citas);
         for (const cita of citas) {
             if (cita.rfc) {
                 console.log('Buscando datos personales para:', cita.rfc);
