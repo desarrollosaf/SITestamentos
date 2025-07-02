@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.atendercita = exports.atenderconliga = exports.getcitas = exports.getCita = exports.saveregistro = exports.validafecha = exports.getservidor = void 0;
+exports.getcitasagrupadas = exports.atendercita = exports.atenderconliga = exports.getcitas = exports.getCita = exports.saveregistro = exports.validafecha = exports.getservidor = void 0;
 const fun_1 = __importDefault(require("../database/fun")); // La conexión
 const dp_fum_datos_generales_1 = require("../models/fun/dp_fum_datos_generales");
 const dp_datospersonales_1 = require("../models/fun/dp_datospersonales");
@@ -384,3 +384,23 @@ const atendercita = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.atendercita = atendercita;
+const getcitasagrupadas = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // try {
+    const citas = yield citas_1.default.findAll({
+        attributes: [
+            'fecha',
+            [sequelize_2.Sequelize.fn('COUNT', sequelize_2.Sequelize.col('id')), 'total_citas']
+        ],
+        group: ['fecha'],
+        order: [['fecha', 'ASC']]
+    });
+    return res.json({
+        msg: `siuuu`,
+        citas: citas
+    });
+    // } catch (error) {
+    //   console.error(error);
+    //   return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
+    // }
+});
+exports.getcitasagrupadas = getcitasagrupadas;

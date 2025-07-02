@@ -410,4 +410,27 @@ export const atendercita= async (req: Request, res: Response): Promise<any> => {
   }
 };
 
+export const getcitasagrupadas = async (req: Request, res: Response): Promise<any> => {
+  // try {
+   
+    const citas = await Cita.findAll({
+      attributes: [
+        'fecha',
+        [Sequelize.fn('COUNT', Sequelize.col('id')), 'total_citas']
+      ],
+      group: ['fecha'],
+      order: [['fecha', 'ASC']] 
+    });
+
+  
+    return res.json({
+      msg: `siuuu`,
+      citas: citas
+    });
+  // } catch (error) {
+  //   console.error(error);
+  //   return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
+  // }
+};
+
 
