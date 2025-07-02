@@ -411,8 +411,7 @@ export const atendercita= async (req: Request, res: Response): Promise<any> => {
 };
 
 export const getcitasagrupadas = async (req: Request, res: Response): Promise<any> => {
-  // try {
-   
+  try {
     const citas = await Cita.findAll({
       attributes: [
         'fecha',
@@ -427,10 +426,38 @@ export const getcitasagrupadas = async (req: Request, res: Response): Promise<an
       msg: `siuuu`,
       citas: citas
     });
-  // } catch (error) {
-  //   console.error(error);
-  //   return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
-  // }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
+  }
 };
+
+export const citasactual = async (req: Request, res: Response): Promise<any> => {
+  try {
+    
+    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+    
+    const citas = await Cita.findAll({
+      attributes: [
+        [Sequelize.fn('COUNT', Sequelize.literal(`CASE WHEN estatus = 1 THEN 1 END`)), 'atendidas'],
+        [Sequelize.fn('COUNT', Sequelize.literal(`CASE WHEN estatus = 0 THEN 1 END`)), 'pendientes']
+      ],
+      where: {
+        fecha: today
+      },
+    });
+
+  
+    return res.json({
+      msg: `siuuu`,
+      citas: citas
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
+  }
+};
+
+
 
 

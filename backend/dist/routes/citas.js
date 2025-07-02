@@ -11,4 +11,5 @@ router.get("/api/citas/getcitas/", citas_1.getcitas);
 router.post("/api/citas/enviarliga/", citas_1.atenderconliga);
 router.get("/api/citas/atendercita/:id", citas_1.atendercita);
 router.get("/api/citas/citasagrupadas/", citas_1.getcitasagrupadas);
+router.get("/api/citas/citasactual/", citas_1.citasactual);
 exports.default = router;
