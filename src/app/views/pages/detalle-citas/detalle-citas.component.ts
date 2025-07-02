@@ -8,10 +8,17 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import { CitasService } from '../../../service/citas.service';
+import { FullCalendarComponent } from '@fullcalendar/angular';
+import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
+import { RouterOutlet } from '@angular/router';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
+import dayGridPlugin from '@fullcalendar/daygrid';
+
 @Component({
   selector: 'app-detalle-citas',
   imports: [NgxDatatableModule, CommonModule, RouterModule, FormsModule,
-    ReactiveFormsModule, NgbTooltipModule],
+    ReactiveFormsModule, NgbTooltipModule, FullCalendarModule],
   templateUrl: './detalle-citas.component.html',
   styleUrl: './detalle-citas.component.scss'
 })
@@ -27,7 +34,24 @@ export class DetalleCitasComponent {
   loading: boolean = true;
   personaSeleccionada: any = null;
   modalRef: NgbModalRef;
+
+  formCitas: FormGroup;
+  showModal = false;
+  selectedDate: Date | null = null;
+  fechaFormat: any;
+  selectedHour: string = '';
+  fechaSeleccionada: any;
+  horaSeleccionada: string = '';
+  mensajeDisponibilidad: string = '';
+  numeroLugares: number = 0;
+  currentUser: any;
+  banderaCita: number = 0;
+
+  viewState: 'lista' | 'enviar-link' | 'atender' = 'lista';
+  selectedRow: any = null;
+
   @ViewChild('table') table: DatatableComponent;
+  @ViewChild('fullcalendar') calendarComponent: FullCalendarComponent;
   @ViewChild('xlModal', { static: true }) xlModal!: TemplateRef<any>;
   constructor(private fb: FormBuilder, private modalService: NgbModal, private router: Router) {
     this.formModal = this.fb.group({
@@ -36,12 +60,54 @@ export class DetalleCitasComponent {
     });
   }
 
+  calendarOptions: CalendarOptions = {
+    plugins: [dayGridPlugin, interactionPlugin],
+    initialView: 'dayGridMonth',
+    events: [],
+    locale: 'es',
+    dateClick: this.onDateClick.bind(this),
+    dayCellDidMount: (info) => {
+      const today = new Date();
+      const cellDate = info.date;
+
+      if (cellDate < new Date(today.setHours(0, 0, 0, 0))) {
+        info.el.classList.add('fc-past-day');
+      }
+    },
+    buttonText: {
+      today: 'Hoy',
+      month: 'Mes',
+      week: 'Semana',
+      day: 'Día',
+      list: 'Lista'
+    },
+    weekends: true,
+    editable: true,
+    selectable: true,
+    selectMirror: true,
+    dayMaxEvents: true
+  };
+
   ngOnInit(): void {
-    this.getCitas()
+    //this.getCitas()
   }
 
-  getCitas() {
-    this._citasService.getCitas().subscribe({
+  onDateClick(arg: DateClickArg) {
+    const today = new Date();
+    console.log(today)
+    const clickedDate = arg.date;
+    if (clickedDate < new Date(today.setHours(0, 0, 0, 0))) {
+      return;
+    }
+    this.selectedDate = clickedDate;
+    this.fechaSeleccionada = clickedDate;
+    const year = clickedDate.getFullYear();
+    const month = String(clickedDate.getMonth() + 1).padStart(2, '0'); // Mes va de 0 a 11
+    const day = String(clickedDate.getDate()).padStart(2, '0');
+
+    this.fechaFormat = `${year}-${month}-${day}`;
+    console.log(this.fechaFormat )
+    this._citasService.getCitas(this.fechaFormat).subscribe({
       next: (response: any) => {
         this.originalData = [...response.citas];
         this.temp = [...this.originalData];
@@ -54,7 +120,29 @@ export class DetalleCitasComponent {
         console.error('Error del servidor:', msg);
       }
     });
+    this.abrirModal(1)
   }
+
+  verEnviarLink(row: any) {
+    this.selectedRow = row;
+    this.viewState = 'enviar-link';
+  }
+
+  /*getCitas() {
+    this._citasService.getCitas("1").subscribe({
+      next: (response: any) => {
+        this.originalData = [...response.citas];
+        this.temp = [...this.originalData];
+        this.filteredCount = this.temp.length;
+        this.setPage({ offset: 0 });
+        this.loading = false;
+      },
+      error: (e: HttpErrorResponse) => {
+        const msg = e.error?.msg || 'Error desconocido';
+        console.error('Error del servidor:', msg);
+      }
+    });
+  }*/
   setPage(pageInfo: any) {
     this.page = pageInfo.offset;
     const start = this.page * this.pageSize;
@@ -72,7 +160,8 @@ export class DetalleCitasComponent {
 
     this.filteredCount = this.temp.length;
     this.setPage({ offset: 0 });
-  }
+  } 
+
 
   enviarDatos(datos: any): void {
     if (this.formModal.value.textLink == '' || this.formModal.value.descripcion == '') {
@@ -91,6 +180,7 @@ export class DetalleCitasComponent {
         rfc: datos.rfc,
         citaid: datos.id
       }
+      console.log(data)
       this._citasService.sendMsg(data).subscribe({
         next: (response: any) => {
           Swal.fire({
@@ -167,7 +257,7 @@ export class DetalleCitasComponent {
   }
   abrirModal(persona: any) {
     this.personaSeleccionada = persona;
-    this.modalRef = this.modalService.open(this.xlModal, { size: 'lg' });
+    this.modalRef = this.modalService.open(this.xlModal, { size: 'xl' });
     setTimeout(() => {
       const elementoDentroDelModal = document.getElementById('focus-target');
       elementoDentroDelModal?.focus();

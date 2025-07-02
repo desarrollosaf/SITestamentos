@@ -41,8 +41,8 @@ export class CitasService {
       return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/getcitaservidor/${id}`)
     }
 
-    getCitas(): Observable<string> {
-      return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/getcitas`)
+    getCitas(fecha: string): Observable<string> {
+      return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/getcitas/${fecha}`)
     }
 
      sendMsg(data: any): Observable<string> {

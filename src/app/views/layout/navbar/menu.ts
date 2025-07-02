@@ -7,9 +7,9 @@ export const MENU: MenuItem[] = [
     link: '/solicitudes'
   },
   {
-    label: 'Generar CSV',
+    label: 'Citas',
     icon: 'file-text',
-    link: '/csv'
+    link: '/detalle-citas'
   },
   {
     label: 'Reportes',

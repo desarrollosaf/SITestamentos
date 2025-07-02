@@ -15,56 +15,17 @@
                             (input)="updateFilter($event)" />
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <div *ngIf="rows.length === 0 && !loading" class="text-center my-3">
-                        <p><strong>No hay datos para mostrar</strong></p>
-                    </div>
-                    <ngx-datatable #table class="bootstrap" [rows]="rows" [columnMode]="'force'" [headerHeight]="50"
-                        *ngIf="rows.length > 0" [footerHeight]="50" [rowHeight]="'auto'" [limit]="pageSize"
-                        [count]="filteredCount" [offset]="page" (page)="setPage($event)" [loadingIndicator]="loading">
-                        <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'"
-                            name="Nombre completo">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{ row.datos_user.nombre_completo}}
-                            </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'"
-                            name="Fecha y hora">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                <p><strong>Fecha: </strong>{{ row.fecha}}</p>
-                                <p><strong>Hora: </strong>{{ row.hora}}</p>
-                            </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'"
-                            name="Correo/Telefono(s)">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                <p><strong>Correo: </strong>{{ row.datos_user.correo_per}}</p>
-                                <p><strong>Télefono: </strong>{{ row.datos_user.numero_tel}}</p>
-                                <p><strong>Celular: </strong>{{ row.datos_user.numero_cel}}</p>
-                            </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'"
-                            name="Dependencia">
-                            <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{ row.dependencia.dependencia.nombre_completo }}
-                            </ng-template>
-                        </ngx-datatable-column>
-                    <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Opciones">
+               
                     
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <div class="d-flex justify-content-center gap-2">
-                                <button class="btn btn-sm btn-primary" placement="end" ngbTooltip="Enviar Link" (click)="abrirModal(row)">
-                                    <i class="feather icon-link"></i>
-                                </button>
-                                <button class="btn btn-sm btn-primary" [disabled]="row.estatus === 1" placement="start"
-                                    ngbTooltip="Marcar como atendido" (click)="sendAtendido(row)">
-                                    <i class="feather icon-check"></i>
-                                </button>
-                            </div>
-                        </ng-template>
-                    </ngx-datatable-column>
-                    </ngx-datatable>
+                <div class="d-flex justify-content-center">
+                    <div style="width: 1300px;">
+                    <div class="calendar-wrapper">
+                        <full-calendar #fullcalendar [options]="calendarOptions"></full-calendar>
+                    </div>
+                    </div>
                 </div>
+                          
+                
             </div>
         </div>
     </div>
@@ -73,35 +34,92 @@
 
 <ng-template #xlModal let-modal>
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Adjuntar link de reunión</h5>
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
         <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
     </div>
     <div class="modal-body">
           <div class="p-2 text-white text-muted bg-light">
-      <strong>Persona a la que se le envia: </strong>{{ personaSeleccionada?.datos_user.nombre_completo }}
+      <strong>Citas del dia : </strong>
     </div>
     <br>
-        <form [formGroup]="formModal" class="forms-sample">
-             <div class="row">
-                <div class="col-sm-12">
-                    <div class="mb-3">
-                        <label class="form-label">Descripción:*</label>
-                         <textarea  formControlName="descripcion" class="form-control" id="descripcion" rows="3"></textarea>
+    @if (viewState === 'lista') {
+        <div class="table-responsive" >
+            <div *ngIf="rows.length === 0 && !loading" class="text-center my-3">
+                <p><strong>No hay datos para mostrar</strong></p>
+            </div>
+            <ngx-datatable #table class="bootstrap" [rows]="rows" [columnMode]="'force'" [headerHeight]="50"
+                *ngIf="rows.length > 0" [footerHeight]="50" [rowHeight]="'auto'" [limit]="pageSize"
+                [count]="filteredCount" [offset]="page" (page)="setPage($event)" [loadingIndicator]="loading">
+                <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'"
+                    name="Nombre completo">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{ row.datos_user.nombre_completo}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'"
+                    name="Fecha y hora">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <p><strong>Fecha: </strong>{{ row.fecha}}</p>
+                        <p><strong>Hora: </strong>{{ row.hora}}</p>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'"
+                    name="Correo/Telefono(s)">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <p><strong>Correo: </strong>{{ row.datos_user.correo_per}}</p>
+                        <p><strong>Télefono: </strong>{{ row.datos_user.numero_tel}}</p>
+                        <p><strong>Celular: </strong>{{ row.datos_user.numero_cel}}</p>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'"
+                    name="Dependencia">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{ row.dependencia.dependencia.nombre_completo }}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Opciones">
+                
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <div class="d-flex justify-content-center gap-2">
+                            <button class="btn btn-sm btn-primary" placement="end" ngbTooltip="Enviar Link"  (click)="verEnviarLink(row)">
+                                <i class="feather icon-link"></i>
+                            </button>
+                            <button class="btn btn-sm btn-primary" [disabled]="row.estatus === 1" placement="start"
+                                ngbTooltip="Marcar como atendido" (click)="sendAtendido(row)">
+                                <i class="feather icon-check"></i>
+                            </button>
+                        </div>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+    }@else if (viewState === 'enviar-link') {
+        <div>
+            <h5>Enviar link de reunión a: {{ selectedRow?.datos_user?.nombre_completo }}</h5>
+            <form [formGroup]="formModal" class="forms-sample">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label class="form-label">Descripción:*</label>
+                            <textarea  formControlName="descripcion" class="form-control" id="descripcion" rows="3"></textarea>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="mb-3">
-                        <label class="form-label">Enlace:*</label>
-                         <textarea  formControlName="textLink" class="form-control" id="textLink" rows="3"></textarea>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label class="form-label">Enlace:*</label>
+                            <textarea  formControlName="textLink" class="form-control" id="textLink" rows="3"></textarea>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form> 
+            <button class="btn btn-success mt-2" (click)="enviarDatos(selectedRow)">Enviar</button>
+            <button class="btn btn-secondary mt-2" (click)="viewState = 'lista'">Volver</button>
+        </div>
+    }
     </div>
     <div class="modal-footer">
         <button type="button" id="focus-target"  class="btn btn-secondary" (click)="modal.close('by: close button')">Cerrar</button>
-        <button type="button" class="btn btn-primary" (click)="enviarDatos(personaSeleccionada)">Enviar</button>
     </div>
 </ng-template>

@@ -21,7 +21,7 @@ export const routes: Routes = [
       },
       {
         path: 'detalle-citas',
-        component: DetalleCitasComponent
+        loadComponent: () => import('./views/pages/detalle-citas/detalle-citas.component').then(c => c.DetalleCitasComponent)
       },
       {
         path: 'reportes',

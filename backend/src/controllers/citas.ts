@@ -135,7 +135,8 @@ export const getCita = async (req: Request, res: Response): Promise<any> => {
 
 export const getcitas = async (req: Request, res: Response): Promise<any> => {
   try {
-   
+
+    const { fecha } = req.params;
     const today = new Date();
     const tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1);
@@ -146,12 +147,13 @@ export const getcitas = async (req: Request, res: Response): Promise<any> => {
     const citas = await Cita.findAll({
       where: {
         fecha: {
-          [Op.in]: [formatDate(today), formatDate(tomorrow)]
+          [Op.eq]: fecha  
         }
       },
       order: [['fecha', 'ASC']]
     });
 
+    console.log(citas);
      for (const cita of citas) {
             if (cita.rfc) {
                 console.log('Buscando datos personales para:', cita.rfc);
