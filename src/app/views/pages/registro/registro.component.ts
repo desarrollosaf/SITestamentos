@@ -31,6 +31,7 @@ export class RegistroComponent {
   porcentajeTotal: number = 0;
   mostrarDoctoIdentifica = false;
 
+
   mostrarNacServ = false;
   labelDocumentoIdentifica = '';
   mostrarFormulario = false;
@@ -591,7 +592,6 @@ export class RegistroComponent {
       this.validarPorcentajeTotal();
     });
   }
-  
 
   //PARA MOSTRAR EL DIV EN CASO DE QUE HAYA TESTIGOS
   // toggleExtraInfo(): void {
