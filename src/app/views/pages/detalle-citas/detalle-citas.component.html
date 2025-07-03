@@ -9,18 +9,39 @@
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">Próximas citas</h6>
-
-               
-                    
+                <div class="p-2 text-white text-muted bg-light">
+                    <strong>Fecha: {{fechaHoraActual}}</strong>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Total</th>
+                                <th></th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> <strong>Total pendientes: </strong></td>
+                                <td>{{tpendientes}}</td>
+                                <td> <strong>Total atendidos:</strong> </td>
+                                <td>{{tatendidos}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
                 <div class="d-flex justify-content-center">
                     <div style="width: 1300px;">
-                    <div class="calendar-wrapper">
-                        <full-calendar #fullcalendar [options]="calendarOptions"></full-calendar>
-                    </div>
+                        <div class="calendar-wrapper">
+                            <full-calendar #fullcalendar [options]="calendarOptions"></full-calendar>
+                        </div>
                     </div>
                 </div>
-                          
-                
+
+
             </div>
         </div>
     </div>
@@ -33,12 +54,12 @@
         <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
     </div>
     <div class="modal-body w-100">
-          <div class="p-2 text-white text-muted bg-light">
-      <strong>Citas del dia </strong>
-    </div>
-    <br>
-    @if (viewState === 'lista') {
-        <div class="table-responsive" >
+        <div class="p-2 text-white text-muted bg-light">
+            <strong>Citas del dia </strong>
+        </div>
+        <br>
+        @if (viewState === 'lista') {
+        <div class="table-responsive">
             <!-- <div class="row align-items-center mb-3">
                 <div class="col-xl-3 col-md-4">
                     <input type="text" class="form-control form-control-sm" placeholder="Buscar..."
@@ -48,17 +69,15 @@
             <div *ngIf="rows.length === 0 && !loading" class="text-center my-3">
                 <p><strong>No hay datos para mostrar</strong></p>
             </div>
-            <ngx-datatable #table class="bootstrap" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" 
+            <ngx-datatable #table class="bootstrap" [rows]="rows" [columnMode]="'force'" [headerHeight]="50"
                 *ngIf="rows.length > 0" [footerHeight]="50" [rowHeight]="'auto'" [limit]="pageSize"
                 [count]="filteredCount" [offset]="page" (page)="setPage($event)" [loadingIndicator]="loading">
-                <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'"
-                    name="Nombre completo">
+                <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Nombre completo">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{ row.datos_user.nombre_completo}}
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'"
-                    name="Fecha y hora">
+                <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Fecha y hora">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         <p><strong>Fecha: </strong>{{ row.fecha}}</p>
                         <p><strong>Hora: </strong>{{ row.hora}}</p>
@@ -72,17 +91,17 @@
                         <p><strong>Celular: </strong>{{ row.datos_user.numero_cel}}</p>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'"
-                    name="Dependencia">
+                <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Dependencia">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         {{ row.dependencia.dependencia.nombre_completo }}
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Opciones">
-                
+
                     <ng-template let-row="row" ngx-datatable-cell-template>
                         <div class="d-flex justify-content-center gap-2">
-                            <button class="btn btn-sm btn-primary" placement="end" ngbTooltip="Enviar Link"  (click)="verEnviarLink(row)">
+                            <button class="btn btn-sm btn-primary" placement="end" ngbTooltip="Enviar Link"
+                                (click)="verEnviarLink(row)">
                                 <i class="feather icon-link"></i>
                             </button>
                             <button class="btn btn-sm btn-primary" [disabled]="row.estatus === 1" placement="start"
@@ -94,7 +113,7 @@
                 </ngx-datatable-column>
             </ngx-datatable>
         </div>
-    }@else if (viewState === 'enviar-link') {
+        }@else if (viewState === 'enviar-link') {
         <div>
             <h5>Enviar link de reunión a: {{ selectedRow?.datos_user?.nombre_completo }}</h5>
             <form [formGroup]="formModal" class="forms-sample">
@@ -102,7 +121,8 @@
                     <div class="col-sm-12">
                         <div class="mb-3">
                             <label class="form-label">Descripción:*</label>
-                            <textarea  formControlName="descripcion" class="form-control" id="descripcion" rows="3"></textarea>
+                            <textarea formControlName="descripcion" class="form-control" id="descripcion"
+                                rows="3"></textarea>
                         </div>
                     </div>
                 </div>
@@ -110,19 +130,20 @@
                     <div class="col-sm-12">
                         <div class="mb-3">
                             <label class="form-label">Enlace:*</label>
-                            <textarea  formControlName="textLink" class="form-control" id="textLink" rows="3"></textarea>
+                            <textarea formControlName="textLink" class="form-control" id="textLink" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
-            </form> 
+            </form>
             <div class="d-flex align-items-start gap-2 mt-2">
                 <button class="btn btn-success" (click)="enviarDatos(selectedRow)">Enviar</button>
                 <button class="btn btn-secondary" (click)="viewState = 'lista'">Volver</button>
             </div>
         </div>
-    }
+        }
     </div>
     <div class="modal-footer">
-        <button type="button" id="focus-target"  class="btn btn-secondary" (click)="modal.close('by: close button')">Cerrar</button>
+        <button type="button" id="focus-target" class="btn btn-secondary"
+            (click)="modal.close('by: close button')">Cerrar</button>
     </div>
 </ng-template>
