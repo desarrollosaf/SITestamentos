@@ -53,6 +53,10 @@ export class CitasService {
       return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/atendercita/${id}`)
     }
     
+    groupCitas(): Observable<string> {
+      return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/citasagrupadas`)
+    }
+    
 
 
 }

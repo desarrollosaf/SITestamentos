@@ -65,14 +65,11 @@ export class DetalleCitasComponent {
     initialView: 'dayGridMonth',
     events: [],
     locale: 'es',
-    dateClick: this.onDateClick.bind(this),
+    // dateClick: this.onDateClick.bind(this),
+    eventClick: this.onEventClick.bind(this),
     dayCellDidMount: (info) => {
       const today = new Date();
       const cellDate = info.date;
-
-      if (cellDate < new Date(today.setHours(0, 0, 0, 0))) {
-        info.el.classList.add('fc-past-day');
-      }
     },
     buttonText: {
       today: 'Hoy',
@@ -89,26 +86,86 @@ export class DetalleCitasComponent {
   };
 
   ngOnInit(): void {
-    //this.getCitas()
+    this.getAllCitas();
   }
 
-  onDateClick(arg: DateClickArg) {
+  getAllCitas() {
+    this._citasService.groupCitas().subscribe({
+      next: (response: any) => {
+        console.log(response);
+        if (response.citas.length > 0) {
+          response.citas.forEach((cita: any) => {
+            const fechaHora = `${cita.fecha}T00:00:00`;
+            const nuevoEvento = {
+              title: `Ver citas, total: ${cita.total_citas}`,
+              start: fechaHora,
+              allDay: false,
+              backgroundColor: '#dc3545',  // Rojo
+              borderColor: '#bd2130',
+              textColor: '#fff'
+            };
+            if (Array.isArray(this.calendarOptions.events)) {
+              this.calendarOptions.events = [...this.calendarOptions.events, nuevoEvento];
+            } else {
+              this.calendarOptions.events = [nuevoEvento];
+            }
+          });
+        }
+      },
+      error: (e: HttpErrorResponse) => {
+        const msg = e.error?.msg || 'Error desconocido'; 1
+        console.error('Error del servidor:', msg);
+      }
+    });
+  }
+  // onDateClick(arg: DateClickArg) {
+  //   const today = new Date();
+  //   console.log(today)
+  //   const clickedDate = arg.date;
+  //   if (clickedDate < new Date(today.setHours(0, 0, 0, 0))) {
+  //     return;
+  //   }
+  //   this.selectedDate = clickedDate;
+  //   this.fechaSeleccionada = clickedDate;
+  //   const year = clickedDate.getFullYear();
+  //   const month = String(clickedDate.getMonth() + 1).padStart(2, '0'); // Mes va de 0 a 11
+  //   const day = String(clickedDate.getDate()).padStart(2, '0');
+
+  //   this.fechaFormat = `${year}-${month}-${day}`;
+  //   console.log(this.fechaFormat )
+  //   this._citasService.getCitas(this.fechaFormat).subscribe({
+  //     next: (response: any) => {
+  //       this.originalData = [...response.citas];
+  //       this.temp = [...this.originalData];
+  //       this.filteredCount = this.temp.length;
+  //       this.setPage({ offset: 0 });
+  //       this.loading = false;
+  //     },
+  //     error: (e: HttpErrorResponse) => {
+  //       const msg = e.error?.msg || 'Error desconocido';1
+  //       console.error('Error del servidor:', msg);
+  //     }
+  //   });
+  //   this.abrirModal(1)
+  // }
+
+
+  onEventClick(arg: any): void {
+    const evento = arg.event;
     const today = new Date();
     console.log(today)
-    const clickedDate = arg.date;
-    if (clickedDate < new Date(today.setHours(0, 0, 0, 0))) {
-      return;
-    }
-    this.selectedDate = clickedDate;
-    this.fechaSeleccionada = clickedDate;
+    const clickedDate = evento.start;
+    this.selectedDate = evento.start;
+    this.fechaSeleccionada = evento.start;
     const year = clickedDate.getFullYear();
     const month = String(clickedDate.getMonth() + 1).padStart(2, '0'); // Mes va de 0 a 11
     const day = String(clickedDate.getDate()).padStart(2, '0');
 
     this.fechaFormat = `${year}-${month}-${day}`;
-    console.log(this.fechaFormat )
+    console.log(this.fechaFormat)
     this._citasService.getCitas(this.fechaFormat).subscribe({
       next: (response: any) => {
+        console.log(response);
         this.originalData = [...response.citas];
         this.temp = [...this.originalData];
         this.filteredCount = this.temp.length;
@@ -116,12 +173,18 @@ export class DetalleCitasComponent {
         this.loading = false;
       },
       error: (e: HttpErrorResponse) => {
-        const msg = e.error?.msg || 'Error desconocido';
+        const msg = e.error?.msg || 'Error desconocido'; 1
         console.error('Error del servidor:', msg);
       }
     });
     this.abrirModal(1)
   }
+
+
+
+
+
+
 
   verEnviarLink(row: any) {
     this.selectedRow = row;
@@ -160,7 +223,7 @@ export class DetalleCitasComponent {
 
     this.filteredCount = this.temp.length;
     this.setPage({ offset: 0 });
-  } 
+  }
 
 
   enviarDatos(datos: any): void {
@@ -261,11 +324,16 @@ export class DetalleCitasComponent {
     setTimeout(() => {
       const elementoDentroDelModal = document.getElementById('focus-target');
       elementoDentroDelModal?.focus();
-    }, 100);
+      if (this.table) {
+        this.table.recalculate();
+      }
+    }, 400);
     this.modalRef.result.then((result) => {
       this.limpiaf()
+      this.viewState = 'lista';
     }).catch((res) => {
       this.limpiaf()
+      this.viewState = 'lista';
     });
   }
 
