@@ -46,10 +46,11 @@ export class DetalleCitasComponent {
   numeroLugares: number = 0;
   currentUser: any;
   banderaCita: number = 0;
-
+  fechaHoraActual: string = '';
   viewState: 'lista' | 'enviar-link' | 'atender' = 'lista';
   selectedRow: any = null;
-
+  tpendientes: any;
+  tatendidos: any;
   @ViewChild('table') table: DatatableComponent;
   @ViewChild('fullcalendar') calendarComponent: FullCalendarComponent;
   @ViewChild('xlModal', { static: true }) xlModal!: TemplateRef<any>;
@@ -87,8 +88,36 @@ export class DetalleCitasComponent {
 
   ngOnInit(): void {
     this.getAllCitas();
+    this.getHoy();
+    this.actualizarFechaHora();
+    setInterval(() => {
+    this.actualizarFechaHora();
+    }, 1000);
   }
 
+ actualizarFechaHora() {
+  const ahora = new Date();
+  this.fechaHoraActual = ahora.toLocaleString('es-MX', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true
+  });
+}
+  getHoy(){
+    this._citasService.getHoy().subscribe({
+      next: (response: any) => {
+        this.tatendidos = response.citas[0].atendidas;
+        this.tpendientes = response.citas[0].pendientes
+      },
+      error: (e: HttpErrorResponse) => {
+        const msg = e.error?.msg || 'Error desconocido'; 1
+        console.error('Error del servidor:', msg);
+      }
+    });
+  }
   getAllCitas() {
     this._citasService.groupCitas().subscribe({
       next: (response: any) => {
@@ -180,32 +209,11 @@ export class DetalleCitasComponent {
     this.abrirModal(1)
   }
 
-
-
-
-
-
-
   verEnviarLink(row: any) {
     this.selectedRow = row;
     this.viewState = 'enviar-link';
   }
 
-  /*getCitas() {
-    this._citasService.getCitas("1").subscribe({
-      next: (response: any) => {
-        this.originalData = [...response.citas];
-        this.temp = [...this.originalData];
-        this.filteredCount = this.temp.length;
-        this.setPage({ offset: 0 });
-        this.loading = false;
-      },
-      error: (e: HttpErrorResponse) => {
-        const msg = e.error?.msg || 'Error desconocido';
-        console.error('Error del servidor:', msg);
-      }
-    });
-  }*/
   setPage(pageInfo: any) {
     this.page = pageInfo.offset;
     const start = this.page * this.pageSize;

@@ -56,6 +56,10 @@ export class CitasService {
     groupCitas(): Observable<string> {
       return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/citasagrupadas`)
     }
+
+    getHoy(): Observable<string> {
+      return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/citasactual`)
+    }
     
 
 
