@@ -493,7 +493,7 @@ export class DetalleSolicitudComponent {
         this.formTestamento.get('puede_ver')?.setValue(response.solicitud[0].puede_ver);
         this.formTestamento.get('puede_oir')?.setValue(response.solicitud[0].puede_oir);
         this.formTestamento.patchValue({
-          fecha_primer_testamento: response.solicitud[0].dificultad_comunicacion,
+          presenta_dificultad: response.solicitud[0].dificultad_comunicacion,
         });
 
         // AGREGAR LA FUNCIONN PARA LOS TESTIGOS*****************************************************************************
