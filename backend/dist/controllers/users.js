@@ -100,7 +100,7 @@ const LoginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
         passwordValid = yield bcrypt_1.default.compare(password, hash);
     }
     if (!passwordValid) {
-        return res.status(400).json({
+        return res.status(402).json({
             msg: `Password Incorrecto => ${password}`
         });
     }

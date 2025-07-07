@@ -103,7 +103,7 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
 
 
     if (!passwordValid) {
-        return res.status(400).json({
+        return res.status(402).json({
             msg: `Password Incorrecto => ${password}`
         })
     }
