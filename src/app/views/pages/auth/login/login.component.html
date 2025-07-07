@@ -1,28 +1,186 @@
-<!-- nombre-del-componente.component.html -->
-<style>
- 
-</style>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tramita tu Testamento</title>
+  <style>
+    .main-container {
+      font-family: 'Montserrat', sans-serif;
+      background: url('/images/FONDO VOLUNTARIADO CON TRMA_Mesa de trabajo 1.svg') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      padding: 5vh 5vw;
+      position: relative;
+      overflow: hidden;
+      color: white;
+      width: 100%;
+      box-sizing: border-box;
+    }
 
-<div class="main-container">
-  <img src="/images/BANNER VOLUNTARIADO-04.png" alt="Logo" class="logo" />
+    .logo-img {
+      width: 650px;
+      max-width: 90vw;
+      height: auto;
+      position: absolute;
+      top: 6vh;
+      left: 5vw;
+      object-fit: contain;
+      z-index: 0;
+    }
 
-  <h1 class="main-title">
-    <span class="title-small">TRAMITA TU</span>
-    <span class="title-large">TESTAMENTO</span>
-  </h1>
+    .main-title {
+      position: absolute;
+      top: 6vh;
+      left: 70%;
+      transform: translateX(-50%);
+      color: #8E134B;
+      font-size: 5vw;
+      font-weight: 800;
+      line-height: 1.2;
+      white-space: nowrap;
+      z-index: 1;
+    }
 
-  <p class="description">
-    <strong>Trabajadora o trabajador del Poder Legislativo<br> mexiquense y sus dependencias:</strong>
-    No heredes problemas<br> y aprovecha esta jornada que el Voluntariado<br> del Congreso del Estado de México tiene para ti.
-    <br><br>
-    <span class="highlight"><strong>Inicia sesión y realiza el trámite en línea.</strong></span>
-  </p>
+    .form-card {
+      position: absolute;
+      top: 37%;
+      left: 70%;
+      transform: translateX(-50%);
+      width: 48.75vw;
+      max-width: 90vw;
+      min-width: 300px;
+      background: linear-gradient(180deg, #8E134B 0%, #B92A67 100%);
+      border-radius: 2.5vw 2.5vw 2.5vw 0;
+      padding: 2vw 4vw;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 2vh;
+      overflow-y: auto;
+      z-index: 1;
+    }
 
-  <form #f="ngForm" (ngSubmit)="onLoggedin(f)">
-    <label for="exampleInputEmail1" class="form-label texto">Matricula: </label>
-    <input type="text" placeholder="Usuario" name="Urfc" ngModel required />
-    <label for="exampleInputPassword1" class="form-label texto">Contraseña: </label>
-    <input type="password" placeholder="Contraseña" name="Upassword" ngModel required />
-    <button type="submit">Ingresar</button>
-  </form>
-</div>
+    .left-text {
+      position: absolute;
+      top: 52%;
+      left: 5vw;
+      width: 35vw;
+      text-align: justify;
+      color: #8D134B;
+      font-size: 2vw;
+      line-height: 1.4;
+      z-index: 1;
+    }
+
+    /* ≥769px and ≤1200px: pantallas medianas */
+    @media (min-width: 769px) and (max-width: 1200px) {
+      .logo-img {
+        width: clamp(250px, 35vw, 550px);
+        left: 5vw;
+        top: 6vh;
+        transform: none;
+      }
+      .main-title {
+        left: 60%;
+        font-size: clamp(3vw, 5vw, 5vw);
+      }
+      .form-card {
+        width: 40vw;
+        max-width: 80vw;
+        left: 60%;
+        top: 35%;
+        transform: translateX(-50%);
+        padding: 2vw 3vw;
+      }
+    }
+
+    /* ≤1200px: ajustar posición */
+    @media (max-width: 1200px) {
+      .main-title,
+      .form-card {
+        left: 60%;
+      }
+    }
+
+    /* ≤992px: centrar */
+    @media (max-width: 992px) {
+      .main-title,
+      .form-card {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .main-title { top: 10vh; }
+      .form-card { top: 45%; }
+    }
+
+    /* ≤768px: móvil */
+    @media (max-width: 768px) {
+      .logo-img {
+        width: 90vw;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 4vh;
+      }
+      .main-title {
+        top: 18vh;
+        font-size: 8vw;
+      }
+      .form-card {
+        width: 90vw;
+        top: 55%;
+        transform: translate(-50%, -50%);
+        padding: 6vw;
+        border-radius: 6vw 6vw 6vw 0;
+      }
+      .left-text {
+        width: 90vw;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 4.5vw;
+        top: auto;
+        bottom: 5vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <!-- Logo responsivo -->
+    <img class="logo-img" src="/images/LOGO VOLUNTARIADO congreso-01.png" alt="Logo Voluntariado">
+
+    <!-- Título principal -->
+    <div class="main-title">
+      TRAMITA TU<br/>TESTAMENTO
+    </div>
+
+    <!-- Tarjeta rosa con formulario -->
+    <div class="form-card">
+      <div style="
+        color: #EAC798;
+        font-size: clamp(16px, 2vw, 24px);
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 1vh;
+      ">
+        Inicia sesión y realiza el trámite en línea.
+      </div>
+      <form #f="ngForm" (ngSubmit)="onLoggedin(f)" style="display:flex;flex-direction:column;gap:2vh;">
+        <label for="Urfc" style="color:white;font-size:clamp(18px,2.2vw,30px);font-weight:600;">Matrícula:</label>
+        <input type="text" id="Urfc" name="Urfc" placeholder="Usuario" ngModel required style="height:45px;background:white;border-radius:50px;padding:10px 20px;font-size:clamp(16px,1.5vw,20px);border:none;" />
+        <label for="Upassword" style="color:white;font-size:clamp(18px,2.2vw,30px);font-weight:600;">Contraseña:</label>
+        <input type="password" id="Upassword" name="Upassword" placeholder="Contraseña" ngModel required style="height:45px;background:white;border-radius:50px;padding:10px 20px;font-size:clamp(16px,1.5vw,20px);border:none;" />
+        <button type="submit" style="margin-top:2vh;height:50px;background:#8E134B;border-radius:50px;color:white;font-size:clamp(18px,2vw,26px);font-weight:600;border:none;cursor:pointer;">
+          Ingresar
+        </button>
+      </form>
+    </div>
+
+    <!-- Texto inferior izquierdo -->
+    <div class="left-text">
+      <span style="font-weight:700;">No heredes problemas y aprovecha<br/></span>
+      <span style="color:white;font-weight:700;">esta jornada que el Voluntariado del Congreso del Estado de México tiene para ti.</span>
+    </div>
+  </div>
+</body>
+</html>

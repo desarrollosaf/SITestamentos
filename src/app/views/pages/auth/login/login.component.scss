@@ -1,20 +1,120 @@
-:host {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-// .auth-background {
-//   min-height: 100vh;
-
-//   background-position: center;
-//   background-repeat: no-repeat;
+// :host {
+//   height: 100vh;
 //   display: flex;
 //   align-items: center;
+//   justify-content: center;
 // }
 
- @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+// // .auth-background {
+// //   min-height: 100vh;
+
+// //   background-position: center;
+// //   background-repeat: no-repeat;
+// //   display: flex;
+// //   align-items: center;
+// // }
+
+//  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+//   .main-container {
+//     font-family: 'Montserrat', sans-serif;
+//     background: url('/images/BANNERVOLUNTARIADOTESTAMENTO-03-03.svg') no-repeat center center fixed;
+//     background-size: cover;
+//     min-height: 100vh;
+//     padding: 5vh 5vw;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: flex-start;
+//     text-align: center;
+//     color: white;
+//     box-sizing: border-box;
+//     width: 100%;
+//   }
+
+//   .logo {
+//     max-width: 534px;
+//     width: 100%;
+//     margin-bottom: 30px;
+//     height: auto;
+//   }
+
+//   .main-title {
+//     font-weight: bold;
+//     margin-bottom: 20px;
+//     line-height: 1.2;
+//     max-width: 100%;
+//     word-break: break-word;
+//   }
+
+//   .title-small {
+//     display: block;
+//     color: #353535;
+//     font-size: clamp(24px, 5vw, 40px);
+//   }
+
+//   .title-large {
+//     display: block;
+//     color: #94134A;
+//     font-size: clamp(40px, 12vw, 100px);
+//   }
+
+//   .description {
+//     font-size: clamp(16px, 4vw, 24px);
+//     max-width: 90%;
+//     margin: 0 auto 40px;
+//     line-height: 1.5;
+//     color: black;
+//   }
+
+//   .highlight {
+//     color: #94134A;
+//   }
+
+//   form {
+//     max-width: 400px;
+//     width: 100%;
+//     text-align: center;
+//   }
+
+//   input {
+//     width: 100%;
+//     background-color: rgba(255, 255, 255, 0.85);
+//     border: none;
+//     border-radius: 80px;
+//     padding: 12px 16px;
+//     font-size: 16px;
+//     margin-bottom: 16px;
+//     box-sizing: border-box;
+//   }
+
+//   button {
+//     width: 100%;
+//     background-color: #94134A;
+//     color: white;
+//     border: none;
+//     padding: 12px;
+//     border-radius: 10px;
+//     font-weight: bold;
+//     font-size: 16px;
+//   }
+
+//   @media (max-width: 480px) {
+//     .logo {
+//       max-width: 150px;
+//     }
+
+//     .main-title {
+//       margin-bottom: 15px;
+//     }
+//   }
+
+//    .texto {
+//     color: #353535;
+//     font-size: clamp(16px, 4vw, 20px);
+//     font-family: 'Montserrat', sans-serif;
+//   }
+
 
   .main-container {
     font-family: 'Montserrat', sans-serif;
@@ -30,87 +130,4 @@
     color: white;
     box-sizing: border-box;
     width: 100%;
-  }
-
-  .logo {
-    max-width: 534px;
-    width: 100%;
-    margin-bottom: 30px;
-    height: auto;
-  }
-
-  .main-title {
-    font-weight: bold;
-    margin-bottom: 20px;
-    line-height: 1.2;
-    max-width: 100%;
-    word-break: break-word;
-  }
-
-  .title-small {
-    display: block;
-    color: #353535;
-    font-size: clamp(24px, 5vw, 40px);
-  }
-
-  .title-large {
-    display: block;
-    color: #94134A;
-    font-size: clamp(40px, 12vw, 100px);
-  }
-
-  .description {
-    font-size: clamp(16px, 4vw, 24px);
-    max-width: 90%;
-    margin: 0 auto 40px;
-    line-height: 1.5;
-    color: black;
-  }
-
-  .highlight {
-    color: #94134A;
-  }
-
-  form {
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-  }
-
-  input {
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.85);
-    border: none;
-    border-radius: 80px;
-    padding: 12px 16px;
-    font-size: 16px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
-  }
-
-  button {
-    width: 100%;
-    background-color: #94134A;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 16px;
-  }
-
-  @media (max-width: 480px) {
-    .logo {
-      max-width: 150px;
-    }
-
-    .main-title {
-      margin-bottom: 15px;
-    }
-  }
-
-   .texto {
-    color: #353535;
-    font-size: clamp(16px, 4vw, 20px);
-    font-family: 'Montserrat', sans-serif;
   }
