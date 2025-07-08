@@ -2,7 +2,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.SECRET_KEY || 'TSE-Poder-legislativo';
+const SECRET_KEY = process.env.SECRET_KEY || 'TSE-Poder-legislativo';
 
 export interface JwtPayload {
     id: number;
@@ -18,7 +18,7 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction): vo
     }
 
     try {
-        const decoded = jwt.verify(token, JWT_SECRET) as JwtPayload;
+        const decoded = jwt.verify(token, SECRET_KEY) as JwtPayload;
         (req as any).user = decoded;
         next();
     } catch (err) {
