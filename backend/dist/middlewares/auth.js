@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const JWT_SECRET = process.env.SECRET_KEY || 'TSE-Poder-legislativo';
+const SECRET_KEY = process.env.SECRET_KEY || 'TSE-Poder-legislativo';
 const verifyToken = (req, res, next) => {
     var _a;
     const token = (_a = req.header('Authorization')) === null || _a === void 0 ? void 0 : _a.replace('Bearer ', '');
@@ -14,7 +14,7 @@ const verifyToken = (req, res, next) => {
         return;
     }
     try {
-        const decoded = jsonwebtoken_1.default.verify(token, JWT_SECRET);
+        const decoded = jsonwebtoken_1.default.verify(token, SECRET_KEY);
         req.user = decoded;
         next();
     }
