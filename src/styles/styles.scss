@@ -3,6 +3,9 @@
 * Copyright © 2024 NobleUI
 * Licensed under ThemeForest License
 */
+:root {
+  --bs-body-font-family: Arial, sans-serif !important;
+}
 
 // Theme style for demo2 (Horizontal Menu Layout)
 
@@ -123,3 +126,4 @@
 
 // Custom scss
 @import "./custom";
+
