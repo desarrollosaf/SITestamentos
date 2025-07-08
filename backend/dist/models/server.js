@@ -21,6 +21,7 @@ const user_1 = __importDefault(require("../routes/user"));
 const solicitudes_1 = __importDefault(require("../routes/solicitudes"));
 const citas_1 = __importDefault(require("../routes/citas"));
 const users_1 = __importDefault(require("../models/saf/users"));
+const auth_1 = require("../middlewares/auth");
 const reportes_1 = __importDefault(require("../routes/reportes"));
 class Server {
     constructor() {
@@ -48,7 +49,7 @@ class Server {
         this.app.use(express_1.default.json());
         this.app.use((0, cors_1.default)());
         this.app.use('/storage', express_1.default.static(path_1.default.join(process.cwd(), 'storage')));
-        // this.app.use(verifyToken);
+        this.app.use(auth_1.verifyToken);
     }
     DBconnetc() {
         return __awaiter(this, void 0, void 0, function* () {
