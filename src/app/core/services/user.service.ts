@@ -51,8 +51,14 @@ export class UserService {
     return this.currentUserSubject.value;
   }
   
-  setCurrentUser(user: User) {
+  setCurrentUser(user: User | null) {
     this.currentUserSubject.next(user);
     localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
+  logout(): Observable<any> {
+    return this.http.post(`${this.myAppUrl}${this.myAPIUrl}/cerrarsesion`, {}, {
+      withCredentials: true
+    });
   }
 }

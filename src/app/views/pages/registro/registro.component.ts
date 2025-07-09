@@ -585,7 +585,6 @@ export class RegistroComponent {
       // console.log("Modal closed" + result);
     }).catch((res) => {});
     this.currentUser = this._userService.currentUserValue;
-    console.log('Usuario Logueado:', this.currentUser.rfc);
     this.buscarDatosPorCurp(this.currentUser.rfc);
 
     this.herederos.valueChanges.subscribe(() => {
@@ -656,7 +655,6 @@ export class RegistroComponent {
   buscarDatosPorCurp(curp: string) {
       this.limpiaForm();
       this.msgcurp = curp;
-      console.log(curp);
       this._registroService.getDatosUser(this.msgcurp).subscribe({
         next: (response: any) => {
           this.datos_personales = response.data
@@ -1097,16 +1095,36 @@ export class RegistroComponent {
     })
   }
 
-  onLogout(e: Event) {
-      e.preventDefault();
+  // onLogout(e: Event) {
+  //     e.preventDefault();
 
+  //     localStorage.setItem('isLoggedin', 'false');
+  //     localStorage.removeItem('myToken')
+  //     localStorage.removeItem('currentUser')
+  //     if (localStorage.getItem('isLoggedin') === 'false') {
+  //       this.router.navigate(['/auth/login']);
+  //     }
+  // }
+
+
+  onLogout(e: Event) {
+  e.preventDefault();
+
+  this._userService.logout().subscribe({
+    next: () => {
+      // Limpia cualquier dato local
+      localStorage.removeItem('currentUser');
       localStorage.setItem('isLoggedin', 'false');
-      localStorage.removeItem('myToken')
-      localStorage.removeItem('currentUser')
-      if (localStorage.getItem('isLoggedin') === 'false') {
-        this.router.navigate(['/auth/login']);
-      }
-  }
+      this._userService.setCurrentUser(null);
+
+      // Redirige al login
+      this.router.navigate(['/auth/login']);
+    },
+    error: (err) => {
+      console.error('Error al cerrar sesión', err);
+    }
+  });
+}
 
   //LIMPIAR FORMULARIO Y ESTADO DE INPUTS
   limpiaForm(){

@@ -6,12 +6,10 @@ import { Router } from '@angular/router';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
-
   const authReq = req.clone({
-    withCredentials: true // 👈 asegura que todas las cookies se envíen
+    withCredentials: true
   });
  
-
   return next(authReq).pipe(
     catchError(err => {
       if (err.status === 401) {
