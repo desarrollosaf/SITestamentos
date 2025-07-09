@@ -44,6 +44,7 @@ class Server {
             origin: 'http://localhost:4200', // ✅ tu frontend exacto
             credentials: true // ✅ necesario para cookies HttpOnly
         }));
+        this.app.use((0, cookie_parser_1.default)());
         this.app.use('/storage', express_1.default.static(path_1.default.join(process.cwd(), 'storage')));
         // ✅ Middleware para proteger solo rutas privadas
         this.app.use((req, res, next) => {
@@ -58,7 +59,6 @@ class Server {
             }
             return (0, auth_1.verifyToken)(req, res, next); // proteger
         });
-        this.app.use((0, cookie_parser_1.default)());
     }
     routes() {
         this.app.use(estados_1.default);

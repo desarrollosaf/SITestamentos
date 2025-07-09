@@ -124,15 +124,14 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
     return res.json({ user,bandera })
 }
 
-export const getCurrentUser = (req: Request, res: Response) => {
-  const user = (req as any).user;
-
-  // Podrías consultar más info en la base de datos si quieres
-  res.json({
-    rfc: user.rfc,
-    // otros datos si es necesario
-  });
-};
+    export const getCurrentUser = (req: Request, res: Response) => {
+        const user = (req as any).user;
+        // Podrías consultar más info en la base de datos si quieres
+        res.json({
+        rfc: user.rfc,
+        // otros datos si es necesario
+        });
+    };
 
 
 
