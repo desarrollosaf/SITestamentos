@@ -32,7 +32,10 @@ class Server {
 
     middlewares() {
         this.app.use(express.json());
-        this.app.use(cors());
+        this.app.use(cors({
+        origin: 'http://localhost:4200', // ✅ tu frontend exacto
+        credentials: true                // ✅ necesario para cookies HttpOnly
+        }));
         this.app.use('/storage', express.static(path.join(process.cwd(), 'storage')));
 
         // ✅ Middleware para proteger solo rutas privadas
