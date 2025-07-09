@@ -23,6 +23,7 @@ const citas_1 = __importDefault(require("../routes/citas"));
 const reportes_1 = __importDefault(require("../routes/reportes"));
 const users_1 = __importDefault(require("../models/saf/users"));
 const auth_1 = require("../middlewares/auth");
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -54,6 +55,7 @@ class Server {
             }
             return (0, auth_1.verifyToken)(req, res, next); // proteger
         });
+        this.app.use((0, cookie_parser_1.default)());
     }
     routes() {
         this.app.use(estados_1.default);

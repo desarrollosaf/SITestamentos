@@ -108,13 +108,22 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
         })
     }
 
-    const token = jwt.sign({
-        rfc: rfc
-    }, process.env.SECRET_KEY || 'TSE-Poder-legislativo',
-    { expiresIn: 10000 }
+     // ✅ Generar token
+    const accessToken = jwt.sign(
+        { rfc: rfc },
+        process.env.SECRET_KEY || 'TSE-Poder-legislativo',
+        { expiresIn: '15m' } // ⏳ Mejora: tiempo legible (15 minutos)
     );
+
+    // ✅ Guardar token en cookie HttpOnly
+    res.cookie('accessToken', accessToken, {
+        httpOnly: true,
+        secure: process.env.SECRET_KEY === 'TSE-Poder-legislativo',
+        sameSite: 'strict', // ✅ minúscula
+        maxAge: 15 * 60 * 1000, // 15 minutos
+    });
     
-    return res.json({ token,user,bandera })
+    return res.json({ user,bandera })
 }
 
 

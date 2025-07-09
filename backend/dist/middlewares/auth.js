@@ -6,9 +6,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const SECRET_KEY = process.env.SECRET_KEY || 'TSE-Poder-legislativo';
+// export const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
+//     const token = req.header('Authorization')?.replace('Bearer ', '');
+//     if (!token) {
+//         res.status(401).json({ msg: 'Token no proporcionado' });
+//         return;
+//     }
+//     try {
+//         const decoded = jwt.verify(token, SECRET_KEY) as JwtPayload;
+//         (req as any).user = decoded;
+//         next();
+//     } catch (err) {
+//         res.status(401).json({ msg: 'Token inválido' });
+//         return;
+//     }
+// };
 const verifyToken = (req, res, next) => {
     var _a;
-    const token = (_a = req.header('Authorization')) === null || _a === void 0 ? void 0 : _a.replace('Bearer ', '');
+    const token = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.accessToken;
     if (!token) {
         res.status(401).json({ msg: 'Token no proporcionado' });
         return;
@@ -20,7 +35,6 @@ const verifyToken = (req, res, next) => {
     }
     catch (err) {
         res.status(401).json({ msg: 'Token inválido' });
-        return;
     }
 };
 exports.verifyToken = verifyToken;

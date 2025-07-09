@@ -104,9 +104,16 @@ const LoginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
             msg: `Password Incorrecto => ${password}`
         });
     }
-    const token = jsonwebtoken_1.default.sign({
-        rfc: rfc
-    }, process.env.SECRET_KEY || 'TSE-Poder-legislativo', { expiresIn: 10000 });
-    return res.json({ token, user, bandera });
+    // ✅ Generar token
+    const accessToken = jsonwebtoken_1.default.sign({ rfc: rfc }, process.env.SECRET_KEY || 'TSE-Poder-legislativo', { expiresIn: '15m' } // ⏳ Mejora: tiempo legible (15 minutos)
+    );
+    // ✅ Guardar token en cookie HttpOnly
+    res.cookie('accessToken', accessToken, {
+        httpOnly: true,
+        secure: process.env.SECRET_KEY === 'TSE-Poder-legislativo',
+        sameSite: 'strict', // ✅ minúscula
+        maxAge: 15 * 60 * 1000, // 15 minutos
+    });
+    return res.json({ user, bandera });
 });
 exports.LoginUser = LoginUser;
