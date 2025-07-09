@@ -119,6 +119,7 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
     secure: process.env.NODE_ENV === 'production', // ✅ más correcto para distinguir local vs producción
     sameSite: 'strict',
     maxAge: 15 * 60 * 1000, // 15 minutos
+    path: '/',
     });
         
     return res.json({ user,bandera })
@@ -132,6 +133,17 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
         // otros datos si es necesario
         });
     };
+
+export const cerrarsesion = async (req: Request, res: Response):  Promise<any> => {
+  res.clearCookie('accessToken', {
+    httpOnly: true,
+    sameSite: 'strict',
+    secure: process.env.NODE_ENV === 'production',
+    path: '/',
+  });
+
+  return res.status(200).json({ message: 'Sesión cerrada' });
+};
 
 
 
