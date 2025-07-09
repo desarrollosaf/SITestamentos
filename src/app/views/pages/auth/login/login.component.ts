@@ -52,64 +52,48 @@ export class LoginComponent implements OnInit {
 
   }
 
-  onLoggedin(form: NgForm) {
+onLoggedin(form: NgForm) {
+  const user: User = {
+    rfc: form.value.Urfc,
+    password: form.value.Upassword
+  };
 
-    const user: User = {
-      rfc: form.value.Urfc,
-      password: form.value.Upassword
-    };
+  this._userService.login(user).subscribe({
+    next: (response: any) => {
+      const userData = response.user;
+      const bandera = response.bandera;
 
-
-      this._userService.login(user).subscribe({
-        next: (response: any) => {
-          const token = response.token;
-          const userData = response.user;
-          const bandera =  response.bandera
-
-          localStorage.setItem('myToken', token);
-          localStorage.setItem('isLoggedin', 'true');
-
-          this._userService.setCurrentUser(userData);
-          this.userRole$.subscribe(role => {
-          });
-          
-          if(bandera){
-            this.router.navigate(['/registro']);
-          }else{
-            this.router.navigate([this.returnUrl]);
-          }
-          
-        },
-        error: (e: HttpErrorResponse) => {
-          console.log(e.status)
-          if (e.error && e.error.msg) {
-            if(e.status == 400){
-              Swal.fire({
-                position: "center",
-                icon: "error",
-                title: "Usuario no existe.",
-                showConfirmButton: false,
-                timer: 3000
-              });
-                
-            }else if(e.status == 402){
-              Swal.fire({
-                position: "center",
-                icon: "error",
-                title: "Contraseña incorrecta.",
-                showConfirmButton: false,
-                timer: 3000
-              });
-
-            }
-            
-          } else {
-            console.error('Error desconocido:', e);
-          }
-        },
-      });
-    
-   
-  }
+      // Ya no guardes el token
+      localStorage.setItem('isLoggedin', 'true'); // opcional
+      this._userService.setCurrentUser(userData);
+      if (bandera) {
+        this.router.navigate(['/registro']);
+      } else {
+        this.router.navigate([this.returnUrl]);
+      }
+    },
+    error: (e: HttpErrorResponse) => {
+      if (e.status === 400) {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Usuario no existe.",
+          showConfirmButton: false,
+          timer: 3000
+        });
+      } else if (e.status === 402) {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Contraseña incorrecta.",
+          showConfirmButton: false,
+          timer: 3000
+        });
+      } else {
+        console.error('Error desconocido:', e);
+      }
+    },
+  });
+}
 
 }

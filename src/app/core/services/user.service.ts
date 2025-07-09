@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { User } from '../interfaces/user';
 import { Injectable, signal, inject, computed } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -28,9 +28,24 @@ export class UserService {
 
   }
 
-  login(user: User): Observable<string>{
-    return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl}/login`, user);
+  // login(user: User): Observable<string>{
+  //   return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl}/login`, user);
+  // }
+
+  login(user: User): Observable<any> {
+    return this.http.post<any>(
+      `${this.myAppUrl}${this.myAPIUrl}/login`,
+      user,
+      { withCredentials: true } // <- necesario para cookies HttpOnly
+    );
   }
+
+
+  getCurrentUser(): Observable<User> {
+  return this.http.get<User>(`${this.myAppUrl}${this.myAPIUrl}/me`, {
+    withCredentials: true
+  });
+}
 
   get currentUserValue(): User | null {
     return this.currentUserSubject.value;

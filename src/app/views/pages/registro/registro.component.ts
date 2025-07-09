@@ -6,8 +6,8 @@ import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { RegistroService } from '../../../service/registro.service';
-import { HttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
+// import { HttpClientModule } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { UserService } from '../../../core/services/user.service';
@@ -585,7 +585,7 @@ export class RegistroComponent {
       // console.log("Modal closed" + result);
     }).catch((res) => {});
     this.currentUser = this._userService.currentUserValue;
-    // console.log('Usuario Logueado:', this.currentUser);
+    console.log('Usuario Logueado:', this.currentUser.rfc);
     this.buscarDatosPorCurp(this.currentUser.rfc);
 
     this.herederos.valueChanges.subscribe(() => {
@@ -656,10 +656,9 @@ export class RegistroComponent {
   buscarDatosPorCurp(curp: string) {
       this.limpiaForm();
       this.msgcurp = curp;
-      // console.log(curp);
+      console.log(curp);
       this._registroService.getDatosUser(this.msgcurp).subscribe({
         next: (response: any) => {
-
           this.datos_personales = response.data
           if(response.solicitud){
             this.estatusSolicitud = true;

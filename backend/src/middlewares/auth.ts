@@ -29,7 +29,6 @@ export interface JwtPayload {
 
 export const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
   const token = req.cookies?.accessToken;
-
   if (!token) {
     res.status(401).json({ msg: 'Token no proporcionado' });
     return;
