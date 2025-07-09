@@ -9,6 +9,7 @@ import routesCitas from '../routes/citas';
 import routesReportes from '../routes/reportes';
 import UsersSafs from '../models/saf/users';
 import { verifyToken } from '../middlewares/auth';
+import cookieParser from 'cookie-parser';
 
 class Server {
     private app: Application;
@@ -50,6 +51,7 @@ class Server {
 
             return verifyToken(req, res, next); // proteger
         });
+        this.app.use(cookieParser());
     }
 
     routes() {
