@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoginUser = exports.CreateUser = exports.ReadUser = void 0;
+exports.getCurrentUser = exports.LoginUser = exports.CreateUser = exports.ReadUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const users_1 = __importDefault(require("../models/saf/users"));
 const user_1 = __importDefault(require("../models/user"));
@@ -114,3 +114,12 @@ const LoginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
     return res.json({ user, bandera });
 });
 exports.LoginUser = LoginUser;
+const getCurrentUser = (req, res) => {
+    const user = req.user;
+    // Podrías consultar más info en la base de datos si quieres
+    res.json({
+        rfc: user.rfc,
+        // otros datos si es necesario
+    });
+};
+exports.getCurrentUser = getCurrentUser;
