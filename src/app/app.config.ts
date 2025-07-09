@@ -19,6 +19,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './views/pages/auth/auth.interceptor';
 
 registerLocaleData(localeEs, 'es');
 
@@ -34,6 +36,9 @@ const highlightOptions = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+     provideHttpClient(
+      withInterceptors([authInterceptor])
+    ),
    provideRouter(routes),
     { provide: LOCALE_ID, useValue: 'es' },
     provideZoneChangeDetection({ eventCoalescing: true }), 
