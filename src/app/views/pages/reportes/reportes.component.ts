@@ -118,7 +118,6 @@ export class ReportesComponent {
         };
         this.reporteService.getRegistros(datos).subscribe({
           next: (response: any) => {
-            console.log(response)
            this.generarGrafica(response.porfecha);
           },
           error: (e: HttpErrorResponse) => {
@@ -143,8 +142,6 @@ export class ReportesComponent {
       this.fromDate = date;
       this.graficaGenerada = false; 
     }
-
-    console.log('Desde:', this.fromDate, 'Hasta:', this.toDate, 'Persona:', this.selectedPersonId);
   }
 
   isHovered(date: NgbDate) {
@@ -229,7 +226,6 @@ export class ReportesComponent {
     this.people = PeoplesData.peoples;
     this.reporteService.getInfo().subscribe({
       next: (response: any) => {
-        console.log(response)
         this.dependencias = response
       },
       error: (e: HttpErrorResponse) => {

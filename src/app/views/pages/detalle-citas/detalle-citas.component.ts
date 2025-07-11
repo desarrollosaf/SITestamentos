@@ -39,6 +39,7 @@ export class DetalleCitasComponent {
   showModal = false;
   selectedDate: Date | null = null;
   fechaFormat: any;
+  fechaModal: any;
   selectedHour: string = '';
   fechaSeleccionada: any;
   horaSeleccionada: string = '';
@@ -47,6 +48,7 @@ export class DetalleCitasComponent {
   currentUser: any;
   banderaCita: number = 0;
   fechaHoraActual: string = '';
+  fechaFormateadaM: string = '';
   viewState: 'lista' | 'enviar-link' | 'atender' = 'lista';
   selectedRow: any = null;
   tpendientes: any;
@@ -118,6 +120,7 @@ export class DetalleCitasComponent {
       }
     });
   }
+
   getAllCitas() {
     this._citasService.groupCitas().subscribe({
       next: (response: any) => {
@@ -182,7 +185,6 @@ export class DetalleCitasComponent {
   onEventClick(arg: any): void {
     const evento = arg.event;
     const today = new Date();
-    console.log(today)
     const clickedDate = evento.start;
     this.selectedDate = evento.start;
     this.fechaSeleccionada = evento.start;
@@ -191,10 +193,14 @@ export class DetalleCitasComponent {
     const day = String(clickedDate.getDate()).padStart(2, '0');
 
     this.fechaFormat = `${year}-${month}-${day}`;
-    console.log(this.fechaFormat)
+    this.fechaFormateadaM = this.fechaSeleccionada.toLocaleDateString('es-MX', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+    
     this._citasService.getCitas(this.fechaFormat).subscribe({
       next: (response: any) => {
-        console.log(response);
         this.originalData = [...response.citas];
         this.temp = [...this.originalData];
         this.filteredCount = this.temp.length;

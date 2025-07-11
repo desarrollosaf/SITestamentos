@@ -132,17 +132,6 @@ export class CitasComponent {
 
 
   enviarDatos(): void {
-    if (this.horaSeleccionada < '09:00' || this.horaSeleccionada > '18:00') {
-      Swal.fire({
-        position: 'center',
-        icon: 'warning',
-        title: "¡Atención!",
-        text: "Selecciona una hora entre 09:00 y 18:00.",
-        showConfirmButton: false,
-        timer: 4000
-      });
-      return;
-    }
     this.currentUser = this._userService.currentUserValue;
 
     const year = this.fechaSeleccionada.getFullYear();
@@ -153,7 +142,6 @@ export class CitasComponent {
 
     const datos = {
       fecha: this.fechaFormat,
-      hora: this.horaSeleccionada,
       rfc: this.currentUser.rfc
     };
     this._citasService.saveCita(datos).subscribe({
