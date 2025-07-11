@@ -41,12 +41,11 @@ class Server {
     middlewares() {
         this.app.use(express_1.default.json());
         this.app.use((0, cors_1.default)({
-            origin: 'http://localhost:4200', // ✅ tu frontend exacto
-            credentials: true // ✅ necesario para cookies HttpOnly
+            origin: 'https://testamentos.siasaf.gob.mx',
+            credentials: true
         }));
         this.app.use((0, cookie_parser_1.default)());
         this.app.use('/storage', express_1.default.static(path_1.default.join(process.cwd(), 'storage')));
-        // ✅ Middleware para proteger solo rutas privadas
         this.app.use((req, res, next) => {
             const publicPaths = [
                 '/api/user/login',
