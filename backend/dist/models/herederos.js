@@ -19,31 +19,31 @@ Heredero.init({
     },
     nombre_heredero: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     primer_apellido_heredero: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     segundo_apellido_heredero: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     edad: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
     },
     parentesco: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
     },
     porcentaje: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     derecho_acrecer: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
     },
     createdAt: sequelize_1.DataTypes.DATE,
     updatedAt: sequelize_1.DataTypes.DATE,

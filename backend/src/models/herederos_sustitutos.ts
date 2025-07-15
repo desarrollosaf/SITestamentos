@@ -41,31 +41,31 @@ HerederoSustituto.init(
     },
     nombre_sustituto: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
      primer_apellido_sustituto: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
      segundo_apellido_sustituto: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     nombre_a_sustituir: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     primer_apellido_a_sustituir: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     segundo_apellido_a_sustituir: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     derecho_acrecer: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     createdAt: {
       type: DataTypes.DATE,

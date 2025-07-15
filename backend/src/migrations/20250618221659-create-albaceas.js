@@ -21,27 +21,27 @@ module.exports = {
       },
       nombre_albacea: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
        primer_apellido_albacea: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
        segundo_apellido_albacea: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
        nombre_falta_albacea: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
        primer_apellido_falta_albacea: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
        segundo_apellido_falta_albacea: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       createdAt: {
         allowNull: false,

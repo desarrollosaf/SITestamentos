@@ -55,11 +55,11 @@ Hijo.init(
     },
     primer_apellido: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     segundo_apellido: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     edad: {
       type: DataTypes.INTEGER,
@@ -71,23 +71,23 @@ Hijo.init(
     },
     reconocido: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
     fuera_de_matrimonio: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
     nombre_fuera: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     primer_apellido_fuera_matri: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     segundo_apellido_fuera_matri: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
