@@ -24,9 +24,8 @@ export class RegistroService {
 
 
   saveRegistro(data: FormData, curp: String): Observable<string> {
-    return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl3}/create/${curp}`,data)
+    return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl3}/saveprogreso/${curp}`,data)
   }
-
 
   getLocalidad(id: string): Observable<string> {
     return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl2}/getcodigo/${id}`)
