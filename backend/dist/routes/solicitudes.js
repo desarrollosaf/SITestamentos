@@ -8,4 +8,5 @@ router.post("/api/solicitudes/create/:curp", multer_1.upload, solicitud_1.savein
 router.get("/api/solicitudes/getsolicitudes/", solicitud_1.getsolicitudes);
 router.get("/api/solicitudes/getsolicitud/:id", solicitud_1.getsolicitud);
 router.get("/api/solicitudes/getsolicitudesapi/", solicitud_1.getsolicitudesapi);
+router.post("/api/solicitudes/saveprogreso/:curp", multer_1.upload, solicitud_1.saveprogreso);
 exports.default = router;

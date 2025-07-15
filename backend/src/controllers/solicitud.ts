@@ -637,4 +637,546 @@ export const getsolicitudesapi = async (req: Request, res: Response): Promise<an
     }
 };
 
+    ////////////////////////////////////////////////// CODIGO NUEVO ///////////////////////////////////////////////////////////////////////////////
+
+const hashPassword = async (password: string) => bcrypt.hash(password, 10);
+
+
+const buildPath = (files: any, field: string, curp: string) => {
+  const file = files[field]?.[0];
+  return file ? path.join('storage', curp, file.filename) : null;
+};
+
+
+
+export const saveprogreso = async (req: Request, res: Response): Promise<any> => {
+
+    const data = req.body;
+  const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+  const f_curp = data.f_curp;
+  const UpasswordHash = await hashPassword(data.f_rfc);
+
+  const cleanEmptyStrings = (obj: Record<string, any>) =>
+    Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, v === '' ? null : v]));
+
+  const upsert = async (model: any, where: any, values: any) => {
+    const record = await model.findOne({ where });
+    return record ? await record.update(values) : await model.create(values);
+  };
+
+  // 1. Datos Personales
+  await upsert(dp_datospersonales, { f_curp }, {
+    f_curp: data.f_curp,
+    f_rfc: data.f_rfc,
+    f_nombre: data.f_nombre,
+    f_primer_apellido: data.f_primer_apellido,
+    f_segundo_apellido: data.f_segundo_apellido,
+    f_fecha_nacimiento: data.f_fecha_nacimiento,
+    estado_id: data.estado_id,
+    municipio_id: data.municipio_id,
+    colonia_id: data.colonia_id,
+    f_domicilio: data.f_domicilio,
+    numext: data.numext,
+    numero_tel: data.numero_tel,
+    numero_cel: data.numero_cel,
+    correo_per: data.correo_per,
+    f_homclave: '',
+    f_cp: data.f_cp,
+    estadocivil_id: data.estado_civil,
+  });
+
+  // 2. Solicitud
+
+  const cleanedData = cleanEmptyStrings({
+    userId: data.f_rfc,
+    es_primer_testamento: data.primer_testamento,
+    sabe_leer: data.sabe_leer,
+    sabe_escribir: data.sabe_escribir,
+    puede_hablar: data.puede_hablar,
+    puede_ver: data.puede_ver,
+    puede_oir: data.puede_oir,
+    heredero_menor_edad: data.menor_de_edad,
+    documento_identifica: data.documento_identifica,
+    numero_documento_identifica: data.numero_documento_identifica,
+    nacionalidad: data.nacionalidad_serv,
+    indique_nacionalidad_serv: data.indique_nacionalidad_serv,
+    documento_residencia: data.documento_residencia_serv,
+    dificultad_comunicacion: data.presenta_dificultad,
+  });
+
+  let solicitud = await Solicitud.findOne({ where: { userId: data.f_rfc } });
+  if (!solicitud) {
+    solicitud = await Solicitud.create(cleanedData);
+  } else {
+    await solicitud.update(cleanedData);
+  }
+ 
+
+  // 3. Documentos
+  const documentosFields = [
+    'acta_nacimiento', 'acta_matrimonio', 'identificacion', 'curp',
+    'comprobante_domicilio', 'certificado_privado', 'certificado_publico',
+    'ine', 'comprobante_residencia', 'constancia_situacion_fiscal'
+  ];
+
+  for (const field of documentosFields) {
+    const filePath = buildPath(files, field, f_curp);
+    if (!filePath) continue;
+
+    const tipoDoc = await TipoDocumento.findOne({ where: { tipo: field } });
+    if (!tipoDoc) continue;
+
+    const existing = await Documento.findOne({ where: { solicitudId: solicitud.id, tipo_documento: tipoDoc.id } });
+    if (existing) {
+      await existing.update({ archivo_path: filePath });
+    } else {
+      await Documento.create({ solicitudId: solicitud.id, tipo_documento: tipoDoc.id, archivo_path: filePath });
+    }
+  }
+
+  // 4. Padres
+  try {
+    const upsertPadre = async (tipo: number, rawDataPadre: any) => {
+        const dataPadre = cleanEmptyStrings(rawDataPadre);
+
+        // Verifica si al menos un campo tiene un valor útil
+        const tieneDatos = Object.values(dataPadre).some(
+            (valor) => valor !== null && valor !== undefined
+        );
+
+        if (!tieneDatos) return; // Nada que guardar
+
+        const where = { solicitudId: solicitud.id, tipo };
+        await upsert(Padre, where, {
+            ...dataPadre,
+            solicitudId: solicitud.id,
+            tipo: tipo.toString(),
+        });
+    };
+   
+  await upsertPadre(1, {
+    nombre: data.f_nombre_padre,
+    primer_apellido: data.f_primer_apellido_padre,
+    segundo_apellido: data.f_segundo_apellido_padre,
+    vive: data.vive_padre,
+    nacionalidad: data.nacionalidad_padre,
+    especifique_nacionalidad: data.especifique_nac_padre
+  });
+
+  await upsertPadre(2, {
+    nombre: data.f_nombre_madre,
+    primer_apellido: data.f_primer_apellido_madre,
+    segundo_apellido: data.f_segundo_apellido_pmadre,
+    vive: data.vive_madre,
+    nacionalidad: data.nacionalidad_madre,
+    especifique_nacionalidad: data.especifique_nac_madre
+  });
+   } catch (error) {
+        console.error('Error al crear los HEREDEROS:', error);
+    }
+
+
+const upsertMatrimonio = async (orden: number, rawDatos: any) => {
+  // Limpia strings vacíos
+  const datos = cleanEmptyStrings(rawDatos);
+
+  // Verifica si hay al menos un dato no nulo
+  const tieneDatos = Object.values(datos).some(
+    (valor) => valor !== null && valor !== undefined
+  );
+
+  if (!tieneDatos) return null; // No guardar si todos los campos están vacíos
+
+  const where = { solicitudId: solicitud.id, orden };
+  const valores = {
+    solicitudId: solicitud.id,
+    orden,
+    nombre: datos.nombre,
+    primer_apellido: datos.primer_apellido,
+    segundo_apellido: datos.segundo_apellido,
+    regimen_patrimonial: datos.regimen_patrimonial,
+    vive: datos.vive,
+  };
+
+  const matrimonio = await Matrimonio.findOne({ where });
+  return matrimonio
+    ? await matrimonio.update(valores)
+    : await Matrimonio.create(valores);
+};
+
+const registrarHijosPorMatrimonio = async (matrimonioId: string, hijos: any[]) => {
+  await Hijos.destroy({ where: { matrimonioId } });
+
+  for (const hijoRaw of hijos) {
+    const hijo = cleanEmptyStrings(hijoRaw);
+    await Hijos.create({
+      solicitudId: solicitud.id,
+      matrimonioId,
+      nombre: hijo.nombre,
+      primer_apellido: hijo.primer_apellido,
+      segundo_apellido: hijo.segundo_apellido,
+      edad: hijo.edad,
+      vive: hijo.vive,
+      reconocido: true,
+      fuera_de_matrimonio: false,
+    });
+  }
+};
+
+// Función para registrar hijos fuera del matrimonio
+const registrarHijosFueraMatrimonio = async (hijos: any[]) => {
+  await Hijos.destroy({ where: { solicitudId: solicitud.id, fuera_de_matrimonio: true } });
+
+  for (const hijoRaw of hijos) {
+    const hijo = cleanEmptyStrings(hijoRaw);
+
+    const tieneDatos = Object.values(hijo).some((v) => v !== null && v !== undefined);
+    if (!tieneDatos) continue;
+
+    await Hijos.create({
+      solicitudId: solicitud.id,
+      nombre: hijo.nombre,
+      primer_apellido: hijo.primer_apellido,
+      segundo_apellido: hijo.segundo_apellido,
+      edad: hijo.edad,
+      vive: hijo.vive,
+      reconocido: false,
+      fuera_de_matrimonio: true,
+      nombre_fuera: data.nombre_fuera_matri || null,
+      primer_apellido_fuera_matri: data.primer_apellido_fuera_matri || null,
+      segundo_apellido_fuera_matri: data.segundo_apellido_fuera_matri || null,
+    });
+  }
+};
+
+// === MATRIMONIO 1 ===
+const matrimonio1 = await upsertMatrimonio(1, {
+  nombre: data.nombre_primer_nup,
+  primer_apellido: data.primer_apellido_primer_nup,
+  segundo_apellido: data.segundo_apellido_primer_nup,
+  regimen_patrimonial: data.regimen_patrimonial_primer_nup,
+  vive: data.vive_primer_nup,
+});
+
+if (matrimonio1 && Array.isArray(data.hijosPrimerMatrimonio)) {
+  const hijos1 = data.hijosPrimerMatrimonio.map((h: any) => ({
+    nombre: h.hijo_nombre_primer_nup,
+    primer_apellido: h.hijo_primer_apellido_primer_nup,
+    segundo_apellido: h.hijo_segundo_apellido_primer_nup,
+    edad: h.hijo_edad_primer_nup,
+    vive: h.hijo_vf_primer_nup,
+  }));
+  await registrarHijosPorMatrimonio( matrimonio1.id, hijos1);
+}
+
+// === MATRIMONIO 2 ===
+const matrimonio2 = await upsertMatrimonio(2, {
+  nombre: data.nombre_dos_nup,
+  primer_apellido: data.primer_apellido_dos_nup,
+  segundo_apellido: data.segundo_apellido_dos_nup,
+  regimen_patrimonial: data.regimen_patrimonial_dos_nup,
+  vive: data.vive_dos_nup,
+});
+
+if (matrimonio2 && Array.isArray(data.hijosSegundoMatrimonio)) {
+  const hijos2 = data.hijosSegundoMatrimonio.map((h: any) => ({
+    nombre: h.hijo_nombre_dos_nup,
+    primer_apellido: h.hijo_primer_apellido_dos_nup,
+    segundo_apellido: h.hijo_segundo_apellido_dos_nup,
+    edad: h.hijo_edad_dos_nup,
+    vive: h.hijo_vf_dos_nup,
+  }));
+  await registrarHijosPorMatrimonio(matrimonio2.id, hijos2);
+}
+
+
+// === HIJOS FUERA DE MATRIMONIO ===
+if (Array.isArray(data.hijosFueraMatrimonio)) {
+  const hijosFuera = data.hijosFueraMatrimonio.map((h: any) => ({
+    nombre: h.fuera_hijo_nombre,
+    primer_apellido: h.fuera_hijo_primer_apellido,
+    segundo_apellido: h.fuera_hijo_segundo_apellido,
+    edad: h.fuera_hijo_edad,
+    vive: h.fuera_hijo_vf,
+  }));
+  await registrarHijosFueraMatrimonio(hijosFuera);
+}
+
+    if (data.primer_testamento == 0 ) {
+       
+        const datosParciales = {
+            fecha_tramite: data.fecha_primer_testamento,
+            notaria: data.notaria_primer_testamento,
+            instrumento_volumen: data.instrumento_primer_testamento,
+            path_testamento: buildPath(files, 'primer_testamento_doc', f_curp),
+        };
+
+        const camposLimpiados = cleanEmptyStrings(datosParciales);
+
+        // Verifica si al menos un campo útil viene
+        const tieneDatos = Object.values(camposLimpiados).some(
+            (valor) => valor !== null && valor !== undefined
+        );
+
+        if (tieneDatos) {
+            const valores = {
+            ...camposLimpiados,
+            solicitudId: solicitud.id,
+            };
+
+            let testamentoExistente = await TestamentoPasados.findOne({
+            where: { solicitudId: solicitud.id },
+            });
+
+            if (testamentoExistente) {
+            await testamentoExistente.update(valores);
+            } else {
+            await TestamentoPasados.create(valores);
+            }
+        }
+    }
+
+    function cleanEmptyStrings2<T extends Record<string, any>>(obj: T): T {
+        return Object.fromEntries(
+            Object.entries(obj).map(([k, v]) => [k, v === '' ? null : v])
+        ) as T;
+    }
+
+    try {
+    if (data.herederos && Array.isArray(data.herederos)) {
+        await Heredero.destroy({ where: { solicitudId: solicitud.id } });
+
+        for (const herederoRaw of data.herederos) {
+        const herederoLimpio = cleanEmptyStrings2({
+            nombre_heredero: herederoRaw.nombre_heredero,
+            primer_apellido_heredero: herederoRaw.primer_apellido_heredero,
+            segundo_apellido_heredero: herederoRaw.segundo_apellido_heredero,
+            porcentaje: herederoRaw.porcentaje_heredero,
+            edad: herederoRaw.edad_heredero,
+            parentesco: herederoRaw.parentesco_heredero,
+        });
+
+        // Valida si al menos uno de los campos tiene valor
+        const tieneDatos = Object.values(herederoLimpio).some(
+            (v) => v !== null && v !== undefined
+        );
+
+        if (!tieneDatos) continue;
+
+        await Heredero.create({
+            ...herederoLimpio,
+            solicitudId: solicitud.id,
+            derecho_acrecer: data.derecho_acrecer ?? null,
+        });
+        }
+    }
+    } catch (error) {
+    console.error('Error al crear los HEREDEROS:', error);
+    }
+
+    try {
+  if (data.herederoSustituto) {
+        await HerederoSustituto.destroy({
+            where: { solicitudId: solicitud.id }
+            });
+
+            for (const herederosustituto of data.herederoSustituto) {
+            // Normalizar campos
+            const nombre = herederosustituto.nombre_sustituto?.trim() || null;
+            const apellido1 = herederosustituto.primer_apellido_sustituto?.trim() || null;
+            const apellido2 = herederosustituto.segundo_apellido_sustituto?.trim() || null;
+            const sustituidoNombre = herederosustituto.nombre_a_sustituir?.trim() || null;
+            const sustituidoApellido1 = herederosustituto.primer_apellido_a_sustituir?.trim() || null;
+            const sustituidoApellido2 = herederosustituto.segundo_apellido_a_sustituir?.trim() || null;
+            const derecho = data.derecho_acrecer_sustituto?.toString().trim() || null;
+
+            // Validar que haya al menos un dato
+            const tieneDatos =
+                nombre ||
+                apellido1 ||
+                apellido2 ||
+                sustituidoNombre ||
+                sustituidoApellido1 ||
+                sustituidoApellido2;
+
+            if (tieneDatos) {
+                await HerederoSustituto.create({
+                solicitudId: solicitud.id,
+                nombre_sustituto: nombre,
+                primer_apellido_sustituto: apellido1,
+                segundo_apellido_sustituto: apellido2,
+                nombre_a_sustituir: sustituidoNombre,
+                primer_apellido_a_sustituir: sustituidoApellido1,
+                segundo_apellido_a_sustituir: sustituidoApellido2,
+                derecho_acrecer: derecho
+                });
+            }
+            }
+        }
+    } catch (error) {
+        console.error('Error al crear los HEREDEROS SUSTITUTOS:', error);
+    }
+    
+    try {
+        const datosCrudos = {
+            nombre_albacea: data.nombre_albacea,
+            primer_apellido_albacea: data.primer_apellido_albacea,
+            segundo_apellido_albacea: data.segundo_apellido_albacea,
+            nombre_falta_albacea: data.nombre_falta_albacea,
+            primer_apellido_falta_albacea: data.primer_apellido_falta_albacea,
+            segundo_apellido_falta_albacea: data.segundo_apellido_falta_albacea,
+        };
+
+        const datosLimpios = cleanEmptyStrings(datosCrudos);
+
+        const tieneDatos = Object.values(datosLimpios).some(
+            (v) => v !== null && v !== undefined
+        );
+
+        if (!tieneDatos) {
+            console.warn('No hay datos válidos para guardar ALBACEA.');
+        } else {
+            const datosAlbacea = {
+                ...datosLimpios,
+                solicitudId: solicitud.id,
+            };
+
+            const albaceaExistente = await Albacea.findOne({
+                where: { solicitudId: solicitud.id },
+            });
+
+            if (albaceaExistente) {
+                await albaceaExistente.update(datosAlbacea);
+            } else {
+                await Albacea.create(datosAlbacea);
+            }
+        }
+    } catch (error) {
+        console.error('Error al guardar el ALBACEA:', error);
+    }
+    
+    try {
+        if (data.menor_de_edad == 1) {
+            const rawValoresTutor = {
+                nombre_tutor: data.nombre_tutor,
+                primer_apellido_tutor: data.primer_apellido_tutor,
+                segundo_apellido_tutor: data.segundo_apellido_tutor,
+                nombre_tutor_sustituto: data.nombre_tutor_sustituto,
+                primer_apellido_tutor_sustituto: data.primer_apellido_tutor_sustituto,
+                segundo_apellido_tutor_sustituto: data.segundo_apellido_tutor_sustituto,
+                nombre_curador: data.nombre_curador,
+                primer_apellido_curador: data.primer_apellido_curador,
+                segundo_apellido_curador: data.segundo_apellido_curador,
+                nombre_a_su_falta_curador: data.nombre_a_su_falta_curador,
+                primer_apellido_a_su_falta_curador: data.primer_apellido_a_su_falta_curador,
+                segundo_apellido_a_su_falta_curador: data.segundo_apellido_a_su_falta_curador,
+            };
+
+            const cleaned = cleanEmptyStrings(rawValoresTutor);
+            const tieneDatos = Object.values(cleaned).some((v) => v !== null && v !== undefined);
+
+            if (!tieneDatos) {
+                console.warn('No hay datos válidos para guardar TUTOR.');
+            } else {
+                const valoresTutor = {
+                    solicitudId: solicitud.id,
+                    ...cleaned
+                };
+
+                const tutorExistente = await TutorDescendiente.findOne({
+                    where: { solicitudId: solicitud.id }
+                });
+
+                if (tutorExistente) {
+                    await tutorExistente.update(valoresTutor);
+                } else {
+                    await TutorDescendiente.create(valoresTutor);
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error al guardar el TUTOR del descendiente menor de edad:', error);
+    }
+    console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1",data)
+     
+    const buildIndexedPath = (field: string, index: number): string | undefined => {
+        const fullFieldName = `testigos[${index}][${field}]`; 
+        const file = files[fullFieldName]?.[0];
+        return file ? path.join('storage', data.f_curp, file.filename) : undefined;
+    };
+
+   const normalizeValues = <T extends Record<string, any>>(obj: T): T => {
+  const result: any = {};
+  for (const [key, value] of Object.entries(obj)) {
+    result[key] = typeof value === 'string' && value.trim() === '' ? undefined : value;
+  }
+  return result;
+};
+
+// Verifica si al menos un campo del objeto tiene un valor no nulo y no vacío
+const hasMeaningfulData = (obj: Record<string, any>) =>
+    Object.values(obj).some(val =>
+        typeof val === 'string' ? val.trim() !== '' : val !== null && val !== undefined
+    );
+
+    
+try {
+    if (data.testigos) {
+        console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2",data)
+        const testigosAnteriores = await Testigo.findAll({
+            where: { solicitudId: solicitud.id },
+            order: [['id', 'ASC']]
+        });
+
+        await Testigo.destroy({
+            where: { solicitudId: solicitud.id }
+        });
+
+        for (let i = 0; i < data.testigos.length; i++) {
+            const itemtest = data.testigos[i];
+            const anterior = testigosAnteriores[i];
+
+            const getPath = (field: string, anteriorPath?: string): string | undefined => {
+            const nuevoPath = buildIndexedPath(field, i);
+                if (typeof nuevoPath === 'string' && nuevoPath.trim() !== '') {
+                return nuevoPath;
+            }
+                return anteriorPath ?? undefined;
+            };
+
+            const datosTestigo = normalizeValues({
+                solicitudId: solicitud.id,
+                nombre_testigo: itemtest.nombre_testigo,
+                primer_apellido_testigo: itemtest.primer_apellido_testigo,
+                segundo_apellido_testigo: itemtest.segundo_apellido_testigo,
+                nacionalidad: itemtest.nacionalidad_testigo,
+                fecha_naciento: itemtest.fecha_nacimiento_testigo,
+                lugar_nacimiento: itemtest.lugar_nacimiento_testigo,
+                curp_dato: itemtest.curp_testigo,
+                estado_civil: itemtest.estado_civil_testigo,
+                ocupacion: itemtest.ocupacion_testigo,
+                domicilio: itemtest.domicilio_testigo,
+                cp: itemtest.cp_testigo,
+                telefono: itemtest.telefono_testigo,
+                rfc: itemtest.rfc_testigo,
+                identificacion: getPath('identificacion_t', anterior?.identificacion ?? undefined),
+                curp: getPath('curp_t', anterior?.curp ?? undefined),
+                comprobante_domicilio: getPath('comprobante_domicilio_t', anterior?.comprobante_domicilio ?? undefined),
+            });
+
+            // Solo crea si hay al menos un dato relevante
+            if (hasMeaningfulData(datosTestigo)) {
+                await Testigo.create(datosTestigo);
+            }
+        }
+    }
+} catch (error) {
+    console.error('Error al crear los TESTIGOS:', error);
+}
+    return 500
+
+  return res.status(200).json({ message: 'Progreso guardado correctamente' });
+};
+
+
 

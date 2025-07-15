@@ -108,17 +108,17 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
         })
     }
 
-     const accessToken = jwt.sign(
-    { rfc: rfc },
-    process.env.SECRET_KEY || 'TSE-Poder-legislativo',
-    { expiresIn: '15m' }
+    const accessToken = jwt.sign(
+        { rfc: rfc },
+        process.env.SECRET_KEY || 'TSE-Poder-legislativo',
+        { expiresIn: '2h' }
     );
 
     res.cookie('accessToken', accessToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production', // ✅ más correcto para distinguir local vs producción
     sameSite: 'strict',
-    maxAge: 15 * 60 * 1000, // 15 minutos
+    maxAge: 2 * 60 * 60 * 1000, // 2 horas
     path: '/',
     });
         

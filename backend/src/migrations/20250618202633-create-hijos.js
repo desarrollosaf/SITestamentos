@@ -31,15 +31,15 @@ module.exports = {
       },
       nombre: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       primer_apellido: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       segundo_apellido: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       edad: {
         type: Sequelize.INTEGER,
@@ -57,15 +57,15 @@ module.exports = {
       },
       nombre_fuera: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       primer_apellido_fuera_matri: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       segundo_apellido_fuera_matri: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,
