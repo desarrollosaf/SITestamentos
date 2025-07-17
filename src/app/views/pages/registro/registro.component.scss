@@ -106,6 +106,39 @@ h5.titulo4 {
   font-size: 0.85rem;
 }
 
+
+.boton-sucess-sm {
+  color: #198754;
+  border: 1px solid #198754;
+  background-color: rgba(220, 53, 69, 0.05);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.3rem;
+  transition: all 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  line-height: 1;
+}
+
+.boton-sucess-sm:hover {
+  background-color: #198754;
+  color: white;
+  border-color: #198754;
+  box-shadow: 0 0.25rem 0.5rem rgba(220, 53, 69, 0.3);
+}
+
+.boton-sucess-sm i {
+  font-size: 0.85rem;
+}
+
+
+
+
+
+
+
+
 .hijos-container {
   display: flex;
   flex-direction: column;

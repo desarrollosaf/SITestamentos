@@ -19,7 +19,7 @@ import Albacea from '../models/albaceas';
 import TutorDescendiente from '../models/tutor_descendientes';
 import Hijo from '../models/hijos';
 import dp_estado_civil from '../models/fun/dp_estado_civil';
-
+import { Op } from 'sequelize'; 
 
 dp_datospersonales.initModel(sequelizefun);
 
@@ -406,10 +406,12 @@ export const getsolicitudes = async (req: Request, res: Response): Promise<any> 
 
 export const getsolicitud = async (req: Request, res: Response): Promise<any> => {
     const { id } = req.params;
-
+    const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id);
     try {
+        const whereCondition = isUUID ? { id } : { userId: id };
+        console.log(whereCondition);
         let solicitudes = await Solicitud.findAll({
-            where: { id: id },
+            where:  whereCondition ,
                 include: [
                     {
                         model: Testigo,

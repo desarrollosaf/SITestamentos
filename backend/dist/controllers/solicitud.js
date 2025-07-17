@@ -393,9 +393,12 @@ const getsolicitudes = (req, res) => __awaiter(void 0, void 0, void 0, function*
 exports.getsolicitudes = getsolicitudes;
 const getsolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
+    const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id);
     try {
+        const whereCondition = isUUID ? { id } : { userId: id };
+        console.log(whereCondition);
         let solicitudes = yield solicitud_1.default.findAll({
-            where: { id: id },
+            where: whereCondition,
             include: [
                 {
                     model: testigos_1.default,
