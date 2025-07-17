@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.STRING 
       },
       es_primer_testamento: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true, 
       },
       sabe_leer: {

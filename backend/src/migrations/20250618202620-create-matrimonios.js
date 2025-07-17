@@ -40,7 +40,7 @@ module.exports = {
         allowNull: true,
       },
       vive: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true,
       },
       createdAt: {

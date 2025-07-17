@@ -91,7 +91,6 @@ const saveregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         const cita = yield citas_1.default.create({
             rfc: data.rfc,
             fecha: data.fecha,
-            hora: data.hora,
             estatus: 0,
         });
         return res.json({

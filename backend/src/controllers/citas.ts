@@ -89,7 +89,6 @@ export const saveregistro = async (req: Request, res: Response): Promise<any> =>
      const cita = await Cita.create({
        rfc: data.rfc,
        fecha: data.fecha,
-       hora: data.hora,
        estatus: 0,
      }); 
      return res.json({
