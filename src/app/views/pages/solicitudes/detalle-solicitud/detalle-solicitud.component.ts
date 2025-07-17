@@ -413,11 +413,11 @@ export class DetalleSolicitudComponent {
               this.hijos.push(hijoGroup);
             });
           }
-        }else{
-            this.formTestamento.patchValue({
-              nombre_primer_nup: 'Sin información',
-              primer_apellido_primer_nup: 'Sin información',
-              segundo_apellido_primer_nup: 'Sin información',
+        } else {
+          this.formTestamento.patchValue({
+            nombre_primer_nup: 'Sin información',
+            primer_apellido_primer_nup: 'Sin información',
+            segundo_apellido_primer_nup: 'Sin información',
           });
         }
 
@@ -443,8 +443,8 @@ export class DetalleSolicitudComponent {
             });
           }
         }
-        else{
-           this.formTestamento.patchValue({
+        else {
+          this.formTestamento.patchValue({
             nombre_dos_nup: 'Sin información',
             primer_apellido_dos_nup: 'Sin información',
             segundo_apellido_dos_nup: 'Sin información',
@@ -467,12 +467,12 @@ export class DetalleSolicitudComponent {
             });
             this.hijosFuera.push(hijoFueraGroup);
           });
-        }else{
-            this.formTestamento.patchValue({
-              nombre_fuera_matri: 'Sin información',
-              primer_apellido_fuera_matri: 'Sin información',
-              segundo_apellido_fuera_matri: 'Sin información',
-            });
+        } else {
+          this.formTestamento.patchValue({
+            nombre_fuera_matri: 'Sin información',
+            primer_apellido_fuera_matri: 'Sin información',
+            segundo_apellido_fuera_matri: 'Sin información',
+          });
         }
         this.formTestamento.get('primer_testamento')?.setValue(response.solicitud[0].es_primer_testamento);
 
@@ -503,7 +503,8 @@ export class DetalleSolicitudComponent {
           response.solicitud[0].puede_hablar,
           response.solicitud[0].puede_ver,
           response.solicitud[0].puede_oir
-        ].some(valor => valor === 0);
+        ].some(valor => valor === '0');
+
         if (response.solicitud[0].testigos.length > 0) {
 
 
@@ -515,7 +516,7 @@ export class DetalleSolicitudComponent {
               nacionalidad_testigo: [testigo.nacionalidad],
               fecha_nacimiento_testigo: [testigo.fecha_naciento],
               lugar_nacimiento_testigo: [testigo.lugar_nacimiento],
-              curp_testigo: [testigo.curp],
+              curp_testigo: [testigo.curp_dato],
               estado_civil_testigo: [testigo.estado_civil],
               ocupacion_testigo: [testigo.ocupacion],
               domicilio_testigo: [testigo.domicilio],

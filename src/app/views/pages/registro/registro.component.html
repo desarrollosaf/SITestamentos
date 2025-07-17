@@ -446,6 +446,13 @@
                           Eliminar archivo
                         </button>
                       </div>
+                      <div *ngIf="doctos['comprobante_residencia']" style="position: absolute; bottom: 0; right: 0;">
+                        <a type="button" class="btn boton-success-sm" [href]="enviro+doctos['comprobante_residencia']"
+                          target="_blank" class="text-decoration-none">
+                          <i class="feather icon-eye btn-icon-prepend"></i>
+                          Ver archivo
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -466,6 +473,13 @@
                         Eliminar archivo
                       </button>
                     </div>
+                    <div *ngIf="doctos['ine']" style="position: absolute; bottom: 0; right: 0;">
+                      <a type="button" class="btn boton-success-sm" [href]="enviro+doctos['ine']" target="_blank"
+                        class="text-decoration-none">
+                        <i class="feather icon-eye btn-icon-prepend"></i>
+                        Ver archivo
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -484,6 +498,13 @@
                         <i class="feather icon-trash btn-icon-prepend"></i>
                         Eliminar archivo
                       </button>
+                    </div>
+                    <div *ngIf="doctos['situacion_fiscal']" style="position: absolute; bottom: 0; right: 0;">
+                      <a type="button" class="btn boton-success-sm" [href]="enviro+doctos['situacion_fiscal']"
+                        target="_blank" class="text-decoration-none">
+                        <i class="feather icon-eye btn-icon-prepend"></i>
+                        Ver archivo
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -1153,6 +1174,13 @@ campo es
                           Eliminar archivo
                         </button>
                       </div>
+                      <div *ngIf="doctos['primer_testamento_doc']" style="position: absolute; bottom: 0; right: 0;">
+                        <a type="button" class="btn boton-success-sm" [href]="enviro+doctos['primer_testamento_doc']"
+                          target="_blank" class="text-decoration-none">
+                          <i class="feather icon-eye btn-icon-prepend"></i>
+                          Ver archivo
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1317,8 +1345,8 @@ campo es
                 <div class="mb-3">
                   <label class="form-label negri">Dentro de sus herederos considera designar a un "menor de
                     edad":*</label>
-                  <ng-select [items]="primerTestamento" [searchable]="false" bindLabel="name" bindValue="id" formControlName="menor_de_edad"
-                    placeholder="--Selecciona--">
+                  <ng-select [items]="primerTestamento" [searchable]="false" bindLabel="name" bindValue="id"
+                    formControlName="menor_de_edad" placeholder="--Selecciona--">
                   </ng-select>
                   <!-- <select class="form-select" id="menor_de_edad" formControlName="menor_de_edad">
                     <option *ngFor="let vives of primerTestamento" [value]="vives.id">
@@ -1346,8 +1374,8 @@ campo es
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Derecho de Acrecer:*</label>
-                  <ng-select [items]="primerTestamento" [searchable]="false" bindLabel="name" bindValue="id" formControlName="derecho_acrecer"
-                    placeholder="--Selecciona--">
+                  <ng-select [items]="primerTestamento" [searchable]="false" bindLabel="name" bindValue="id"
+                    formControlName="derecho_acrecer" placeholder="--Selecciona--">
                   </ng-select>
                   <!-- <select class="form-select" id="derecho_acrecer" formControlName="derecho_acrecer">
                     <option *ngFor="let vives of primerTestamento" [value]="vives.id">
@@ -1482,8 +1510,8 @@ campo es
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Derecho de Acrecer:*</label>
-                  <ng-select [items]="primerTestamento" [searchable]="false" bindLabel="name" bindValue="id" formControlName="derecho_acrecer_sustituto"
-                    placeholder="--Selecciona--">
+                  <ng-select [items]="primerTestamento" [searchable]="false" bindLabel="name" bindValue="id"
+                    formControlName="derecho_acrecer_sustituto" placeholder="--Selecciona--">
                   </ng-select>
                   <!-- <select class="form-select" id="derecho_acrecer_sustituto"
                     formControlName="derecho_acrecer_sustituto">
@@ -2121,6 +2149,15 @@ campo es
                                 <i class="feather icon-trash btn-icon-prepend"></i> Eliminar archivo
                               </button>
                             </div>
+                            <div *ngIf="hijo.get('identificaciont')?.value"
+                              style="position: absolute; bottom: 0; right: 0;">
+                              <a type="button" class="btn boton-success-sm"
+                                [href]="enviro+hijo.get('identificaciont')?.value" target="_blank"
+                                class="text-decoration-none">
+                                <i class="feather icon-eye btn-icon-prepend"></i>
+                                Ver archivo
+                              </a>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -2137,6 +2174,13 @@ campo es
                                 (click)="eliminarArchivoTestigos(i, 'curp_t', fileCurp_t)">
                                 <i class="feather icon-trash btn-icon-prepend"></i> Eliminar archivo
                               </button>
+                            </div>
+                            <div *ngIf="hijo.get('curpt')?.value" style="position: absolute; bottom: 0; right: 0;">
+                              <a type="button" class="btn boton-success-sm" [href]="enviro+hijo.get('curpt')?.value"
+                                target="_blank" class="text-decoration-none">
+                                <i class="feather icon-eye btn-icon-prepend"></i>
+                                Ver archivo
+                              </a>
                             </div>
                           </div>
                         </div>
@@ -2157,12 +2201,22 @@ campo es
                                 <i class="feather icon-trash btn-icon-prepend"></i> Eliminar archivo
                               </button>
                             </div>
+                            <div *ngIf="hijo.get('comprobante_domiciliot')?.value"
+                              style="position: absolute; bottom: 0; right: 0;">
+                              <a type="button" class="btn boton-success-sm"
+                                [href]="enviro+hijo.get('comprobante_domiciliot')?.value" target="_blank"
+                                class="text-decoration-none">
+                                <i class="feather icon-eye btn-icon-prepend"></i>
+                                Ver archivo
+                              </a>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
 
                     <div class="col-12 text-center">
+                      <br>
                       <button style="background-color: #c82333; color: white;" type="button"
                         (click)="eliminarTestigo(i)" class="btn btn-sm mt-2">
                         🗑️ Eliminar testigo
@@ -2194,6 +2248,13 @@ campo es
                         Eliminar archivo
                       </button>
                     </div>
+                    <div *ngIf="doctos['acta_nacimiento']" style="position: absolute; bottom: 0; right: 0;">
+                      <a type="button" class="btn boton-success-sm" [href]="enviro+doctos['acta_nacimiento']"
+                        target="_blank" class="text-decoration-none">
+                        <i class="feather icon-eye btn-icon-prepend"></i>
+                        Ver archivo
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2211,6 +2272,13 @@ campo es
                         <i class="feather icon-trash btn-icon-prepend"></i>
                         Eliminar archivo
                       </button>
+                    </div>
+                    <div *ngIf="doctos['acta_matrimonio']" style="position: absolute; bottom: 0; right: 0;">
+                      <a type="button" class="btn boton-success-sm" [href]="enviro+doctos['acta_matrimonio']"
+                        target="_blank" class="text-decoration-none">
+                        <i class="feather icon-eye btn-icon-prepend"></i>
+                        Ver archivo
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -2231,6 +2299,13 @@ campo es
                         Eliminar archivo
                       </button>
                     </div>
+                    <div *ngIf="doctos['curp']" style="position: absolute; bottom: 0; right: 0;">
+                      <a type="button" class="btn boton-success-sm" [href]="enviro+doctos['curp']" target="_blank"
+                        class="text-decoration-none">
+                        <i class="feather icon-eye btn-icon-prepend"></i>
+                        Ver archivo
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2247,6 +2322,13 @@ campo es
                         <i class="feather icon-trash btn-icon-prepend"></i>
                         Eliminar archivo
                       </button>
+                    </div>
+                    <div *ngIf="doctos['comprobante_domicilio']" style="position: absolute; bottom: 0; right: 0;">
+                      <a type="button" class="btn boton-success-sm" [href]="enviro+doctos['comprobante_domicilio']"
+                        target="_blank" class="text-decoration-none">
+                        <i class="feather icon-eye btn-icon-prepend"></i>
+                        Ver archivo
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -2319,7 +2401,7 @@ campo es
                   style="background-color: #ecbb87; color: #000; border: none;">
                   Registrarse
                 </button>
-                  <button type="button" class="btn btn-primary px-4"
+                <button type="button" class="btn btn-primary px-4"
                   style="background-color: #ecbb87; color: #000; border: none;" (click)="guardarProceso()">
                   Guardar proceso
                 </button>

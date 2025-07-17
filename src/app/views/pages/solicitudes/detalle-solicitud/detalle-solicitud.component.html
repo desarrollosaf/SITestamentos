@@ -28,8 +28,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">RFC:</label>
-                  <input formControlName="f_rfc" type="text" class="form-control input-simulado-disabled" placeholder="Ejemplo: MACJ750101"
-                    maxlength="10" />
+                  <input formControlName="f_rfc" type="text" class="form-control input-simulado-disabled"
+                    placeholder="Ejemplo: MACJ750101" maxlength="10" />
                   <div>
                     <small class="colorsm"
                       *ngIf="formTestamento.get('f_rfc')?.hasError('required') && formTestamento.get('f_rfc')?.touched">Este
@@ -43,7 +43,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Ocupación:</label>
-                  <input formControlName="ocupacion" type="text" class="form-control input-simulado-disabled" value='Servidor Público' />
+                  <input formControlName="ocupacion" type="text" class="form-control input-simulado-disabled"
+                    value='Servidor Público' />
                 </div>
               </div>
             </div>
@@ -122,7 +123,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Código postal:</label>
-                  <input formControlName="f_cp" type="text" class="form-control input-simulado-disabled" placeholder="Ejemplo: 50122" />
+                  <input formControlName="f_cp" type="text" class="form-control input-simulado-disabled"
+                    placeholder="Ejemplo: 50122" />
                   <small class="colorsm"
                     *ngIf="formTestamento.get('f_cp')?.hasError('required') && formTestamento.get('f_cp')?.touched">Este
                     campo es
@@ -132,8 +134,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Entidad federativa:</label>
-                  <input [value]="formTestamento.get('estado_nombre')?.value" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: México" [disabled]="true" />
+                  <input [value]="formTestamento.get('estado_nombre')?.value" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: México" [disabled]="true" />
                   <small class="colorsm"
                     *ngIf="formTestamento.get('estado_id')?.hasError('required') && formTestamento.get('estado_id')?.touched">Este
                     campo es
@@ -143,8 +145,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Municipio:</label>
-                  <input [value]="formTestamento.get('municipio_nombre')?.value" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: México" [disabled]="true" />
+                  <input [value]="formTestamento.get('municipio_nombre')?.value" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: México" [disabled]="true" />
                   <small class="colorsm"
                     *ngIf="formTestamento.get('municipio_id')?.hasError('required') && formTestamento.get('municipio_id')?.touched">Este
                     campo es
@@ -157,8 +159,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Colonia:</label>
-                  <ng-select [readonly]="true" [items]="localidades" bindLabel="colon" bindValue="idcol" formControlName="colonia_id"
-                    placeholder="Selecciona una colonia">
+                  <ng-select [readonly]="true" [items]="localidades" bindLabel="colon" bindValue="idcol"
+                    formControlName="colonia_id" placeholder="Selecciona una colonia">
                   </ng-select>
                   <small class="colorsm"
                     *ngIf="formTestamento.get('colonia_id')?.hasError('required') && formTestamento.get('colonia_id')?.touched">Este
@@ -170,7 +172,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Calle:</label>
-                  <input formControlName="f_domicilio" type="text" class="form-control input-simulado-disabled" placeholder="Ejemplo: México" />
+                  <input formControlName="f_domicilio" type="text" class="form-control input-simulado-disabled"
+                    placeholder="Ejemplo: México" />
                   <small class="colorsm"
                     *ngIf="formTestamento.get('f_domicilio')?.hasError('required') && formTestamento.get('f_domicilio')?.touched">Este
                     campo es
@@ -181,7 +184,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Número:</label>
-                  <input formControlName="numext" type="text" class="form-control input-simulado-disabled" placeholder="Ejemplo: México" />
+                  <input formControlName="numext" type="text" class="form-control input-simulado-disabled"
+                    placeholder="Ejemplo: México" />
                   <small class="colorsm"
                     *ngIf="formTestamento.get('numext')?.hasError('required') && formTestamento.get('numext')?.touched">Este
                     campo es
@@ -240,8 +244,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Estado civil:</label>
-                  <ng-select [readonly]="true" [readonly]="true" [items]="estadoCivilArray" bindLabel="name" bindValue="id" formControlName="estado_civil"
-                    placeholder="Selecciona estado civil">
+                  <ng-select [readonly]="true" [readonly]="true" [items]="estadoCivilArray" bindLabel="name"
+                    bindValue="id" formControlName="estado_civil" placeholder="Selecciona estado civil">
                   </ng-select>
                   <small class="colorsm"
                     *ngIf="formTestamento.get('estado_civil')?.hasError('required') && formTestamento.get('estado_civil')?.touched">
@@ -252,7 +256,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Documento con que se identifica:</label>
-                  <select  class="form-select input-simulado-disabled" id="documento_identifica" formControlName="documento_identifica">
+                  <select class="form-select input-simulado-disabled" id="documento_identifica"
+                    formControlName="documento_identifica">
                     <option *ngFor="let vives of doctoIdentifica" [value]="vives.id">
                       {{ vives.name }}
                     </option>
@@ -267,7 +272,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Nacionalidad:</label>
-                  <select class="form-select input-simulado-disabled"  id="nacionalidad_serv" formControlName="nacionalidad_serv">
+                  <select class="form-select input-simulado-disabled" id="nacionalidad_serv"
+                    formControlName="nacionalidad_serv">
                     <option *ngFor="let vives of nacionalidad" [value]="vives.id">
                       {{ vives.name }}
                     </option>
@@ -286,8 +292,8 @@
               <div class="col-sm-12" *ngIf="mostrarDoctoIdentifica">
                 <div class="mb-3">
                   <label class="form-label negri">{{ labelDocumentoIdentifica }}:</label>
-                  <input formControlName="numero_documento_identifica" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: 123456789" />
+                  <input formControlName="numero_documento_identifica" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: 123456789" />
                   <small class="colorsm"
                     *ngIf="formTestamento.get('numero_documento_identifica')?.hasError('required') && formTestamento.get('numero_documento_identifica')?.touched">Este
                     campo es
@@ -301,8 +307,8 @@
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri">Indique nacionalidad:</label>
-                    <input formControlName="indique_nacionalidad_serv" type="text" class="form-control input-simulado-disabled"
-                      placeholder="Ejemplo: Venezolana, Colombiana" />
+                    <input formControlName="indique_nacionalidad_serv" type="text"
+                      class="form-control input-simulado-disabled" placeholder="Ejemplo: Venezolana, Colombiana" />
                     <small class="colorsm"
                       *ngIf="formTestamento.get('indique_nacionalidad_serv')?.hasError('required') && formTestamento.get('indique_nacionalidad_serv')?.touched">Este
                       campo es
@@ -312,7 +318,7 @@
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri">Cuenta con documento de residencia:</label>
-                    <select class="form-select input-simulado-disabled"  id="documento_residencia_serv"
+                    <select class="form-select input-simulado-disabled" id="documento_residencia_serv"
                       formControlName="documento_residencia_serv">
                       <option *ngFor="let vives of primerTestamento" [value]="vives.id">
                         {{ vives.name }}
@@ -332,7 +338,8 @@
                       <div class="w-100 d-flex flex-column justify-content-center align-items-center"
                         style="min-height: 150px;">
                         <ng-container *ngIf="doctos['comprobante_residencia']; else noDisponible">
-                          <a [href]="enviro+doctos['comprobante_residencia']" target="_blank" class="text-decoration-none">
+                          <a [href]="enviro+doctos['comprobante_residencia']" target="_blank"
+                            class="text-decoration-none">
                             <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
                             <div class="mt-2">Ver documento</div>
                           </a>
@@ -440,8 +447,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Primer apellido:</label>
-                  <input formControlName="f_primer_apellido_padre" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: Jimenez" />
+                  <input formControlName="f_primer_apellido_padre" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: Jimenez" />
                   <small class="colorsm"
                     *ngIf="formTestamento.get('f_primer_apellido_padre')?.hasError('required') && formTestamento.get('f_primer_apellido_padre')?.touched">Este
                     campo es
@@ -452,8 +459,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Segundo apellido:</label>
-                  <input formControlName="f_segundo_apellido_padre" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: Gonzalez" />
+                  <input formControlName="f_segundo_apellido_padre" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: Gonzalez" />
                   <small class="colorsm"
                     *ngIf="formTestamento.get('f_segundo_apellido_padre')?.hasError('required') && formTestamento.get('f_segundo_apellido_padre')?.touched">Este
                     campo es
@@ -466,7 +473,7 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Indicar si vive:</label>
-                  <select class="form-select input-simulado-disabled"  id="vive_padre" formControlName="vive_padre">
+                  <select class="form-select input-simulado-disabled" id="vive_padre" formControlName="vive_padre">
                     <option *ngFor="let vives of vive" [value]="vives.id">
                       {{ vives.name }}
                     </option>
@@ -480,7 +487,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Nacionalidad:</label>
-                  <select class="form-select input-simulado-disabled"  id="nacionalidad_padre" formControlName="nacionalidad_padre">
+                  <select class="form-select input-simulado-disabled" id="nacionalidad_padre"
+                    formControlName="nacionalidad_padre">
                     <option *ngFor="let nacion of nacionalidad" [value]="nacion.id">
                       {{ nacion.name }}
                     </option>
@@ -495,8 +503,8 @@
               <div *ngIf="padreNac" class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Especifique:</label>
-                  <input formControlName="especifique_nac_padre" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: Peruana" />
+                  <input formControlName="especifique_nac_padre" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: Peruana" />
                 </div>
               </div>
             </div>
@@ -521,8 +529,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Primer apellido:</label>
-                  <input formControlName="f_primer_apellido_madre" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: Jimenez" />
+                  <input formControlName="f_primer_apellido_madre" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: Jimenez" />
                   <small class="colorsm"
                     *ngIf="formTestamento.get('f_primer_apellido_madre')?.hasError('required') && formTestamento.get('f_primer_apellido_madre')?.touched">Este
                     campo es
@@ -534,8 +542,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Segundo apellido:</label>
-                  <input formControlName="f_segundo_apellido_pmadre" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: Gonzalez" />
+                  <input formControlName="f_segundo_apellido_pmadre" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: Gonzalez" />
                   <small class="colorsm"
                     *ngIf="formTestamento.get('f_segundo_apellido_pmadre')?.hasError('required') && formTestamento.get('f_segundo_apellido_pmadre')?.touched">Este
                     campo es
@@ -549,7 +557,7 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Indicar si vive:</label>
-                  <select class="form-select input-simulado-disabled"  id="vive_madre" formControlName="vive_madre">
+                  <select class="form-select input-simulado-disabled" id="vive_madre" formControlName="vive_madre">
                     <option *ngFor="let vives of vive" [value]="vives.id">
                       {{ vives.name }}
                     </option>
@@ -563,7 +571,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Nacionalidad:</label>
-                  <select class="form-select input-simulado-disabled"  id="nacionalidad_madre" formControlName="nacionalidad_madre">
+                  <select class="form-select input-simulado-disabled" id="nacionalidad_madre"
+                    formControlName="nacionalidad_madre">
                     <option *ngFor="let nacion of nacionalidad" [value]="nacion.id">
                       {{ nacion.name }}
                     </option>
@@ -577,8 +586,8 @@
               <div *ngIf="madreNac" class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Especifique:</label>
-                  <input formControlName="especifique_nac_madre" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: Peruana" />
+                  <input formControlName="especifique_nac_madre" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: Peruana" />
                 </div>
               </div>
             </div>
@@ -599,16 +608,16 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Primer apellido:</label>
-                  <input formControlName="primer_apellido_primer_nup" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: Jimenez" />
+                  <input formControlName="primer_apellido_primer_nup" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: Jimenez" />
                 </div>
               </div>
 
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Segundo apellido:</label>
-                  <input formControlName="segundo_apellido_primer_nup" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: Gonzalez" />
+                  <input formControlName="segundo_apellido_primer_nup" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: Gonzalez" />
                 </div>
               </div>
 
@@ -618,7 +627,8 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Indicar si vive:</label>
-                  <select class="form-select input-simulado-disabled"  id="vive_primer_nup" formControlName="vive_primer_nup">
+                  <select class="form-select input-simulado-disabled" id="vive_primer_nup"
+                    formControlName="vive_primer_nup">
                     <option *ngFor="let vives of vive" [value]="vives.id">
                       {{ vives.name }}
                     </option>
@@ -629,7 +639,7 @@
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Régimen patrimonial:</label>
-                  <select class="form-select input-simulado-disabled"  id="regimen_patrimonial_primer_nup"
+                  <select class="form-select input-simulado-disabled" id="regimen_patrimonial_primer_nup"
                     formControlName="regimen_patrimonial_primer_nup">
                     <option *ngFor="let vives of regimenP" [value]="vives.id">
                       {{ vives.name }}
@@ -646,24 +656,24 @@
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Nombre(s):</label>
-                      <input formControlName="hijo_nombre_primer_nup" type="text" class="form-control input-simulado-disabled"
-                        placeholder="Ejemplo: Sofía" />
+                      <input formControlName="hijo_nombre_primer_nup" type="text"
+                        class="form-control input-simulado-disabled" placeholder="Ejemplo: Sofía" />
                     </div>
                   </div>
 
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Primer apellido:</label>
-                      <input formControlName="hijo_primer_apellido_primer_nup" type="text" class="form-control input-simulado-disabled"
-                        placeholder="Ejemplo: Jiménez" />
+                      <input formControlName="hijo_primer_apellido_primer_nup" type="text"
+                        class="form-control input-simulado-disabled" placeholder="Ejemplo: Jiménez" />
                     </div>
                   </div>
 
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Segundo apellido:</label>
-                      <input formControlName="hijo_segundo_apellido_primer_nup" type="text" class="form-control input-simulado-disabled"
-                        placeholder="Ejemplo: González" />
+                      <input formControlName="hijo_segundo_apellido_primer_nup" type="text"
+                        class="form-control input-simulado-disabled" placeholder="Ejemplo: González" />
                     </div>
                   </div>
                 </div>
@@ -671,8 +681,8 @@
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Edad*</label>
-                      <input formControlName="hijo_edad_primer_nup" type="number" class="form-control input-simulado-disabled"
-                        placeholder="Ejemplo: 18" />
+                      <input formControlName="hijo_edad_primer_nup" type="number"
+                        class="form-control input-simulado-disabled" placeholder="Ejemplo: 18" />
                     </div>
                   </div>
 
@@ -686,7 +696,8 @@ placeholder="Ejemplo: Vivo" />
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Vive o Finado:</label>
-                      <select class="form-select input-simulado-disabled"  id="hijo_vf_primer_nup" formControlName="hijo_vf_primer_nup">
+                      <select class="form-select input-simulado-disabled" id="hijo_vf_primer_nup"
+                        formControlName="hijo_vf_primer_nup">
                         <option *ngFor="let vives of vive" [value]="vives.id">
                           {{ vives.name }}
                         </option>
@@ -714,16 +725,16 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Primer apellido:</label>
-                  <input formControlName="primer_apellido_dos_nup" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: Jimenez" />
+                  <input formControlName="primer_apellido_dos_nup" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: Jimenez" />
                 </div>
               </div>
 
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Segundo apellido:</label>
-                  <input formControlName="segundo_apellido_dos_nup" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: Gonzalez" />
+                  <input formControlName="segundo_apellido_dos_nup" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: Gonzalez" />
                 </div>
               </div>
 
@@ -733,7 +744,7 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Indicar si vive:</label>
-                  <select class="form-select input-simulado-disabled"  id="vive_dos_nup" formControlName="vive_dos_nup">
+                  <select class="form-select input-simulado-disabled" id="vive_dos_nup" formControlName="vive_dos_nup">
                     <option *ngFor="let vives of vive" [value]="vives.id">
                       {{ vives.name }}
                     </option>
@@ -744,7 +755,7 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Régimen patrimonial:</label>
-                  <select class="form-select input-simulado-disabled"  id="regimen_patrimonial_dos_nup"
+                  <select class="form-select input-simulado-disabled" id="regimen_patrimonial_dos_nup"
                     formControlName="regimen_patrimonial_dos_nup">
                     <option *ngFor="let vives of regimenP" [value]="vives.id">
                       {{ vives.name }}
@@ -764,24 +775,24 @@ placeholder="Ejemplo: Vivo" />
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Nombre(s):</label>
-                      <input formControlName="hijo_nombre_dos_nup" type="text" class="form-control input-simulado-disabled"
-                        placeholder="Ejemplo: Sofía" />
+                      <input formControlName="hijo_nombre_dos_nup" type="text"
+                        class="form-control input-simulado-disabled" placeholder="Ejemplo: Sofía" />
                     </div>
                   </div>
 
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Primer apellido:</label>
-                      <input formControlName="hijo_primer_apellido_dos_nup" type="text" class="form-control input-simulado-disabled"
-                        placeholder="Ejemplo: Jiménez" />
+                      <input formControlName="hijo_primer_apellido_dos_nup" type="text"
+                        class="form-control input-simulado-disabled" placeholder="Ejemplo: Jiménez" />
                     </div>
                   </div>
 
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Segundo apellido:</label>
-                      <input formControlName="hijo_segundo_apellido_dos_nup" type="text" class="form-control input-simulado-disabled"
-                        placeholder="Ejemplo: González" />
+                      <input formControlName="hijo_segundo_apellido_dos_nup" type="text"
+                        class="form-control input-simulado-disabled" placeholder="Ejemplo: González" />
                     </div>
                   </div>
                 </div>
@@ -791,14 +802,15 @@ placeholder="Ejemplo: Vivo" />
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Edad*</label>
-                      <input formControlName="hijo_edad_dos_nup" type="number" class="form-control input-simulado-disabled"
-                        placeholder="Ejemplo: 18" />
+                      <input formControlName="hijo_edad_dos_nup" type="number"
+                        class="form-control input-simulado-disabled" placeholder="Ejemplo: 18" />
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Vive o Finado:</label>
-                      <select class="form-select input-simulado-disabled"  id="hijo_vf_dos_nup" formControlName="hijo_vf_dos_nup">
+                      <select class="form-select input-simulado-disabled" id="hijo_vf_dos_nup"
+                        formControlName="hijo_vf_dos_nup">
                         <option *ngFor="let vives of vive" [value]="vives.id">
                           {{ vives.name }}
                         </option>
@@ -837,16 +849,16 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Primer apellido:</label>
-                  <input formControlName="primer_apellido_fuera_matri" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: Jiménez" />
+                  <input formControlName="primer_apellido_fuera_matri" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: Jiménez" />
                 </div>
               </div>
 
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Segundo apellido:</label>
-                  <input formControlName="segundo_apellido_fuera_matri" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: González" />
+                  <input formControlName="segundo_apellido_fuera_matri" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: González" />
                 </div>
               </div>
             </div>
@@ -862,24 +874,24 @@ placeholder="Ejemplo: Vivo" />
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Nombre(s):</label>
-                      <input formControlName="fuera_hijo_nombre" type="text" class="form-control input-simulado-disabled"
-                        placeholder="Ejemplo: Sofía" />
+                      <input formControlName="fuera_hijo_nombre" type="text"
+                        class="form-control input-simulado-disabled" placeholder="Ejemplo: Sofía" />
                     </div>
                   </div>
 
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Primer apellido:</label>
-                      <input formControlName="fuera_hijo_primer_apellido" type="text" class="form-control input-simulado-disabled"
-                        placeholder="Ejemplo: Jiménez" />
+                      <input formControlName="fuera_hijo_primer_apellido" type="text"
+                        class="form-control input-simulado-disabled" placeholder="Ejemplo: Jiménez" />
                     </div>
                   </div>
 
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Segundo apellido:</label>
-                      <input formControlName="fuera_hijo_segundo_apellido" type="text" class="form-control input-simulado-disabled"
-                        placeholder="Ejemplo: González" />
+                      <input formControlName="fuera_hijo_segundo_apellido" type="text"
+                        class="form-control input-simulado-disabled" placeholder="Ejemplo: González" />
                     </div>
                   </div>
                 </div>
@@ -887,14 +899,15 @@ placeholder="Ejemplo: Vivo" />
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Edad:</label>
-                      <input formControlName="fuera_hijo_edad" type="number" class="form-control input-simulado-disabled"
-                        placeholder="Ejemplo: 18" />
+                      <input formControlName="fuera_hijo_edad" type="number"
+                        class="form-control input-simulado-disabled" placeholder="Ejemplo: 18" />
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="mb-3">
                       <label class="form-label negri">Vive o Finado:</label>
-                      <select class="form-select input-simulado-disabled"  id="fuera_hijo_vf" formControlName="fuera_hijo_vf">
+                      <select class="form-select input-simulado-disabled" id="fuera_hijo_vf"
+                        formControlName="fuera_hijo_vf">
                         <option *ngFor="let vives of vive" [value]="vives.id">
                           {{ vives.name }}
                         </option>
@@ -914,7 +927,8 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Es el primer testamento que otorga:</label>
-                  <select class="form-select input-simulado-disabled"  id="primer_testamento" formControlName="primer_testamento">
+                  <select class="form-select input-simulado-disabled" id="primer_testamento"
+                    formControlName="primer_testamento">
                     <option *ngFor="let vives of primerTestamento" [value]="vives.id">
                       {{ vives.name }}
                     </option>
@@ -934,20 +948,22 @@ placeholder="Ejemplo: Vivo" />
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri"> La fecha en que realizo el tramite:</label>
-                    <input formControlName="fecha_primer_testamento" type="date" class="form-control input-simulado-disabled" />
+                    <input formControlName="fecha_primer_testamento" type="date"
+                      class="form-control input-simulado-disabled" />
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri"> Ante que Notaría lo realizo:</label>
-                    <input formControlName="notaria_primer_testamento" type="text" class="form-control input-simulado-disabled"
-                      placeholder="Ejemplo: 81" />
+                    <input formControlName="notaria_primer_testamento" type="text"
+                      class="form-control input-simulado-disabled" placeholder="Ejemplo: 81" />
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri"> Número de instrumento y volumen:</label>
-                    <input formControlName="instrumento_primer_testamento" type="text" class="form-control input-simulado-disabled"
+                    <input formControlName="instrumento_primer_testamento" type="text"
+                      class="form-control input-simulado-disabled"
                       placeholder="Ejemplo: Escriba el número de instrumento y volumen" />
                   </div>
                 </div>
@@ -962,7 +978,8 @@ placeholder="Ejemplo: Vivo" />
                       <div class="w-100 d-flex flex-column justify-content-center align-items-center"
                         style="min-height: 150px;">
                         <ng-container *ngIf="doctos['primer_testamento_doc']; else noDisponible">
-                          <a [href]="enviro+doctos['primer_testamento_doc']" target="_blank" class="text-decoration-none">
+                          <a [href]="enviro+doctos['primer_testamento_doc']" target="_blank"
+                            class="text-decoration-none">
                             <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
                             <div class="mt-2">Ver documento</div>
                           </a>
@@ -989,7 +1006,7 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Sabe y puede leer:</label>
-                  <select class="form-select input-simulado-disabled"  id="sabe_leer" formControlName="sabe_leer">
+                  <select class="form-select input-simulado-disabled" id="sabe_leer" formControlName="sabe_leer">
                     <option *ngFor="let nacion of bajoProtesta" [value]="nacion.id">
                       {{ nacion.name }}
                     </option>
@@ -1004,7 +1021,8 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Sabe y puede escribir:</label>
-                  <select class="form-select input-simulado-disabled"  id="sabe_escribir" formControlName="sabe_escribir">
+                  <select class="form-select input-simulado-disabled" id="sabe_escribir"
+                    formControlName="sabe_escribir">
                     <option *ngFor="let nacion of bajoProtesta" [value]="nacion.id">
                       {{ nacion.name }}
                     </option>
@@ -1019,7 +1037,7 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Puede hablar:</label>
-                  <select class="form-select input-simulado-disabled"  id="puede_hablar" formControlName="puede_hablar">
+                  <select class="form-select input-simulado-disabled" id="puede_hablar" formControlName="puede_hablar">
                     <option *ngFor="let nacion of bajoProtesta" [value]="nacion.id">
                       {{ nacion.name }}
                     </option>
@@ -1036,7 +1054,7 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Puede ver:</label>
-                  <select class="form-select input-simulado-disabled"  id="puede_ver" formControlName="puede_ver">
+                  <select class="form-select input-simulado-disabled" id="puede_ver" formControlName="puede_ver">
                     <option *ngFor="let nacion of bajoProtesta" [value]="nacion.id">
                       {{ nacion.name }}
                     </option>
@@ -1051,7 +1069,7 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Puede oír:</label>
-                  <select class="form-select input-simulado-disabled"  id="puede_oir" formControlName="puede_oir">
+                  <select class="form-select input-simulado-disabled" id="puede_oir" formControlName="puede_oir">
                     <option *ngFor="let nacion of bajoProtesta" [value]="nacion.id">
                       {{ nacion.name }}
                     </option>
@@ -1107,7 +1125,8 @@ placeholder="Ejemplo: Vivo" />
                 <div class="mb-3">
                   <label class="form-label negri">Dentro de sus herederos considera designar a un "menor de
                     edad":</label>
-                  <select class="form-select input-simulado-disabled"  id="menor_de_edad" formControlName="menor_de_edad">
+                  <select class="form-select input-simulado-disabled" id="menor_de_edad"
+                    formControlName="menor_de_edad">
                     <option *ngFor="let vives of primerTestamento" [value]="vives.id">
                       {{ vives.name }}
                     </option>
@@ -1121,7 +1140,8 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Derecho de Acrecer:</label>
-                  <select class="form-select input-simulado-disabled"  id="derecho_acrecer" formControlName="derecho_acrecer">
+                  <select class="form-select input-simulado-disabled" id="derecho_acrecer"
+                    formControlName="derecho_acrecer">
                     <option *ngFor="let vives of primerTestamento" [value]="vives.id">
                       {{ vives.name }}
                     </option>
@@ -1139,8 +1159,8 @@ placeholder="Ejemplo: Vivo" />
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Nombre(s):</label>
-                        <input formControlName="nombre_heredero" type="text" class="form-control input-simulado-disabled"
-                          placeholder="Ejemplo: Sofía" />
+                        <input formControlName="nombre_heredero" type="text"
+                          class="form-control input-simulado-disabled" placeholder="Ejemplo: Sofía" />
                         <small class="colorsm"
                           *ngIf="herederos.at(i).get('nombre_heredero')?.hasError('required') && herederos.at(i).get('nombre_heredero')?.touched">Este
                           campo es
@@ -1151,8 +1171,8 @@ placeholder="Ejemplo: Vivo" />
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Primer apellido:</label>
-                        <input formControlName="primer_apellido_heredero" type="text" class="form-control input-simulado-disabled"
-                          placeholder="Ejemplo: Jiménez" />
+                        <input formControlName="primer_apellido_heredero" type="text"
+                          class="form-control input-simulado-disabled" placeholder="Ejemplo: Jiménez" />
                         <small class="colorsm"
                           *ngIf="herederos.at(i).get('primer_apellido_heredero')?.hasError('required') && herederos.at(i).get('primer_apellido_heredero')?.touched">Este
                           campo es
@@ -1163,8 +1183,8 @@ placeholder="Ejemplo: Vivo" />
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Segundo apellido:</label>
-                        <input formControlName="segundo_apellido_heredero" type="text" class="form-control input-simulado-disabled"
-                          placeholder="Ejemplo: González" />
+                        <input formControlName="segundo_apellido_heredero" type="text"
+                          class="form-control input-simulado-disabled" placeholder="Ejemplo: González" />
                         <small class="colorsm"
                           *ngIf="herederos.at(i).get('segundo_apellido_heredero')?.hasError('required') && herederos.at(i).get('segundo_apellido_heredero')?.touched">Este
                           campo es
@@ -1176,8 +1196,8 @@ placeholder="Ejemplo: Vivo" />
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Edad:</label>
-                        <input formControlName="edad_heredero" type="number" class="form-control input-simulado-disabled"
-                          placeholder="Ejemplo: 18 años" />
+                        <input formControlName="edad_heredero" type="number"
+                          class="form-control input-simulado-disabled" placeholder="Ejemplo: 18 años" />
                         <small class="colorsm"
                           *ngIf="herederos.at(i).get('edad_heredero')?.hasError('required') && herederos.at(i).get('edad_heredero')?.touched">Este
                           campo es
@@ -1188,8 +1208,8 @@ placeholder="Ejemplo: Vivo" />
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Parentesco:</label>
-                        <input formControlName="parentesco_heredero" type="text" class="form-control input-simulado-disabled"
-                          placeholder="Ejemplo: Hijo" />
+                        <input formControlName="parentesco_heredero" type="text"
+                          class="form-control input-simulado-disabled" placeholder="Ejemplo: Hijo" />
                         <small class="colorsm"
                           *ngIf="herederos.at(i).get('parentesco_heredero')?.hasError('required') && herederos.at(i).get('parentesco_heredero')?.touched">Este
                           campo es
@@ -1199,8 +1219,8 @@ placeholder="Ejemplo: Vivo" />
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Porcentaje:</label>
-                        <input formControlName="porcentaje_heredero" type="number" class="form-control input-simulado-disabled"
-                          placeholder="Ejemplo: 100" />
+                        <input formControlName="porcentaje_heredero" type="number"
+                          class="form-control input-simulado-disabled" placeholder="Ejemplo: 100" />
                         <small class="colorsm"
                           *ngIf="herederos.at(i).get('porcentaje_heredero')?.hasError('required') && herederos.at(i).get('porcentaje_heredero')?.touched">Este
                           campo es
@@ -1220,7 +1240,7 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Derecho de Acrecer:</label>
-                  <select class="form-select input-simulado-disabled"  id="derecho_acrecer_sustituto"
+                  <select class="form-select input-simulado-disabled" id="derecho_acrecer_sustituto"
                     formControlName="derecho_acrecer_sustituto">
                     <option *ngFor="let vives of primerTestamento" [value]="vives.id">
                       {{ vives.name }}
@@ -1239,24 +1259,24 @@ placeholder="Ejemplo: Vivo" />
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Nombre(s):</label>
-                        <input formControlName="nombre_sustituto" type="text" class="form-control input-simulado-disabled"
-                          placeholder="Ejemplo: Sofía" />
+                        <input formControlName="nombre_sustituto" type="text"
+                          class="form-control input-simulado-disabled" placeholder="Ejemplo: Sofía" />
                       </div>
                     </div>
 
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Primer apellido:</label>
-                        <input formControlName="primer_apellido_sustituto" type="text" class="form-control input-simulado-disabled"
-                          placeholder="Ejemplo: Jiménez" />
+                        <input formControlName="primer_apellido_sustituto" type="text"
+                          class="form-control input-simulado-disabled" placeholder="Ejemplo: Jiménez" />
                       </div>
                     </div>
 
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Segundo apellido:</label>
-                        <input formControlName="segundo_apellido_sustituto" type="text" class="form-control input-simulado-disabled"
-                          placeholder="Ejemplo: González" />
+                        <input formControlName="segundo_apellido_sustituto" type="text"
+                          class="form-control input-simulado-disabled" placeholder="Ejemplo: González" />
                       </div>
                     </div>
                   </div>
@@ -1266,24 +1286,24 @@ placeholder="Ejemplo: Vivo" />
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Nombre(s):</label>
-                        <input formControlName="nombre_a_sustituir" type="text" class="form-control input-simulado-disabled"
-                          placeholder="Ejemplo: Sofía" />
+                        <input formControlName="nombre_a_sustituir" type="text"
+                          class="form-control input-simulado-disabled" placeholder="Ejemplo: Sofía" />
                       </div>
                     </div>
 
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Primer apellido:</label>
-                        <input formControlName="primer_apellido_a_sustituir" type="text" class="form-control input-simulado-disabled"
-                          placeholder="Ejemplo: Jiménez" />
+                        <input formControlName="primer_apellido_a_sustituir" type="text"
+                          class="form-control input-simulado-disabled" placeholder="Ejemplo: Jiménez" />
                       </div>
                     </div>
 
                     <div class="col-sm-4">
                       <div class="mb-3">
                         <label class="form-label negri">Segundo apellido:</label>
-                        <input formControlName="segundo_apellido_a_sustituir" type="text" class="form-control input-simulado-disabled"
-                          placeholder="Ejemplo: González" />
+                        <input formControlName="segundo_apellido_a_sustituir" type="text"
+                          class="form-control input-simulado-disabled" placeholder="Ejemplo: González" />
                       </div>
                     </div>
                   </div>
@@ -1336,8 +1356,8 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Primer apellido:</label>
-                  <input formControlName="primer_apellido_albacea" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: Jiménez" />
+                  <input formControlName="primer_apellido_albacea" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: Jiménez" />
                   <small class="colorsm"
                     *ngIf="formTestamento.get('primer_apellido_albacea')?.hasError('required') && formTestamento.get('primer_apellido_albacea')?.touched">Este
                     campo es
@@ -1348,8 +1368,8 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Segundo apellido:</label>
-                  <input formControlName="segundo_apellido_albacea" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: González" />
+                  <input formControlName="segundo_apellido_albacea" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: González" />
                   <small class="colorsm"
                     *ngIf="formTestamento.get('segundo_apellido_albacea')?.hasError('required') && formTestamento.get('segundo_apellido_albacea')?.touched">Este
                     campo es
@@ -1375,8 +1395,8 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Primer apellido:</label>
-                  <input formControlName="primer_apellido_falta_albacea" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: Jiménez" />
+                  <input formControlName="primer_apellido_falta_albacea" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: Jiménez" />
                   <small class="colorsm"
                     *ngIf="formTestamento.get('primer_apellido_falta_albacea')?.hasError('required') && formTestamento.get('primer_apellido_falta_albacea')?.touched">Este
                     campo es
@@ -1387,8 +1407,8 @@ placeholder="Ejemplo: Vivo" />
               <div class="col-sm-4">
                 <div class="mb-3">
                   <label class="form-label negri">Segundo apellido:</label>
-                  <input formControlName="segundo_apellido_falta_albacea" type="text" class="form-control input-simulado-disabled"
-                    placeholder="Ejemplo: González" />
+                  <input formControlName="segundo_apellido_falta_albacea" type="text"
+                    class="form-control input-simulado-disabled" placeholder="Ejemplo: González" />
                   <small class="colorsm"
                     *ngIf="formTestamento.get('segundo_apellido_falta_albacea')?.hasError('required') && formTestamento.get('segundo_apellido_falta_albacea')?.touched">Este
                     campo es
@@ -1441,8 +1461,8 @@ placeholder="Ejemplo: Vivo" />
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri">Primer apellido:</label>
-                    <input formControlName="primer_apellido_tutor" type="text" class="form-control input-simulado-disabled"
-                      placeholder="Ejemplo: Jiménez" />
+                    <input formControlName="primer_apellido_tutor" type="text"
+                      class="form-control input-simulado-disabled" placeholder="Ejemplo: Jiménez" />
                     <small class="colorsm"
                       *ngIf="formTestamento.get('primer_apellido_tutor')?.hasError('required') && formTestamento.get('primer_apellido_tutor')?.touched">Este
                       campo es
@@ -1453,8 +1473,8 @@ placeholder="Ejemplo: Vivo" />
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri">Segundo apellido:</label>
-                    <input formControlName="segundo_apellido_tutor" type="text" class="form-control input-simulado-disabled"
-                      placeholder="Ejemplo: González" />
+                    <input formControlName="segundo_apellido_tutor" type="text"
+                      class="form-control input-simulado-disabled" placeholder="Ejemplo: González" />
                     <small class="colorsm"
                       *ngIf="formTestamento.get('segundo_apellido_tutor')?.hasError('required') && formTestamento.get('segundo_apellido_tutor')?.touched">Este
                       campo es
@@ -1467,8 +1487,8 @@ placeholder="Ejemplo: Vivo" />
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri">Nombre(s):</label>
-                    <input formControlName="nombre_tutor_sustituto" type="text" class="form-control input-simulado-disabled"
-                      placeholder="Ejemplo: Sofía" />
+                    <input formControlName="nombre_tutor_sustituto" type="text"
+                      class="form-control input-simulado-disabled" placeholder="Ejemplo: Sofía" />
                     <small class="colorsm"
                       *ngIf="formTestamento.get('nombre_tutor_sustituto')?.hasError('required') && formTestamento.get('nombre_tutor_sustituto')?.touched">Este
                       campo es
@@ -1479,8 +1499,8 @@ placeholder="Ejemplo: Vivo" />
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri">Primer apellido:</label>
-                    <input formControlName="primer_apellido_tutor_sustituto" type="text" class="form-control input-simulado-disabled"
-                      placeholder="Ejemplo: Jiménez" />
+                    <input formControlName="primer_apellido_tutor_sustituto" type="text"
+                      class="form-control input-simulado-disabled" placeholder="Ejemplo: Jiménez" />
                     <small class="colorsm"
                       *ngIf="formTestamento.get('primer_apellido_tutor_sustituto')?.hasError('required') && formTestamento.get('primer_apellido_tutor_sustituto')?.touched">Este
                       campo es
@@ -1491,8 +1511,8 @@ placeholder="Ejemplo: Vivo" />
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri">Segundo apellido:</label>
-                    <input formControlName="segundo_apellido_tutor_sustituto" type="text" class="form-control input-simulado-disabled"
-                      placeholder="Ejemplo: González" />
+                    <input formControlName="segundo_apellido_tutor_sustituto" type="text"
+                      class="form-control input-simulado-disabled" placeholder="Ejemplo: González" />
                     <small class="colorsm"
                       *ngIf="formTestamento.get('segundo_apellido_tutor_sustituto')?.hasError('required') && formTestamento.get('segundo_apellido_tutor_sustituto')?.touched">Este
                       campo es
@@ -1532,8 +1552,8 @@ placeholder="Ejemplo: Vivo" />
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri">Primer apellido:</label>
-                    <input formControlName="primer_apellido_curador" type="text" class="form-control input-simulado-disabled"
-                      placeholder="Ejemplo: Jiménez" />
+                    <input formControlName="primer_apellido_curador" type="text"
+                      class="form-control input-simulado-disabled" placeholder="Ejemplo: Jiménez" />
                     <small class="colorsm"
                       *ngIf="formTestamento.get('primer_apellido_curador')?.hasError('required') && formTestamento.get('primer_apellido_curador')?.touched">Este
                       campo es
@@ -1544,8 +1564,8 @@ placeholder="Ejemplo: Vivo" />
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri">Segundo apellido:</label>
-                    <input formControlName="segundo_apellido_curador" type="text" class="form-control input-simulado-disabled"
-                      placeholder="Ejemplo: González" />
+                    <input formControlName="segundo_apellido_curador" type="text"
+                      class="form-control input-simulado-disabled" placeholder="Ejemplo: González" />
                     <small class="colorsm"
                       *ngIf="formTestamento.get('segundo_apellido_curador')?.hasError('required') && formTestamento.get('segundo_apellido_curador')?.touched">Este
                       campo es
@@ -1559,8 +1579,8 @@ placeholder="Ejemplo: Vivo" />
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri">Nombre(s):</label>
-                    <input formControlName="nombre_a_su_falta_curador" type="text" class="form-control input-simulado-disabled"
-                      placeholder="Ejemplo: Sofía" />
+                    <input formControlName="nombre_a_su_falta_curador" type="text"
+                      class="form-control input-simulado-disabled" placeholder="Ejemplo: Sofía" />
                     <small class="colorsm"
                       *ngIf="formTestamento.get('nombre_a_su_falta_curador')?.hasError('required') && formTestamento.get('nombre_a_su_falta_curador')?.touched">Este
                       campo es
@@ -1571,8 +1591,8 @@ placeholder="Ejemplo: Vivo" />
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri">Primer apellido:</label>
-                    <input formControlName="primer_apellido_a_su_falta_curador" type="text" class="form-control input-simulado-disabled"
-                      placeholder="Ejemplo: Jiménez" />
+                    <input formControlName="primer_apellido_a_su_falta_curador" type="text"
+                      class="form-control input-simulado-disabled" placeholder="Ejemplo: Jiménez" />
                     <small class="colorsm"
                       *ngIf="formTestamento.get('primer_apellido_a_su_falta_curador')?.hasError('required') && formTestamento.get('primer_apellido_a_su_falta_curador')?.touched">Este
                       campo es
@@ -1584,8 +1604,8 @@ placeholder="Ejemplo: Vivo" />
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label negri">Segundo apellido:</label>
-                    <input formControlName="segundo_apellido_a_su_falta_curador" type="text" class="form-control input-simulado-disabled"
-                      placeholder="Ejemplo: González" />
+                    <input formControlName="segundo_apellido_a_su_falta_curador" type="text"
+                      class="form-control input-simulado-disabled" placeholder="Ejemplo: González" />
                     <small class="colorsm"
                       *ngIf="formTestamento.get('segundo_apellido_a_su_falta_curador')?.hasError('required') && formTestamento.get('segundo_apellido_a_su_falta_curador')?.touched">Este
                       campo es
@@ -1627,24 +1647,24 @@ placeholder="Ejemplo: Vivo" />
                       <div class="col-sm-4">
                         <div class="mb-3">
                           <label class="form-label negri">Nombre(s):*</label>
-                          <input formControlName="nombre_testigo" type="text" class="form-control input-simulado-disabled"
-                            placeholder="Ejemplo: Sofía" />
+                          <input formControlName="nombre_testigo" type="text"
+                            class="form-control input-simulado-disabled" placeholder="Ejemplo: Sofía" />
                         </div>
                       </div>
 
                       <div class="col-sm-4">
                         <div class="mb-3">
                           <label class="form-label negri">Primer apellido:*</label>
-                          <input formControlName="primer_apellido_testigo" type="text" class="form-control input-simulado-disabled"
-                            placeholder="Ejemplo: Jiménez" />
+                          <input formControlName="primer_apellido_testigo" type="text"
+                            class="form-control input-simulado-disabled" placeholder="Ejemplo: Jiménez" />
                         </div>
                       </div>
 
                       <div class="col-sm-4">
                         <div class="mb-3">
                           <label class="form-label negri">Segundo apellido:*</label>
-                          <input formControlName="segundo_apellido_testigo" type="text" class="form-control input-simulado-disabled"
-                            placeholder="Ejemplo: González" />
+                          <input formControlName="segundo_apellido_testigo" type="text"
+                            class="form-control input-simulado-disabled" placeholder="Ejemplo: González" />
                         </div>
                       </div>
                     </div>
@@ -1653,24 +1673,24 @@ placeholder="Ejemplo: Vivo" />
                       <div class="col-sm-4">
                         <div class="mb-3">
                           <label class="form-label negri">Nacionalidad:*</label>
-                          <input formControlName="nacionalidad_testigo" type="text" class="form-control input-simulado-disabled"
-                            placeholder="Ejemplo: Mexicana" />
+                          <input formControlName="nacionalidad_testigo" type="text"
+                            class="form-control input-simulado-disabled" placeholder="Ejemplo: Mexicana" />
                         </div>
                       </div>
 
                       <div class="col-sm-4">
                         <div class="mb-3">
                           <label class="form-label negri">Fecha de nacimiento:*</label>
-                          <input formControlName="fecha_nacimiento_testigo" type="date" class="form-control input-simulado-disabled"
-                            placeholder="Seleccione una fecha" />
+                          <input formControlName="fecha_nacimiento_testigo" type="date"
+                            class="form-control input-simulado-disabled" placeholder="Seleccione una fecha" />
                         </div>
                       </div>
 
                       <div class="col-sm-4">
                         <div class="mb-3">
                           <label class="form-label negri">Lugar de nacimiento:*</label>
-                          <input formControlName="lugar_nacimiento_testigo" type="text" class="form-control input-simulado-disabled"
-                            placeholder="Ejemplo: Mexico" />
+                          <input formControlName="lugar_nacimiento_testigo" type="text"
+                            class="form-control input-simulado-disabled" placeholder="Ejemplo: Mexico" />
                         </div>
                       </div>
                     </div>
@@ -1687,16 +1707,16 @@ placeholder="Ejemplo: Vivo" />
                       <div class="col-sm-4">
                         <div class="mb-3">
                           <label class="form-label negri">Estado civil:*</label>
-                          <input formControlName="estado_civil_testigo" type="text" class="form-control input-simulado-disabled"
-                            placeholder="Ejemplo: Soltero" />
+                          <input formControlName="estado_civil_testigo" type="text"
+                            class="form-control input-simulado-disabled" placeholder="Ejemplo: Soltero" />
                         </div>
                       </div>
 
                       <div class="col-sm-4">
                         <div class="mb-3">
                           <label class="form-label negri">Ocupación:*</label>
-                          <input formControlName="ocupacion_testigo" type="text" class="form-control input-simulado-disabled"
-                            placeholder="Ejemplo: Empleado" />
+                          <input formControlName="ocupacion_testigo" type="text"
+                            class="form-control input-simulado-disabled" placeholder="Ejemplo: Empleado" />
                         </div>
                       </div>
                     </div>
@@ -1705,7 +1725,8 @@ placeholder="Ejemplo: Vivo" />
                       <div class="col-sm-4">
                         <div class="mb-3">
                           <label class="form-label negri">Domicilio:*</label>
-                          <input formControlName="domicilio_testigo" type="text" class="form-control input-simulado-disabled"
+                          <input formControlName="domicilio_testigo" type="text"
+                            class="form-control input-simulado-disabled"
                             placeholder="Ejemplo: Av. Reforma #123, CDMX" />
                         </div>
                       </div>
@@ -1721,8 +1742,8 @@ placeholder="Ejemplo: Vivo" />
                       <div class="col-sm-4">
                         <div class="mb-3">
                           <label class="form-label negri">Teléfono:*</label>
-                          <input formControlName="telefono_testigo" type="number" class="form-control input-simulado-disabled"
-                            placeholder="Ejemplo: 5512345678" />
+                          <input formControlName="telefono_testigo" type="number"
+                            class="form-control input-simulado-disabled" placeholder="Ejemplo: 5512345678" />
                         </div>
                       </div>
                     </div>
@@ -1771,7 +1792,8 @@ placeholder="Ejemplo: Vivo" />
                             <div class="w-100 d-flex flex-column justify-content-center align-items-center"
                               style="min-height: 150px;">
                               <ng-container *ngIf="hijo.get('curpt')?.value; else noDisponible">
-                                <a [href]="enviro+hijo.get('curpt')?.value" target="_blank" class="text-decoration-none">
+                                <a [href]="enviro+hijo.get('curpt')?.value" target="_blank"
+                                  class="text-decoration-none">
                                   <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
                                   <div class="mt-2">Ver documento</div>
                                 </a>
@@ -1814,105 +1836,105 @@ placeholder="Ejemplo: Vivo" />
               </div>
             </div>
 
-  <br>
+            <br>
             <div>
               <h5 class="titulo">Documentación requerida</h5>
             </div>
             <br>
 
-          <div class="row">
-                <div class="col-sm-6 mb-4">
-                  <div class="card h-100 shadow-sm">
-                    <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
-                      <h5 class="card-title">Acta de nacimiento</h5>
+            <div class="row">
+              <div class="col-sm-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                    <h5 class="card-title">Acta de nacimiento</h5>
 
-                      <div class="w-100 d-flex flex-column justify-content-center align-items-center"
-                        style="min-height: 150px;">
-                        <ng-container *ngIf="doctos['acta_nacimiento']; else noDisponible">
-                          <a [href]="enviro+doctos['acta_nacimiento']" target="_blank" class="text-decoration-none">
-                            <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
-                            <div class="mt-2">Ver documento</div>
-                          </a>
-                        </ng-container>
+                    <div class="w-100 d-flex flex-column justify-content-center align-items-center"
+                      style="min-height: 150px;">
+                      <ng-container *ngIf="doctos['acta_nacimiento']; else noDisponible">
+                        <a [href]="enviro+doctos['acta_nacimiento']" target="_blank" class="text-decoration-none">
+                          <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
+                          <div class="mt-2">Ver documento</div>
+                        </a>
+                      </ng-container>
 
-                        <ng-template #noDisponible>
-                          <span class="text-muted">No hay documento disponible</span>
-                        </ng-template>
-                      </div>
+                      <ng-template #noDisponible>
+                        <span class="text-muted">No hay documento disponible</span>
+                      </ng-template>
                     </div>
                   </div>
                 </div>
+              </div>
 
 
-                     <div class="col-sm-6 mb-4">
-                  <div class="card h-100 shadow-sm">
-                    <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
-                      <h5 class="card-title">Acta de matrimonio</h5>
+              <div class="col-sm-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                    <h5 class="card-title">Acta de matrimonio</h5>
 
-                      <div class="w-100 d-flex flex-column justify-content-center align-items-center"
-                        style="min-height: 150px;">
-                        <ng-container *ngIf="doctos['acta_matrimonio']; else noDisponible">
-                          <a [href]="enviro+doctos['acta_matrimonio']" target="_blank" class="text-decoration-none">
-                            <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
-                            <div class="mt-2">Ver documento</div>
-                          </a>
-                        </ng-container>
+                    <div class="w-100 d-flex flex-column justify-content-center align-items-center"
+                      style="min-height: 150px;">
+                      <ng-container *ngIf="doctos['acta_matrimonio']; else noDisponible">
+                        <a [href]="enviro+doctos['acta_matrimonio']" target="_blank" class="text-decoration-none">
+                          <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
+                          <div class="mt-2">Ver documento</div>
+                        </a>
+                      </ng-container>
 
-                        <ng-template #noDisponible>
-                          <span class="text-muted">No hay documento disponible</span>
-                        </ng-template>
-                      </div>
+                      <ng-template #noDisponible>
+                        <span class="text-muted">No hay documento disponible</span>
+                      </ng-template>
                     </div>
                   </div>
                 </div>
-          </div>
+              </div>
+            </div>
 
-                <div class="row">
-                <div class="col-sm-6 mb-4">
-                  <div class="card h-100 shadow-sm">
-                    <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
-                      <h5 class="card-title">Clave única de registro de población</h5>
+            <div class="row">
+              <div class="col-sm-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                    <h5 class="card-title">Clave única de registro de población</h5>
 
-                      <div class="w-100 d-flex flex-column justify-content-center align-items-center"
-                        style="min-height: 150px;">
-                        <ng-container *ngIf="doctos['curp']; else noDisponible">
-                          <a [href]="enviro+doctos['curp']" target="_blank" class="text-decoration-none">
-                            <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
-                            <div class="mt-2">Ver documento</div>
-                          </a>
-                        </ng-container>
+                    <div class="w-100 d-flex flex-column justify-content-center align-items-center"
+                      style="min-height: 150px;">
+                      <ng-container *ngIf="doctos['curp']; else noDisponible">
+                        <a [href]="enviro+doctos['curp']" target="_blank" class="text-decoration-none">
+                          <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
+                          <div class="mt-2">Ver documento</div>
+                        </a>
+                      </ng-container>
 
-                        <ng-template #noDisponible>
-                          <span class="text-muted">No hay documento disponible</span>
-                        </ng-template>
-                      </div>
+                      <ng-template #noDisponible>
+                        <span class="text-muted">No hay documento disponible</span>
+                      </ng-template>
                     </div>
                   </div>
                 </div>
+              </div>
 
 
-                     <div class="col-sm-6 mb-4">
-                  <div class="card h-100 shadow-sm">
-                    <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
-                      <h5 class="card-title">Comprobante de domicilio</h5>
+              <div class="col-sm-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                    <h5 class="card-title">Comprobante de domicilio</h5>
 
-                      <div class="w-100 d-flex flex-column justify-content-center align-items-center"
-                        style="min-height: 150px;">
-                        <ng-container *ngIf="doctos['comprobante_domicilio']; else noDisponible">
-                          <a [href]="enviro+doctos['comprobante_domicilio']" target="_blank" class="text-decoration-none">
-                            <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
-                            <div class="mt-2">Ver documento</div>
-                          </a>
-                        </ng-container>
+                    <div class="w-100 d-flex flex-column justify-content-center align-items-center"
+                      style="min-height: 150px;">
+                      <ng-container *ngIf="doctos['comprobante_domicilio']; else noDisponible">
+                        <a [href]="enviro+doctos['comprobante_domicilio']" target="_blank" class="text-decoration-none">
+                          <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
+                          <div class="mt-2">Ver documento</div>
+                        </a>
+                      </ng-container>
 
-                        <ng-template #noDisponible>
-                          <span class="text-muted">No hay documento disponible</span>
-                        </ng-template>
-                      </div>
+                      <ng-template #noDisponible>
+                        <span class="text-muted">No hay documento disponible</span>
+                      </ng-template>
                     </div>
                   </div>
                 </div>
-          </div>
+              </div>
+            </div>
             <br />
             <div class="text-center mt-4">
               <a routerLink="/solicitudes" class="btn btn-secondary">
