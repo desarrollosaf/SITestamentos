@@ -72,7 +72,10 @@ export class RegistroComponent {
     acta_nacimiento: null,
     acta_matrimonio: null,
     curp: null,
-    comprobante_domicilio: null
+    comprobante_domicilio: null,
+    certificado_publico: null,
+    certificado_privado: null
+
   };
 
 
@@ -854,8 +857,13 @@ export class RegistroComponent {
             if (doc.tipo_doc.tipo == 'curp') {
               this.doctos['curp'] = doc.archivo_path || null;
             }
+            if (doc.tipo_doc.tipo == 'certificado_publico') {
+              this.doctos['certificado_publico'] = doc.archivo_path || null;
+            }
+            if (doc.tipo_doc.tipo == 'certificado_privado') {
+              this.doctos['certificado_privado'] = doc.archivo_path || null;
+            }
           });
-
         } else {
           return;
         }
@@ -971,14 +979,14 @@ export class RegistroComponent {
               this.localidades = response.data;
               const coloniaIdActual = this.formTestamento.get('colonia_id')?.value;
               const coloniaExiste = this.localidades.some(c => c.idcol === coloniaIdActual);
+              this.formTestamento.patchValue({
+                estado_id: this.localidades[0].municipio_dp_municipio.estado_dp_estado.estadoid,
+                municipio_id: this.localidades[0].municipio_dp_municipio.municipioid,
+                estado_nombre: this.localidades[0].municipio_dp_municipio.estado_dp_estado.estadonom,
+                municipio_nombre: this.localidades[0].municipio_dp_municipio.municipionom
+              });
               if (coloniaExiste) {
                 this.formTestamento.get('colonia_id')?.setValue(coloniaIdActual);
-                this.formTestamento.patchValue({
-                  estado_id: this.localidades[0].municipio_dp_municipio.estado_dp_estado.estadoid,
-                  municipio_id: this.localidades[0].municipio_dp_municipio.municipioid,
-                  estado_nombre: this.localidades[0].municipio_dp_municipio.estado_dp_estado.estadonom,
-                  municipio_nombre: this.localidades[0].municipio_dp_municipio.municipionom
-                });
               } else {
                 this.formTestamento.get('colonia_id')?.reset();
               }
@@ -1045,15 +1053,15 @@ export class RegistroComponent {
   //PARA QUE SE HAGAN REQUERIDOS LOS INPUT DE LOS PRIMEROS DOCUMENTOS
   documentosRequeridosLlenos(): boolean {
     return (this.documentos.acta_nacimiento !== null || this.doctos['acta_nacimiento'] !== null) &&
-      (this.documentos.ine !== null || this.doctos['ine'] !== null)   &&
-      (this.documentos.comprobante_domicilio !== null || this.doctos['comprobante_domicilio']!== null)&&
-      (this.documentos.constancia_situacion_fiscal !== null ||  this.doctos['situacion_fiscal'] !== null) &&
-      (this.documentos.curp !== null || this.doctos['curp']!== null);
+      (this.documentos.ine !== null || this.doctos['ine'] !== null) &&
+      (this.documentos.comprobante_domicilio !== null || this.doctos['comprobante_domicilio'] !== null) &&
+      (this.documentos.constancia_situacion_fiscal !== null || this.doctos['situacion_fiscal'] !== null) &&
+      (this.documentos.curp !== null || this.doctos['curp'] !== null);
   }
   //PARA QUE SE HAGAN REQUERIDOS LOS INPUT DE LOS TESTIGOS EN CASO DE QUE SE CUMPLA LA CONDICION
   documentosExtraRequeridosLlenos(): boolean {
-    return this.documentos.certificado_publico !== null &&
-      this.documentos.certificado_privado !== null;
+    return (this.documentos.certificado_publico !== null || this.doctos['certificado_publico'] !== null) &&
+      (this.documentos.certificado_privado !== null || this.doctos['certificado_privado'] !== null);
     // this.documentos.t1_identificacion !== null &&
     // this.documentos.t1_curp !== null &&
     // this.documentos.t1_comprobante_domicilio !== null &&
@@ -1067,7 +1075,7 @@ export class RegistroComponent {
 
   //GUARDA DATOS
   enviarDatos(): void {
-   
+
     if (!this.formTestamento.valid || !this.documentosRequeridosLlenos()) {
       this.formTestamento.markAllAsTouched();
       Swal.fire({
@@ -1089,6 +1097,7 @@ export class RegistroComponent {
         showConfirmButton: false,
         timer: 3000
       });
+
       return;
     }
 
@@ -1148,9 +1157,6 @@ export class RegistroComponent {
       return;
 
     }
-
-
-
     const formData = new FormData();
     formData.append('f_rfc', String(this.formTestamento.value.f_rfc));
     formData.append('f_curp', String(this.formTestamento.value.f_curp));

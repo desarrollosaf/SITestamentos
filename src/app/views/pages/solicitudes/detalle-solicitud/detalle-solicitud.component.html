@@ -1935,6 +1935,68 @@ placeholder="Ejemplo: Vivo" />
                 </div>
               </div>
             </div>
+
+            <div *ngIf="mostrarExtraInfo">
+              <div>
+                <h5 class="titulo">
+                  En caso de ser adulto mayor o que su estado de salud así lo requiera, o si es sordo o invidente, o si
+                  no
+                  sabe o no puede firmar o leer o si tiene alguna dificultad con lo antes mencionado:
+                  Presentar dos Certificados médicos.
+                </h5>
+              </div>
+              <br>
+
+              <br>
+
+
+              <div class="row">
+                <div class="col-sm-6 mb-4">
+                  <div class="card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                      <h5 class="card-title">Expedido por una institución de salud pública</h5>
+
+                      <div class="w-100 d-flex flex-column justify-content-center align-items-center"
+                        style="min-height: 150px;">
+                        <ng-container *ngIf="doctos['certificado_publico']; else noDisponible">
+                          <a [href]="enviro+doctos['certificado_publico']" target="_blank" class="text-decoration-none">
+                            <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
+                            <div class="mt-2">Ver documento</div>
+                          </a>
+                        </ng-container>
+
+                        <ng-template #noDisponible>
+                          <span class="text-muted">No hay documento disponible</span>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-sm-6 mb-4">
+                  <div class="card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                      <h5 class="card-title">Expedido por una institución de salud privada</h5>
+
+                      <div class="w-100 d-flex flex-column justify-content-center align-items-center"
+                        style="min-height: 150px;">
+                        <ng-container *ngIf="doctos['certificado_privado']; else noDisponible">
+                          <a [href]="enviro+doctos['certificado_privado']" target="_blank" class="text-decoration-none">
+                            <img src="assets/images/pdf.png" alt="PDF" width="50" height="60" />
+                            <div class="mt-2">Ver documento</div>
+                          </a>
+                        </ng-container>
+
+                        <ng-template #noDisponible>
+                          <span class="text-muted">No hay documento disponible</span>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <br />
             <div class="text-center mt-4">
               <a routerLink="/solicitudes" class="btn btn-secondary">

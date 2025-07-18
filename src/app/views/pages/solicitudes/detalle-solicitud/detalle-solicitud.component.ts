@@ -87,7 +87,9 @@ export class DetalleSolicitudComponent {
     acta_nacimiento: null,
     acta_matrimonio: null,
     curp: null,
-    comprobante_domicilio: null
+    comprobante_domicilio: null,
+    certificado_publico: null,
+    certificado_privado: null
   };
 
 
@@ -611,6 +613,12 @@ export class DetalleSolicitudComponent {
           if (doc.tipo_doc.tipo == 'curp') {
             this.doctos['curp'] = doc.archivo_path || null;
           }
+          if (doc.tipo_doc.tipo == 'certificado_publico') {
+            this.doctos['certificado_publico'] = doc.archivo_path || null;
+          }
+          if (doc.tipo_doc.tipo == 'certificado_privado') {
+            this.doctos['certificado_privado'] = doc.archivo_path || null;
+          }
         });
 
 
@@ -658,6 +666,14 @@ export class DetalleSolicitudComponent {
             response.solicitud[0].datos_user.f_fecha_nacimiento
           );
           this.formTestamento.patchValue({ edad: edad + ' años' });
+          if (edad > 60) {
+            this.mostrarExtraInfo = !this.mostrarExtraInfo;
+            if (this.mostrarExtraInfo) {
+              this.testigos = true;
+            } else {
+              this.testigos = false;
+            }
+          }
         }
       },
       error: (e: HttpErrorResponse) => {

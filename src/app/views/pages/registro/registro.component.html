@@ -2368,6 +2368,13 @@ campo es
                           Eliminar archivo
                         </button>
                       </div>
+                      <div *ngIf="doctos['certificado_publico']" style="position: absolute; bottom: 0; right: 0;">
+                        <a type="button" class="btn boton-success-sm" [href]="enviro+doctos['certificado_publico']"
+                          target="_blank" class="text-decoration-none">
+                          <i class="feather icon-eye btn-icon-prepend"></i>
+                          Ver archivo
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2384,6 +2391,13 @@ campo es
                           <i class="feather icon-trash btn-icon-prepend"></i>
                           Eliminar archivo
                         </button>
+                      </div>
+                      <div *ngIf="doctos['certificado_privado']" style="position: absolute; bottom: 0; right: 0;">
+                        <a type="button" class="btn boton-success-sm" [href]="enviro+doctos['certificado_privado']"
+                          target="_blank" class="text-decoration-none">
+                          <i class="feather icon-eye btn-icon-prepend"></i>
+                          Ver archivo
+                        </a>
                       </div>
                     </div>
                   </div>
