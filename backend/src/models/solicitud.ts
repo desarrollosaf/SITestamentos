@@ -40,6 +40,7 @@ export class Solicitud extends Model<
   declare documento_identifica: string | null;
   declare numero_documento_identifica: string | null; 
   declare indique_nacionalidad_serv: string | null;
+  declare lugar_nacimiento: string | null;
   declare user?: User;
   declare datos_user?: any
   declare testigos?: Testigo[];
@@ -117,6 +118,10 @@ Solicitud.init(
       allowNull: true,
     },
     indique_nacionalidad_serv: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    lugar_nacimiento: {
       type: DataTypes.STRING,
       allowNull: true,
     },

@@ -15,15 +15,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
+// Rutas
 const estados_1 = __importDefault(require("../routes/fun/estados"));
 const datosp_1 = __importDefault(require("../routes/fun/datosp"));
 const user_1 = __importDefault(require("../routes/user"));
 const solicitudes_1 = __importDefault(require("../routes/solicitudes"));
 const citas_1 = __importDefault(require("../routes/citas"));
 const reportes_1 = __importDefault(require("../routes/reportes"));
+const token_1 = __importDefault(require("../routes/token"));
+// Modelos y middlewares
 const users_1 = __importDefault(require("../models/saf/users"));
 const auth_1 = require("../middlewares/auth");
-const cookie_parser_1 = __importDefault(require("cookie-parser"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -46,17 +49,18 @@ class Server {
         }));
         this.app.use((0, cookie_parser_1.default)());
         this.app.use('/storage', express_1.default.static(path_1.default.join(process.cwd(), 'storage')));
+        // Middleware global para proteger rutas con cookies, excepto algunas rutas públicas
         this.app.use((req, res, next) => {
             const publicPaths = [
                 '/api/user/login',
-                // '/api/user/register',
-                '/token',
+                '/token', // acceso público para obtener token
+                '/api/solicitudes/getsolicitudesapi/' // esta se protege con token, no con cookie
             ];
             const isPublic = publicPaths.some(path => req.originalUrl.startsWith(path));
             if (isPublic) {
-                return next(); // no proteger
+                return next(); // no proteger con cookie
             }
-            return (0, auth_1.verifyToken)(req, res, next); // proteger
+            return (0, auth_1.verifyToken)(req, res, next); // proteger con cookie
         });
     }
     routes() {
@@ -66,6 +70,7 @@ class Server {
         this.app.use(solicitudes_1.default);
         this.app.use(citas_1.default);
         this.app.use(reportes_1.default);
+        this.app.use(token_1.default); // Token OAuth route
     }
     DBconnetc() {
         return __awaiter(this, void 0, void 0, function* () {
