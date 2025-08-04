@@ -608,10 +608,15 @@ export class RegistroComponent {
     this._solicitudService.getsolicitud(this.currentUser.rfc).subscribe({
       next: (response: any) => {
         if (response.solicitud.length > 0) {
+          if (response.solicitud[0].estatus_solicitud != 0) {
+            this.mostrarFormulario = false;
+            this.estatusSolicitud = true;
+            return;
+          }
           // console.log(response.solicitud[0]);
           // console.log(response.solicitud[0].estatus_solicitud);
           // if (response.solicitud[0].estatus_solicitud == 0) {
-            console.log(response.solicitud[0]);
+            // console.log(response.solicitud[0]);
             this.formTestamento.patchValue({
               lugar_nacimiento: response.solicitud[0].lugar_nacimiento,
             });
