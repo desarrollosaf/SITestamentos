@@ -94,6 +94,11 @@ Solicitud.init({
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
+    estatus_solicitud: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0,
+    },
     createdAt: {
         type: sequelize_1.DataTypes.DATE,
         allowNull: false,
