@@ -671,30 +671,32 @@ export const saveprogreso = async (req: Request, res: Response): Promise<any> =>
   );
 
   const upsert = async (model: any, where: any, values: any) => {
-    const record = await model.findOne({ where });
-    return record ? await record.update(values) : await model.create(values);
-  };
+  const record = await model.findOne({ where });
+  return record ? await record.update(values) : await model.create(values);
+};
 
-  // 1. Datos Personales
-  await upsert(dp_datospersonales, { f_curp }, {
-    f_curp: data.f_curp,
-    f_rfc: data.f_rfc,
-    f_nombre: data.f_nombre,
-    f_primer_apellido: data.f_primer_apellido,
-    f_segundo_apellido: data.f_segundo_apellido,
-    f_fecha_nacimiento: data.f_fecha_nacimiento,
-    estado_id: data.estado_id,
-    municipio_id: data.municipio_id,
-    colonia_id: data.colonia_id,
-    f_domicilio: data.f_domicilio,
-    numext: data.numext,
-    numero_tel: data.numero_tel,
-    numero_cel: data.numero_cel,
-    correo_per: data.correo_per,
-    f_homclave: '',
-    f_cp: data.f_cp,
-    estadocivil_id: data.estado_civil,
-  });
+// --- Uso ---
+const personalData = cleanEmptyStrings({
+  f_curp: data.f_curp,
+  f_rfc: data.f_rfc,
+  f_nombre: data.f_nombre,
+  f_primer_apellido: data.f_primer_apellido,
+  f_segundo_apellido: data.f_segundo_apellido,
+  f_fecha_nacimiento: data.f_fecha_nacimiento,
+  estado_id: data.estado_id,
+  municipio_id: data.municipio_id,
+  colonia_id: data.colonia_id,
+  f_domicilio: data.f_domicilio,
+  numext: data.numext,
+  numero_tel: data.numero_tel,
+  numero_cel: data.numero_cel,
+  correo_per: data.correo_per,
+  f_homclave: '  ', // Se convertirá a null por cleanEmptyStrings
+  f_cp: data.f_cp,
+  estadocivil_id: data.estado_civil,
+});
+
+await upsert(dp_datospersonales, { f_curp: data.f_curp }, personalData);
 
   // 2. Solicitud
 
@@ -715,7 +717,7 @@ export const saveprogreso = async (req: Request, res: Response): Promise<any> =>
     dificultad_comunicacion: data.presenta_dificultad,
     lugar_nacimiento: data.lugar_nacimiento,
   });
-
+  
   let solicitud = await Solicitud.findOne({ where: { userId: data.f_rfc } });
   if (!solicitud) {
     solicitud = await Solicitud.create(cleanedData);
@@ -723,7 +725,6 @@ export const saveprogreso = async (req: Request, res: Response): Promise<any> =>
     await solicitud.update(cleanedData);
   }
  
-
   // 3. Documentos
   
   const documentosFields = [

@@ -642,8 +642,8 @@ const saveprogreso = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             const record = yield model.findOne({ where });
             return record ? yield record.update(values) : yield model.create(values);
         });
-        // 1. Datos Personales
-        yield upsert(dp_datospersonales_1.dp_datospersonales, { f_curp }, {
+        // --- Uso ---
+        const personalData = cleanEmptyStrings({
             f_curp: data.f_curp,
             f_rfc: data.f_rfc,
             f_nombre: data.f_nombre,
@@ -658,10 +658,11 @@ const saveprogreso = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             numero_tel: data.numero_tel,
             numero_cel: data.numero_cel,
             correo_per: data.correo_per,
-            f_homclave: '',
+            f_homclave: '  ', // Se convertirá a null por cleanEmptyStrings
             f_cp: data.f_cp,
             estadocivil_id: data.estado_civil,
         });
+        yield upsert(dp_datospersonales_1.dp_datospersonales, { f_curp: data.f_curp }, personalData);
         // 2. Solicitud
         const cleanedData = cleanEmptyStrings({
             userId: data.f_rfc,
