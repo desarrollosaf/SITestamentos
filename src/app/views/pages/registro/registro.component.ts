@@ -593,19 +593,25 @@ export class RegistroComponent {
 
   ngOnInit(): void {
     //empieza
-    // this.modalService.open(this.xlModal, {size: 'lg'}).result.then((result) => {
-    //   // console.log("Modal closed" + result);
-    // }).catch((res) => {});
-    this.currentUser = this._userService.currentUserValue;
-    this.buscarDatosPorCurp(this.currentUser.rfc);
-
+    this.modalService.open(this.xlModal, {size: 'lg'}).result.then((result) => {
+      // console.log("Modal closed" + result);
+    }).catch((res) => {});
     this.herederos.valueChanges.subscribe(() => {
       this.validarPorcentajeTotal();
     });
-    this._solicitudService.getsolicitud(this.currentUser.rfc).subscribe({
+
+    this.iniciarDatos();
+  }
+  iniciarDatos(){
+    this.currentUser = this._userService.currentUserValue;
+    this.buscarDatosPorCurp(this.currentUser.rfc);
+        this._solicitudService.getsolicitud(this.currentUser.rfc).subscribe({
       next: (response: any) => {
         if (response.solicitud.length > 0) {
           console.log(response.solicitud[0]);
+          this.formTestamento.patchValue({
+              lugar_nacimiento: response.solicitud[0].lugar_nacimiento,
+          });
           this.formTestamento.get('documento_identifica')?.setValue(response.solicitud[0].documento_identifica);
           if (response.solicitud[0].documento_identifica == 'Pasaporte' || response.solicitud[0].documento_identifica == 'Cédula profesional') {
             this.mostrarDoctoIdentifica = true;
@@ -875,9 +881,7 @@ export class RegistroComponent {
       },
     });
 
-
   }
-
   //PARA MOSTRAR EL DIV EN CASO DE QUE HAYA TESTIGOS
   // toggleExtraInfo(): void {
   //     this.mostrarExtraInfo = !this.mostrarExtraInfo;
@@ -1381,10 +1385,6 @@ export class RegistroComponent {
   }
 
   guardarProceso(): void {
-
-
-
-
     const formData = new FormData();
     formData.append('f_rfc', String(this.formTestamento.value.f_rfc));
     formData.append('f_curp', String(this.formTestamento.value.f_curp));
@@ -1578,17 +1578,22 @@ export class RegistroComponent {
     console.log(formData);
     this._registroService.saveRegistro(formData, curpUsr).subscribe({
       next: (response: any) => {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "¡Registro exitoso!",
-          text: `El registro de su trámite testamentario se ha efectuado de manera satisfactoria. Se le solicita mantenerse atento a los medios de contacto proporcionados, ya que en breve será contactado(a) para dar seguimiento y continuidad al procedimiento correspondiente.`,
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
           showConfirmButton: false,
-          timer: 7000
-        }).then(() => {
-          this.mostrarFormulario = false;
-          this.estatusSolicitud = true;
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
         });
+        Toast.fire({
+          icon: "success",
+          title: "Proceso guardado."
+        });
+        // this.iniciarDatos();
       },
       error: (e: HttpErrorResponse) => {
         if (e.error && e.error.msg) {
