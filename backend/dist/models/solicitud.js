@@ -90,6 +90,10 @@ Solicitud.init({
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
+    lugar_nacimiento: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
     createdAt: {
         type: sequelize_1.DataTypes.DATE,
         allowNull: false,

@@ -105,6 +105,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
             indique_nacionalidad_serv: data.indique_nacionalidad_serv,
             documento_residencia: data.documento_residencia_serv,
             dificultad_comunicacion:  data.presenta_dificultad,
+            lugar_nacimiento: data.lugar_nacimiento,
         });    
     } catch (error) {
         console.error('❌ Error al crear la solicitud:', error);
@@ -652,14 +653,21 @@ const buildPath = (files: any, field: string, curp: string) => {
 
 
 export const saveprogreso = async (req: Request, res: Response): Promise<any> => {
-
+ try {
+    
     const data = req.body;
   const files = req.files as { [fieldname: string]: Express.Multer.File[] };
   const f_curp = data.f_curp;
   const UpasswordHash = await hashPassword(data.f_rfc);
-
+    //  console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1",data)
+    //  return 500;
   const cleanEmptyStrings = (obj: Record<string, any>) =>
-    Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, v === '' ? null : v]));
+  Object.fromEntries(
+    Object.entries(obj).map(([k, v]) => {
+      if (v === '' || v === 'null' || v === undefined) return [k, null];
+      return [k, v];
+    })
+  );
 
   const upsert = async (model: any, where: any, values: any) => {
     const record = await model.findOne({ where });
@@ -704,6 +712,7 @@ export const saveprogreso = async (req: Request, res: Response): Promise<any> =>
     indique_nacionalidad_serv: data.indique_nacionalidad_serv,
     documento_residencia: data.documento_residencia_serv,
     dificultad_comunicacion: data.presenta_dificultad,
+    lugar_nacimiento: data.lugar_nacimiento,
   });
 
   let solicitud = await Solicitud.findOne({ where: { userId: data.f_rfc } });
@@ -715,6 +724,7 @@ export const saveprogreso = async (req: Request, res: Response): Promise<any> =>
  
 
   // 3. Documentos
+  
   const documentosFields = [
     'acta_nacimiento', 'acta_matrimonio', 'identificacion', 'curp',
     'comprobante_domicilio', 'certificado_privado', 'certificado_publico',
@@ -734,7 +744,8 @@ export const saveprogreso = async (req: Request, res: Response): Promise<any> =>
     } else {
       await Documento.create({ solicitudId: solicitud.id, tipo_documento: tipoDoc.id, archivo_path: filePath });
     }
-  }
+  } 
+
 
   // 4. Padres
   try {
@@ -860,15 +871,18 @@ const matrimonio1 = await upsertMatrimonio(1, {
   vive: data.vive_primer_nup,
 });
 
-if (matrimonio1 && Array.isArray(data.hijosPrimerMatrimonio)) {
-  const hijos1 = data.hijosPrimerMatrimonio.map((h: any) => ({
+if (matrimonio1) {
+  const hijosArray = Array.isArray(data.hijosPrimerMatrimonio) ? data.hijosPrimerMatrimonio : [];
+
+  const hijos1 = hijosArray.map((h: any) => ({
     nombre: h.hijo_nombre_primer_nup,
     primer_apellido: h.hijo_primer_apellido_primer_nup,
     segundo_apellido: h.hijo_segundo_apellido_primer_nup,
     edad: h.hijo_edad_primer_nup,
     vive: h.hijo_vf_primer_nup,
   }));
-  await registrarHijosPorMatrimonio( matrimonio1.id, hijos1);
+
+  await registrarHijosPorMatrimonio(matrimonio1.id, hijos1);
 }
 
 // === MATRIMONIO 2 ===
@@ -880,8 +894,10 @@ const matrimonio2 = await upsertMatrimonio(2, {
   vive: data.vive_dos_nup,
 });
 
-if (matrimonio2 && Array.isArray(data.hijosSegundoMatrimonio)) {
-  const hijos2 = data.hijosSegundoMatrimonio.map((h: any) => ({
+
+if (matrimonio2) {
+  const hijosArray = Array.isArray(data.hijosSegundoMatrimonio) ? data.hijosSegundoMatrimonio : [];
+  const hijos2 = hijosArray.map((h: any) => ({
     nombre: h.hijo_nombre_dos_nup,
     primer_apellido: h.hijo_primer_apellido_dos_nup,
     segundo_apellido: h.hijo_segundo_apellido_dos_nup,
@@ -893,8 +909,9 @@ if (matrimonio2 && Array.isArray(data.hijosSegundoMatrimonio)) {
 
 
 // === HIJOS FUERA DE MATRIMONIO ===
-if (Array.isArray(data.hijosFueraMatrimonio)) {
-  const hijosFuera = data.hijosFueraMatrimonio.map((h: any) => ({
+
+  const hijosArray = Array.isArray(data.hijosFueraMatrimonio) ? data.hijosFueraMatrimonio : [];
+  const hijosFuera = hijosArray.map((h: any) => ({
     nombre: h.fuera_hijo_nombre,
     primer_apellido: h.fuera_hijo_primer_apellido,
     segundo_apellido: h.fuera_hijo_segundo_apellido,
@@ -902,7 +919,7 @@ if (Array.isArray(data.hijosFueraMatrimonio)) {
     vive: h.fuera_hijo_vf,
   }));
   await registrarHijosFueraMatrimonio(hijosFuera);
-}
+
 
     if (data.primer_testamento == 0 ) {
        
@@ -943,76 +960,70 @@ if (Array.isArray(data.hijosFueraMatrimonio)) {
             Object.entries(obj).map(([k, v]) => [k, v === '' ? null : v])
         ) as T;
     }
-
     try {
-    if (data.herederos && Array.isArray(data.herederos)) {
-        await Heredero.destroy({ where: { solicitudId: solicitud.id } });
-
-        for (const herederoRaw of data.herederos) {
-        const herederoLimpio = cleanEmptyStrings2({
-            nombre_heredero: herederoRaw.nombre_heredero,
-            primer_apellido_heredero: herederoRaw.primer_apellido_heredero,
-            segundo_apellido_heredero: herederoRaw.segundo_apellido_heredero,
-            porcentaje: herederoRaw.porcentaje_heredero,
-            edad: herederoRaw.edad_heredero,
-            parentesco: herederoRaw.parentesco_heredero,
-        });
-
-        // Valida si al menos uno de los campos tiene valor
-        const tieneDatos = Object.values(herederoLimpio).some(
-            (v) => v !== null && v !== undefined
-        );
-
-        if (!tieneDatos) continue;
-
-        await Heredero.create({
-            ...herederoLimpio,
-            solicitudId: solicitud.id,
-            derecho_acrecer: data.derecho_acrecer ?? null,
-        });
+        if (solicitud?.id) {
+            //   console.log("Holaaaaaaaaaaaaaaaaaaaaaaaaa", await Heredero.destroy({ where: { solicitudId: solicitud.id } }))
+            await Heredero.destroy({ where: { solicitudId: solicitud.id } });
         }
-    }
-    } catch (error) {
-    console.error('Error al crear los HEREDEROS:', error);
-    }
+        if (Array.isArray(data.herederos)) {
+            for (const herederoRaw of data.herederos) {
+                const herederoLimpio = cleanEmptyStrings2({
+                    nombre_heredero: herederoRaw.nombre_heredero,
+                    primer_apellido_heredero: herederoRaw.primer_apellido_heredero,
+                    segundo_apellido_heredero: herederoRaw.segundo_apellido_heredero,
+                    porcentaje: herederoRaw.porcentaje_heredero,
+                    edad: herederoRaw.edad_heredero,
+                    parentesco: herederoRaw.parentesco_heredero,
+                });
 
-    try {
-  if (data.herederoSustituto) {
-        await HerederoSustituto.destroy({
-            where: { solicitudId: solicitud.id }
-            });
+                const tieneDatos = Object.values(herederoLimpio).some(
+                    (v) => v !== null && v !== undefined
+                );
 
-            for (const herederosustituto of data.herederoSustituto) {
-            // Normalizar campos
-            const nombre = herederosustituto.nombre_sustituto?.trim() || null;
-            const apellido1 = herederosustituto.primer_apellido_sustituto?.trim() || null;
-            const apellido2 = herederosustituto.segundo_apellido_sustituto?.trim() || null;
-            const sustituidoNombre = herederosustituto.nombre_a_sustituir?.trim() || null;
-            const sustituidoApellido1 = herederosustituto.primer_apellido_a_sustituir?.trim() || null;
-            const sustituidoApellido2 = herederosustituto.segundo_apellido_a_sustituir?.trim() || null;
-            const derecho = data.derecho_acrecer_sustituto?.toString().trim() || null;
+                if (!tieneDatos) continue;
 
-            // Validar que haya al menos un dato
-            const tieneDatos =
-                nombre ||
-                apellido1 ||
-                apellido2 ||
-                sustituidoNombre ||
-                sustituidoApellido1 ||
-                sustituidoApellido2;
-
-            if (tieneDatos) {
-                await HerederoSustituto.create({
-                solicitudId: solicitud.id,
-                nombre_sustituto: nombre,
-                primer_apellido_sustituto: apellido1,
-                segundo_apellido_sustituto: apellido2,
-                nombre_a_sustituir: sustituidoNombre,
-                primer_apellido_a_sustituir: sustituidoApellido1,
-                segundo_apellido_a_sustituir: sustituidoApellido2,
-                derecho_acrecer: derecho
+                await Heredero.create({
+                    ...herederoLimpio,
+                    solicitudId: solicitud.id,
+                    derecho_acrecer: data.derecho_acrecer ?? null,
                 });
             }
+        }
+    } catch (error) {
+        console.error('Error al crear los HEREDEROS:', error);
+    }
+
+    try {
+        if (solicitud?.id) {
+            await HerederoSustituto.destroy({ where: { solicitudId: solicitud.id } });
+        }
+
+        if (Array.isArray(data.herederoSustituto)) {
+                const registrosValidos = [];
+            for (const h of data.herederoSustituto) {
+                    const herederoLimpio = {
+                        solicitudId: solicitud.id,
+                        nombre_sustituto: h.nombre_sustituto?.trim() || null,
+                        primer_apellido_sustituto: h.primer_apellido_sustituto?.trim() || null,
+                        segundo_apellido_sustituto: h.segundo_apellido_sustituto?.trim() || null,
+                        nombre_a_sustituir: h.nombre_a_sustituir?.trim() || null,
+                        primer_apellido_a_sustituir: h.primer_apellido_a_sustituir?.trim() || null,
+                        segundo_apellido_a_sustituir: h.segundo_apellido_a_sustituir?.trim() || null,
+                        derecho_acrecer: data.derecho_acrecer_sustituto?.toString().trim() || null
+                    };
+
+                    const tieneDatos = Object.values(herederoLimpio).some(
+                        (v, i) => i > 0 && v !== null // i > 0 para ignorar solicitudId
+                    );
+
+                    if (tieneDatos) {
+                        registrosValidos.push(herederoLimpio);
+                    }
+                }
+
+            
+                if (registrosValidos.length > 0) {
+                    await HerederoSustituto.bulkCreate(registrosValidos);
             }
         }
     } catch (error) {
@@ -1099,7 +1110,7 @@ if (Array.isArray(data.hijosFueraMatrimonio)) {
     } catch (error) {
         console.error('Error al guardar el TUTOR del descendiente menor de edad:', error);
     }
-    console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1",data)
+   
      
     const buildIndexedPath = (field: string, index: number): string | undefined => {
         const fullFieldName = `testigos[${index}][${field}]`; 
@@ -1107,12 +1118,25 @@ if (Array.isArray(data.hijosFueraMatrimonio)) {
         return file ? path.join('storage', data.f_curp, file.filename) : undefined;
     };
 
-   const normalizeValues = <T extends Record<string, any>>(obj: T): T => {
-  const result: any = {};
-  for (const [key, value] of Object.entries(obj)) {
-    result[key] = typeof value === 'string' && value.trim() === '' ? undefined : value;
-  }
-  return result;
+ const normalizeValues = (obj: Record<string, any>): Record<string, any> => {
+    const result: Record<string, any> = {};
+
+    for (const key in obj) {
+        let value = obj[key];
+
+        if (
+            value === undefined ||
+            value === null ||
+            (typeof value === 'string' && value.trim() === '') ||
+            value === 'null'
+        ) {
+            result[key] = null;
+        } else {
+            result[key] = typeof value === 'string' ? value.trim() : value;
+        }
+    }
+
+    return result;
 };
 
 // Verifica si al menos un campo del objeto tiene un valor no nulo y no vacío
@@ -1122,60 +1146,76 @@ const hasMeaningfulData = (obj: Record<string, any>) =>
     );
 
     
-try {
-    if (data.testigos) {
-        console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2",data)
-        const testigosAnteriores = await Testigo.findAll({
-            where: { solicitudId: solicitud.id },
-            order: [['id', 'ASC']]
-        });
-
-        await Testigo.destroy({
-            where: { solicitudId: solicitud.id }
-        });
-
-        for (let i = 0; i < data.testigos.length; i++) {
-            const itemtest = data.testigos[i];
-            const anterior = testigosAnteriores[i];
-
-            const getPath = (field: string, anteriorPath?: string): string | undefined => {
-            const nuevoPath = buildIndexedPath(field, i);
-                if (typeof nuevoPath === 'string' && nuevoPath.trim() !== '') {
-                return nuevoPath;
-            }
-                return anteriorPath ?? undefined;
-            };
-
-            const datosTestigo = normalizeValues({
-                solicitudId: solicitud.id,
-                nombre_testigo: itemtest.nombre_testigo,
-                primer_apellido_testigo: itemtest.primer_apellido_testigo,
-                segundo_apellido_testigo: itemtest.segundo_apellido_testigo,
-                nacionalidad: itemtest.nacionalidad_testigo,
-                fecha_naciento: itemtest.fecha_nacimiento_testigo,
-                lugar_nacimiento: itemtest.lugar_nacimiento_testigo,
-                curp_dato: itemtest.curp_testigo,
-                estado_civil: itemtest.estado_civil_testigo,
-                ocupacion: itemtest.ocupacion_testigo,
-                domicilio: itemtest.domicilio_testigo,
-                cp: itemtest.cp_testigo,
-                telefono: itemtest.telefono_testigo,
-                rfc: itemtest.rfc_testigo,
-                identificacion: getPath('identificacion_t', anterior?.identificacion ?? undefined),
-                curp: getPath('curp_t', anterior?.curp ?? undefined),
-                comprobante_domicilio: getPath('comprobante_domicilio_t', anterior?.comprobante_domicilio ?? undefined),
+   try {
+        if (solicitud?.id) {
+            // Obtener los testigos anteriores por si hay que reutilizar rutas de archivos
+            const testigosAnteriores = await Testigo.findAll({
+                where: { solicitudId: solicitud.id },
+                order: [['id', 'ASC']]
             });
 
-            // Solo crea si hay al menos un dato relevante
-            if (hasMeaningfulData(datosTestigo)) {
-                await Testigo.create(datosTestigo);
+            // Eliminar todos los registros anteriores
+            await Testigo.destroy({
+                where: { solicitudId: solicitud.id }
+            });
+
+            
+            // Solo procesar si viene un array válido
+            if (Array.isArray(data.testigos)) {
+                const registrosValidos = [];
+
+                for (let i = 0; i < data.testigos.length; i++) {
+                    const itemtest = data.testigos[i];
+                    const anterior = testigosAnteriores[i];
+
+                    const getPath = (field: string, anteriorPath?: string): string | null => {
+                        const nuevoPath = buildIndexedPath(field, i);
+                        if (typeof nuevoPath === 'string' && nuevoPath.trim() !== '') {
+                            return nuevoPath;
+                        }
+                        return anteriorPath?.trim() || null;
+                    };
+
+                    const datosTestigo = normalizeValues({
+                        solicitudId: solicitud.id,
+                        nombre_testigo: itemtest.nombre_testigo,
+                        primer_apellido_testigo: itemtest.primer_apellido_testigo,
+                        segundo_apellido_testigo: itemtest.segundo_apellido_testigo,
+                        nacionalidad: itemtest.nacionalidad_testigo,
+                        fecha_naciento: itemtest.fecha_nacimiento_testigo,
+                        lugar_nacimiento: itemtest.lugar_nacimiento_testigo,
+                        curp_dato: itemtest.curp_testigo,
+                        estado_civil: itemtest.estado_civil_testigo,
+                        ocupacion: itemtest.ocupacion_testigo,
+                        domicilio: itemtest.domicilio_testigo,
+                        cp: itemtest.cp_testigo,
+                        telefono: itemtest.telefono_testigo,
+                        rfc: itemtest.rfc_testigo,
+                        identificacion: getPath('identificacion_t', anterior?.identificacion ?? undefined),
+                        curp: getPath('curp_t', anterior?.curp ?? undefined),
+                        comprobante_domicilio: getPath('comprobante_domicilio_t', anterior?.comprobante_domicilio ?? undefined),
+                    });
+
+                    if (hasMeaningfulData(datosTestigo)) {
+                        registrosValidos.push(datosTestigo);
+                    }
+                }
+                // console.log("holaaaaaaaa testigos", registrosValidos)
+                // return 500;
+                if (registrosValidos.length > 0) {
+                    await Testigo.bulkCreate(registrosValidos);
+                }
             }
         }
+    } catch (error) {
+        console.error('Error al crear los TESTIGOS:', error);
     }
-} catch (error) {
-    console.error('Error al crear los TESTIGOS:', error);
-}
-    return 500
+    
+
+
+    } catch (error) {
+        console.error('Error al crear alguna parte de solicitud:', error);
+    }
 
   return res.status(200).json({ message: 'Progreso guardado correctamente' });
 };

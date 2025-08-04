@@ -1,15 +1,20 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import path from 'path';
+import cookieParser from 'cookie-parser';
+
+// Rutas
 import routesEstados from '../routes/fun/estados';
 import routesDatosp from '../routes/fun/datosp';
 import routesUser from '../routes/user';
-import routesSolicitud from '../routes/solicitudes';  
+import routesSolicitud from '../routes/solicitudes';
 import routesCitas from '../routes/citas';
 import routesReportes from '../routes/reportes';
+import tokenRoute from '../routes/token';
+
+// Modelos y middlewares
 import UsersSafs from '../models/saf/users';
 import { verifyToken } from '../middlewares/auth';
-import cookieParser from 'cookie-parser';
 
 class Server {
     private app: Application;
@@ -18,7 +23,7 @@ class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT || '3002';
-        this.middlewares();  
+        this.middlewares();
         this.routes();
         this.DBconnetc();
         this.listen();
@@ -32,28 +37,31 @@ class Server {
 
     middlewares() {
         this.app.use(express.json());
+
         this.app.use(cors({
             origin: 'http://localhost:4200', //http://localhost:4200/    https://testamentos.siasaf.gob.mx
-            credentials: true               
+            credentials: true
         }));
+
         this.app.use(cookieParser());
         this.app.use('/storage', express.static(path.join(process.cwd(), 'storage')));
+
+        // Middleware global para proteger rutas con cookies, excepto algunas rutas públicas
         this.app.use((req: Request, res: Response, next: NextFunction) => {
             const publicPaths = [
                 '/api/user/login',
-                // '/api/user/register',
-                '/token',
+                '/token', // acceso público para obtener token
+                '/api/solicitudes/getsolicitudesapi/' // esta se protege con token, no con cookie
             ];
 
             const isPublic = publicPaths.some(path => req.originalUrl.startsWith(path));
             
             if (isPublic) {
-                return next(); // no proteger
+                return next(); // no proteger con cookie
             }
 
-            return verifyToken(req, res, next); // proteger
+            return verifyToken(req, res, next); // proteger con cookie
         });
-        
     }
 
     routes() {
@@ -63,11 +71,12 @@ class Server {
         this.app.use(routesSolicitud);
         this.app.use(routesCitas);
         this.app.use(routesReportes);
+        this.app.use(tokenRoute); // Token OAuth route
     }
 
     async DBconnetc() {
         try {
-            await UsersSafs.sync(); 
+            await UsersSafs.sync();
             console.log("Conexión a DB exitosa");
         } catch (error) {
             console.log("Conexión a DB errónea => " + error);
