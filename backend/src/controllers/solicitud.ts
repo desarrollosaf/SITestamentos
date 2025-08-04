@@ -106,6 +106,7 @@ export const saveinfo = async (req: Request, res: Response): Promise<any> => {
             documento_residencia: data.documento_residencia_serv,
             dificultad_comunicacion:  data.presenta_dificultad,
             lugar_nacimiento: data.lugar_nacimiento,
+            estatus_solicitud: 1,
         });    
     } catch (error) {
         console.error('❌ Error al crear la solicitud:', error);

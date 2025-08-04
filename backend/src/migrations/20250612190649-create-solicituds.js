@@ -75,6 +75,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true, 
       },
+      estatus_solicitud: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: 0,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

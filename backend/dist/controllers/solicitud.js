@@ -113,6 +113,7 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             documento_residencia: data.documento_residencia_serv,
             dificultad_comunicacion: data.presenta_dificultad,
             lugar_nacimiento: data.lugar_nacimiento,
+            estatus_solicitud: 1,
         });
     }
     catch (error) {
