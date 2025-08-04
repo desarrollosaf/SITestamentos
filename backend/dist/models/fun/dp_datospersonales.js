@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dp_datospersonales = void 0;
 const sequelize_1 = require("sequelize");
-const fun_1 = __importDefault(require("../../database/fun")); // Conexión específica a 'administracion'
+const fun_1 = __importDefault(require("../../database/fun"));
 const dp_colonias_1 = require("../fun/dp_colonias");
 class dp_datospersonales extends sequelize_1.Model {
     static initModel(sequelize) {
@@ -23,7 +23,10 @@ class dp_datospersonales extends sequelize_1.Model {
                 type: sequelize_1.DataTypes.STRING(255),
                 allowNull: false,
             },
-            f_segundo_apellido: sequelize_1.DataTypes.STRING(255),
+            f_segundo_apellido: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
             f_curp: {
                 type: sequelize_1.DataTypes.STRING(255),
                 allowNull: false,
@@ -34,41 +37,122 @@ class dp_datospersonales extends sequelize_1.Model {
             },
             f_homclave: {
                 type: sequelize_1.DataTypes.STRING(255),
-                allowNull: false,
+                allowNull: true,
             },
-            f_sexo: sequelize_1.DataTypes.STRING(255),
-            f_clave_issemym: sequelize_1.DataTypes.STRING(255),
+            f_sexo: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            f_clave_issemym: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
             f_fecha_nacimiento: {
                 type: sequelize_1.DataTypes.STRING(255),
-                allowNull: false,
+                allowNull: true,
             },
-            f_entidad: sequelize_1.DataTypes.STRING(255),
-            f_domicilio: sequelize_1.DataTypes.STRING(255),
-            f_colonia: sequelize_1.DataTypes.STRING(255),
-            f_cedula: sequelize_1.DataTypes.STRING(255),
-            f_cp: sequelize_1.DataTypes.STRING(255),
-            f_cuenta_bancaria: sequelize_1.DataTypes.STRING(255),
-            f_municipio: sequelize_1.DataTypes.STRING(255),
-            numint: sequelize_1.DataTypes.STRING(255),
-            numext: sequelize_1.DataTypes.STRING(255),
-            correo_ins: sequelize_1.DataTypes.STRING(255),
-            correo_per: sequelize_1.DataTypes.STRING(255),
-            numero_tel: sequelize_1.DataTypes.STRING(255),
-            numero_cel: sequelize_1.DataTypes.STRING(255),
-            fecha_escolaridad: sequelize_1.DataTypes.STRING(255),
-            area_escolaridad: sequelize_1.DataTypes.STRING(255),
-            estadocivil_id: sequelize_1.DataTypes.BIGINT.UNSIGNED,
-            sindicalizado_id: sequelize_1.DataTypes.BIGINT.UNSIGNED,
-            sci_id: sequelize_1.DataTypes.BIGINT.UNSIGNED,
-            escolaridad_id: sequelize_1.DataTypes.BIGINT.UNSIGNED,
-            estado_id: sequelize_1.DataTypes.BIGINT.UNSIGNED,
-            municipio_id: sequelize_1.DataTypes.BIGINT.UNSIGNED,
-            colonia_id: sequelize_1.DataTypes.BIGINT.UNSIGNED,
-            created_at: sequelize_1.DataTypes.DATE,
-            updated_at: sequelize_1.DataTypes.DATE,
-            deleted_at: sequelize_1.DataTypes.DATE,
+            f_entidad: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            f_domicilio: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            f_colonia: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            f_cedula: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            f_cp: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            f_cuenta_bancaria: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            f_municipio: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            numint: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            numext: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            correo_ins: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            correo_per: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            numero_tel: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            numero_cel: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            fecha_escolaridad: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            area_escolaridad: {
+                type: sequelize_1.DataTypes.STRING(255),
+                allowNull: true,
+            },
+            estadocivil_id: {
+                type: sequelize_1.DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
+            },
+            sindicalizado_id: {
+                type: sequelize_1.DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
+            },
+            sci_id: {
+                type: sequelize_1.DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
+            },
+            escolaridad_id: {
+                type: sequelize_1.DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
+            },
+            estado_id: {
+                type: sequelize_1.DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
+            },
+            municipio_id: {
+                type: sequelize_1.DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
+            },
+            colonia_id: {
+                type: sequelize_1.DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
+            },
+            created_at: {
+                type: sequelize_1.DataTypes.DATE,
+                allowNull: true,
+            },
+            updated_at: {
+                type: sequelize_1.DataTypes.DATE,
+                allowNull: true,
+            },
+            deleted_at: {
+                type: sequelize_1.DataTypes.DATE,
+                allowNull: true,
+            },
         }, {
-            sequelize: fun_1.default, // conexión específica
+            sequelize: fun_1.default,
             tableName: 'dp_datospersonales',
             timestamps: false,
             paranoid: true,
@@ -78,30 +162,6 @@ class dp_datospersonales extends sequelize_1.Model {
             foreignKey: 'colonia_id',
             as: 'colonia',
         });
-        //  dp_datospersonales.belongsTo(dp_escolaridad, {
-        //   foreignKey: 'escolaridad_id',
-        //   as: 'escolaridad',
-        // });
-        //  dp_datospersonales.belongsTo(dp_estado_civil, {
-        //   foreignKey: 'estadocivil_id',
-        //   as: 'estadocivil',
-        // });
-        //  dp_datospersonales.belongsTo(dp_estados, {
-        //   foreignKey: 'estado_id',
-        //   as: 'estado',
-        // });
-        //   dp_datospersonales.belongsTo(dp_municipios, {
-        //   foreignKey: 'municipio_id',
-        //   as: 'municipio',
-        // });
-        //  dp_datospersonales.belongsTo(dp_opciones, {
-        //   foreignKey: 'sindicalizado_id',
-        //   as: 'sindicalizado',
-        // });
-        // dp_datospersonales.belongsTo(dp_opciones, {
-        //   foreignKey: 'sci_id',
-        //   as: 'sci',
-        // });
         return dp_datospersonales;
     }
 }
