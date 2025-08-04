@@ -310,6 +310,9 @@ export class DetalleSolicitudComponent {
             name: item.estado_civil
           }))
         ];
+         this.formTestamento.patchValue({
+              lugar_nacimiento: response.solicitud[0].lugar_nacimiento,
+          });
         this.formTestamento.get('estado_civil')?.setValue(response.solicitud[0].datos_user.estadocivil_id);
         this.formTestamento.get('documento_identifica')?.setValue(response.solicitud[0].documento_identifica);
         if (response.solicitud[0].documento_identifica == 'Pasaporte' || response.solicitud[0].documento_identifica == 'Cédula profesional') {
