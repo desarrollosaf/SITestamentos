@@ -691,7 +691,7 @@ const personalData = cleanEmptyStrings({
   numero_tel: data.numero_tel,
   numero_cel: data.numero_cel,
   correo_per: data.correo_per,
-  f_homclave: '  ', // Se convertirá a null por cleanEmptyStrings
+  f_homclave: '  ', // le pongo un espacio por que en la base esta como requerido
   f_cp: data.f_cp,
   estadocivil_id: data.estado_civil,
 });
