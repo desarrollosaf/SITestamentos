@@ -39,7 +39,7 @@ class Server {
         this.app.use(express.json());
 
         this.app.use(cors({
-            origin: 'http://localhost:4200', //http://localhost:4200/    https://testamentos.siasaf.gob.mx
+            origin: 'https://testamentos.siasaf.gob.mx', //http://localhost:4200/    https://testamentos.siasaf.gob.mx
             credentials: true
         }));
 

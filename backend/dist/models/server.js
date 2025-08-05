@@ -44,7 +44,7 @@ class Server {
     middlewares() {
         this.app.use(express_1.default.json());
         this.app.use((0, cors_1.default)({
-            origin: 'http://localhost:4200', //http://localhost:4200/    https://testamentos.siasaf.gob.mx
+            origin: 'https://testamentos.siasaf.gob.mx', //http://localhost:4200/    https://testamentos.siasaf.gob.mx
             credentials: true
         }));
         this.app.use((0, cookie_parser_1.default)());
