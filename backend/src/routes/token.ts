@@ -3,6 +3,6 @@ import { generateToken } from '../controllers/auth';
 
 const router = Router();
 
-router.post('/token', generateToken);
+router.post('/api/token', generateToken);
 
 export default router;

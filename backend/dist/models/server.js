@@ -53,7 +53,7 @@ class Server {
         this.app.use((req, res, next) => {
             const publicPaths = [
                 '/api/user/login',
-                '/token', // acceso público para obtener token
+                '/api/token', // acceso público para obtener token
                 '/api/solicitudes/getsolicitudesapi/' // esta se protege con token, no con cookie
             ];
             const isPublic = publicPaths.some(path => req.originalUrl.startsWith(path));

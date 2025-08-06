@@ -39,7 +39,7 @@ class Server {
         this.app.use(express.json());
 
         this.app.use(cors({
-            origin: 'http://localhost:4200', //http://localhost:4200/    https://testamentos.siasaf.gob.mx
+            origin: 'https://testamentos.siasaf.gob.mx', //http://localhost:4200/    https://testamentos.siasaf.gob.mx
             credentials: true
         }));
 
@@ -50,7 +50,7 @@ class Server {
         this.app.use((req: Request, res: Response, next: NextFunction) => {
             const publicPaths = [
                 '/api/user/login',
-                '/token', // acceso público para obtener token
+                '/api/token', // acceso público para obtener token
                 '/api/solicitudes/getsolicitudesapi/' // esta se protege con token, no con cookie
             ];
 
