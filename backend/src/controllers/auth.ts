@@ -2,7 +2,9 @@ import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
 export const generateToken = async (req: Request, res: Response): Promise<any> => {
+    
     return res.json({
+        martin: "Holaaaaaa siiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
         headers: req.headers,
         body: req.body,
         query: req.query,
