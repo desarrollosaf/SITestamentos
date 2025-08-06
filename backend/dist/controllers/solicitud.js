@@ -634,7 +634,7 @@ const saveprogreso = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         //  console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1",data)
         //  return 500;
         const cleanEmptyStrings = (obj) => Object.fromEntries(Object.entries(obj).map(([k, v]) => {
-            if (v === '' || v === 'null' || v === undefined)
+            if (v === '' || v === 'null' || v === 'undefined' || v === undefined)
                 return [k, null];
             return [k, v];
         }));
@@ -658,7 +658,7 @@ const saveprogreso = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             numero_tel: data.numero_tel,
             numero_cel: data.numero_cel,
             correo_per: data.correo_per,
-            f_homclave: '  ', // le pongo un espacio por que en la base esta como requerido
+            f_homclave: '  ',
             f_cp: data.f_cp,
             estadocivil_id: data.estado_civil,
         });
@@ -741,13 +741,21 @@ const saveprogreso = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             console.error('Error al crear los HEREDEROS:', error);
         }
         const upsertMatrimonio = (orden, rawDatos) => __awaiter(void 0, void 0, void 0, function* () {
-            // Limpia strings vacíos
+            // Limpia strings vacíos o undefined
             const datos = cleanEmptyStrings(rawDatos);
-            // Verifica si hay al menos un dato no nulo
-            const tieneDatos = Object.values(datos).some((valor) => valor !== null && valor !== undefined);
-            if (!tieneDatos)
-                return null; // No guardar si todos los campos están vacíos
+            // Verificacion de datos null o 
+            const tieneDatos = Object.values(datos).some((valor) => valor !== null && valor !== undefined && valor !== "");
             const where = { solicitudId: solicitud.id, orden };
+            // validar si se tienen datos antes guardados para eliminar
+            if (!tieneDatos) {
+                const matrimonio = yield matrimonios_1.default.findOne({ where });
+                if (matrimonio) {
+                    yield hijos_1.default.destroy({ where: { matrimonioId: matrimonio.id } });
+                    yield matrimonio.destroy();
+                }
+                return null;
+            }
+            // Si sí tiene datos, hacer upsert
             const valores = {
                 solicitudId: solicitud.id,
                 orden,
@@ -851,20 +859,26 @@ const saveprogreso = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         }));
         yield registrarHijosFueraMatrimonio(hijosFuera);
         if (data.primer_testamento == 0) {
+            const nuevoPath = buildPath(files, 'primer_testamento_doc', f_curp);
             const datosParciales = {
                 fecha_tramite: data.fecha_primer_testamento,
                 notaria: data.notaria_primer_testamento,
                 instrumento_volumen: data.instrumento_primer_testamento,
-                path_testamento: buildPath(files, 'primer_testamento_doc', f_curp),
             };
             const camposLimpiados = cleanEmptyStrings(datosParciales);
             // Verifica si al menos un campo útil viene
             const tieneDatos = Object.values(camposLimpiados).some((valor) => valor !== null && valor !== undefined);
-            if (tieneDatos) {
+            let testamentoExistente = yield testamentos_pasados_1.default.findOne({
+                where: { solicitudId: solicitud.id },
+            });
+            if (tieneDatos || nuevoPath) {
+                if (nuevoPath) {
+                    camposLimpiados.path_testamento = nuevoPath;
+                }
+                else if (testamentoExistente) {
+                    camposLimpiados.path_testamento = testamentoExistente.path_testamento;
+                }
                 const valores = Object.assign(Object.assign({}, camposLimpiados), { solicitudId: solicitud.id });
-                let testamentoExistente = yield testamentos_pasados_1.default.findOne({
-                    where: { solicitudId: solicitud.id },
-                });
                 if (testamentoExistente) {
                     yield testamentoExistente.update(valores);
                 }
@@ -872,13 +886,16 @@ const saveprogreso = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                     yield testamentos_pasados_1.default.create(valores);
                 }
             }
+            else if (testamentoExistente) {
+                // Si no hay datos y no hay path, eliminamos el registro
+                yield testamentoExistente.destroy();
+            }
         }
         function cleanEmptyStrings2(obj) {
             return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, v === '' ? null : v]));
         }
         try {
             if (solicitud === null || solicitud === void 0 ? void 0 : solicitud.id) {
-                //   console.log("Holaaaaaaaaaaaaaaaaaaaaaaaaa", await Heredero.destroy({ where: { solicitudId: solicitud.id } }))
                 yield herederos_1.default.destroy({ where: { solicitudId: solicitud.id } });
             }
             if (Array.isArray(data.herederos)) {

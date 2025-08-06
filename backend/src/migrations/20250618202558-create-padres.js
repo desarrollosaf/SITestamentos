@@ -20,22 +20,27 @@ module.exports = {
         onUpdate: 'CASCADE'
       },
       tipo: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       nombre: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       primer_apellido: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       segundo_apellido: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       vive: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       nacionalidad: {
+        allowNull: true,
         type: Sequelize.STRING
       },
        especifique_nacionalidad: {
