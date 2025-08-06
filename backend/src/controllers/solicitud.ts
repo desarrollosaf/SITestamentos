@@ -1124,6 +1124,13 @@ if (matrimonio2) {
                     await TutorDescendiente.create(valoresTutor);
                 }
             }
+        }else{
+            const tutorExistente = await TutorDescendiente.findOne({
+                    where: { solicitudId: solicitud.id }
+                });
+            if(tutorExistente){
+                await tutorExistente.destroy();
+            }
         }
     } catch (error) {
         console.error('Error al guardar el TUTOR del descendiente menor de edad:', error);
