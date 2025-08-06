@@ -38,7 +38,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       derecho_acrecer: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
