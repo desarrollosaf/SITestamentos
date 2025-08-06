@@ -15,6 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const generateToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    return res.json({
+        datos: req,
+    });
     const { client_id, client_secret } = req.body;
     if (client_id === 'cliente_externo' && client_secret === 'super_secreto') {
         const token = jsonwebtoken_1.default.sign({ client_id }, process.env.JWT_SECRET, { expiresIn: '1h' });
