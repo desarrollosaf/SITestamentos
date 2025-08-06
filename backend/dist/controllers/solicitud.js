@@ -1013,6 +1013,14 @@ const saveprogreso = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                     }
                 }
             }
+            else {
+                const tutorExistente = yield tutor_descendientes_1.default.findOne({
+                    where: { solicitudId: solicitud.id }
+                });
+                if (tutorExistente) {
+                    yield tutorExistente.destroy();
+                }
+            }
         }
         catch (error) {
             console.error('Error al guardar el TUTOR del descendiente menor de edad:', error);
