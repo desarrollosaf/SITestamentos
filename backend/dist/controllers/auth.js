@@ -16,6 +16,7 @@ exports.generateToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const generateToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.json({
+        martin: "Holaaaaaa siiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
         headers: req.headers,
         body: req.body,
         query: req.query,
