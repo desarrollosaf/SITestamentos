@@ -35,27 +35,27 @@ Solicitud.init({
         allowNull: true,
     },
     es_primer_testamento: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
     sabe_leer: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
     sabe_escribir: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
     puede_hablar: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
     puede_ver: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
     puede_oir: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
     dificultad_comunicacion: {
@@ -71,7 +71,7 @@ Solicitud.init({
         allowNull: true,
     },
     documento_residencia: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
     heredero_menor_edad: {

@@ -42,7 +42,7 @@ HerederoSustituto.init({
         allowNull: true,
     },
     derecho_acrecer: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: true,
     },
     createdAt: {
