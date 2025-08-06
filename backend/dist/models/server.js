@@ -42,7 +42,9 @@ class Server {
         });
     }
     middlewares() {
+        this.app.use((0, cors_1.default)());
         this.app.use(express_1.default.json());
+        this.app.use(express_1.default.urlencoded({ extended: true }));
         this.app.use((0, cors_1.default)({
             origin: 'https://testamentos.siasaf.gob.mx', //http://localhost:4200/    https://testamentos.siasaf.gob.mx
             credentials: true

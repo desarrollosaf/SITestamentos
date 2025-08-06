@@ -36,8 +36,9 @@ class Server {
     }
 
     middlewares() {
+        this.app.use(cors());
         this.app.use(express.json());
-
+        this.app.use(express.urlencoded({ extended: true }));
         this.app.use(cors({
             origin: 'https://testamentos.siasaf.gob.mx', //http://localhost:4200/    https://testamentos.siasaf.gob.mx
             credentials: true
