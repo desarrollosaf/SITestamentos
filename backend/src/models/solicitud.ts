@@ -26,17 +26,17 @@ export class Solicitud extends Model<
   declare id: CreationOptional<string>;
   declare userId: string | null;
   declare nacionalidad: string | null;
-  declare es_primer_testamento: number | null;
-  declare sabe_leer: number | null; 
-  declare sabe_escribir: number | null;
-  declare puede_hablar: number | null;
-  declare puede_ver: number | null;
-  declare puede_oir: number | null;
+  declare es_primer_testamento: string | null;
+  declare sabe_leer: string | null; 
+  declare sabe_escribir: string | null;
+  declare puede_hablar: string | null;
+  declare puede_ver: string | null;
+  declare puede_oir: string | null;
   declare dificultad_comunicacion: string | null;
   declare no_pasaporte: string | null;
   declare cedula_profesional: string | null;
-  declare documento_residencia: number | null;
-  declare heredero_menor_edad: number | null;
+  declare documento_residencia: string | null;
+  declare heredero_menor_edad: string | null;
   declare documento_identifica: string | null;
   declare numero_documento_identifica: string | null; 
   declare indique_nacionalidad_serv: string | null;
@@ -67,27 +67,27 @@ Solicitud.init(
       allowNull: true,
     },
     es_primer_testamento: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     sabe_leer: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     sabe_escribir: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     puede_hablar: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     puede_ver: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     puede_oir: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     },   
     dificultad_comunicacion: {
@@ -103,7 +103,7 @@ Solicitud.init(
       allowNull: true,
     },
     documento_residencia: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     heredero_menor_edad: {

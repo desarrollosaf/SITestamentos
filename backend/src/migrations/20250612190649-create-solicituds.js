@@ -20,23 +20,23 @@ module.exports = {
         allowNull: true, 
       },
       sabe_leer: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true, 
       },
       sabe_escribir: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true, 
       },
       puede_hablar: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true, 
       },
       puede_ver: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true, 
       },
       puede_oir: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true, 
       },
       dificultad_comunicacion: {
@@ -52,11 +52,11 @@ module.exports = {
         allowNull: true, 
       },
       documento_residencia: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true, 
       },
       heredero_menor_edad: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true, 
       },
       documento_identifica: {
