@@ -7,6 +7,9 @@ exports.dp_datospersonales = void 0;
 const sequelize_1 = require("sequelize");
 const fun_1 = __importDefault(require("../../database/fun"));
 const dp_colonias_1 = require("../fun/dp_colonias");
+const dp_estados_1 = require("../fun/dp_estados");
+const dp_municipios_1 = require("../fun/dp_municipios");
+const dp_estado_civil_1 = __importDefault(require("../fun/dp_estado_civil"));
 class dp_datospersonales extends sequelize_1.Model {
     static initModel(sequelize) {
         dp_datospersonales.init({
@@ -162,6 +165,9 @@ class dp_datospersonales extends sequelize_1.Model {
             foreignKey: 'colonia_id',
             as: 'colonia',
         });
+        dp_datospersonales.belongsTo(dp_estados_1.dp_estados, { foreignKey: 'estado_id', as: 'estado' });
+        dp_datospersonales.belongsTo(dp_municipios_1.dp_municipios, { foreignKey: 'municipio_id', as: 'municipio' });
+        dp_datospersonales.belongsTo(dp_estado_civil_1.default, { foreignKey: 'estadocivil_id', as: 'estadocivil' });
         return dp_datospersonales;
     }
 }

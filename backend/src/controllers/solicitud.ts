@@ -20,6 +20,10 @@ import TutorDescendiente from '../models/tutor_descendientes';
 import Hijo from '../models/hijos';
 import dp_estado_civil from '../models/fun/dp_estado_civil';
 import { Op } from 'sequelize'; 
+import { dp_estados } from '../models/fun/dp_estados';
+import { dp_municipios } from '../models/fun/dp_municipios';
+import DpEstadoCivil from '../models/fun/dp_estado_civil';
+import { dp_colonias } from '../models/fun/dp_colonias';
 
 dp_datospersonales.initModel(sequelizefun);
 
@@ -496,7 +500,7 @@ export const getsolicitud = async (req: Request, res: Response): Promise<any> =>
         // Cargar datos personales manualmente desde otra base de datos
         for (const solicitud of solicitudes) {
             if (solicitud.userId) {
-                console.log('Buscando datos personales para:', solicitud.userId);
+            
 
                 const datos = await dp_datospersonales.findOne({
                 where: { f_rfc: solicitud.userId },
@@ -507,6 +511,7 @@ export const getsolicitud = async (req: Request, res: Response): Promise<any> =>
                 }
             }
         }
+
         const civil = await dp_estado_civil.findAll();
 
         if (solicitudes) {
@@ -558,10 +563,10 @@ export const getsolicitudesapi = async (req: Request, res: Response): Promise<an
                         model: HerederoSustituto,
                         as: 'herederos_susti',
                     },
-                    {
-                        model: Hijo,
-                        as: 'hijos',
-                    },
+                    // {
+                    //     model: Hijo,
+                    //     as: 'hijos',
+                    // },
                     // Primeras nupcias (orden 1)
                     {
                         model: Matrimonio,
@@ -609,25 +614,81 @@ export const getsolicitudesapi = async (req: Request, res: Response): Promise<an
                 ],
             });
 
-
-        // Cargar datos personales manualmente desde otra base de datos
-        for (const solicitud of solicitudes) {
+       for (const solicitud of solicitudes) {
             if (solicitud.userId) {
-                console.log('Buscando datos personales para:', solicitud.userId);
-
                 const datos = await dp_datospersonales.findOne({
-                where: { f_rfc: solicitud.userId },
+                    where: { f_rfc: solicitud.userId },
+                    attributes: [
+                        'f_curp',
+                        'f_rfc',
+                        'f_nombre',
+                        'f_primer_apellido',
+                        'f_segundo_apellido',
+                        'f_fecha_nacimiento',
+                        'f_domicilio',
+                        'numext',
+                        'numero_tel',
+                        'numero_cel',
+                        'correo_per',
+                        'f_homclave',
+                        'f_cp'
+                    ],
+                    include: [
+                        {
+                            model: dp_estados,
+                            attributes: ['nombre'],
+                            as: 'estado'
+                        },
+                        {
+                            model: dp_municipios,
+                            attributes: ['nombre'],
+                            as: 'municipio'
+                        },
+                        {
+                            model: dp_colonias,
+                            attributes: ['nombre'],
+                            as: 'colonia'
+                        },
+                        {
+                            model: DpEstadoCivil,
+                            attributes: ['estado_civil'],
+                            as: 'estadocivil'
+                        }
+                    ]
                 });
 
                 if (datos) {
-                solicitud.setDataValue('datos_user', datos);
+                    // Convertimos a JSON plano
+                    const plainDatos = datos.get({ plain: true }) as any;
+
+                    // Creamos un nuevo objeto con los nombres planos
+                    const datos_user = {
+                        f_curp: plainDatos.f_curp,
+                        f_rfc: plainDatos.f_rfc,
+                        f_nombre: plainDatos.f_nombre,
+                        f_primer_apellido: plainDatos.f_primer_apellido,
+                        f_segundo_apellido: plainDatos.f_segundo_apellido,
+                        f_fecha_nacimiento: plainDatos.f_fecha_nacimiento,
+                        f_domicilio: plainDatos.f_domicilio,
+                        numext: plainDatos.numext,
+                        numero_tel: plainDatos.numero_tel,
+                        numero_cel: plainDatos.numero_cel,
+                        correo_per: plainDatos.correo_per,
+                        f_homclave: plainDatos.f_homclave,
+                        f_cp: plainDatos.f_cp,
+                        estado: plainDatos.estado?.nombre || null,
+                        municipio: plainDatos.municipio?.nombre || null,
+                        colonia: plainDatos.colonia?.nombre || null,
+                        estadocivil: plainDatos.estadocivil?.estado_civil || null
+                    };
+
+                    solicitud.setDataValue('datos_user', datos_user);
                 }
             }
         }
     
 
         if (solicitudes) {
-            // return res.json(solicitudes);
              return res.json({
                 solicitudes: solicitudes,
             });
