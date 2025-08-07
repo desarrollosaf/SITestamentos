@@ -31,6 +31,10 @@ const albaceas_1 = __importDefault(require("../models/albaceas"));
 const tutor_descendientes_1 = __importDefault(require("../models/tutor_descendientes"));
 const hijos_2 = __importDefault(require("../models/hijos"));
 const dp_estado_civil_1 = __importDefault(require("../models/fun/dp_estado_civil"));
+const dp_estados_1 = require("../models/fun/dp_estados");
+const dp_municipios_1 = require("../models/fun/dp_municipios");
+const dp_estado_civil_2 = __importDefault(require("../models/fun/dp_estado_civil"));
+const dp_colonias_1 = require("../models/fun/dp_colonias");
 dp_datospersonales_1.dp_datospersonales.initModel(fun_1.default);
 const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
@@ -481,7 +485,6 @@ const getsolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         // Cargar datos personales manualmente desde otra base de datos
         for (const solicitud of solicitudes) {
             if (solicitud.userId) {
-                console.log('Buscando datos personales para:', solicitud.userId);
                 const datos = yield dp_datospersonales_1.dp_datospersonales.findOne({
                     where: { f_rfc: solicitud.userId },
                 });
@@ -509,6 +512,7 @@ const getsolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.getsolicitud = getsolicitud;
 const getsolicitudesapi = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b, _c, _d;
     const { id } = req.params;
     try {
         let solicitudes = yield solicitud_1.default.findAll({
@@ -539,10 +543,10 @@ const getsolicitudesapi = (req, res) => __awaiter(void 0, void 0, void 0, functi
                     model: herederos_sustitutos_1.default,
                     as: 'herederos_susti',
                 },
-                {
-                    model: hijos_2.default,
-                    as: 'hijos',
-                },
+                // {
+                //     model: Hijo,
+                //     as: 'hijos',
+                // },
                 // Primeras nupcias (orden 1)
                 {
                     model: matrimonios_1.default,
@@ -589,20 +593,76 @@ const getsolicitudesapi = (req, res) => __awaiter(void 0, void 0, void 0, functi
                 }
             ],
         });
-        // Cargar datos personales manualmente desde otra base de datos
         for (const solicitud of solicitudes) {
             if (solicitud.userId) {
-                console.log('Buscando datos personales para:', solicitud.userId);
                 const datos = yield dp_datospersonales_1.dp_datospersonales.findOne({
                     where: { f_rfc: solicitud.userId },
+                    attributes: [
+                        'f_curp',
+                        'f_rfc',
+                        'f_nombre',
+                        'f_primer_apellido',
+                        'f_segundo_apellido',
+                        'f_fecha_nacimiento',
+                        'f_domicilio',
+                        'numext',
+                        'numero_tel',
+                        'numero_cel',
+                        'correo_per',
+                        'f_homclave',
+                        'f_cp'
+                    ],
+                    include: [
+                        {
+                            model: dp_estados_1.dp_estados,
+                            attributes: ['nombre'],
+                            as: 'estado'
+                        },
+                        {
+                            model: dp_municipios_1.dp_municipios,
+                            attributes: ['nombre'],
+                            as: 'municipio'
+                        },
+                        {
+                            model: dp_colonias_1.dp_colonias,
+                            attributes: ['nombre'],
+                            as: 'colonia'
+                        },
+                        {
+                            model: dp_estado_civil_2.default,
+                            attributes: ['estado_civil'],
+                            as: 'estadocivil'
+                        }
+                    ]
                 });
                 if (datos) {
-                    solicitud.setDataValue('datos_user', datos);
+                    // Convertimos a JSON plano
+                    const plainDatos = datos.get({ plain: true });
+                    // Creamos un nuevo objeto con los nombres planos
+                    const datos_user = {
+                        f_curp: plainDatos.f_curp,
+                        f_rfc: plainDatos.f_rfc,
+                        f_nombre: plainDatos.f_nombre,
+                        f_primer_apellido: plainDatos.f_primer_apellido,
+                        f_segundo_apellido: plainDatos.f_segundo_apellido,
+                        f_fecha_nacimiento: plainDatos.f_fecha_nacimiento,
+                        f_domicilio: plainDatos.f_domicilio,
+                        numext: plainDatos.numext,
+                        numero_tel: plainDatos.numero_tel,
+                        numero_cel: plainDatos.numero_cel,
+                        correo_per: plainDatos.correo_per,
+                        f_homclave: plainDatos.f_homclave,
+                        f_cp: plainDatos.f_cp,
+                        estado: ((_a = plainDatos.estado) === null || _a === void 0 ? void 0 : _a.nombre) || null,
+                        municipio: ((_b = plainDatos.municipio) === null || _b === void 0 ? void 0 : _b.nombre) || null,
+                        colonia: ((_c = plainDatos.colonia) === null || _c === void 0 ? void 0 : _c.nombre) || null,
+                        estadocivil: ((_d = plainDatos.estadocivil) === null || _d === void 0 ? void 0 : _d.estado_civil) || null
+                    };
+                    solicitud.setDataValue('datos_user', datos_user);
                 }
             }
         }
         if (solicitudes) {
-            // return res.json(solicitudes);
             return res.json({
                 solicitudes: solicitudes,
             });
