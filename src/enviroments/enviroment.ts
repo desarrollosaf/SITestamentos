@@ -1,4 +1,4 @@
 export const enviroment = {
     production: false,
-    endpoint: 'http://localhost:3002/'
+    endpoint: 'https://voluntariado.congresoedomex.gob.mx/testamentos/backend/'
   };
