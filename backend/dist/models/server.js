@@ -45,7 +45,15 @@ class Server {
         this.app.use(express_1.default.json());
         this.app.use(express_1.default.urlencoded({ extended: true }));
         this.app.use((0, cors_1.default)({
-            origin: 'https://testamentos.siasaf.gob.mx', //http://localhost:4200/    https://testamentos.siasaf.gob.mx
+            origin: function (origin, callback) {
+                const allowedOrigins = ['https://voluntariado.congresoedomex.gob.mx', 'https://testamentos.siasaf.gob.mx'];
+                if (!origin || allowedOrigins.includes(origin)) {
+                    callback(null, true);
+                }
+                else {
+                    callback(new Error('Not allowed by CORS'));
+                }
+            },
             credentials: true
         }));
         this.app.use((0, cookie_parser_1.default)());
