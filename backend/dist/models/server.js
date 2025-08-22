@@ -45,6 +45,7 @@ class Server {
         this.app.use(express_1.default.json());
         this.app.use(express_1.default.urlencoded({ extended: true }));
         this.app.use((0, cors_1.default)({
+
             origin: function (origin, callback) {
                 const allowedOrigins = ['https://voluntariado.congresoedomex.gob.mx/testamentos/', 'https://testamentos.siasaf.gob.mx'];
                 if (!origin || allowedOrigins.includes(origin)) {
@@ -54,6 +55,7 @@ class Server {
                     callback(new Error('Not allowed by CORS'));
                 }
             },
+          
             credentials: true
         }));
         this.app.use((0, cookie_parser_1.default)());
