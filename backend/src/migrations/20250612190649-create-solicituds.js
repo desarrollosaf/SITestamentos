@@ -40,8 +40,8 @@ module.exports = {
         allowNull: true, 
       },
       dificultad_comunicacion: {
-        type: Sequelize.STRING,
-        allowNull: true, 
+        type: Sequelize.TEXT('long'),
+        allowNull: true,
       },
       no_pasaporte: {
         type: Sequelize.STRING,

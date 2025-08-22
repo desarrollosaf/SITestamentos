@@ -91,7 +91,7 @@ Solicitud.init(
       allowNull: true,
     },   
     dificultad_comunicacion: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT('long'), 
       allowNull: true,
     },
     no_pasaporte: {
