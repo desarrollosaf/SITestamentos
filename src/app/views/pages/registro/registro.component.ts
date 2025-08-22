@@ -1585,12 +1585,12 @@ export class RegistroComponent {
     // }
     //formData.append('testigos', String(this.testigos));
 
-    // formData.forEach((valor, clave) => {
-    //   console.log(clave, valor);
-    // });
+    formData.forEach((valor, clave) => {
+      console.log(clave, valor);
+    });
     // debugger
     const curpUsr = this.formTestamento.value.f_curp;
-    // console.log(formData);
+    console.log(formData);
     this._registroService.saveRegistro(formData, curpUsr).subscribe({
       next: (response: any) => {
         const Toast = Swal.mixin({
