@@ -51,7 +51,7 @@ Hijo.init(
     },
     nombre: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     primer_apellido: {
       type: DataTypes.STRING,

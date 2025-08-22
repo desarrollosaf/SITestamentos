@@ -23,7 +23,7 @@ Hijo.init({
     },
     nombre: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     primer_apellido: {
         type: sequelize_1.DataTypes.STRING,
