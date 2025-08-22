@@ -59,7 +59,7 @@ Solicitud.init({
         allowNull: true,
     },
     dificultad_comunicacion: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.TEXT('long'),
         allowNull: true,
     },
     no_pasaporte: {

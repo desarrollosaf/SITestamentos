@@ -15,6 +15,7 @@ import dp_estado_civil from '../fun/dp_estado_civil';
 import { dp_estados } from '../fun/dp_estados';
 import { dp_municipios } from '../fun/dp_municipios';
 import { dp_opciones } from '../fun/dp_opciones';
+import DpEstadoCivil from '../fun/dp_estado_civil';
 
 export class dp_datospersonales extends Model<
   InferAttributes<dp_datospersonales>,
@@ -228,6 +229,9 @@ export class dp_datospersonales extends Model<
       as: 'colonia',
     });
 
+    dp_datospersonales.belongsTo(dp_estados, { foreignKey: 'estado_id', as: 'estado' });
+    dp_datospersonales.belongsTo(dp_municipios, { foreignKey: 'municipio_id', as: 'municipio' });
+    dp_datospersonales.belongsTo(DpEstadoCivil, { foreignKey: 'estadocivil_id', as: 'estadocivil' });
     return dp_datospersonales;
   }
 }

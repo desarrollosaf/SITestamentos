@@ -22,7 +22,7 @@ class HerederoSustituto extends Model<
   declare nombre_a_sustituir: string;
   declare primer_apellido_a_sustituir: string;
   declare segundo_apellido_a_sustituir: string;
-  declare derecho_acrecer: number;
+  declare derecho_acrecer: string;
 
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
@@ -64,7 +64,7 @@ HerederoSustituto.init(
       allowNull: true,
     },
     derecho_acrecer: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     createdAt: {
