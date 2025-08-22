@@ -617,6 +617,7 @@ export class RegistroComponent {
           // console.log(response.solicitud[0].estatus_solicitud);
           // if (response.solicitud[0].estatus_solicitud == 0) {
             // console.log(response.solicitud[0]);
+            console.log(response);
             this.formTestamento.patchValue({
               lugar_nacimiento: response.solicitud[0].lugar_nacimiento,
             });
