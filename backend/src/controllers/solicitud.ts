@@ -721,7 +721,7 @@ export const saveprogreso = async (req: Request, res: Response): Promise<any> =>
   const files = req.files as { [fieldname: string]: Express.Multer.File[] };
   const f_curp = data.f_curp;
   const UpasswordHash = await hashPassword(data.f_rfc);
-    //  console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1",data)
+     console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1",data)
     //  return 500;
   const cleanEmptyStrings = (obj: Record<string, any>) =>
   Object.fromEntries(
@@ -1034,11 +1034,6 @@ if (matrimonio2) {
         }
         }
 
-    function cleanEmptyStrings2<T extends Record<string, any>>(obj: T): T {
-        return Object.fromEntries(
-            Object.entries(obj).map(([k, v]) => [k, v === '' ? null : v])
-        ) as T;
-    }
     try {
         if (solicitud?.id) {
         
@@ -1046,7 +1041,7 @@ if (matrimonio2) {
         }
         if (Array.isArray(data.herederos)) {
             for (const herederoRaw of data.herederos) {
-                const herederoLimpio = cleanEmptyStrings2({
+                const herederoLimpio = cleanEmptyStrings({
                     nombre_heredero: herederoRaw.nombre_heredero,
                     primer_apellido_heredero: herederoRaw.primer_apellido_heredero,
                     segundo_apellido_heredero: herederoRaw.segundo_apellido_heredero,
