@@ -804,20 +804,23 @@ export class RegistroComponent {
             this.formTestamento.get('menor_de_edad')?.setValue(response.solicitud[0].heredero_menor_edad);
             if (response.solicitud[0].heredero_menor_edad == '1') {
               this.mostrarCamposMenorDeEdad = true;
-              this.formTestamento.patchValue({
-                nombre_tutor: response.solicitud[0].tutor_descendientes.nombre_tutor,
-                primer_apellido_tutor: response.solicitud[0].tutor_descendientes.primer_apellido_tutor,
-                segundo_apellido_tutor: response.solicitud[0].tutor_descendientes.segundo_apellido_tutor,
-                nombre_tutor_sustituto: response.solicitud[0].tutor_descendientes.nombre_tutor_sustituto,
-                primer_apellido_tutor_sustituto: response.solicitud[0].tutor_descendientes.primer_apellido_tutor_sustituto,
-                segundo_apellido_tutor_sustituto: response.solicitud[0].tutor_descendientes.segundo_apellido_tutor_sustituto,
-                nombre_curador: response.solicitud[0].tutor_descendientes.nombre_curador,
-                primer_apellido_curador: response.solicitud[0].tutor_descendientes.primer_apellido_curador,
-                segundo_apellido_curador: response.solicitud[0].tutor_descendientes.segundo_apellido_curador,
-                nombre_a_su_falta_curador: response.solicitud[0].tutor_descendientes.nombre_a_su_falta_curador,
-                primer_apellido_a_su_falta_curador: response.solicitud[0].tutor_descendientes.primer_apellido_a_su_falta_curador,
-                segundo_apellido_a_su_falta_curador: response.solicitud[0].tutor_descendientes.segundo_apellido_a_su_falta_curador
+              if(response.solicitud[0].tutor_descendientes){
+                this.formTestamento.patchValue({
+                  nombre_tutor: response.solicitud[0].tutor_descendientes.nombre_tutor,
+                  primer_apellido_tutor: response.solicitud[0].tutor_descendientes.primer_apellido_tutor,
+                  segundo_apellido_tutor: response.solicitud[0].tutor_descendientes.segundo_apellido_tutor,
+                  nombre_tutor_sustituto: response.solicitud[0].tutor_descendientes.nombre_tutor_sustituto,
+                  primer_apellido_tutor_sustituto: response.solicitud[0].tutor_descendientes.primer_apellido_tutor_sustituto,
+                  segundo_apellido_tutor_sustituto: response.solicitud[0].tutor_descendientes.segundo_apellido_tutor_sustituto,
+                  nombre_curador: response.solicitud[0].tutor_descendientes.nombre_curador,
+                  primer_apellido_curador: response.solicitud[0].tutor_descendientes.primer_apellido_curador,
+                  segundo_apellido_curador: response.solicitud[0].tutor_descendientes.segundo_apellido_curador,
+                  nombre_a_su_falta_curador: response.solicitud[0].tutor_descendientes.nombre_a_su_falta_curador,
+                  primer_apellido_a_su_falta_curador: response.solicitud[0].tutor_descendientes.primer_apellido_a_su_falta_curador,
+                  segundo_apellido_a_su_falta_curador: response.solicitud[0].tutor_descendientes.segundo_apellido_a_su_falta_curador
               });
+              }
+           
             }
 
             if (response.solicitud[0].herederos.length > 0) {
@@ -849,14 +852,17 @@ export class RegistroComponent {
                 this.herederoSustit.push(HerederosSustGroup);
               });
             }
-            this.formTestamento.patchValue({
-              nombre_albacea: response.solicitud[0].albacea.nombre_albacea,
-              primer_apellido_albacea: response.solicitud[0].albacea.primer_apellido_albacea,
-              segundo_apellido_albacea: response.solicitud[0].albacea.segundo_apellido_albacea,
-              nombre_falta_albacea: response.solicitud[0].albacea.nombre_falta_albacea,
-              primer_apellido_falta_albacea: response.solicitud[0].albacea.primer_apellido_falta_albacea,
-              segundo_apellido_falta_albacea: response.solicitud[0].albacea.segundo_apellido_falta_albacea
-            });
+            if(response.solicitud[0].albacea){
+                this.formTestamento.patchValue({
+                  nombre_albacea: response.solicitud[0].albacea.nombre_albacea,
+                  primer_apellido_albacea: response.solicitud[0].albacea.primer_apellido_albacea,
+                  segundo_apellido_albacea: response.solicitud[0].albacea.segundo_apellido_albacea,
+                  nombre_falta_albacea: response.solicitud[0].albacea.nombre_falta_albacea,
+                  primer_apellido_falta_albacea: response.solicitud[0].albacea.primer_apellido_falta_albacea,
+                  segundo_apellido_falta_albacea: response.solicitud[0].albacea.segundo_apellido_falta_albacea
+                });
+            }
+           
 
             response.solicitud[0].documentos.forEach((doc: any) => {
               // console.log(doc.tipo_doc.tipo );
