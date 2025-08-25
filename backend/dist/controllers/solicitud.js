@@ -691,7 +691,7 @@ const saveprogreso = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         const files = req.files;
         const f_curp = data.f_curp;
         const UpasswordHash = yield hashPassword(data.f_rfc);
-        //  console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1",data)
+        console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1", data);
         //  return 500;
         const cleanEmptyStrings = (obj) => Object.fromEntries(Object.entries(obj).map(([k, v]) => {
             if (v === '' || v === 'null' || v === 'undefined' || v === undefined)
@@ -951,16 +951,13 @@ const saveprogreso = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 yield testamentoExistente.destroy();
             }
         }
-        function cleanEmptyStrings2(obj) {
-            return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, v === '' ? null : v]));
-        }
         try {
             if (solicitud === null || solicitud === void 0 ? void 0 : solicitud.id) {
                 yield herederos_1.default.destroy({ where: { solicitudId: solicitud.id } });
             }
             if (Array.isArray(data.herederos)) {
                 for (const herederoRaw of data.herederos) {
-                    const herederoLimpio = cleanEmptyStrings2({
+                    const herederoLimpio = cleanEmptyStrings({
                         nombre_heredero: herederoRaw.nombre_heredero,
                         primer_apellido_heredero: herederoRaw.primer_apellido_heredero,
                         segundo_apellido_heredero: herederoRaw.segundo_apellido_heredero,
