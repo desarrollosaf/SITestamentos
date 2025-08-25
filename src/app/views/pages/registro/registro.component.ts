@@ -14,6 +14,7 @@ import { UserService } from '../../../core/services/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SolicitudesService } from '../../../service/solicitudes.service';
 import { enviroment } from '../../../../enviroments/enviroment';
+
 @Component({
   selector: 'app-registro',
   imports: [CommonModule, FormsModule, ReactiveFormsModule, NgSelectModule, RouterLink],
@@ -30,6 +31,7 @@ export class RegistroComponent {
   mostrarExtraInfo: boolean = false;
   mostrarCamposTestamento = false;
   mostrarCamposMenorDeEdad = false;
+  finalizado = 0;
   @ViewChild('xlModal', { static: true }) xlModal!: TemplateRef<any>;
   porcentajeTotal: number = 0;
   mostrarDoctoIdentifica = false;
@@ -611,6 +613,7 @@ export class RegistroComponent {
           if (response.solicitud[0].estatus_solicitud != 0) {
             this.mostrarFormulario = false;
             this.estatusSolicitud = true;
+            console.log('jk');
             return;
           }
           // console.log(response.solicitud[0]);
@@ -1338,13 +1341,14 @@ export class RegistroComponent {
         });
       });
     }
-
+    this.finalizado = 1;
     formData.append('nombre_albacea', String(this.formTestamento.value.nombre_albacea));
     formData.append('primer_apellido_albacea', String(this.formTestamento.value.primer_apellido_albacea));
     formData.append('segundo_apellido_albacea', String(this.formTestamento.value.segundo_apellido_albacea));
     formData.append('nombre_falta_albacea', String(this.formTestamento.value.nombre_falta_albacea));
     formData.append('primer_apellido_falta_albacea', String(this.formTestamento.value.primer_apellido_falta_albacea));
     formData.append('segundo_apellido_falta_albacea', String(this.formTestamento.value.segundo_apellido_falta_albacea));
+    formData.append('finalizado', String(this.finalizado));
 
 
 
@@ -1570,7 +1574,7 @@ export class RegistroComponent {
     formData.append('nombre_falta_albacea', String(this.formTestamento.value.nombre_falta_albacea));
     formData.append('primer_apellido_falta_albacea', String(this.formTestamento.value.primer_apellido_falta_albacea));
     formData.append('segundo_apellido_falta_albacea', String(this.formTestamento.value.segundo_apellido_falta_albacea));
-
+    formData.append('finalizado', String(this.finalizado));     
 
 
     for (const key in this.documentos) {
