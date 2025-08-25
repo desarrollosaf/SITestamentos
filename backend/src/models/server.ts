@@ -40,7 +40,7 @@ class Server {
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(cors({
            origin: function (origin, callback) {
-                const allowedOrigins = ['https://voluntariado.congresoedomex.gob.mx/testamentos/', 'https://testamentos.siasaf.gob.mx'];
+                const allowedOrigins = ['https://voluntariado.congresoedomex.gob.mx', 'https://testamentos.siasaf.gob.mx'];
                 if (!origin || allowedOrigins.includes(origin) ) {
                     callback(null, true);
                 } else {
@@ -53,12 +53,11 @@ class Server {
         this.app.use(cookieParser());
         this.app.use('/storage', express.static(path.join(process.cwd(), 'storage')));
 
-        // Middleware global para proteger rutas con cookies, excepto algunas rutas públicas
         this.app.use((req: Request, res: Response, next: NextFunction) => {
             const publicPaths = [
                 '/api/user/login',
-                '/api/token', // acceso público para obtener token
-                '/api/solicitudes/getsolicitudesapi/' // esta se protege con token, no con cookie
+                '/api/token', 
+                '/api/solicitudes/getsolicitudesapi/'
             ];
 
             const isPublic = publicPaths.some(path => req.originalUrl.startsWith(path));
