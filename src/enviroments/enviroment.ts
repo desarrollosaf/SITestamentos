@@ -1,4 +1,4 @@
 export const enviroment = {
     production: false,
-    endpoint: 'https://voluntariado.congresoedomex.gob.mx/testamentos/backend/'
+    endpoint: 'https://testamento.congresoedomex.gob.mx/backend/'
   };
