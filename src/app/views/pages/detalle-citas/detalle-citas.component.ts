@@ -257,7 +257,7 @@ export class DetalleCitasComponent {
         rfc: datos.rfc,
         citaid: datos.id
       }
-      console.log(data)
+
       this._citasService.sendMsg(data).subscribe({
         next: (response: any) => {
           Swal.fire({

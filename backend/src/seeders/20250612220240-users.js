@@ -11,8 +11,8 @@ module.exports = {
 
     const users = [
       { id: uuidv4(), name: 'NOT25SAGM990220', email: 'martin.sanchez@congresoedomex.gob.mx', password: hashedPassword },
-      { id: uuidv4(), name: 'NOT25JISP980721', email: 'pablo.jimenez@congresoedomex.gob.mx', password: hashedPassword },
-      { id: uuidv4(), name: 'NOT25DEGC941209', email: 'cesar.desales@congresoedomex.gob.mx', password: hashedPassword },
+      { id: uuidv4(), name: 'NOT25VOLT090125', email: 'voluntariado.admin@congresoedomex.gob.mx', password: hashedPassword },
+      { id: uuidv4(), name: 'NOT25VOLT090122', email: 'voluntariado.user@congresoedomex.gob.mx', password: hashedPassword },
     ];
 
     await queryInterface.bulkInsert(

@@ -36,10 +36,9 @@ import { map, catchError, of } from 'rxjs';
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const userService = inject(UserService);
-
   return userService.getCurrentUser().pipe(
     map(user => {
-      userService.setCurrentUser(user); // opcional
+      userService.setCurrentUser(user); 
       return true;
     }),
     catchError(() => {

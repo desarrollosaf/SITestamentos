@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { BaseComponent } from './views/layout/base/base.component';
 import { authGuard } from './core/guards/auth.guard';
+import { adminGuard } from './core/guards/admin.guard'
 import { DetalleCitasComponent } from './views/pages/detalle-citas/detalle-citas.component';
 
 export const routes: Routes = [
@@ -17,17 +18,20 @@ export const routes: Routes = [
       },
       {
         path: 'solicitudes',
+        canActivate : [ adminGuard ],
         loadChildren: () => import('./views/pages/solicitudes/solicitudes.route')
       },
       {
         path: 'detalle-citas',
+        canActivate : [ adminGuard ],
         loadComponent: () => import('./views/pages/detalle-citas/detalle-citas.component').then(c => c.DetalleCitasComponent)
       },
-      {
+      {   
         path: 'reportes',
+        canActivate : [ adminGuard ],
         loadComponent: () => import('./views/pages/reportes/reportes.component').then(c => c.ReportesComponent)
       }
-    ]
+    ] 
   },
   {
     path: 'error',
