@@ -595,15 +595,18 @@ export class RegistroComponent {
 
   ngOnInit(): void {
     //empieza
-    this.modalService.open(this.xlModal, { size: 'lg' }).result.then((result) => {
-      // console.log("Modal closed" + result);
-    }).catch((res) => { });
+    // this.modalService.open(this.xlModal, { size: 'lg' }).result.then((result) => {
+    //   // console.log("Modal closed" + result);
+    // }).catch((res) => { });
+
+
     this.herederos.valueChanges.subscribe(() => {
       this.validarPorcentajeTotal();
     });
 
     this.iniciarDatos();
   }
+
   iniciarDatos() {
     this.currentUser = this._userService.currentUserValue;
     this.buscarDatosPorCurp(this.currentUser.rfc);
