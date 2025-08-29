@@ -271,7 +271,7 @@ export const atenderconliga = async (req: Request, res: Response): Promise<any> 
             <p>
               Liga: ${data.enlace}
             </p>
-            <p>Atentamente,<br><strong>Poder Legislativo del Estado de México</strong></p>
+            <p>Atentamente,<br><strong>Voluntariado, Poder Legislativo del Estado de México</strong></p>
           </div>
         `;
         let htmlContent = generarHtmlCorreo(contenido);

@@ -1374,6 +1374,14 @@ export class RegistroComponent {
     });*/
     const curpUsr = this.formTestamento.value.f_curp;
     // console.log('cvx');
+    Swal.fire({
+      title: 'Guardando solicitud',
+      text: 'Espere un momento...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
     this._registroService.saveRegistro(formData, curpUsr).subscribe({
       next: (response: any) => {
         Swal.fire({
@@ -1601,6 +1609,7 @@ export class RegistroComponent {
     // debugger
     const curpUsr = this.formTestamento.value.f_curp;
     // console.log(formData);
+  
     this._registroService.saveRegistro(formData, curpUsr).subscribe({
       next: (response: any) => {
         const Toast = Swal.mixin({

@@ -21,7 +21,7 @@ export const sendEmail = async (
 ) => {
   try {
     await transporter.sendMail({
-      from: `"Derechos Humanos" <${process.env.SMTP_USER}>`,
+      from: `"Voluntariado" <${process.env.SMTP_USER}>`,
       to,
       subject,
       html,

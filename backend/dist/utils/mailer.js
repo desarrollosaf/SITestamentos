@@ -28,7 +28,7 @@ const transporter = nodemailer.createTransport({
 const sendEmail = (to_1, subject_1, html_1, ...args_1) => __awaiter(void 0, [to_1, subject_1, html_1, ...args_1], void 0, function* (to, subject, html, attachments = []) {
     try {
         yield transporter.sendMail({
-            from: `"Derechos Humanos" <${process.env.SMTP_USER}>`,
+            from: `"Voluntariado" <${process.env.SMTP_USER}>`,
             to,
             subject,
             html,
