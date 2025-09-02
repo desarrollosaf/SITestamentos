@@ -492,21 +492,32 @@ export const saveregistrofech = async (req: Request, res: Response): Promise<any
 
       const usuario = await dp_datospersonales.findOne({
         where: { f_rfc: data.rfc },
-        attributes: [
-          'correo_ins',
-          'correo_per',
-          'numero_tel',
-          'numero_cel',
-        ],
-        raw: true
       });
 
       if (!usuario) {
-        return res.status(401).json({ mensaje: 'Faltan datos obligatorios (correo_per o numero_tel)' });
-      }
-
-      if (!usuario.correo_per || !usuario.numero_tel) {
-        return res.status(401).json({ mensaje: 'Faltan datos obligatorios (correo_per o numero_tel)' });
+         const registro = await dp_fum_datos_generales.findOne({ 
+              where: { f_rfc: data.rfc }
+          });
+          if(registro){
+            const cita = await dp_datospersonales.create({
+             f_curp: registro.f_curp,
+             f_rfc: registro.f_rfc,
+             f_nombre: registro.f_nombre,
+             f_primer_apellido: registro.f_primer_apellido,
+             f_segundo_apellido: registro.f_segundo_apellido,
+             f_fecha_nacimiento: registro.f_fecha_nacimiento,
+             numero_tel: data.telefono,
+             numero_cel: data.telefono,
+             correo_per: data.correo,
+             f_homclave: '',
+             f_cp: registro.f_cp,
+            }); 
+          }
+      }else{
+          await usuario.update({
+            correo_per: data.correo,
+            numero_tel: data.telefono
+          });
       }
 
      const cita = await Cita.create({
@@ -523,6 +534,8 @@ export const saveregistrofech = async (req: Request, res: Response): Promise<any
     return res.status(500).json({ error: 'No  se guardo' });
   }
 };
+
+
 
 
 
