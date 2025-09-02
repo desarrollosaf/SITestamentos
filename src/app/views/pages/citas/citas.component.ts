@@ -40,6 +40,10 @@ registerLocaleData(localeEs, 'es');
 })
 
 export class CitasComponent {
+  correoUsuario: string = '';
+  telefonoUsuario: string  = '';
+  correoInvalido: boolean = false;
+telefonoInvalido: boolean = false;
   formCitas: FormGroup;
   showModal = false;
   selectedDate: Date | null = null;
@@ -52,9 +56,11 @@ export class CitasComponent {
   currentUser: any;
   banderaCita: number = 0;
   modalRef: NgbModalRef; // define esto en tu componente
+  modalRef1: NgbModalRef; // define esto en tu componente
   public _citasService = inject(CitasService);
   @ViewChild('fullcalendar') calendarComponent: FullCalendarComponent;
   @ViewChild('xlModal', { static: true }) xlModal!: TemplateRef<any>;
+   @ViewChild('xlModal1', { static: true }) xlModal1!: TemplateRef<any>;
   constructor(private fb: FormBuilder, private router: Router, private modalService: NgbModal, private _userService: UserService) {
     this.formCitas = this.fb.group({
       f_curp: ['', [
@@ -122,14 +128,22 @@ export class CitasComponent {
   }
 
   abrirModal() {
-    this.modalRef = this.modalService.open(this.xlModal, { size: 'lg' });
+    this.modalRef = this.modalService.open(this.xlModal1, { size: 'lg' });
     this.modalRef.result.then((result) => {
       // console.log("Modal cerrado:", result);
     }).catch((res) => {
       // console.log("Modal cerrado por dismiss");
     });
   }
-
+  abrirModalContacto(){
+     this.modalRef1 = this.modalService.open(this.xlModal1, { size: 'lg' });
+    this.modalRef1.result.then((result) => {
+      // console.log("Modal cerrado:", result);
+    }).catch((res) => {
+      // console.log("Modal cerrado por dismiss");
+    });
+    
+  }
 
   enviarDatos(): void {
     this.currentUser = this._userService.currentUserValue;
@@ -180,7 +194,31 @@ export class CitasComponent {
       }
     });
   }
+  enviarDatosFaltante(){
+  
+    this.validarCorreo();
+    this.validarTelefono();
 
+    if (this.correoInvalido || this.telefonoInvalido) {
+        Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: "¡Atención!",
+        text: "Datos de contacto no validos",
+        showConfirmButton: false,
+        timer: 3000
+        });
+      return;
+    }
+     const datos = {
+      fecha: this.fechaFormat,
+      rfc: this.currentUser.rfc,
+      correo:this.correoUsuario,
+      telefono: this.telefonoUsuario
+
+    };
+      console.log(datos);
+  }
 
   formatearFecha(fecha: Date): string {
     const year = fecha.getFullYear();
@@ -234,5 +272,16 @@ export class CitasComponent {
       }
     });
   }
+
+
+  validarCorreo() {
+  const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  this.correoInvalido = !regexCorreo.test(this.correoUsuario);
+}
+
+validarTelefono() {
+  const regexTelefono = /^\d{10}$/;
+  this.telefonoInvalido = !regexTelefono.test(this.telefonoUsuario);
+}
 
 }

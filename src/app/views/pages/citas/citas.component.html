@@ -5,15 +5,13 @@
       <div class="card">
         <div class="card-body">
           <div class="d-flex justify-content-end">
-           <button 
-              class="btn btn-sm" 
-              style="background-color: #ecbb87; color: #000; border: none;" 
+            <button class="btn btn-sm" style="background-color: #ecbb87; color: #000; border: none;"
               [routerLink]="['/registro']">
               <i class="feather icon-log-out me-1"></i> Regresar
             </button>
-          </div>  
+          </div>
           <h6 class="fw-bold mb-4 text-center" style="color: #96134b; font-size: 1.2rem;">
-              Citas
+            Citas
           </h6>
           <div class="d-flex justify-content-center">
             <div style="width: 1300px;">
@@ -53,6 +51,50 @@
 
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Cerrar</button>
-    <button type="button" class="btn btn-primary" [disabled]="numeroLugares <= 0" (click)="enviarDatos()">Enviar</button>
+    <button type="button" class="btn btn-primary" [disabled]="numeroLugares <= 0"
+      (click)="enviarDatos()">Enviar</button>
+  </div>
+</ng-template>
+
+<ng-template #xlModal1 let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Agrega correo electrónico y telefono de contacto</h5>
+
+    <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="mb-3">
+          <div class="form-group">
+            <label class="form-label">Correo electrónico*:</label>
+            <input [(ngModel)]="correoUsuario" (ngModelChange)="validarCorreo()" type="text" class="form-control"
+              placeholder="Ejemplo: ejemplo@gmail.com" />
+            <div class="text-danger" *ngIf="correoInvalido">
+              Correo inválido
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="mb-3">
+          <div class="form-group">
+            <label class="form-label">Teléfono*:</label>
+            <input [(ngModel)]="telefonoUsuario" (ngModelChange)="validarTelefono()" type="text" class="form-control"
+              placeholder="Ejemplo: 722XXXXXXX" />
+            <div class="text-danger" *ngIf="telefonoInvalido">
+              El teléfono debe tener 10 dígitos numéricos
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Cerrar</button>
+    <button type="button" class="btn btn-primary" [disabled]="numeroLugares <= 0"
+      (click)="enviarDatosFaltante()">Enviar</button>
   </div>
 </ng-template>
