@@ -128,7 +128,7 @@ telefonoInvalido: boolean = false;
   }
 
   abrirModal() {
-    this.modalRef = this.modalService.open(this.xlModal1, { size: 'lg' });
+    this.modalRef = this.modalService.open(this.xlModal, { size: 'lg' });
     this.modalRef.result.then((result) => {
       // console.log("Modal cerrado:", result);
     }).catch((res) => {
@@ -160,18 +160,23 @@ telefonoInvalido: boolean = false;
     };
     this._citasService.saveCita(datos).subscribe({
       next: (response: any) => {
-        this.banderaCita = 1;
-        this.agregarEventoAlCalendario(datos);
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: "Cita guardada correctamente",
-          text: "Uno de nuestros abogados se pondrá en contacto con usted.",
-          showConfirmButton: false,
-          timer: 5000
-        });
-        if (this.modalRef) {
-          this.modalRef.close('');
+        console.log(response.estatus);
+        if(response.estatus == 401){
+
+        }else{
+          this.banderaCita = 1;
+          this.agregarEventoAlCalendario(datos);
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: "Cita guardada correctamente",
+            text: "Uno de nuestros abogados se pondrá en contacto con usted.",
+            showConfirmButton: false,
+            timer: 5000
+          });
+          if (this.modalRef) {
+            this.modalRef.close('');
+          }
         }
       },
       error: (e: HttpErrorResponse) => {
