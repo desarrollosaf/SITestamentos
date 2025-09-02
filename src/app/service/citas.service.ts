@@ -35,7 +35,9 @@ export class CitasService {
     saveCita(data:any): Observable<string> {
         return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl}/saveregistro/`,data)
     }
-
+    saveCitaCorr(data:any): Observable<string> {
+        return this.http.post<string>(`${this.myAppUrl}${this.myAPIUrl}/saveregistrocorr/`,data)
+    }
 
     getCitaUser(id: string): Observable<string> {
       return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/getcitaservidor/${id}`)

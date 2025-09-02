@@ -41,9 +41,9 @@ registerLocaleData(localeEs, 'es');
 
 export class CitasComponent {
   correoUsuario: string = '';
-  telefonoUsuario: string  = '';
+  telefonoUsuario: string = '';
   correoInvalido: boolean = false;
-telefonoInvalido: boolean = false;
+  telefonoInvalido: boolean = false;
   formCitas: FormGroup;
   showModal = false;
   selectedDate: Date | null = null;
@@ -60,7 +60,7 @@ telefonoInvalido: boolean = false;
   public _citasService = inject(CitasService);
   @ViewChild('fullcalendar') calendarComponent: FullCalendarComponent;
   @ViewChild('xlModal', { static: true }) xlModal!: TemplateRef<any>;
-   @ViewChild('xlModal1', { static: true }) xlModal1!: TemplateRef<any>;
+  @ViewChild('xlModal1', { static: true }) xlModal1!: TemplateRef<any>;
   constructor(private fb: FormBuilder, private router: Router, private modalService: NgbModal, private _userService: UserService) {
     this.formCitas = this.fb.group({
       f_curp: ['', [
@@ -135,14 +135,14 @@ telefonoInvalido: boolean = false;
       // console.log("Modal cerrado por dismiss");
     });
   }
-  abrirModalContacto(){
-     this.modalRef1 = this.modalService.open(this.xlModal1, { size: 'lg' });
+  abrirModalContacto() {
+    this.modalRef1 = this.modalService.open(this.xlModal1, { size: 'lg' });
     this.modalRef1.result.then((result) => {
       // console.log("Modal cerrado:", result);
     }).catch((res) => {
       // console.log("Modal cerrado por dismiss");
     });
-    
+
   }
 
   enviarDatos(): void {
@@ -161,9 +161,10 @@ telefonoInvalido: boolean = false;
     this._citasService.saveCita(datos).subscribe({
       next: (response: any) => {
         console.log(response.estatus);
-        if(response.estatus == 401){
+        if (response.estatus == 401) {
+          this.abrirModalContacto();
 
-        }else{
+        } else {
           this.banderaCita = 1;
           this.agregarEventoAlCalendario(datos);
           Swal.fire({
@@ -199,30 +200,70 @@ telefonoInvalido: boolean = false;
       }
     });
   }
-  enviarDatosFaltante(){
-  
+  enviarDatosFaltante() {
+
     this.validarCorreo();
     this.validarTelefono();
 
     if (this.correoInvalido || this.telefonoInvalido) {
-        Swal.fire({
+      Swal.fire({
         position: 'center',
         icon: 'error',
         title: "¡Atención!",
         text: "Datos de contacto no validos",
         showConfirmButton: false,
         timer: 3000
-        });
+      });
       return;
     }
-     const datos = {
+    const datos = {
       fecha: this.fechaFormat,
       rfc: this.currentUser.rfc,
-      correo:this.correoUsuario,
+      correo: this.correoUsuario,
       telefono: this.telefonoUsuario
-
     };
-      console.log(datos);
+    this._citasService.saveCitaCorr(datos).subscribe({
+      next: (response: any) => {
+        console.log(response.estatus);
+        this.banderaCita = 1;
+        this.agregarEventoAlCalendario(datos);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: "Cita guardada correctamente",
+          text: "Uno de nuestros abogados se pondrá en contacto con usted.",
+          showConfirmButton: false,
+          timer: 5000
+        });
+        if (this.modalRef) {
+          this.modalRef.close('');
+        }
+        if (this.modalRef1) {
+          this.modalRef1.close('');
+        }
+      },
+      error: (e: HttpErrorResponse) => {
+        if (e.status == 400) {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: "¡Atención!",
+            text: "Ya tienes una cita activa",
+            showConfirmButton: false,
+            timer: 5000
+          });
+          if (this.modalRef) {
+            this.modalRef.close('');
+          }
+          if (this.modalRef1) {
+            this.modalRef1.close('');
+          }
+        } else {
+          const msg = e.error?.msg || 'Error desconocido';
+          console.error('Error del servidor:', msg);
+        }
+      }
+    });
   }
 
   formatearFecha(fecha: Date): string {
@@ -280,13 +321,13 @@ telefonoInvalido: boolean = false;
 
 
   validarCorreo() {
-  const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  this.correoInvalido = !regexCorreo.test(this.correoUsuario);
-}
+    const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    this.correoInvalido = !regexCorreo.test(this.correoUsuario);
+  }
 
-validarTelefono() {
-  const regexTelefono = /^\d{10}$/;
-  this.telefonoInvalido = !regexTelefono.test(this.telefonoUsuario);
-}
+  validarTelefono() {
+    const regexTelefono = /^\d{10}$/;
+    this.telefonoInvalido = !regexTelefono.test(this.telefonoUsuario);
+  }
 
 }
