@@ -616,14 +616,13 @@ export class RegistroComponent {
           if (response.solicitud[0].estatus_solicitud != 0) {
             this.mostrarFormulario = false;
             this.estatusSolicitud = true;
-            console.log('jk');
             return;
           }
           // console.log(response.solicitud[0]);
           // console.log(response.solicitud[0].estatus_solicitud);
           // if (response.solicitud[0].estatus_solicitud == 0) {
             // console.log(response.solicitud[0]);
-            console.log(response);
+            // console.log(response);
             this.formTestamento.patchValue({
               lugar_nacimiento: response.solicitud[0].lugar_nacimiento,
             });
@@ -1378,6 +1377,14 @@ export class RegistroComponent {
     });*/
     const curpUsr = this.formTestamento.value.f_curp;
     // console.log('cvx');
+    Swal.fire({
+      title: 'Guardando solicitud',
+      text: 'Espere un momento...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
     this._registroService.saveRegistro(formData, curpUsr).subscribe({
       next: (response: any) => {
         Swal.fire({
@@ -1599,12 +1606,13 @@ export class RegistroComponent {
     // }
     //formData.append('testigos', String(this.testigos));
 
-    formData.forEach((valor, clave) => {
-      console.log(clave, valor);
-    });
+    // formData.forEach((valor, clave) => {
+    //   console.log(clave, valor);
+    // });
     // debugger
     const curpUsr = this.formTestamento.value.f_curp;
-    console.log(formData);
+    // console.log(formData);
+  
     this._registroService.saveRegistro(formData, curpUsr).subscribe({
       next: (response: any) => {
         const Toast = Swal.mixin({

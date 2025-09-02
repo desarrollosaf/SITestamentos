@@ -4,17 +4,20 @@ export const MENU: MenuItem[] = [
   {
     label: 'Solicitudes',
     icon: 'book',
-    link: '/solicitudes'
+    link: '/solicitudes',
+    roles: ['Administrador', 'Validador'],
   },
   {
     label: 'Citas',
     icon: 'file-text',
-    link: '/detalle-citas'
+    link: '/detalle-citas',
+    roles: ['Administrador', 'Validador'],
   },
   {
     label: 'Reportes',
     icon: 'check-square',
-    link: '/reportes'
+    link: '/reportes',
+    roles: ['Administrador', 'Validador'],
   },
   
   

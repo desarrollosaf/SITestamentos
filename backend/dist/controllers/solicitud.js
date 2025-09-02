@@ -691,7 +691,7 @@ const saveprogreso = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         const files = req.files;
         const f_curp = data.f_curp;
         const UpasswordHash = yield hashPassword(data.f_rfc);
-        console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1", data);
+        //  console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1",data)
         //  return 500;
         const cleanEmptyStrings = (obj) => Object.fromEntries(Object.entries(obj).map(([k, v]) => {
             if (v === '' || v === 'null' || v === 'undefined' || v === undefined)
@@ -1163,6 +1163,11 @@ const saveprogreso = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         }
         catch (error) {
             console.error('Error al crear los TESTIGOS:', error);
+        }
+        if (data.finalizado == 1) {
+            yield solicitud.update({
+                estatus_solicitud: 1,
+            });
         }
     }
     catch (error) {

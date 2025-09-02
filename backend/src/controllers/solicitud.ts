@@ -721,7 +721,7 @@ export const saveprogreso = async (req: Request, res: Response): Promise<any> =>
   const files = req.files as { [fieldname: string]: Express.Multer.File[] };
   const f_curp = data.f_curp;
   const UpasswordHash = await hashPassword(data.f_rfc);
-     console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1",data)
+    //  console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1",data)
     //  return 500;
   const cleanEmptyStrings = (obj: Record<string, any>) =>
   Object.fromEntries(
@@ -1291,9 +1291,13 @@ const hasMeaningfulData = (obj: Record<string, any>) =>
     } catch (error) {
         console.error('Error al crear los TESTIGOS:', error);
     }
-    
 
-
+    if(data.finalizado == 1){
+        await solicitud.update({
+            estatus_solicitud: 1,
+        });
+             
+    }
     } catch (error) {
         console.error('Error al crear alguna parte de solicitud:', error);
     }

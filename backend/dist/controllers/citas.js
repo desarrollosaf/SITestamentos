@@ -88,6 +88,22 @@ const saveregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         if (citasser.length > 0) {
             return res.status(400).json({ error: 'cuentas con una solicitud', estatus: 400 });
         }
+        const usuario = yield dp_datospersonales_1.dp_datospersonales.findOne({
+            where: { f_rfc: data.rfc },
+            attributes: [
+                'correo_ins',
+                'correo_per',
+                'numero_tel',
+                'numero_cel',
+            ],
+            raw: true
+        });
+        if (!usuario) {
+            return res.status(401).json({ mensaje: 'Faltan datos obligatorios (correo_per o numero_tel)' });
+        }
+        if (!usuario.correo_per || !usuario.numero_tel) {
+            return res.status(401).json({ mensaje: 'Faltan datos obligatorios (correo_per o numero_tel)' });
+        }
         const cita = yield citas_1.default.create({
             rfc: data.rfc,
             fecha: data.fecha,
@@ -253,7 +269,7 @@ const atenderconliga = (req, res) => __awaiter(void 0, void 0, void 0, function*
             <p>
               Liga: ${data.enlace}
             </p>
-            <p>Atentamente,<br><strong>Poder Legislativo del Estado de México</strong></p>
+            <p>Atentamente,<br><strong>Voluntariado, Poder Legislativo del Estado de México</strong></p>
           </div>
         `;
                 let htmlContent = generarHtmlCorreo(contenido);
