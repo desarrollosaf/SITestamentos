@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.citasactual = exports.getcitasagrupadas = exports.atendercita = exports.atenderconliga = exports.getcitas = exports.getCita = exports.saveregistro = exports.validafecha = exports.getservidor = void 0;
+exports.saveregistrofech = exports.citasactual = exports.getcitasagrupadas = exports.atendercita = exports.atenderconliga = exports.getcitas = exports.getCita = exports.saveregistro = exports.validafecha = exports.getservidor = void 0;
 const fun_1 = __importDefault(require("../database/fun")); // La conexión
 const dp_fum_datos_generales_1 = require("../models/fun/dp_fum_datos_generales");
 const dp_datospersonales_1 = require("../models/fun/dp_datospersonales");
@@ -99,10 +99,10 @@ const saveregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             raw: true
         });
         if (!usuario) {
-            return res.status(401).json({ mensaje: 'Faltan datos obligatorios (correo_per o numero_tel)' });
+            return res.status(401).json({ error: 'Faltan datos obligatorios (correo_per o numero_tel)', estatus: 401 });
         }
         if (!usuario.correo_per || !usuario.numero_tel) {
-            return res.status(401).json({ mensaje: 'Faltan datos obligatorios (correo_per o numero_tel)' });
+            return res.status(401).json({ error: 'Faltan datos obligatorios (correo_per o numero_tel)', estatus: 401 });
         }
         const cita = yield citas_1.default.create({
             rfc: data.rfc,
@@ -443,3 +443,47 @@ const citasactual = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.citasactual = citasactual;
+const saveregistrofech = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = req.body;
+    try {
+        const citasser = yield citas_1.default.findAll({
+            where: {
+                rfc: data.rfc,
+                estatus: 0
+            }
+        });
+        if (citasser.length > 0) {
+            return res.status(400).json({ error: 'cuentas con una solicitud', estatus: 400 });
+        }
+        const usuario = yield dp_datospersonales_1.dp_datospersonales.findOne({
+            where: { f_rfc: data.rfc },
+            attributes: [
+                'correo_ins',
+                'correo_per',
+                'numero_tel',
+                'numero_cel',
+            ],
+            raw: true
+        });
+        if (!usuario) {
+            return res.status(401).json({ mensaje: 'Faltan datos obligatorios (correo_per o numero_tel)' });
+        }
+        if (!usuario.correo_per || !usuario.numero_tel) {
+            return res.status(401).json({ mensaje: 'Faltan datos obligatorios (correo_per o numero_tel)' });
+        }
+        const cita = yield citas_1.default.create({
+            rfc: data.rfc,
+            fecha: data.fecha,
+            estatus: 0,
+        });
+        return res.json({
+            msg: `cita guardada`,
+            estatus: 200
+        });
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'No  se guardo' });
+    }
+});
+exports.saveregistrofech = saveregistrofech;
