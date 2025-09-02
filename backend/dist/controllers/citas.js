@@ -99,10 +99,10 @@ const saveregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             raw: true
         });
         if (!usuario) {
-            return res.status(401).json({ error: 'Faltan datos obligatorios (correo_per o numero_tel)', estatus: 401 });
+            return res.status(200).json({ error: 'Faltan datos obligatorios (correo_per o numero_tel)', estatus: 401 });
         }
         if (!usuario.correo_per || !usuario.numero_tel) {
-            return res.status(401).json({ error: 'Faltan datos obligatorios (correo_per o numero_tel)', estatus: 401 });
+            return res.status(200).json({ error: 'Faltan datos obligatorios (correo_per o numero_tel)', estatus: 401 });
         }
         const cita = yield citas_1.default.create({
             rfc: data.rfc,
