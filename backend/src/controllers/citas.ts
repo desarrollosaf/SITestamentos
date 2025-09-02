@@ -98,11 +98,11 @@ export const saveregistro = async (req: Request, res: Response): Promise<any> =>
       });
 
       if (!usuario) {
-        return res.status(401).json({ mensaje: 'Faltan datos obligatorios (correo_per o numero_tel)' });
+        return res.status(401).json({ error: 'Faltan datos obligatorios (correo_per o numero_tel)', estatus: 401 });
       }
 
       if (!usuario.correo_per || !usuario.numero_tel) {
-        return res.status(401).json({ mensaje: 'Faltan datos obligatorios (correo_per o numero_tel)' });
+        return res.status(401).json({ error: 'Faltan datos obligatorios (correo_per o numero_tel)' , estatus: 401  });
       }
 
      const cita = await Cita.create({
@@ -473,6 +473,54 @@ export const citasactual = async (req: Request, res: Response): Promise<any> => 
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Ocurrió un error al obtener los registros' });
+  }
+};
+
+export const saveregistrofech = async (req: Request, res: Response): Promise<any> => {
+    const  data  = req.body;
+  try {
+     const citasser = await Cita.findAll({
+        where: {
+          rfc: data.rfc,
+          estatus: 0
+        }
+      });
+
+       if(citasser.length > 0){
+        return res.status(400).json({ error: 'cuentas con una solicitud', estatus: 400  });
+      }
+
+      const usuario = await dp_datospersonales.findOne({
+        where: { f_rfc: data.rfc },
+        attributes: [
+          'correo_ins',
+          'correo_per',
+          'numero_tel',
+          'numero_cel',
+        ],
+        raw: true
+      });
+
+      if (!usuario) {
+        return res.status(401).json({ mensaje: 'Faltan datos obligatorios (correo_per o numero_tel)' });
+      }
+
+      if (!usuario.correo_per || !usuario.numero_tel) {
+        return res.status(401).json({ mensaje: 'Faltan datos obligatorios (correo_per o numero_tel)' });
+      }
+
+     const cita = await Cita.create({
+       rfc: data.rfc,
+       fecha: data.fecha,
+       estatus: 0,
+     }); 
+     return res.json({
+      msg: `cita guardada`,
+      estatus: 200
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'No  se guardo' });
   }
 };
 
