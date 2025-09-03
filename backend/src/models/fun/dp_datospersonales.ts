@@ -22,11 +22,11 @@ export class dp_datospersonales extends Model<
   InferCreationAttributes<dp_datospersonales>
 > {
   declare id: CreationOptional<number>;
-  declare f_nombre: string;
-  declare f_primer_apellido: string;
+  declare f_nombre: string | null;
+  declare f_primer_apellido: string | null;
   declare f_segundo_apellido?: string | null;
-  declare f_curp: string;
-  declare f_rfc: string;
+  declare f_curp: string | null;
+  declare f_rfc: string | null;
   declare f_homclave?: string | null;
   declare f_sexo?: string | null;
   declare f_clave_issemym?: string | null;
