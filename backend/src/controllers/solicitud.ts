@@ -536,6 +536,7 @@ export const getsolicitudesapi = async (req: Request, res: Response): Promise<an
 
     try {
         let solicitudes = await Solicitud.findAll({
+                where: { estatus_solicitud: 1 },
                 include: [
                     {
                         model: Testigo,
