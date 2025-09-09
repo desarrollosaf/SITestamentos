@@ -511,11 +511,13 @@ const getsolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.getsolicitud = getsolicitud;
+// holiii
 const getsolicitudesapi = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c, _d;
     const { id } = req.params;
     try {
         let solicitudes = yield solicitud_1.default.findAll({
+            where: { estatus_solicitud: 1 },
             include: [
                 {
                     model: testigos_1.default,

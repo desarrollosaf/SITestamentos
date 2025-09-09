@@ -530,12 +530,13 @@ export const getsolicitud = async (req: Request, res: Response): Promise<any> =>
     }
 };
 
-
+// holiii
 export const getsolicitudesapi = async (req: Request, res: Response): Promise<any> => {
     const { id } = req.params;
-
     try {
         let solicitudes = await Solicitud.findAll({
+                where: { estatus_solicitud: 1 },
+
                 include: [
                     {
                         model: Testigo,
