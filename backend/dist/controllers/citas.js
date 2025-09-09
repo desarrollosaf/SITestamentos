@@ -428,9 +428,6 @@ const citasactual = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                 [sequelize_2.Sequelize.fn('COUNT', sequelize_2.Sequelize.literal(`CASE WHEN estatus = 1 THEN 1 END`)), 'atendidas'],
                 [sequelize_2.Sequelize.fn('COUNT', sequelize_2.Sequelize.literal(`CASE WHEN estatus = 0 THEN 1 END`)), 'pendientes']
             ],
-            where: {
-                fecha: today
-            },
         });
         return res.json({
             msg: `siuuu`,

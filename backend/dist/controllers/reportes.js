@@ -28,10 +28,18 @@ const getinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     };
     const fechaFormateada = new Date().toLocaleString('es-MX', opciones);
     const total = yield solicitud_1.default.count();
+    const total_enviadas = yield solicitud_1.default.count({
+        where: { estatus_solicitud: 1 }
+    });
+    const total_registradas = yield solicitud_1.default.count({
+        where: { estatus_solicitud: 0 }
+    });
     const dependencias = yield t_dependencia_1.default.findAll();
     return res.json({
         fechaactual: fechaFormateada,
         total: total,
+        total_enviadas: total_enviadas,
+        total_registradas: total_registradas,
         dependencias: dependencias
     });
 });

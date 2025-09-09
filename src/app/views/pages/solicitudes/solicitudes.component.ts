@@ -42,11 +42,11 @@ export class SolicitudesComponent implements AfterViewInit {
 ngOnInit(): void {
   this._solicitudService.getsolicitudes().subscribe({
       next: (response: any) => {
-        console.log(response)
+
         this.originalData = [...response];
         this.temp = [...this.originalData];
+        this.rows = this.temp;   
         this.filteredCount = this.temp.length;
-        this.setPage({ offset: 0 });
         this.loading = false;
         
       },
@@ -57,23 +57,36 @@ ngOnInit(): void {
     });
 
 }
-  setPage(pageInfo: any) {
+  /*setPage(pageInfo: any) {
     this.page = pageInfo.offset;
     const start = this.page * this.pageSize;
     const end = start + this.pageSize;
     this.rows = this.temp.slice(start, end); 
-  }
+  }*/
 
-  updateFilter(event: any) {
-    const val = (event.target?.value || '').toLowerCase();
-    this.temp = this.originalData.filter((row: any) => {
-      return Object.values(row).some((field) => {
-        return field && field.toString().toLowerCase().includes(val);
+  updateFilter(event: KeyboardEvent) {
+    const inputElement = event.target as HTMLInputElement;
+
+
+    if (inputElement && inputElement.value !== undefined) {
+      const val = inputElement.value.toLocaleLowerCase().trim();  
+      
+      const temp = this.temp.filter((d: any) => {
+        
+        return Object.values(d).some(value => {
+          
+          if (value != null) {
+            return value.toString().toLocaleLowerCase().includes(val);
+          }
+          return false;
+        }) || !val;  
       });
-    });
 
-    this.filteredCount = this.temp.length;
-    this.setPage({ offset: 0 }); 
+      this.rows = temp;
+
+      
+      this.table.offset = 0;
+    }
   }
 
 }

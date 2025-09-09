@@ -124,7 +124,7 @@ export class DetalleCitasComponent {
   getAllCitas() {
     this._citasService.groupCitas().subscribe({
       next: (response: any) => {
-        console.log(response);
+
         if (response.citas.length > 0) {
           response.citas.forEach((cita: any) => {
             const fechaHora = `${cita.fecha}T00:00:00`;

@@ -460,9 +460,7 @@ export const citasactual = async (req: Request, res: Response): Promise<any> => 
         [Sequelize.fn('COUNT', Sequelize.literal(`CASE WHEN estatus = 1 THEN 1 END`)), 'atendidas'],
         [Sequelize.fn('COUNT', Sequelize.literal(`CASE WHEN estatus = 0 THEN 1 END`)), 'pendientes']
       ],
-      where: {
-        fecha: today
-      },
+
     });
 
   

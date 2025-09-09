@@ -17,11 +17,19 @@ export const getinfo = async (req: Request, res: Response): Promise<any> => {
 
     const fechaFormateada = new Date().toLocaleString('es-MX', opciones);
     const total = await Solicitud.count();
+    const total_enviadas = await Solicitud.count({
+        where: { estatus_solicitud: 1 }
+    });
+    const total_registradas = await Solicitud.count({
+        where: { estatus_solicitud: 0 }
+    });
     const dependencias = await Dependencia.findAll();
 
     return res.json({
         fechaactual: fechaFormateada,
         total: total,
+        total_enviadas: total_enviadas,
+        total_registradas: total_registradas,
         dependencias: dependencias
     });
 }
