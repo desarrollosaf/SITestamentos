@@ -511,6 +511,7 @@ const getsolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.getsolicitud = getsolicitud;
+// holiii
 const getsolicitudesapi = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c, _d;
     const { id } = req.params;
