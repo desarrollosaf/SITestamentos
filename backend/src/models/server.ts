@@ -40,7 +40,7 @@ class Server {
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(cors({
            origin: function (origin, callback) {
-                const allowedOrigins = ['https://voluntariado.congresoedomex.gob.mx', 'https://testamentos.siasaf.gob.mx'];
+                const allowedOrigins = ['https://testamento.congresoedomex.gob.mx/'];
                 if (!origin || allowedOrigins.includes(origin) ) {
                     callback(null, true);
                 } else {

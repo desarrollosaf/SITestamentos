@@ -1,10 +1,10 @@
 
 {
    "development": {
-     "username": "root",
-     "password": "",
-     "database": "testamentos",
-     "host": "localhost",
+     "username": "usr_testamentos",
+     "password": "adminplem_testamentos",
+     "database": "8lv8EXLKNvCovs2tx4MF",
+     "host": "192.168.36.53",
      "dialect": "mysql"
     }
  }
