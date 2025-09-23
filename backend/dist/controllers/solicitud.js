@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saveprogreso = exports.getsolicitudesapi = exports.getsolicitud = exports.getsolicitudes = exports.saveinfo = void 0;
+exports.sendNoti = exports.saveprogreso = exports.getsolicitudesapi = exports.getsolicitud = exports.getsolicitudes = exports.saveinfo = void 0;
 const solicitud_1 = __importDefault(require("../models/solicitud"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const testigos_1 = __importDefault(require("../models/testigos"));
@@ -35,6 +35,7 @@ const dp_estados_1 = require("../models/fun/dp_estados");
 const dp_municipios_1 = require("../models/fun/dp_municipios");
 const dp_estado_civil_2 = __importDefault(require("../models/fun/dp_estado_civil"));
 const dp_colonias_1 = require("../models/fun/dp_colonias");
+const mailer_1 = require("../utils/mailer");
 dp_datospersonales_1.dp_datospersonales.initModel(fun_1.default);
 const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
@@ -43,9 +44,9 @@ const saveinfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const Upassword = data.f_rfc;
     const UpasswordHash = yield bcrypt_1.default.hash(Upassword, 10);
     /*const newUser = await User.create({
-      name:  data.f_rfc,
-      email:  data.correo_per,
-      password: UpasswordHash,
+    name:  data.f_rfc,
+    email:  data.correo_per,
+    password: UpasswordHash,
     });*/
     let registro = yield dp_datospersonales_1.dp_datospersonales.findOne({
         where: { f_curp: data.f_curp }
@@ -1178,3 +1179,162 @@ const saveprogreso = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     return res.status(200).json({ message: 'Progreso guardado correctamente' });
 });
 exports.saveprogreso = saveprogreso;
+const sendNoti = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
+    try {
+        const solicitudes = yield solicitud_1.default.findAll({
+            attributes: [
+                'userId',
+                'estatus_solicitud'
+            ],
+            where: {
+                estatus_solicitud: 0
+            },
+            raw: true
+        });
+        for (const solicitud of solicitudes) {
+            if (solicitud.userId) {
+                const usuario = yield dp_datospersonales_1.dp_datospersonales.findOne({
+                    where: { f_rfc: solicitud.userId },
+                    attributes: [
+                        'correo_ins',
+                        'correo_per',
+                        'f_nombre',
+                        'f_primer_apellido',
+                        'f_segundo_apellido',
+                    ],
+                    raw: true
+                });
+                let correo = (_b = ((_a = usuario === null || usuario === void 0 ? void 0 : usuario.correo_per) !== null && _a !== void 0 ? _a : usuario === null || usuario === void 0 ? void 0 : usuario.correo_ins)) !== null && _b !== void 0 ? _b : '';
+                if (correo) {
+                    (() => __awaiter(void 0, void 0, void 0, function* () {
+                        try {
+                            const meses = [
+                                "enero", "febrero", "marzo", "abril", "mayo", "junio",
+                                "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+                            ];
+                            const hoy = new Date();
+                            const fechaFormateada = `Toluca de Lerdo, México; a ${hoy.getDate()} de ${meses[hoy.getMonth()]} de ${hoy.getFullYear()}.`;
+                            const contenido = `
+                                <div class="container">
+                                <p  class="pderecha" >${fechaFormateada}</p>
+                                <p>C. ${usuario === null || usuario === void 0 ? void 0 : usuario.f_nombre} ${usuario === null || usuario === void 0 ? void 0 : usuario.f_primer_apellido} ${usuario === null || usuario === void 0 ? void 0 : usuario.f_segundo_apellido},</p>
+                                <p>Esperamos que se encuentre bien.</p>
+                                <p style="text-align: justify;">
+                                    Le recordamos que cuenta con un trámite iniciado en el portal
+                                    <a href="https://testamento.congresoedomex.gob.mx/" target="_blank" rel="noopener noreferrer">
+                                    https://testamento.congresoedomex.gob.mx/
+                                    </a>, el cual aún no ha sido concluido.
+                                </p>
+                                <p style="text-align: justify;">
+                                    Para garantizar la validez y formalización de su testamento, es importante que finalice el proceso. Le invitamos a ingresar nuevamente al sistema y completar su registro en el boton de Registrarse.
+                                </p>
+                                <p style="text-align: justify;">
+                                    En caso de tener alguna duda o requerir asistencia, puede ponerse en contacto a la extensión 5506 o 5516
+                                </p>
+                                <a href='https://testamento.congresoedomex.gob.mx/auth/login' class="button" target="_blank">Finalizar proceso</a>
+                                <p>
+                                    Agradecemos su atención y quedamos a sus órdenes.
+                                </p>
+                                <p>Atentamente,<br><strong>Voluntariado, Poder Legislativo del Estado de México</strong></p>
+                                </div>
+                                `;
+                            let htmlContent = generarHtmlCorreo(contenido);
+                            yield (0, mailer_1.sendEmail)(correo, 'Recordatorio para concluir su proceso en el Sistema de Testamentos', htmlContent);
+                            console.log('Correo enviado correctamente');
+                        }
+                        catch (err) {
+                            console.error('Error al enviar correo:', err);
+                        }
+                    }))();
+                }
+                else {
+                    console.warn('No se encontró ningún correo para el usuario');
+                }
+            }
+        }
+        return res.json({
+            msg: `todos enviados`,
+        });
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Ocurrió un error' });
+    }
+});
+exports.sendNoti = sendNoti;
+function generarHtmlCorreo(contenidoHtml) {
+    return `
+        <html>
+        <head>
+        <style>
+        body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f7;
+        margin: 0;
+        padding: 0;
+        }
+        .container {
+        background-color: #ffffff;
+        max-width: 600px;
+        margin: 40px auto;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding: 30px;
+        }
+        h1 {
+        color: #2c3e50;
+        font-size: 22px;
+        margin-bottom: 20px;
+        }
+        p {
+        color: #4d4d4d;
+        font-size: 16px;
+        line-height: 1.5;
+        }
+        .credentials {
+        background-color: #ecf0f1;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+        font-family: monospace;
+        }
+        .button {
+        display: inline-block;
+        background-color: #007bff;
+        color: white;
+        padding: 12px 20px;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 16px;
+        margin-top: 20px;
+        }
+        .footer {
+        font-size: 12px;
+        color: #999999;
+        margin-top: 30px;
+        text-align: center;
+        }
+        .pderecha{
+        text-align: right;
+        }
+        </style>
+        </head>
+        <body>
+        <div style="text-align: center;">
+        <img 
+        src="https://legislacion.legislativoedomex.gob.mx/aparlamentarios/Sin%20t%C3%ADtulo-2_Mesa%20de%20trabajo%201.png" 
+        alt="Logo"
+        style="display: block; margin: 0 auto; width: 300px; height: auto;"
+        >
+        </div>
+        <div class="content">
+        ${contenidoHtml}
+        </div>
+        <div class="footer">
+        © ${new Date().getFullYear()} SITestamento. Todos los derechos reservados.
+        </div>
+        </body>
+        </html>
+        `;
+}

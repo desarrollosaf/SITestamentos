@@ -13,4 +13,5 @@ router.get("/api/solicitudes/getsolicitudes/", solicitud_1.getsolicitudes);
 router.get("/api/solicitudes/getsolicitud/:id", solicitud_1.getsolicitud);
 router.get('/api/solicitudes/getsolicitudesapi/', verifyAccessToken_1.default, solicitud_1.getsolicitudesapi);
 router.post("/api/solicitudes/saveprogreso/:curp", multer_1.upload, solicitud_1.saveprogreso);
+router.get("/api/solicitudes/sendNoti/", solicitud_1.sendNoti);
 exports.default = router;
