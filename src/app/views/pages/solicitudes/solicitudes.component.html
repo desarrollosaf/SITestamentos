@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a routerLink=".">Solicitud</a></li>
@@ -14,16 +15,25 @@
             <input type="text" class="form-control form-control-sm" placeholder="Buscar..."
                (keyup)="updateFilter($event)" />
           </div>
+
+          <!-- <div class="col text-end">
+            <button class="btn btn-primary" (click)="notificarsp()">
+              <i class="bi  bi-megaphone"></i> Notificar Proceso
+            </button>  
+          </div> -->
         </div>
+        <br>
+
         <div class="table-responsive">
           <div *ngIf="rows.length === 0 && !loading" class="text-center my-3">
             <p><strong>No hay datos para mostrar</strong></p>
           </div>
           <ngx-datatable #table class="bootstrap" [rows]="rows" [columnMode]="'force'" [headerHeight]="50"
-            *ngIf="rows.length > 0" [footerHeight]="50" [rowHeight]="'auto'" [limit]="pageSize" [count]="filteredCount"
-            [offset]="page"  [loadingIndicator]="loading">
-            <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Nombre completo">
-              <ng-template let-row="row" ngx-datatable-cell-template>
+            *ngIf="rows.length > 0" [footerHeight]="50" [externalSorting]="true" [externalPaging]="true"  
+            [rowHeight]="'auto'" [limit]="pageSize" [count]="filteredCount"
+            [offset]="page" (page)="setPage($event)"  [loadingIndicator]="loading">
+            <ngx-datatable-column prop="nombre" [headerClass]="'text-center'" [cellClass]="'text-center'" name="Nombre completo">
+              <ng-template  let-row="row" ngx-datatable-cell-template>
                 {{row.datos_user.f_nombre}} {{row.datos_user.f_primer_apellido}}
                 {{row.datos_user.f_segundo_apellido}}
               </ng-template>
@@ -43,8 +53,8 @@
                 {{row.datos_user.numero_cel}}
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Curp">
-              <ng-template let-row="row" ngx-datatable-cell-template>
+            <ngx-datatable-column prop="curp" [headerClass]="'text-center'" [cellClass]="'text-center'" name="Curp">
+              <ng-template  let-row="row" ngx-datatable-cell-template>
                 {{row.datos_user.f_curp}}
               </ng-template>
             </ngx-datatable-column>

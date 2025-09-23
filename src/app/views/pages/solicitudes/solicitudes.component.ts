@@ -6,6 +6,7 @@ import { SolicitudesService } from '../../../service/solicitudes.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgIconsModule } from '@ng-icons/core';
 import { AfterViewInit } from '@angular/core';
+
 declare var bootstrap: any;
 @Component({
   selector: 'app-solicitudes',
@@ -57,36 +58,37 @@ ngOnInit(): void {
     });
 
 }
-  /*setPage(pageInfo: any) {
+
+  setPage(pageInfo: any) {
     this.page = pageInfo.offset;
     const start = this.page * this.pageSize;
     const end = start + this.pageSize;
-    this.rows = this.temp.slice(start, end); 
-  }*/
+    this.rows = this.temp.slice(start, end);
+  }
 
-  updateFilter(event: KeyboardEvent) {
-    const inputElement = event.target as HTMLInputElement;
+  updateFilter(event: any) {
+    const val = (event.target?.value || '').toLowerCase();
+    console.log(val);
+    this.temp = this.originalData.filter((row: any) => {
+      const nombreCompleto = (
+      row.datos_user?.f_nombre + ' ' +
+      row.datos_user?.f_primer_apellido + ' ' +
+      row.datos_user?.f_segundo_apellido
+    ).toLowerCase() || '';
+      const curp = row.datos_user?.f_curp?.toLowerCase() || '';
+      return (
+        nombreCompleto.includes(val) ||
+         curp.includes(val)
+
+      );
+    });
+    this.filteredCount = this.temp.length;
+    this.setPage({ offset: 0 });
+  }
 
 
-    if (inputElement && inputElement.value !== undefined) {
-      const val = inputElement.value.toLocaleLowerCase().trim();  
-      
-      const temp = this.temp.filter((d: any) => {
-        
-        return Object.values(d).some(value => {
-          
-          if (value != null) {
-            return value.toString().toLocaleLowerCase().includes(val);
-          }
-          return false;
-        }) || !val;  
-      });
+  notificarsp(){
 
-      this.rows = temp;
-
-      
-      this.table.offset = 0;
-    }
   }
 
 }
