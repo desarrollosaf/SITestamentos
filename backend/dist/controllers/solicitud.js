@@ -1232,7 +1232,11 @@ const sendNoti = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                                 <p style="text-align: justify;">
                                     En caso de tener alguna duda o requerir asistencia, puede ponerse en contacto a la extensión 5506 o 5516
                                 </p>
-                                <a href='https://testamento.congresoedomex.gob.mx/auth/login' class="button" target="_blank">Finalizar proceso</a>
+                                <div style="text-align: center;">
+                                    <a href='https://testamento.congresoedomex.gob.mx/auth/login' class="button" target="_blank">
+                                        Finalizar proceso
+                                    </a>
+                                </div>
                                 <p>
                                     Agradecemos su atención y quedamos a sus órdenes.
                                 </p>
