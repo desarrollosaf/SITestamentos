@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getsolicitud, getsolicitudes, getsolicitudesapi, saveinfo, saveprogreso } from "../controllers/solicitud";
+import { getsolicitud, getsolicitudes, getsolicitudesapi, saveinfo, saveprogreso,sendNoti } from "../controllers/solicitud";
 import { upload } from "../controllers/multer";
 import verifyAccessToken from '../middlewares/verifyAccessToken';
 
@@ -12,6 +12,7 @@ router.get("/api/solicitudes/getsolicitudes/", getsolicitudes)
 router.get("/api/solicitudes/getsolicitud/:id", getsolicitud)
 router.get('/api/solicitudes/getsolicitudesapi/', verifyAccessToken, getsolicitudesapi);
 router.post("/api/solicitudes/saveprogreso/:curp",upload, saveprogreso)
+router.get("/api/solicitudes/sendNoti/", sendNoti)
 
 
 

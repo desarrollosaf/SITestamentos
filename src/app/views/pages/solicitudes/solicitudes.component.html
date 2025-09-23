@@ -13,14 +13,19 @@
         <div class="row">
           <div class="col-xl-3 col-md-4">
             <input type="text" class="form-control form-control-sm" placeholder="Buscar..."
-               (keyup)="updateFilter($event)" />
+              (keyup)="updateFilter($event)" />
           </div>
-
-          <!-- <div class="col text-end">
-            <button class="btn btn-primary" (click)="notificarsp()">
-              <i class="bi  bi-megaphone"></i> Notificar Proceso
-            </button>  
-          </div> -->
+          <div class="col text-end">
+            <button class="btn btn-sm btn-primary me-2" (click)="notificarsp()" [disabled]="isLoading">
+              <ng-container *ngIf="!isLoading; else loadingTemplate">
+                <i class="bi bi-send"></i>  Notificar
+              </ng-container>
+              <ng-template #loadingTemplate>
+                <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+                Notificando...
+              </ng-template>
+            </button>
+          </div>
         </div>
         <br>
 
@@ -29,11 +34,12 @@
             <p><strong>No hay datos para mostrar</strong></p>
           </div>
           <ngx-datatable #table class="bootstrap" [rows]="rows" [columnMode]="'force'" [headerHeight]="50"
-            *ngIf="rows.length > 0" [footerHeight]="50" [externalSorting]="true" [externalPaging]="true"  
-            [rowHeight]="'auto'" [limit]="pageSize" [count]="filteredCount"
-            [offset]="page" (page)="setPage($event)"  [loadingIndicator]="loading">
-            <ngx-datatable-column prop="nombre" [headerClass]="'text-center'" [cellClass]="'text-center'" name="Nombre completo">
-              <ng-template  let-row="row" ngx-datatable-cell-template>
+            *ngIf="rows.length > 0" [footerHeight]="50" [externalSorting]="true" [externalPaging]="true"
+            [rowHeight]="'auto'" [limit]="pageSize" [count]="filteredCount" [offset]="page" (page)="setPage($event)"
+            [loadingIndicator]="loading">
+            <ngx-datatable-column prop="nombre" [headerClass]="'text-center'" [cellClass]="'text-center'"
+              name="Nombre completo">
+              <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.datos_user.f_nombre}} {{row.datos_user.f_primer_apellido}}
                 {{row.datos_user.f_segundo_apellido}}
               </ng-template>
@@ -54,7 +60,7 @@
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column prop="curp" [headerClass]="'text-center'" [cellClass]="'text-center'" name="Curp">
-              <ng-template  let-row="row" ngx-datatable-cell-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
                 {{row.datos_user.f_curp}}
               </ng-template>
             </ngx-datatable-column>
@@ -65,10 +71,10 @@
             </ngx-datatable-column>
             <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Estatus">
               <ng-template let-row="row" ngx-datatable-cell-template>
-                 @if (row.estatus_solicitud === 1) {
-                  <span class="badge bg-success">Terminado</span>
+                @if (row.estatus_solicitud === 1) {
+                <span class="badge bg-success">Terminado</span>
                 } @else {
-                  <span class="badge bg-danger">En proceso</span>
+                <span class="badge bg-danger">En proceso</span>
                 }
               </ng-template>
             </ngx-datatable-column>

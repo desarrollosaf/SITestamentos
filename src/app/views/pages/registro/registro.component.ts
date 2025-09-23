@@ -1121,7 +1121,7 @@ export class RegistroComponent {
         position: "center",
         icon: "warning",
         title: "¡Atención!",
-        text: "11111Todos los campos señalados con un asterisco (*) son obligatorios. Es necesario completarlos para el correcto envío de la información.",
+        text: "Todos los campos señalados con un asterisco (*) son obligatorios. Es necesario completarlos para el correcto envío de la información.",
         showConfirmButton: false,
         timer: 3000
       });

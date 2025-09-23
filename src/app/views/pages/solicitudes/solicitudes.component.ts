@@ -6,6 +6,7 @@ import { SolicitudesService } from '../../../service/solicitudes.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgIconsModule } from '@ng-icons/core';
 import { AfterViewInit } from '@angular/core';
+import Swal from 'sweetalert2';
 
 declare var bootstrap: any;
 @Component({
@@ -35,6 +36,7 @@ export class SolicitudesComponent implements AfterViewInit {
   rutaActual: string = '';
   titulo: string = '';
   tipoEstatus: number = 0;
+  isLoading: boolean = false;
   public _solicitudService = inject(SolicitudesService);
   @ViewChild('table') table: DatatableComponent;
 
@@ -68,7 +70,6 @@ ngOnInit(): void {
 
   updateFilter(event: any) {
     const val = (event.target?.value || '').toLowerCase();
-    console.log(val);
     this.temp = this.originalData.filter((row: any) => {
       const nombreCompleto = (
       row.datos_user?.f_nombre + ' ' +
@@ -88,6 +89,27 @@ ngOnInit(): void {
 
 
   notificarsp(){
+    this.isLoading = true;
+
+      this._solicitudService.sendNotificacion().subscribe({
+      next: (response: any) => {
+
+this.isLoading = false;
+  Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "¡Atención!",
+            text: `Los recordatorios se han enviado correctamente.`,
+            showConfirmButton: false,
+            timer: 2000
+          });
+        
+      },
+      error: (e: HttpErrorResponse) => {
+        const msg = e.error?.msg || 'Error desconocido';
+        console.error('Error del servidor:', msg);
+      }
+    });
 
   }
 

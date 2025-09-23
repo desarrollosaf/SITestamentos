@@ -33,5 +33,9 @@ export class SolicitudesService {
       return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl2}/getcodigo/${id}`)
     }
 
+    sendNotificacion(): Observable<string> {
+      return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl3}/sendNoti/`)
+    }
+
 
 }
