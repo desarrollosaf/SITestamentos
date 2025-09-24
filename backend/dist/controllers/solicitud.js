@@ -1207,53 +1207,31 @@ const sendNoti = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 });
                 let correo = (_b = ((_a = usuario === null || usuario === void 0 ? void 0 : usuario.correo_per) !== null && _a !== void 0 ? _a : usuario === null || usuario === void 0 ? void 0 : usuario.correo_ins)) !== null && _b !== void 0 ? _b : '';
                 if (correo) {
-                    (() => __awaiter(void 0, void 0, void 0, function* () {
-                        try {
-                            const meses = [
-                                "enero", "febrero", "marzo", "abril", "mayo", "junio",
-                                "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
-                            ];
-                            const hoy = new Date();
-                            const fechaFormateada = `Toluca de Lerdo, México; a ${hoy.getDate()} de ${meses[hoy.getMonth()]} de ${hoy.getFullYear()}.`;
-                            const contenido = `
-                                <div class="container">
-                                <p  class="pderecha" >${fechaFormateada}</p>
-                                <p>C. ${usuario === null || usuario === void 0 ? void 0 : usuario.f_nombre} ${usuario === null || usuario === void 0 ? void 0 : usuario.f_primer_apellido} ${usuario === null || usuario === void 0 ? void 0 : usuario.f_segundo_apellido},</p>
-                                <p>Esperamos que se encuentre bien.</p>
-                                <p style="text-align: justify;">
-                                    Le recordamos que cuenta con un trámite iniciado en el portal
-                                    <a href="https://testamento.congresoedomex.gob.mx/" target="_blank" rel="noopener noreferrer">
-                                    https://testamento.congresoedomex.gob.mx/
-                                    </a>, el cual aún no ha sido concluido.
-                                </p>
-                                <p style="text-align: justify;">
-                                    Para garantizar la validez y formalización de su testamento, es importante que finalice el proceso. Le invitamos a ingresar nuevamente al sistema y completar su registro en el boton de Registrarse.
-                                </p>
-                                <p style="text-align: justify;">
-                                    En caso de tener alguna duda o requerir asistencia, puede ponerse en contacto a la extensión 5506 o 5516
-                                </p>
-                                <div style="text-align: center;">
-                                    <a href='https://testamento.congresoedomex.gob.mx/auth/login' class="button" target="_blank">
-                                        Finalizar proceso
-                                    </a>
-                                </div>
-                                <p>
-                                    Agradecemos su atención y quedamos a sus órdenes.
-                                </p>
-                                <p>Atentamente,<br><strong>Voluntariado, Poder Legislativo del Estado de México</strong></p>
-                                </div>
-                                `;
-                            let htmlContent = generarHtmlCorreo(contenido);
-                            yield (0, mailer_1.sendEmail)(correo, 'Recordatorio para concluir su proceso en el Sistema de Testamentos', htmlContent);
-                            console.log('Correo enviado correctamente');
-                        }
-                        catch (err) {
-                            console.error('Error al enviar correo:', err);
-                        }
-                    }))();
+                    try {
+                        const meses = [
+                            "enero", "febrero", "marzo", "abril", "mayo", "junio",
+                            "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+                        ];
+                        const hoy = new Date();
+                        const fechaFormateada = `Toluca de Lerdo, México; a ${hoy.getDate()} de ${meses[hoy.getMonth()]} de ${hoy.getFullYear()}.`;
+                        const contenido = `
+                    <div class="container">
+                    <p class="pderecha">${fechaFormateada}</p>
+                    <p>C. ${usuario === null || usuario === void 0 ? void 0 : usuario.f_nombre} ${usuario === null || usuario === void 0 ? void 0 : usuario.f_primer_apellido} ${usuario === null || usuario === void 0 ? void 0 : usuario.f_segundo_apellido},</p>
+                    <p>Esperamos que se encuentre bien.</p>
+                    ...
+                    </div>
+                `;
+                        let htmlContent = generarHtmlCorreo(contenido);
+                        yield (0, mailer_1.sendEmail)(correo, 'Recordatorio para concluir su proceso en el Sistema de Testamentos', htmlContent);
+                        console.log(`Correo enviado correctamente a ${correo}`);
+                    }
+                    catch (err) {
+                        console.error(`Error al enviar correo a ${correo}:`, err);
+                    }
                 }
                 else {
-                    console.warn('No se encontró ningún correo para el usuario');
+                    console.warn(`No se encontró ningún correo para el usuario ${solicitud.userId}`);
                 }
             }
         }
