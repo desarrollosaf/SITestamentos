@@ -1035,7 +1035,7 @@ export class RegistroComponent {
         }
         if (response.data.f_fecha_nacimiento) {
           const edad = this.calcularEdad(response.data.f_fecha_nacimiento);
-          if (edad > 60) {
+          if (edad > 70) {
             this.mostrarExtraInfo = !this.mostrarExtraInfo;
             if (this.mostrarExtraInfo) {
               this.testigos = true;

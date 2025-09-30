@@ -669,7 +669,7 @@ export class DetalleSolicitudComponent {
             response.solicitud[0].datos_user.f_fecha_nacimiento
           );
           this.formTestamento.patchValue({ edad: edad + ' años' });
-          if (edad > 60) {
+          if (edad > 70) {
             this.mostrarExtraInfo = !this.mostrarExtraInfo;
             if (this.mostrarExtraInfo) {
               this.testigos = true;
